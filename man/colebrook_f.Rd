@@ -2,20 +2,23 @@
 % Please edit documentation in R/f_colebrook.R
 \name{colebrook_f}
 \alias{colebrook_f}
+\alias{velocity}
 \alias{reynolds_number}
 \alias{colebrook}
 \title{Calculates the Darcy-Weisbach Friction Factor f}
 \usage{
+velocity(D = NULL, Q = NULL)
+
 reynolds_number(V = NULL, D = NULL, nu = NULL)
 
 colebrook(ks, V, D, nu)
 }
 \arguments{
-\item{V}{numeric vector that contains the average Velocity of flow in the pipe,
-equal to flow divided by area, Q/A [m/s or ft/s]}
-
 \item{D}{numeric vector that contains the pipe diameter [m or ft]
 which should be D >=0.0025 m (0.0082 ft).}
+
+\item{V}{numeric vector that contains the average Velocity of flow in the pipe,
+equal to flow divided by area, Q/A [m/s or ft/s]}
 
 \item{nu}{numeric vector that contains the kinematic viscocity of water,
 [m2 s-1 or ft2 s-1]. Computed with a utility function in water_properties.R:
