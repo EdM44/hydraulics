@@ -7,7 +7,7 @@ Maintainer: Ed Maurer <emaurer@scu.edu>
 Description: Functions for basic hydraulic calculations related to 
     water flow in circular pipes flowing full (under pressure). This
     includes friction loss calculations, solving the Darcy-Weisbach
-    equation for flow or diameter, and plotting a Moody diagram
+    equation for flow or diameter, and plotting a Moody diagram.
 License: GPL (>= 3) 
 Depends: R (>= 3.6.1)
 Encoding: UTF-8
