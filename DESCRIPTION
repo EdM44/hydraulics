@@ -1,0 +1,20 @@
+Package: hydraulics
+Type: Package
+Title: Basic Pipe Hydraulics
+Version: 0.1.0
+Author: Ed Maurer [aut, cre]
+Maintainer: Ed Maurer <emaurer@scu.edu>
+Description: Functions for basic hydraulic calculations related to 
+    water flow in circular pipes flowing full (under pressure). This
+    includes friction loss calculations, solving the Darcy-Weisbach
+    equation for flow or diameter, and plotting a Moody diagram
+License: GPL (>= 3) 
+Depends: R (>= 3.6.1)
+Encoding: UTF-8
+LazyData: true
+Imports:
+    ggplot2,
+    grid,
+    reshape2
+Suggests:
+RoxygenNote: 7.0.2
