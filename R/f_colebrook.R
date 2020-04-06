@@ -16,6 +16,8 @@
 #' @param nu numeric vector that contains the kinematic viscocity of water,
 #'  [m2 s-1 or ft2 s-1]. Computed with a utility function in water_properties.R:
 #'  kvisc(T=T, units=['SI' or 'Eng'])
+#' @param Q (for velocity function only) numeric vector that contains the flow rate
+#'  [m^3/s or ft^3/s]
 #'
 #' @return f Returns a numeric vector containing the Darcy-Weisbach friction
 #'   factor
@@ -34,6 +36,9 @@
 #' ks <- 0.0005 #pipe roughness in ft
 #'
 #' f <- colebrook(ks=ks,V=velocity(D,Q), D=D, nu=kvisc(T=T, units="Eng"))
+#' 
+#' @importFrom utils tail
+#' @importFrom stats uniroot
 #'
 #' @name colebrook_f
 NULL

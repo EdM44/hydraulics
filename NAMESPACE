@@ -11,6 +11,5 @@ export(velocity)
 import(ggplot2)
 import(grid)
 import(reshape2)
-importFrom("stats", "uniroot")
-importFrom("utils", "tail")
-
+importFrom(stats,uniroot)
+importFrom(utils,tail)

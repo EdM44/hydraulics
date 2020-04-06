@@ -89,7 +89,8 @@ moody <- function(Re = NULL, f = NULL) {
   # Reconfigure data for plotting rearrange data frame for plotting
   dfrough <- as.data.frame(f_rough, row.names = Returb, col.names = kd)
   dfrough$Re <- Returb
-  dfrough2 <- reshape2::melt(dfrough, id = "Re", value.name = "f")
+  dfrough2 <- reshape2::melt(dfrough, id.vars = "Re", value.name = "f")
+  names(dfrough2)[names(dfrough2) == "variable"] <- "ks_d"
   # Set up plotting parameters and create diagram add grid lines at
   # specific intervals
   breaks <- 10^(-10:10)
@@ -98,7 +99,7 @@ moody <- function(Re = NULL, f = NULL) {
                                                                    to = 0.1, by = 0.005))
   ybreaks <- ytickloc
   # plot lines for turbulent region
-  p1 <- ggplot2::ggplot(dfrough2, ggplot2::aes(x = Re, y = f, group = variable)) +
+  p1 <- ggplot2::ggplot(dfrough2, ggplot2::aes(x = Re, y = f, group = ks_d)) +
     ggplot2::geom_line() +
     ggplot2::scale_y_log10(limits = c(ymin, ymax), expand = c(0, 0),
                            breaks = ybreaks, minor_breaks = yminor_breaks) +
@@ -106,7 +107,7 @@ moody <- function(Re = NULL, f = NULL) {
                            breaks = breaks, minor_breaks = minor_breaks) +
     ggplot2::scale_colour_discrete(guide = "none") +
     ggplot2::geom_text(data = subset(dfrough2, Re == 1e+08),
-                       ggplot2::aes(label = variable, x = 1e+08, y = f), hjust = -0.3, size=3) +
+                       ggplot2::aes(label = ks_d, x = 1e+08, y = f), hjust = -0.3, size=3) +
     ggplot2::annotate("text", x = 1e+08, y = 0.092, label = "ks/D", hjust = -0.3, size=3) +
     ggplot2::theme_bw() +
     ggplot2::theme(plot.margin = grid::unit(c(1,3, 1, 1), "lines"))
