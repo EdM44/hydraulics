@@ -37,10 +37,14 @@
 #'
 #' @name colebrook_f
 NULL
+
 # velocity function - consistent units needed
 #' @export
 #' @rdname colebrook_f
-velocity <- function(D, Q) {
+velocity <- function(D = NULL, Q = NULL) {
+  if (D <= 0.0) {
+    stop("\nPositive value needed for diameter\n")
+  }
   velocity <- Q/(0.25 * pi * D^2)
   return(velocity)
 }
