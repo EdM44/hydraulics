@@ -17,6 +17,7 @@ library("hydraulics")
 ```
 
 #' 1) Type 1 problem (solve for friction loss): Eng (US) units
+```R
 D <- 20/12  
 L <- 10560
 Q <- 4
