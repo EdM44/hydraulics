@@ -1,4 +1,4 @@
-# iemisc
+# hydraulics
 
 This R package contains functions to 1) describe properties of water, 2) solve the Darcy-Weisbach equation
 for friction loss through pipes, and 3) plot a Moody diagram. 
