@@ -38,6 +38,8 @@
 #' @name colebrook_f
 NULL
 # velocity function - consistent units needed
+#' @export
+#' @rdname colebrook_f
 velocity <- function(D, Q) {
   velocity <- Q/(0.25 * pi * D^2)
   return(velocity)
