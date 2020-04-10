@@ -1,12 +1,12 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# hydraulics
+# Description
 
-This R package contains functions to 1) describe properties of water, 2)
-solve the Darcy-Weisbach equation for friction loss through pipes, and
-3) plot a Moody diagram. The format of functions and solutions are
-designed to be compatible with the *iemisc* package that includes open
-channel hydraulics solutions.
+The *hydraulics* R package contains functions to 1) describe properties
+of water, 2) solve the Darcy-Weisbach equation for friction loss through
+pipes, and 3) plot a Moody diagram. The format of functions and
+solutions are designed to be compatible with the *iemisc* package that
+includes open channel hydraulics solutions.
 
 # Installation
 
@@ -21,7 +21,7 @@ devtools::install_github("EdM44/hydraulics")
 library("hydraulics")
 ```
 
-# 1\) Type 1 problem (solve for friction loss): Eng (US) units
+## 1\) Type 1 problem (solve for friction loss): Eng (US) units
 
 ``` r
 D <- 20/12  
@@ -47,7 +47,7 @@ cat(sprintf("Reynolds no: %.0f\nFriction Fact: %.4f\nHead Loss: %.2f\n", ans1$Re
 #> Head Loss: 5.72
 ```
 
-# 2\) Type 2 (solving for flow rate, Q): SI Units
+## 2\) Type 2 (solving for flow rate, Q): SI Units
 
 ``` r
 D <- .5
@@ -64,7 +64,7 @@ cat(sprintf("Reynolds no: %.0f\nFriction Fact: %.4f\nFlow: %.2f\n", ans1$Re, ans
 #> Flow: 4.00
 ```
 
-# Type 3 (solving for diameter, D): Eng (US) units
+## Type 3 (solving for diameter, D): Eng (US) units
 
 ``` r
 Q <- 37.5     #flow in ft^3/s
@@ -81,15 +81,15 @@ cat(sprintf("Reynolds no: %.0f\nFriction Fact: %.4f\nDiameter: %.2f\n", ans1$Re,
 #> Diameter: 1.67
 ```
 
-# Utility functions for water properties can be used independently as well:
+## Utility functions for water properties can be used independently as well:
 
-# Find kinematic viscocity for water temperature of 55 F
+## Find kinematic viscocity for water temperature of 55 F
 
 ``` r
 nu = kvisc(T = 55, units = 'Eng')
 ```
 
-# Find kinematic viscocity assuming default water temperature of 68 F
+## Find kinematic viscocity assuming default water temperature of 68 F
 
 ``` r
 nu = kvisc(units = 'Eng')
@@ -98,13 +98,13 @@ nu = kvisc(units = 'Eng')
 #> Assuming T = 68 F
 ```
 
-# Find water density for water temperature of 25 C
+## Find water density for water temperature of 25 C
 
 ``` r
 rho = kvisc(T = 25, units = 'SI')
 ```
 
-# plot a Moody diagram
+## plot a Moody diagram
 
 ``` r
 moody()
