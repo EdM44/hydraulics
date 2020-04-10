@@ -17,4 +17,5 @@ Imports:
     grid,
     reshape2
 Suggests:
+    iemisc
 RoxygenNote: 7.0.2
