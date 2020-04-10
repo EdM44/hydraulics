@@ -58,10 +58,10 @@ ks <- 0.000046
 ans2 <- darcyweisbach(D = D, hf = hf, L = L, ks = ks, nu = kvisc(T=T, units='SI'), units = c('SI'))
 #> Q missing: solving a Type 2 problem
 #> Colebrook f: 0.0133
-cat(sprintf("Reynolds no: %.0f\nFriction Fact: %.4f\nFlow: %.2f\n", ans1$Re, ans1$f, ans1$Q))
-#> Reynolds no: 248625
-#> Friction Fact: 0.0173
-#> Flow: 4.00
+cat(sprintf("Reynolds no: %.0f\nFriction Fact: %.4f\nFlow: %.2f\n", ans2$Re, ans2$f, ans2$Q))
+#> Reynolds no: 1010337
+#> Friction Fact: 0.0133
+#> Flow: 0.41
 ```
 
 ## Type 3 (solving for diameter, D): Eng (US) units
@@ -75,10 +75,10 @@ ks <- 0.0008  #pipe roughness, ft
 ans3 <- darcyweisbach(Q = Q, hf = hf, L = L, ks = ks, nu = kvisc(T=T, units='Eng'), units = c('Eng'))
 #> D missing: solving a Type 3 problem
 #> Colebrook f: 0.0164
-cat(sprintf("Reynolds no: %.0f\nFriction Fact: %.4f\nDiameter: %.2f\n", ans1$Re, ans1$f, ans1$D))
-#> Reynolds no: 248625
-#> Friction Fact: 0.0173
-#> Diameter: 1.67
+cat(sprintf("Reynolds no: %.0f\nFriction Fact: %.4f\nDiameter: %.2f\n", ans3$Re, ans3$f, ans3$D))
+#> Reynolds no: 2336974
+#> Friction Fact: 0.0164
+#> Diameter: 1.85
 ```
 
 ## Utility functions for water properties can be used independently as well:
@@ -104,10 +104,10 @@ nu = kvisc(units = 'Eng')
 rho = kvisc(T = 25, units = 'SI')
 ```
 
-## plot a Moody diagram
+## plot a Moody diagram, with optional points added
 
 ``` r
-moody()
+moody(Re = c(ans1$Re, ans2$Re, ans3$Re), f = c(ans1$f, ans2$f, ans3$f))
 ```
 
 <img src="README-moody-diagram-1.png" width="100%" />
