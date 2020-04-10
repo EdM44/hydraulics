@@ -9,7 +9,7 @@ Description: Functions for basic hydraulic calculations related to
     includes friction loss calculations, solving the Darcy-Weisbach
     equation for flow or diameter, and plotting a Moody diagram.
 License: GPL (>= 3) 
-Depends: R (>= 3.6.1)
+Depends: R (>= 3.6.0)
 Encoding: UTF-8
 LazyData: true
 Imports:

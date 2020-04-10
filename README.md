@@ -110,4 +110,4 @@ rho = kvisc(T = 25, units = 'SI')
 moody(Re = c(ans1$Re, ans2$Re, ans3$Re), f = c(ans1$f, ans2$f, ans3$f))
 ```
 
-<img src="README-moody-diagram-1.png" width="100%" />
+<img src="man/figures/README-moody-diagram-1.png" width="100%" />
