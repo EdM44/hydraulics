@@ -4,16 +4,16 @@
 
 ## R CMD check results
 
-*From Local OSX check:
-0 errors ✓ | 0 warnings ✓ | 1 note x
+* From Local OSX check:
+  0 errors ✓ | 0 warnings ✓ | 1 note x
 
-R CMD check succeeded
+  R CMD check succeeded
 
-* NOTE: 
+  NOTE: 
   Non-standard files/directories found at top level:
     ‘README.Rmd’ ‘cran-comments.md’ ‘hydraulics_0.1.0.pdf’
 
-*from Windows check:
+* From Windows check:
 	0 errors, 0 warnings, 2 notes
 	Possibly mis-spelled words in DESCRIPTION:
 	Weisbach (9:60)
