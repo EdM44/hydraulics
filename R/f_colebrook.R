@@ -13,7 +13,7 @@
 #'   equal to flow divided by area, Q/A [m/s or ft/s]
 #' @param D numeric vector that contains the pipe diameter [m or ft]
 #'   which should be D >=0.0025 m (0.0082 ft).
-#' @param nu numeric vector that contains the kinematic viscocity of water,
+#' @param nu numeric vector that contains the kinematic viscosity of water,
 #'  [m2 s-1 or ft2 s-1]. Computed with a utility function in water_properties.R:
 #'  kvisc(T=T, units=['SI' or 'Eng'])
 #' @param Q (for velocity function only) numeric vector that contains the flow rate

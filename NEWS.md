@@ -2,4 +2,4 @@
 
 # hydraulics 0.1.0
 
-\*Initital Release
+\*Initial Release
