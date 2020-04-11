@@ -5,19 +5,16 @@
 ## R CMD check results
 
 * From Local OSX check:
-  0 errors ✓ | 0 warnings ✓ | 1 note x
+  + 0 errors ✓ | 0 warnings ✓ | 1 note x
+  + R CMD check succeeded
 
-  R CMD check succeeded
-
-  NOTE: 
-  Non-standard files/directories found at top level:
+  + NOTE: Non-standard files/directories found at top level:
     ‘README.Rmd’ ‘cran-comments.md’ ‘hydraulics_0.1.0.pdf’
 
 * From Windows check:
-	0 errors, 0 warnings, 2 notes
-	Possibly mis-spelled words in DESCRIPTION:
-	Weisbach (9:60)
-	Non-standard files/directories found at top level:
+	+ 0 errors, 0 warnings, 2 notes
+	+ Possibly mis-spelled words in DESCRIPTION: Weisbach (9:60)
+	+ Non-standard files/directories found at top level:
 	'README.Rmd' 'cran-comments.md' 'hydraulics_0.1.0.pdf'
 
 ## Downstream dependencies
