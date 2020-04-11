@@ -83,25 +83,31 @@ cat(sprintf("Reynolds no: %.0f\nFriction Fact: %.4f\nDiameter: %.2f\n", ans3$Re,
 
 ## Utility functions for water properties can be used independently as well:
 
-## Find kinematic viscocity for water temperature of 55 F
+### Find kinematic viscocity for water temperature of 55 F
 
 ``` r
 nu = kvisc(T = 55, units = 'Eng')
+cat(sprintf("Kinematic viscosity: %.3e\n", nu))
+#> Kinematic viscosity: 1.318e-05
 ```
 
-## Find kinematic viscocity assuming default water temperature of 68 F
+### Find kinematic viscocity assuming default water temperature of 68 F
 
 ``` r
 nu = kvisc(units = 'Eng')
 #> 
 #> Temperature not given.
 #> Assuming T = 68 F
+cat(sprintf("Kinematic viscosity: %.3e\n", nu))
+#> Kinematic viscosity: 1.105e-05
 ```
 
-## Find water density for water temperature of 25 C
+### Find water density for water temperature of 25 C
 
 ``` r
 rho = kvisc(T = 25, units = 'SI')
+cat(sprintf("Kinematic viscosity: %.3e\n", nu))
+#> Kinematic viscosity: 1.105e-05
 ```
 
 ## plot a Moody diagram, with optional points added
