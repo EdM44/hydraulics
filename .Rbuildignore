@@ -1,2 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^CRAN-RELEASE$
+^NEWS\.Rmd$
+^README\.Rmd$
+^cran-comments\.md$
+^hydraulics_0\.1\.0\.pdf$

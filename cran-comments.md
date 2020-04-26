@@ -29,7 +29,7 @@ was removed as a suggest.
 
 * From Windows check:
 	+ 0 errors, 0 warnings, 2 notes
-	+ Possibly mis-spelled words in DESCRIPTION: Weisbach (9:60)
+	+ Possibly mis-spelled words in DESCRIPTION: Weisbach (9:60) (false-positive)
 	+ Non-standard files/directories found at top level:
 	'README.Rmd' 'cran-comments.md' 'hydraulics_0.1.0.pdf'
 
