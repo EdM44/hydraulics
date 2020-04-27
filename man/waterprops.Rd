@@ -24,10 +24,10 @@ units. This is used for compatibility with iemisc package}
 rho, the density of water for the
   dens function [kg/m3 or slug/ft3].
 
-mu, the dynamic viscocity of water for the
+mu, the dynamic viscosity of water for the
   dvisc function [Pa-s (N s m^-2) or lbf s ft^-2].
 
-nu, the kinematic viscocity of water for the
+nu, the kinematic viscosity of water for the
   kvisc function [m2 s^-1 or ft^2 s^-1].
 }
 \description{

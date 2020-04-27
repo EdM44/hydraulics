@@ -16,10 +16,10 @@
 #' @return rho, the density of water for the
 #'   dens function [kg/m3 or slug/ft3].
 #'
-#' @return mu, the dynamic viscocity of water for the
+#' @return mu, the dynamic viscosity of water for the
 #'   dvisc function [Pa-s (N s m^-2) or lbf s ft^-2].
 #'
-#' @return nu, the kinematic viscocity of water for the
+#' @return nu, the kinematic viscosity of water for the
 #'   kvisc function [m2 s^-1 or ft^2 s^-1].
 #'
 #' @author Ed Maurer

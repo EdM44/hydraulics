@@ -15,7 +15,7 @@
 #' @param L numeric vector that contains the pipe length [m or ft],
 #' @param ks numeric vector that contains the 'equivalent sand roughness height
 #'   sand roughness height. Units should be consistent with other input [m or ft]
-#' @param nu numeric vector that contains the kinematic viscocity of water,
+#' @param nu numeric vector that contains the kinematic viscosity of water,
 #'  [m2 s-1 or ft2 s-1].
 #' @param units character vector that contains the system of units [options are
 #'   \code{SI} for International System of Units and \code{Eng} for English (US customary)

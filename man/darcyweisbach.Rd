@@ -27,7 +27,7 @@ darcyweisbach(
 \item{ks}{numeric vector that contains the 'equivalent sand roughness height
 sand roughness height. Units should be consistent with other input [m or ft]}
 
-\item{nu}{numeric vector that contains the kinematic viscocity of water,
+\item{nu}{numeric vector that contains the kinematic viscosity of water,
 [m2 s-1 or ft2 s-1].}
 
 \item{units}{character vector that contains the system of units [options are
