@@ -18,7 +18,7 @@ devtools::install_github("EdM44/hydraulics")
 # Examples (see more examples in the function descriptions)
 
 ``` r
-library("hydraulics")
+library(hydraulics)
 ```
 
 ## 1\) Type 1 problem (solve for friction loss): Eng (US) units
