@@ -6,9 +6,15 @@ Author: Ed Maurer [aut, cre]
 Maintainer: Ed Maurer <emaurer@scu.edu>
 Description: Functions for basic hydraulic calculations related to 
     water flow in circular pipes flowing full (under pressure). This
-    includes friction loss calculations, solving the Darcy-Weisbach
-    equation for flow or diameter, and plotting a Moody diagram. This package
-    is designed to worked similarly to the iemisc package, but for pipe flow.
+    includes friction loss calculations by solving the Darcy-Weisbach
+    equation for head loss, flow or diameter, and plotting a Moody diagram. 
+    The Darcy-Weisbach friction factor is calculated using the Colebrook (or 
+    Colebrook-White equation), the basis of the Moody diagram, the original 
+    citation being Colebrook (1939) <doi:10.1680/ijoti.1939.13150>. The 
+    derivation of the Darcy-Weisbach equation and methods for its solution 
+    are outlined in many fundamental fluid mechanics texts such as 
+    Finnemore and Franzini (2002). This package is designed to work similarly
+    to the 'iemisc' package, but with an emphasis on pipe flow.
 License: GPL (>= 3) 
 Depends: R (>= 3.6.0)
 Encoding: UTF-8
