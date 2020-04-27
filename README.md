@@ -83,7 +83,7 @@ cat(sprintf("Reynolds no: %.0f\nFriction Fact: %.4f\nDiameter: %.2f ft\n", ans3$
 
 ## Utility functions for water properties can be used independently as well:
 
-### Find kinematic viscocity for water temperature of 55 F
+### Find kinematic viscosity for water temperature of 55 F
 
 ``` r
 nu = kvisc(T = 55, units = 'Eng')
@@ -91,7 +91,7 @@ cat(sprintf("Kinematic viscosity: %.3e ft2/s\n", nu))
 #> Kinematic viscosity: 1.318e-05 ft2/s
 ```
 
-### Find kinematic viscocity assuming default water temperature of 68 F
+### Find kinematic viscosity assuming default water temperature of 68 F
 
 ``` r
 nu = kvisc(units = 'Eng')
