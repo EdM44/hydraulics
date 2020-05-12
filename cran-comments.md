@@ -1,4 +1,24 @@
 ## Resubmission
+Comments received on May 1, 2020 inluded:
+* Please write references in the description of the DESCRIPTION file in the form
+  + authors (year) <doi:...>
+  + authors (year) <arXiv:...>
+  + authors (year, ISBN:...)
+  + or if those are not available: authors (year) <https:...>
+  + with no space after 'doi:', 'arXiv:', 'https:' and angle brackets for auto-linking.
+  + (If you want to add a title as well please put it in quotes: "Title")
+* You write information messages to the console that cannot be easily
+suppressed. Instead of print()/cat() rather use 
+  + message()/warning() or 
+  + if(verbose)cat(..) 
+  + (or maybe stop()) if you really have to write text to the console. (except for print, summary, interactive functions)
+
+Revision: 
+* All cat statements have been replaced by message or stop.
+* Reference to Finnemore and Franzini includes ISBN in format suggested
+* R CMD check succeeded 0 errors ✓ | 0 warnings ✓ | 0 notes ✓
+
+## Resubmission
 
 First attempt succeeded in compiling in Windows and Fedora Linux:
 * Build ID: hydraulics_0.1.0.tar.gz-8d55df00b25e430bb61ec2a799aaeb02

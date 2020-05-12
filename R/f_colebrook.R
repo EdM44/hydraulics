@@ -78,17 +78,15 @@ colebrookfcn <- function(f, ks, D, Re) {
 colebrook <- function(ks, V, D, nu) {
 
   if (ks/D > 0.01) {
-    cat(sprintf("ks/D: %.4f\n", ks/D))
-    stop("\nUnitless ks/D value too large, outside applicable range\n")
+    stop(sprintf("ks/D: %.4f value > 0.01, outside applicable range\n", ks/D))
   }
   Re <- reynolds_number(V = V, D = D, nu = nu)
   if (Re < 2300) {
-    cat(sprintf("Reynolds number: %.4f\n", Re))
-    stop("\nReynolds number is below 2300, outside applicable range\n")
+    stop(sprintf("Reynolds number: %.4f is below 2300, outside applicable range\n", Re))
   }
   f_colebrook <- uniroot(colebrookfcn, interval = c(0.01, 0.08), ks,
                          D, Re)
-  # print results
-  cat(sprintf("Colebrook f: %.4f\n", f_colebrook$root))
+  # return results
+  #cat(sprintf("Colebrook f: %.4f\n", f_colebrook$root))
   return(f_colebrook$root)
 }

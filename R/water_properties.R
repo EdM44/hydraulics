@@ -46,10 +46,10 @@ dvisc <- function(T = NULL, units = c("SI", "Eng")) {
   units <- units
   if (length(checks) < 1) {
     if (units == "SI") {
-      cat("\nTemperature not given.\nAssuming T = 20 C\n")
+      message("\nTemperature not given.\nAssuming T = 20 C\n")
       T = 20
     } else if (units == "Eng") {
-      cat("\nTemperature not given.\nAssuming T = 68 F\n")
+      message("\nTemperature not given.\nAssuming T = 68 F\n")
       T = 68
     } else if (all(c("SI", "Eng") %in% units == FALSE) == FALSE) {
       stop("Incorrect unit system. Specify either SI or Eng.")
@@ -85,10 +85,10 @@ dens <- function(T = NULL, units = c("SI", "Eng")) {
   units <- units
   if (length(checks) < 1) {
     if (units == "SI") {
-      cat("\nTemperature not given.\nAssuming T = 20 C\n")
+      message("\nTemperature not given.\nAssuming T = 20 C\n")
       T = 20
     } else if (units == "Eng") {
-      cat("\nTemperature not given.\nAssuming T = 68 F\n")
+      message("\nTemperature not given.\nAssuming T = 68 F\n")
       T = 68
     } else if (all(c("SI", "Eng") %in% units == FALSE) == FALSE) {
       stop("Incorrect unit system. Specifcy either SI or Eng.")
@@ -120,10 +120,10 @@ kvisc <- function(T = NULL, units = c("SI", "Eng")) {
   units <- units
   if (length(checks) < 1) {
     if (units == "SI") {
-      cat("\nTemperature not given.\nAssuming T = 20 C\n")
+      message("\nTemperature not given.\nAssuming T = 20 C\n")
       T = 20
     } else if (units == "Eng") {
-      cat("\nTemperature not given.\nAssuming T = 68 F\n")
+      message("\nTemperature not given.\nAssuming T = 68 F\n")
       T = 68
     } else if (all(c("SI", "Eng") %in% units == FALSE) == FALSE) {
       stop("Incorrect unit system. Specifcy either SI or Eng.")

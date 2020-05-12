@@ -12,8 +12,8 @@ Description: Functions for basic hydraulic calculations related to
     Colebrook-White equation), the basis of the Moody diagram, the original 
     citation being Colebrook (1939) <doi:10.1680/ijoti.1939.13150>. The 
     derivation of the Darcy-Weisbach equation and methods for its solution 
-    are outlined in many fundamental fluid mechanics texts such as 
-    Finnemore and Franzini (2002). This package is designed to work similarly
+    are outlined in many fluid mechanics texts such as Finnemore and Franzini 
+    (2002, ISBN:978-0072432022). This package is designed to work similarly
     to the 'iemisc' package, but with an emphasis on pipe flow.
 License: GPL (>= 3) 
 Depends: R (>= 3.6.0)

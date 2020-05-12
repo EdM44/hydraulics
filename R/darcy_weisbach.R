@@ -68,8 +68,8 @@ darcyweisbach <- function(Q = NULL, D = NULL, hf = NULL, L = NULL, ks = NULL,
   if (length(c(Q, D, hf)) != 2) {
     stop("One of the three variables Q, D, hf must be missing.")
   }
-  if (any(checks == 0)) {
-    stop("Either Q, D, hf, L, ks, nu is 0. None of the variables can be 0. Try again.")
+  if (any(c(Q, D, hf, L, nu) == 0)) {
+    stop("Either Q, D, hf, L, nu is 0. None of the variables can be 0. Try again.")
   }
   if (units == "SI") {
     g <- 9.80665  # m / s^2
@@ -83,10 +83,9 @@ darcyweisbach <- function(Q = NULL, D = NULL, hf = NULL, L = NULL, ks = NULL,
     stop("Incorrect unit system. Try again.")
   }
   if (missing(hf)) {
-    cat(sprintf("hf missing: solving a Type 1 problem\n"))
+    message(sprintf("hf missing: solving a Type 1 problem\n"))
     if (D < dmin | D > dmax) {
-      cat(sprintf("Diameter: %.5f. allowable range: %.5f, %.5f\n",D, dmin,dmax))
-      stop("\nDiameter outside applicable range")
+      stop(sprintf("Diameter: %.5f. outside allowable range: %.5f, %.5f\n",D, dmin,dmax))
     }
     V <- velocity(D, Q)
     Re <- reynolds_number(V = V, D = D, nu = nu)
@@ -95,10 +94,9 @@ darcyweisbach <- function(Q = NULL, D = NULL, hf = NULL, L = NULL, ks = NULL,
     return(list(Q = Q, V = V, L = L, D = D, hf = hf, f = f, Re = Re))
   }
   if (missing(Q)) {
-    cat(sprintf("Q missing: solving a Type 2 problem\n"))
+    message(sprintf("Q missing: solving a Type 2 problem\n"))
     if (D < dmin | D > dmax) {
-      cat(sprintf("Diameter: %.5f. allowable range: %.5f, %.5f\n",D, dmin,dmax))
-      stop("\nDiameter outside applicable range")
+      stop(sprintf("Diameter: %.5f. outside allowable range: %.5f, %.5f\n",D, dmin,dmax))
     }
     # solve with explicit equation for velocity - any consistent units
     pt1 <- (ks/D)/3.7 + (2.51 * (nu/D) * sqrt(L/(g * D * hf)))
@@ -109,7 +107,7 @@ darcyweisbach <- function(Q = NULL, D = NULL, hf = NULL, L = NULL, ks = NULL,
     return(list(Q = Q, V = V, L = L, D = D, hf = hf, f = f, Re = Re))
   }
   if (missing(D)) {
-    cat(sprintf("D missing: solving a Type 3 problem\n"))
+    message(sprintf("D missing: solving a Type 3 problem\n"))
     D <- uniroot(type3_fcn, interval = c(dmin, dmax), Q, hf, L, ks, nu, g)$root
     Re <- reynolds_number(V = velocity(D = D, Q = Q), D = D, nu = nu)
     f <- colebrook(ks = ks, V = velocity(D = D, Q = Q), D = D, nu = nu)
