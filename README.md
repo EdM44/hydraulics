@@ -34,13 +34,11 @@ ks <- 0.0005  #ft
 reynolds_number(V = velocity(D, Q), D = D, nu = kvisc(T = T, units = "Eng"))
 #> [1] 248624.7
 colebrook(ks = ks, V = velocity(D, Q), D = D, nu = kvisc(T = T, units = "Eng"))
-#> Colebrook f: 0.0173
 #> [1] 0.0173031
 
 #Solve directly for the missing value of friction loss 
 ans1 <- darcyweisbach(Q = Q,D = D, L = L, ks = ks, nu = kvisc(T=T, units="Eng"), units = c("Eng"))
 #> hf missing: solving a Type 1 problem
-#> Colebrook f: 0.0173
 cat(sprintf("Reynolds no: %.0f\nFriction Fact: %.4f\nHead Loss: %.2f ft\n", ans1$Re, ans1$f, ans1$hf))
 #> Reynolds no: 248625
 #> Friction Fact: 0.0173
@@ -57,7 +55,6 @@ T <- 20         #C
 ks <- 0.000046  #m
 ans2 <- darcyweisbach(D = D, hf = hf, L = L, ks = ks, nu = kvisc(T=T, units='SI'), units = c('SI'))
 #> Q missing: solving a Type 2 problem
-#> Colebrook f: 0.0133
 cat(sprintf("Reynolds no: %.0f\nFriction Fact: %.4f\nFlow: %.2f m3/s\n", ans2$Re, ans2$f, ans2$Q))
 #> Reynolds no: 1010337
 #> Friction Fact: 0.0133
@@ -74,7 +71,6 @@ T <- 68       #water temperature, F
 ks <- 0.0008  #pipe roughness, ft
 ans3 <- darcyweisbach(Q = Q, hf = hf, L = L, ks = ks, nu = kvisc(T=T, units='Eng'), units = c('Eng'))
 #> D missing: solving a Type 3 problem
-#> Colebrook f: 0.0164
 cat(sprintf("Reynolds no: %.0f\nFriction Fact: %.4f\nDiameter: %.2f ft\n", ans3$Re, ans3$f, ans3$D))
 #> Reynolds no: 2336974
 #> Friction Fact: 0.0164
