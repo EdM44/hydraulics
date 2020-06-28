@@ -2,11 +2,13 @@
 
 # Description
 
-The *hydraulics* R package contains functions to 1) describe properties
-of water, 2) solve the Darcy-Weisbach equation for friction loss through
-pipes, and 3) plot a Moody diagram. The format of functions and
-solutions are designed to be compatible with the *iemisc* package that
-includes open channel hydraulics solutions.
+The *hydraulics* R package contains pipe flow functions to 1) describe
+properties of water, 2) solve the Darcy-Weisbach equation for friction
+loss through pipes, and 3) plot a Moody diagram. Partially-filled pipe
+solutions are solved with the Manning equation. The format of functions
+and pressure pipe solutions are designed to be compatible with the
+*iemisc* package, and the open channel hydraulics solutions are
+modifications of that code.
 
 # Installation
 
