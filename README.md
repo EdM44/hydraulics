@@ -79,7 +79,7 @@ cat(sprintf("Reynolds no: %.0f\nFriction Fact: %.4f\nDiameter: %.2f ft\n", ans3$
 #> Diameter: 1.85 ft
 ```
 
-## Solving for roughness height (ks): Eng (US) units
+## Solving for roughness height (ks): Eng (US) units, print results as data frame
 
 ``` r
 D <- 1.85     #diameter in ft
@@ -89,9 +89,162 @@ hf <- 215     #head loss due to friction, in ft
 T <- 68       #water temperature, F
 ans4 <- darcyweisbach(Q = Q, D = D, hf = hf, L = L, nu = kvisc(T=T, units='Eng'), units = c('Eng'))
 #> ks missing: solving for missing roughness height
-cat(sprintf("ks: %.5f ft\n", ans4$ks))
-#> ks: 0.00082 ft
+kable(setNames(as.data.frame(unlist(ans4)),c('value')), format = "html")
 ```
+
+<table>
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+</th>
+
+<th style="text-align:right;">
+
+value
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Q
+
+</td>
+
+<td style="text-align:right;">
+
+3.750000e+01
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+V
+
+</td>
+
+<td style="text-align:right;">
+
+1.395076e+01
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+L
+
+</td>
+
+<td style="text-align:right;">
+
+8.000000e+03
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+D
+
+</td>
+
+<td style="text-align:right;">
+
+1.850000e+00
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+hf
+
+</td>
+
+<td style="text-align:right;">
+
+2.150000e+02
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+f
+
+</td>
+
+<td style="text-align:right;">
+
+1.649880e-02
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+ks
+
+</td>
+
+<td style="text-align:right;">
+
+8.176000e-04
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Re
+
+</td>
+
+<td style="text-align:right;">
+
+2.335866e+06
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
 
 ## Utility functions for water properties can be used independently as well:
 
