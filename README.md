@@ -13,7 +13,7 @@ includes open channel hydraulics solutions.
 ``` r
 #Install the stable CRAN version of this package
 install.packages("EdM44/hydraulics")
-#Install the latest version of this package
+#Install the development version of this package
 devtools::install_github("EdM44/hydraulics")
 ```
 
