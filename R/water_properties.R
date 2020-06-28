@@ -33,7 +33,7 @@
 #' nu = kvisc(units = 'Eng')
 #'
 #' #Find water density for water temperature of 25 C
-#' rho = kvisc(T = 25, units = 'SI')
+#' rho = dens(T = 25, units = 'SI')
 #'
 #' @name waterprops
 NULL

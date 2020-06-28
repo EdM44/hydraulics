@@ -3,7 +3,7 @@
 \name{darcyweisbach}
 \alias{darcyweisbach}
 \title{Solves the Darcy-Weisbach Equation for the either head loss (hf),
-flow rate (Q), or diameter (D).}
+flow rate (Q), diameter (D), or roughness height (ks).}
 \usage{
 darcyweisbach(
   Q = NULL,
@@ -24,8 +24,8 @@ darcyweisbach(
 
 \item{L}{numeric vector that contains the pipe length [m or ft],}
 
-\item{ks}{numeric vector that contains the 'equivalent sand roughness height
-sand roughness height. Units should be consistent with other input [m or ft]}
+\item{ks}{numeric vector that contains the equivalent sand roughness height.
+Units should be consistent with other input [m or ft]}
 
 \item{nu}{numeric vector that contains the kinematic viscosity of water,
 [m2 s-1 or ft2 s-1].}
@@ -42,14 +42,15 @@ Returns a list including the missing parameter (hf, Q, or D):
   \item L - pipe length.
   \item hf - head loss due to friction
   \item f - Darcy-Weisbach friction factor
+  \item ks - roughness height
   \item Re - Reynolds number
 }
 }
 \description{
 This function solves the Darcy-Weisbach friction loss equation
 for with water in circular pipes. the function solves for
-either head loss (hf), flow rate (Q), or diameter (D),
-whichever is missing (not included as an argument).
+either head loss (hf), flow rate (Q), diameter (D),or roughness height,
+(ks) whichever is missing (not included as an argument).
 As with many parts of this package, techniques and formatting
 were drawn from Irucka Embry's iemisc package, which includes some
 methods with similar functionality.

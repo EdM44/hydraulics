@@ -275,10 +275,36 @@ cat(sprintf("Water density: %.3f kg/m3\n", rho))
 #> Water density: 997.075 kg/m3
 ```
 
-## plot a Moody diagram, with optional points added
+## Plot a Moody diagram, with optional points added
 
 ``` r
 moody(Re = c(ans1$Re, ans2$Re, ans3$Re), f = c(ans1$f, ans2$f, ans3$f))
 ```
 
 <img src="man/figures/README-moody-diagram-1.png" width="100%" />
+
+## Open Channel Flow: solving for Q: SI Units
+
+``` r
+oc1 <- manningc(d = 0.6, n = 0.013, Sf = 1./400., y = 0.24, units = "SI")
+cat(sprintf("Flow rate, Q: %.2f m3/s\nFull pipe flow rate, Qf: %.2f\n", oc1$Q, oc1$Qf))
+#> Flow rate, Q: 0.10 m3/s
+#> Full pipe flow rate, Qf: 0.31
+```
+
+## Open Channel Flow: solving for diameter, d when given y\_d): Eng (US) units
+
+``` r
+oc2 <- manningc(Q = 83.5, n = 0.015, Sf = 0.0002, y_d = 0.9, units = "Eng")
+cat(sprintf("Required diameter: %.2f ft\nFlow depth: %.2f\n", oc2$d, oc2$y))
+#> Required diameter: 7.00 ft
+#> Flow depth: 6.30
+```
+
+## Plot the cross section for the last example
+
+``` r
+xc_circle( y = oc2$y ,d = oc2$d )
+```
+
+<img src="man/figures/README-xc-plot-1.png" width="100%" />
