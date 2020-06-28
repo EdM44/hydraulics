@@ -11,7 +11,9 @@ includes open channel hydraulics solutions.
 # Installation
 
 ``` r
-#Install this package
+#Install the stable CRAN version of this package
+install.packages("EdM44/hydraulics")
+#Install the latest version of this package
 devtools::install_github("EdM44/hydraulics")
 ```
 
@@ -75,6 +77,20 @@ cat(sprintf("Reynolds no: %.0f\nFriction Fact: %.4f\nDiameter: %.2f ft\n", ans3$
 #> Reynolds no: 2336974
 #> Friction Fact: 0.0164
 #> Diameter: 1.85 ft
+```
+
+## Solving for roughness height (ks): Eng (US) units
+
+``` r
+D <- 1.85     #diameter in ft
+Q <- 37.5     #flow in ft^3/s
+L <- 8000     #pipe length in ft
+hf <- 215     #head loss due to friction, in ft
+T <- 68       #water temperature, F
+ans4 <- darcyweisbach(Q = Q, D = D, hf = hf, L = L, nu = kvisc(T=T, units='Eng'), units = c('Eng'))
+#> ks missing: solving for missing roughness height
+cat(sprintf("ks: %.5f ft\n", ans4$ks))
+#> ks: 0.00082 ft
 ```
 
 ## Utility functions for water properties can be used independently as well:
