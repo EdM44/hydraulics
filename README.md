@@ -2,13 +2,16 @@
 
 # Description
 
-The *hydraulics* R package contains pipe flow functions to 1) describe
-properties of water, 2) solve the Darcy-Weisbach equation for friction
-loss through pipes, and 3) plot a Moody diagram. Partially-filled pipe
-solutions are solved with the Manning equation. The format of functions
-and pressure pipe solutions are designed to be compatible with the
-*iemisc* package, and the open channel hydraulics solutions are
-modifications of that code.
+The *hydraulics* R package solves basic pipe hydraulics for both
+pressure and gravity flow conditions, and open-channel hydraculis for
+trapezoidal channels, including triangular and rectangular. Pressure
+pipe solutions include functions to 1) describe properties of water, 2)
+solve the Darcy-Weisbach equation for friction loss through pipes, and
+3) plot a Moody diagram. Partially-filled pipe and other open-channel
+flow solutions are solved with the Manning equation. The format of
+functions and pressure pipe solutions are designed to be compatible with
+the *iemisc* package, and the open channel hydraulics solutions are
+modifications of code in that package.
 
 # Installation
 
@@ -285,7 +288,7 @@ moody(Re = c(ans1$Re, ans2$Re, ans3$Re), f = c(ans1$f, ans2$f, ans3$f))
 
 <img src="man/figures/README-moody-diagram-1.png" width="100%" />
 
-## Open Channel Flow: solving for Q: SI Units
+## Open Channel Flow in a Pipe: solving for Q: SI Units
 
 ``` r
 oc1 <- manningc(d = 0.6, n = 0.013, Sf = 1./400., y = 0.24, units = "SI")
@@ -294,7 +297,7 @@ cat(sprintf("Flow rate, Q: %.2f m3/s\nFull pipe flow rate, Qf: %.2f\n", oc1$Q, o
 #> Full pipe flow rate, Qf: 0.31
 ```
 
-## Open Channel Flow: solving for diameter, d when given y\_d): Eng (US) units
+## Open Channel Flow in a Pipe: solving for diameter, d when given y\_d): Eng (US) units
 
 ``` r
 oc2 <- manningc(Q = 83.5, n = 0.015, Sf = 0.0002, y_d = 0.9, units = "Eng")
@@ -309,4 +312,29 @@ cat(sprintf("Required diameter: %.2f ft\nFlow depth: %.2f\n", oc2$d, oc2$y))
 xc_circle( y = oc2$y ,d = oc2$d )
 ```
 
-<img src="man/figures/README-xc-plot-1.png" width="100%" />
+<img src="man/figures/README-xc-plot-circle-1.png" width="100%" />
+
+## Open Channel Flow in a Channel: solving for slope: Eng (US) units
+
+``` r
+oc3 <- manningt(Q = 360., n = 0.015, m = 1, b = 20.0, y = 3.0, units = "Eng")
+cat(sprintf("Slope: %.5f ft\nCritical depth: %.2f\n", oc3$Sf, oc3$yc))
+#> Slope: 0.00088 ft
+#> Critical depth: 2.08
+```
+
+## Plot a specific energy diagram for the channel of last example
+
+``` r
+spec_energy_trap( Q = oc3$Q, b = oc3$b, m = oc3$m, scale = 4, units = "Eng" )
+```
+
+<img src="man/figures/README-spec-energy-plot-1-1.png" width="100%" />
+
+## Plot the cross section for the last example
+
+``` r
+xc_trap( y = oc3$y, b = oc3$b, m = oc3$m )
+```
+
+<img src="man/figures/README-xc-plot-trap-1.png" width="100%" />

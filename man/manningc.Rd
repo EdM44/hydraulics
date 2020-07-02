@@ -49,37 +49,25 @@ Returns a list including the missing parameter:
 }
 }
 \description{
-This function solves the Manning equation for water 
-flow in a circular pipe at less than full. This is a modification of the 
+This function solves the Manning equation for water
+flow in a circular pipe at less than full. This is a modification of the
 comprehensive code prepared by Irucka Embry in his iemisc package. Specifically
 the iemisc::manningcirc function was adapted here for more limited cases
 commonly used in classroom exercises, additional checks were included to ensure
 the pipe is flowing less than full, and a cross-section figure is also
-available. The iemisc::manningcirc and iemisc::manningcircy sunctions were also 
+available. The iemisc::manningcirc and iemisc::manningcircy sunctions were also
 combined into a single function.
 }
 \details{
-A common form of the Manning equation is:
-
-\deqn{Q = \frac{K_n}{n}\frac{A^\frac{5}{3}}{P^\frac{2}{3}}\sqrt{S}}
-
-\describe{
-\item{\emph{Q}}{the discharge [m^3/s or ft^3/s (cfs)]}
-\item{\emph{n}}{Manning's roughness coefficient (dimensionless)}
-\item{\emph{P}}{the wetted perimeter (m or ft)}
-\item{\emph{A}}{the cross-sectional area (m^2 or ft^2)}
-\item{\emph{S}}{the slope of the channel bed (m/m or ft/ft)}
-\item{\emph{\eqn{K_n}}}{the conversion constant: 1.0 (SI) and 1.4859 (Eng)}
-}
-
-The possible applications of this function for circular pipes are:
+The possible applications of this function for solving the Manning equation
+for circular pipes are:
 \tabular{ll}{
   \strong{Given} \tab \strong{Solve for} \cr
   y_d, Q, Sf, n \tab d \cr
   d, Sf, Q, n \tab y \cr
   y, d, Q, n \tab Sf \cr
   y, d, Sf, n \tab Q \cr
-  d, Q, Sf, y \tab n 
+  d, Q, Sf, y \tab n
 }
 }
 \examples{

@@ -1,35 +1,23 @@
 #' Solves the Manning Equation for gravity flow in a circular pipe
 #'
-#' This function solves the Manning equation for water 
-#' flow in a circular pipe at less than full. This is a modification of the 
+#' This function solves the Manning equation for water
+#' flow in a circular pipe at less than full. This is a modification of the
 #' comprehensive code prepared by Irucka Embry in his iemisc package. Specifically
 #' the iemisc::manningcirc function was adapted here for more limited cases
 #' commonly used in classroom exercises, additional checks were included to ensure
 #' the pipe is flowing less than full, and a cross-section figure is also
-#' available. The iemisc::manningcirc and iemisc::manningcircy sunctions were also 
+#' available. The iemisc::manningcirc and iemisc::manningcircy sunctions were also
 #' combined into a single function.
-#' 
-#' A common form of the Manning equation is:
 #'
-#' \deqn{Q = \frac{K_n}{n}\frac{A^\frac{5}{3}}{P^\frac{2}{3}}\sqrt{S}}
-#'
-#' \describe{
-#'	\item{\emph{Q}}{the discharge [m^3/s or ft^3/s (cfs)]}
-#'	\item{\emph{n}}{Manning's roughness coefficient (dimensionless)}
-#'	\item{\emph{P}}{the wetted perimeter (m or ft)}
-#'	\item{\emph{A}}{the cross-sectional area (m^2 or ft^2)}
-#'	\item{\emph{S}}{the slope of the channel bed (m/m or ft/ft)}
-#'	\item{\emph{\eqn{K_n}}}{the conversion constant: 1.0 (SI) and 1.4859 (Eng)}
-#' }
-#' 
-#' The possible applications of this function for circular pipes are:
+#' The possible applications of this function for solving the Manning equation
+#' for circular pipes are:
 #' \tabular{ll}{
 #'   \strong{Given} \tab \strong{Solve for} \cr
 #'   y_d, Q, Sf, n \tab d \cr
 #'   d, Sf, Q, n \tab y \cr
 #'   y, d, Q, n \tab Sf \cr
 #'   y, d, Sf, n \tab Q \cr
-#'   d, Q, Sf, y \tab n 
+#'   d, Q, Sf, y \tab n
 #' }
 #'
 #' @param Q numeric vector that contains the flow rate [m^3/s or or ft^3/s]
@@ -65,7 +53,7 @@
 #' #Solving for flow rate, Q: SI Units
 #' manningc(d = 0.6, n = 0.013, Sf = 1./400., y = 0.24, units = "SI")
 #' #returns 0.1 m3/s
-#' 
+#'
 #' #Solving for Sf, if d=600 mm and pipe is to flow half full
 #' manningc(d = 0.6, Q = 0.17, n = 0.013, y = 0.3, units = "SI")
 #' #returns required slope of 0.003
@@ -85,11 +73,11 @@ Qfull <- function(d = NULL, Sf = NULL, n = NULL, k = NULL) {
 
 #' @export
 #' @rdname manningc
-manningc <- function (Q = NULL, n = NULL, Sf = NULL, y = NULL, d = NULL, y_d = NULL, 
+manningc <- function (Q = NULL, n = NULL, Sf = NULL, y = NULL, d = NULL, y_d = NULL,
                       units = c("SI", "Eng")) {
 
   units <- units
-  
+
   #initial check for missing variables and out of bounds
   if(missing(y_d)) {
     if (length(c(Q, n, Sf, y, d)) != 4) {
@@ -101,7 +89,7 @@ manningc <- function (Q = NULL, n = NULL, Sf = NULL, y = NULL, d = NULL, y_d = N
     if ( (! missing(d)) & (! missing(y)) & ( y > d ) ) {
       stop("depth y cannot exceed diameter d.")
     }
-    case <- 1 
+    case <- 1
   } else {
     if ( (length(c(Q, Sf, n)) != 3) & (! missing(d))  & (! missing(y)) ) {
       stop("d, y must be missing when given y_d.")
@@ -114,7 +102,7 @@ manningc <- function (Q = NULL, n = NULL, Sf = NULL, y = NULL, d = NULL, y_d = N
     }
     case <- 2
   }
-  
+
   if (units == "SI") {
     g <- 9.80665     # m / s^2
     k <- 1.0
@@ -194,7 +182,7 @@ manningc <- function (Q = NULL, n = NULL, Sf = NULL, y = NULL, d = NULL, y_d = N
     } else if (missing(y)) {
       Qf <- Qfull(d = d, Sf = Sf, n = n, k = k)
       if ( Q > Qf ) {
-        stop("Flow Q exceeds full flow for the pipe")
+        stop("Flow Q exceeds full flow for the pipe.")
       }
       rh <- (n * Q) / (k * sqrt(Sf))
       thetafun <- function (theta) ((theta - sin(theta)) * (d ^ 2 / 8)) * (((theta - sin(theta)) * (d ^ 2 / 8) / ((theta * d) / 2)) ^ (2 / 3)) - rh
