@@ -1,4 +1,16 @@
-## Resubmission
+##Submission of new version v 0.2.0 - 1 July 2020
+
+* R CMD check results
+    + From Local OSX check:
+        - 0 errors ✓ | 0 warnings ✓ | 0 notes ✓
+        - R CMD check succeeded
+    + From Windows check (devtools::check_win_devel()):
+        - Status: 1 NOTE: Possibly mis-spelled words in DESCRIPTION: Embry (21:23) Irucka (21:16)
+        - Neither are misspellings
+
+Downstream dependencies: None.
+
+## Resubmission 12 May 2020 (accepted as commit f26886a5f3)
 Comments received on May 1, 2020 inluded:
 * Please write references in the description of the DESCRIPTION file in the form
   + authors (year) <doi:...>
