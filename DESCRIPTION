@@ -17,7 +17,7 @@ Description: Functions for basic hydraulic calculations related to
     derivation of and solutions using the Darcy-Weisbach equation and the
     Manning equation are outlined in many fluid mechanics texts such as 
     Finnemore and Franzini (2002, ISBN:978-0072432022). For the Manning equation
-    soutions, this package uses modifications of original code from the 'iemisc' 
+    solutions, this package uses modifications of original code from the 'iemisc' 
     package by Irucka Embry.
 License: GPL (>= 3) 
 Depends: R (>= 3.6.0)
