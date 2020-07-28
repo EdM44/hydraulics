@@ -2,30 +2,36 @@
 #'
 #' This function calculates the Darcy-Weisbach friction factor
 #' and is only provided in this package for use with water in circular pipes
-#' while the equation is technically valid for any liquid.
+#' while the equation is technically valid for any liquid or channel.
 #' As with many parts of this package, techniques and formatting
 #' were drawn from Irucka Embry's iemisc package, which includes some
-#' methods with similar functionality.
+#' methods with similar functionality. Two utility functions are included for velocity 
+#' and Reynolds Number.
 #'
 #' @param ks numeric vector that contains the 'equivalent sand roughness height
-#'   sand roughness height. Units should be consistent with other input [m or ft]
+#'   sand roughness height. Units should be consistent with other input [\eqn{m} or \eqn{ft}]
 #' @param V numeric vector that contains the average Velocity of flow in the pipe,
-#'   equal to flow divided by area, Q/A [m/s or ft/s]
-#' @param D numeric vector that contains the pipe diameter [m or ft]
+#'   equal to flow divided by area, \eqn{\frac{Q}{A}} [\eqn{m s^{-1}} or \eqn{ft s^{-1}}]
+#' @param D numeric vector that contains the pipe diameter [\eqn{m} or \eqn{ft}]
 #'   which should be D >=0.0025 m (0.0082 ft).
 #' @param nu numeric vector that contains the kinematic viscosity of water,
-#'  [m2 s-1 or ft2 s-1]. Computed with a utility function in water_properties.R:
+#'  [\eqn{m^2 s^{-1}} or \eqn{ft^2 s^{-1}}]. Computed with a utility function in water_properties.R:
 #'  kvisc(T=T, units=['SI' or 'Eng'])
 #' @param Q (for velocity function only) numeric vector that contains the flow rate
-#'  [m^3/s or ft^3/s]
+#'  [\eqn{m^3 s^{-1}} or \eqn{ft^3 s^{-1}}]
 #'
 #' @return f Returns a numeric vector containing the Darcy-Weisbach friction
 #'   factor
 #'
+#' @details The Colebrook-White equation was developed to estimate the Darcy-Weisbach friction factor
+#' for commercial pipes under turbulent flow conditions. It is recommended for pipe diameters greater 
+#' than 2.5 mm (0.1 inch).  The equation is: \deqn{\frac{1}{\sqrt{f}} = -2\log(\frac{\frac{ks}{D}}{3.7D} + \frac{2.51}{Re\sqrt{f}})}
+#' where \eqn{Re = \frac{VD}{nu}} is the Reynolds Number.
+#' 
 #' @author Ed Maurer
 #'
 #' @seealso \code{\link{kvisc}} for kinematic viscosity, \code{\link{velocity}} for
-#' calculating V=Q/A, \code{\link{reynolds_number}} for Reynolds number
+#' calculating \eqn{V=\frac{Q}{A}}, \code{\link{reynolds_number}} for Reynolds number
 #'
 #' @examples
 #'
@@ -40,12 +46,12 @@
 #' @importFrom utils tail
 #' @importFrom stats uniroot
 #'
-#' @name colebrook_f
+#' @name colebrook
 NULL
 
 # velocity function - consistent units needed
 #' @export
-#' @rdname colebrook_f
+#' @rdname colebrook
 velocity <- function(D = NULL, Q = NULL) {
   if (D <= 0.0) {
     stop("\nPositive value needed for diameter\n")
@@ -55,7 +61,7 @@ velocity <- function(D = NULL, Q = NULL) {
 }
 # Reynolds Number Function - consistent units needed
 #' @export
-#' @rdname colebrook_f
+#' @rdname colebrook
 reynolds_number <- function(V = NULL, D = NULL, nu = NULL) {
   checks <- c(V, D, nu)
   if (length(checks) < 3) {
@@ -74,7 +80,7 @@ colebrookfcn <- function(f, ks, D, Re) {
 }
 # ks and D in same units system, so units unneeded as argument
 #' @export
-#' @rdname colebrook_f
+#' @rdname colebrook
 colebrook <- function(ks, V, D, nu) {
 
   if (ks/D > 0.01) {
