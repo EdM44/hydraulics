@@ -11,7 +11,7 @@
 #' @param ks numeric vector that contains the 'equivalent sand roughness height
 #'   sand roughness height. Units should be consistent with other input [\eqn{m}{m} or \eqn{ft}{ft}]
 #' @param V numeric vector that contains the average Velocity of flow in the pipe,
-#'   equal to flow divided by area, \eqn{\frac{Q}{A}} [\eqn{m\,s^{-1}}{m/s} or \eqn{ft\,s^{-1}}{ft/s}]
+#'   equal to flow divided by area, \eqn{\frac{Q}{A}}{Q/A} [\eqn{m\,s^{-1}}{m/s} or \eqn{ft\,s^{-1}}{ft/s}]
 #' @param D numeric vector that contains the pipe diameter [\eqn{m}{m} or \eqn{ft}{ft}]
 #'   which should be D >=0.0025 m (0.0082 ft).
 #' @param nu numeric vector that contains the kinematic viscosity of water,
@@ -31,7 +31,7 @@
 #' @author Ed Maurer
 #'
 #' @seealso \code{\link{kvisc}} for kinematic viscosity, \code{\link{velocity}} for
-#' calculating \eqn{V=\frac{Q}{A}}, \code{\link{reynolds_number}} for Reynolds number
+#' calculating \eqn{V=\frac{Q}{A}}{V=Q/A}, \code{\link{reynolds_number}} for Reynolds number
 #'
 #' @examples
 #'
