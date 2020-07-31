@@ -3,7 +3,7 @@
 # Description
 
 The *hydraulics* R package solves basic pipe hydraulics for both
-pressure and gravity flow conditions, and open-channel hydraculis for
+pressure and gravity flow conditions, and open-channel hydraulics for
 trapezoidal channels, including triangular and rectangular. Pressure
 pipe solutions include functions to 1) describe properties of water, 2)
 solve the Darcy-Weisbach equation for friction loss through pipes, and

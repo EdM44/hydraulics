@@ -15,7 +15,7 @@ manningt(
 )
 }
 \arguments{
-\item{Q}{numeric vector that contains the flow rate [m^3/s or or ft^3/s]}
+\item{Q}{numeric vector that contains the flow rate [\eqn{m^3 s^{-1}}{m^3/s} or \eqn{ft^3 s^{-1}}{ft^3/s}]}
 
 \item{n}{numeric vector that contains the Manning roughness coefficient}
 
@@ -23,9 +23,9 @@ manningt(
 
 \item{Sf}{numeric vector that contains the slope of the channel [unitless]}
 
-\item{y}{numeric vector that contains the water depth [m or ft]}
+\item{y}{numeric vector that contains the water depth [\eqn{m}{m} or \eqn{ft}{ft}]}
 
-\item{b}{numeric vector that contains the channel bottom width [m or ft]}
+\item{b}{numeric vector that contains the channel bottom width [\eqn{m}{m} or \eqn{ft}{ft}]}
 
 \item{units}{character vector that contains the system of units [options are
 \code{SI} for International System of Units and \code{Eng} for English (US customary)
@@ -51,14 +51,25 @@ Returns a list including the missing parameter:
 }
 }
 \description{
-This function solves the Manning equation for water
-flow in an open channel with a trapezoidal shape. This is a modification of the
-code prepared by Irucka Embry in his iemisc package. Specifically
-the iemisc::manningtrap, iemisc::manningrect, and iemisc::manningtri were combined
-and adapted here for more limited cases commonly used in classroom exercises.Some
+This function solves the Manning equation for water flow in an open 
+channel with a trapezoidal shape.  Uniform flow conditions are assumed, 
+so that the channel slope is equal to the slope of the water surface 
+and the energy grade line. This is a modification of the code prepared 
+by Irucka Embry in his iemisc package. Specifically the
+iemisc::manningtrap, iemisc::manningrect, and iemisc::manningtri were combined
+and adapted here for cases commonly used in classroom exercises. Some
 auxiliary variables in the iemisc code are not included here (shear stress, and
-specific energy), as these will be done separately. A cross-section figure is also
+specific energy), as these can be calculated separately. A cross-section figure is also
 available.
+}
+\details{
+The Manning equation (also known as the Strickler equation) describes flow conditions in
+an open channel under uniform flow conditions. It is often expressed as: 
+\deqn{Q = A\frac{C}{n}{R}^{\frac{2}{3}}{S_f}^{\frac{1}{2}}}
+where \eqn{C} is 1.0 for SI units and 1.49 for Eng (U.S. Customary) units. Critical depth is 
+defined by the relation (at critical conditions):
+\deqn{\frac{Q^{2}T}{g\,A^{3}}=1}{Q^2T/gA^3=1}
+where \eqn{T}{T} is the top width of the water surface.
 }
 \examples{
 
@@ -74,6 +85,10 @@ manningt(Q = 14.56, m = 0, Sf = 0.0004, y = 2.0, b = 4, units = "Eng")
 manningt(Q = 1.0, n = 0.011, m = 1, Sf = 0.0065, b = 0, units = "SI")
 #returns 0.6 m normal flow depth
 
+}
+\seealso{
+\code{\link{spec_energy_trap}} for specific energy diagram and \code{\link{xc_trap}} 
+for a cross-section diagram of the trapezoidal channel
 }
 \author{
 Ed Maurer, Irucka Embry

@@ -14,7 +14,7 @@ dens(T = NULL, units = c("SI", "Eng"))
 kvisc(T = NULL, units = c("SI", "Eng"))
 }
 \arguments{
-\item{T}{numeric vector that contains the water temperature [C or F]}
+\item{T}{numeric vector that contains the water temperature [\eqn{^{\circ}C}{C} or \eqn{^{\circ}F}{F}]}
 
 \item{units}{character vector that contains the system of units [options are
 \code{SI} for International System of Units and \code{Eng} for English (US customary)
@@ -22,22 +22,16 @@ units. This is used for compatibility with iemisc package}
 }
 \value{
 rho, the density of water for the
-  dens function [kg/m3 or slug/ft3].
+  dens function [\eqn{{kg}\,{m^{-3}}}{kg/m^3} or \eqn{{slug}\,{ft^{-3}}}{slug/ft^3}]
 
 mu, the dynamic viscosity of water for the
-  dvisc function [Pa-s (N s m^-2) or lbf s ft^-2].
+  dvisc function [\eqn{{N}\,{s}\,{m^{-2}}}{N s/m^2} or \eqn{{lbf}\,{s}\,{ft^{-2}}}{lbf s/ft^2}]
 
 nu, the kinematic viscosity of water for the
-  kvisc function [m2 s^-1 or ft^2 s^-1].
+  kvisc function [\eqn{m^2 s^{-1}}{m^2/s} or \eqn{ft^2 s^{-1}}{ft^2/s}].
 }
 \description{
-This function calculates the Darcy-Weisbach friction factor
-and is only provided in this package for use with water in circular pipes
-while the equation is technically valid for any liquid.
-As with many parts of this package, techniques and formatting
-were drawn from Irucka Embry's iemisc package, which includes some
-methods with similar functionality.
-function(ks,V,D,nu)
+This function calculates water properties that are used in other functions.
 }
 \examples{
 

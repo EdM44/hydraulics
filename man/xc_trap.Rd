@@ -7,9 +7,9 @@
 xc_trap(y = NULL, b = NULL, m = NULL)
 }
 \arguments{
-\item{y}{water depth}
+\item{y}{water depth  [\eqn{m}{m} or \eqn{ft}{ft}]}
 
-\item{b}{bottom width}
+\item{b}{bottom width  [\eqn{m}{m} or \eqn{ft}{ft}]}
 
 \item{m}{side slope (H:1)}
 }

@@ -15,15 +15,15 @@ manningc(
 )
 }
 \arguments{
-\item{Q}{numeric vector that contains the flow rate [m^3/s or or ft^3/s]}
+\item{Q}{numeric vector that contains the flow rate [\eqn{m^3 s^{-1}}{m^3/s} or \eqn{ft^3 s^{-1}}{ft^3/s}]}
 
 \item{n}{numeric vector that contains the Manning roughness coefficient.}
 
 \item{Sf}{numeric vector that contains the slope of the pipe [unitless]}
 
-\item{y}{numeric vector that contains the water depth [m or ft]}
+\item{y}{numeric vector that contains the water depth [\eqn{m}{m} or \eqn{ft}{ft}]}
 
-\item{d}{numeric vector that contains the pipe diameter [m or ft]}
+\item{d}{numeric vector that contains the pipe diameter [\eqn{m}{m} or \eqn{ft}{ft}]}
 
 \item{y_d}{numeric vector that contains the ratio of depth to diameter [unitless]}
 
@@ -38,24 +38,26 @@ Returns a list including the missing parameter:
   \item V - flow velocity
   \item A - cross-sectional area of flow
   \item P - wetted perimeter
-  \item R - hydraulic radius
+  \item R - hydraulic radius (A/P)
   \item y - flow depth
   \item d - pipe diameter
   \item Sf - slope
   \item n - Manning's roughness
+  \item yc - critical depth
   \item Fr - Froude number
   \item Re - Reynolds number
   \item Qf - Full pipe flow rate
 }
 }
 \description{
-This function solves the Manning equation for water
-flow in a circular pipe at less than full. This is a modification of the
-comprehensive code prepared by Irucka Embry in his iemisc package. Specifically
-the iemisc::manningcirc function was adapted here for more limited cases
+This function solves the Manning equation for water flow in a circular pipe 
+at less than full. Uniform flow conditions are assumed, so that the pipe slope 
+is equal to the slope of the water surface and the energy grade line. This is a 
+modification of the code prepared by Irucka Embry in his iemisc package.
+The iemisc::manningcirc function was adapted here for more limited cases
 commonly used in classroom exercises, additional checks were included to ensure
 the pipe is flowing less than full, and a cross-section figure is also
-available. The iemisc::manningcirc and iemisc::manningcircy sunctions were also
+available. The iemisc::manningcirc and iemisc::manningcircy functions were
 combined into a single function.
 }
 \details{
@@ -69,6 +71,16 @@ for circular pipes are:
   y, d, Sf, n \tab Q \cr
   d, Q, Sf, y \tab n
 }
+
+The Manning equation (also known as the Strickler equation) describes flow conditions in
+an open channel under uniform flow conditions. It is often expressed as: 
+\deqn{Q = A\frac{C}{n}{R}^{\frac{2}{3}}{S_f}^{\frac{1}{2}}}
+where \eqn{C} is 1.0 for SI units and 1.49 for Eng (U.S. Customary) units. Critical depth is 
+defined by the relation (at critical conditions):
+\deqn{\frac{Q^{2}T}{g\,A^{3}}=1}{Q^2T/gA^3=1}
+where \eqn{T}{T} is the top width of the water surface. Since T equals zero for a full pipe, critical 
+depth is set to the pipe diameter \eqn{d}{d} if the flow \eqn{Q}{Q} exceeds a value that would produce a 
+critical flow at \eqn{\frac{y}{d}=0.99}{y/d=0.99}.
 }
 \examples{
 
@@ -84,6 +96,13 @@ manningc(d = 0.6, Q = 0.17, n = 0.013, y = 0.3, units = "SI")
 manningc(Q = 83.5, n = 0.015, Sf = 0.0002, y_d = 0.9, units = "Eng")
 #returns 7.0 ft required diameter
 
+#Solving for depth, d when given Q: SI units
+manningc(Q=0.01, n=0.0013, Sf=0.001, d = 0.2, units="SI")
+#returns depth  y = 0.042 m, critical depth, yc = 0.085 m
+
+}
+\seealso{
+\code{\link{xc_circle}} for a cross-section diagram of the circular channel
 }
 \author{
 Ed Maurer, Irucka Embry

@@ -8,7 +8,7 @@
 #' @param f (optional) numeric vector (same length as Re) that contains the Darcy-Weisbach
 #' friction factors corresponding to the points to be manually added
 #'
-#' @return a Moody diagram, with the optional added (f,Re) points
+#' @return a Moody diagram, with the optional added (Re, f) points
 #'
 #' @author Ed Maurer
 #'

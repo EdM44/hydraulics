@@ -3,8 +3,8 @@
 #' This function plots a cross-section of a circular pipe, shaded as filled
 #' to the level indicated by the depth and diameter values passed to it.
 #'
-#' @param y water depth
-#' @param d pipe diameter
+#' @param y water depth [\eqn{m}{m} or \eqn{ft}{ft}]
+#' @param d pipe diameter [\eqn{m}{m} or \eqn{ft}{ft}]
 #'
 #' @return a cross-section diagram
 #'

@@ -9,24 +9,24 @@
 #' and Reynolds Number.
 #'
 #' @param ks numeric vector that contains the 'equivalent sand roughness height
-#'   sand roughness height. Units should be consistent with other input [\eqn{m} or \eqn{ft}]
+#'   sand roughness height. Units should be consistent with other input [\eqn{m}{m} or \eqn{ft}{ft}]
 #' @param V numeric vector that contains the average Velocity of flow in the pipe,
-#'   equal to flow divided by area, \eqn{\frac{Q}{A}} [\eqn{m s^{-1}} or \eqn{ft s^{-1}}]
-#' @param D numeric vector that contains the pipe diameter [\eqn{m} or \eqn{ft}]
+#'   equal to flow divided by area, \eqn{\frac{Q}{A}} [\eqn{m\,s^{-1}}{m/s} or \eqn{ft\,s^{-1}}{ft/s}]
+#' @param D numeric vector that contains the pipe diameter [\eqn{m}{m} or \eqn{ft}{ft}]
 #'   which should be D >=0.0025 m (0.0082 ft).
 #' @param nu numeric vector that contains the kinematic viscosity of water,
-#'  [\eqn{m^2 s^{-1}} or \eqn{ft^2 s^{-1}}]. Computed with a utility function in water_properties.R:
+#'  [\eqn{m^2 s^{-1}}{m^2/s} or \eqn{ft^2 s^{-1}}{ft^2/s}]. Computed with a utility function in water_properties.R:
 #'  kvisc(T=T, units=['SI' or 'Eng'])
 #' @param Q (for velocity function only) numeric vector that contains the flow rate
-#'  [\eqn{m^3 s^{-1}} or \eqn{ft^3 s^{-1}}]
+#'  [\eqn{m^3 s^{-1}}{m^3/s} or \eqn{ft^3 s^{-1}}{ft^3/s}]
 #'
 #' @return f Returns a numeric vector containing the Darcy-Weisbach friction
 #'   factor
 #'
 #' @details The Colebrook-White equation was developed to estimate the Darcy-Weisbach friction factor
 #' for commercial pipes under turbulent flow conditions. It is recommended for pipe diameters greater 
-#' than 2.5 mm (0.1 inch).  The equation is: \deqn{\frac{1}{\sqrt{f}} = -2\log(\frac{\frac{ks}{D}}{3.7D} + \frac{2.51}{Re\sqrt{f}})}
-#' where \eqn{Re = \frac{VD}{nu}} is the Reynolds Number.
+#' than 2.5 mm (0.1 inch).  The equation is: \deqn{\frac{1}{\sqrt{f}} = -2\log\left(\frac{\frac{ks}{D}}{3.7D} + \frac{2.51}{Re\sqrt{f}}\right)}
+#' where \eqn{Re = \frac{VD}{nu}} is the unitless Reynolds Number.
 #' 
 #' @author Ed Maurer
 #'

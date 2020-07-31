@@ -1,21 +1,28 @@
 #' Creates a specific energy diagram for a trapezoidal channel
 #'
 #' This function plots a specific energy diagram of a trapezoidal
-#' (including rectangle and triangle) channel, with annotation of
-#' critical depth and minimum specific energy
+#' (including rectangular and triangular) channel, with annotation of
+#' critical depth and minimum specific energy.
 #'
-#'
-#' @param Q flow rate
-#' @param b bottom width
-#' @param m side slope (H:1)
-#' @param scale multiplier (of yc) for plot scale (default is 3)
+#' @param Q flow rate [\eqn{m^3 s^{-1}}{m^3/s} or \eqn{ft^3 s^{-1}}{ft^3/s}]
+#' @param b bottom width [\eqn{m}{m} or \eqn{ft}{ft}]
+#' @param m side slope (H:1) [unitless]
+#' @param scale multiplier (of yc) for axis scales (default is 3)
 #' @param units character vector that contains the system of units [options are
 #'   \code{SI} for International System of Units and \code{Eng} for English (US customary)
-#'   units. This is used for compatibility with iemisc package]
+#'   units.
 #'
 #' @return a specific energy diagram
 #'
 #' @author Ed Maurer
+#'
+#' @details Specific Energy, E, is the energy, expressed as a head (i.e., the mechanical energy 
+#' per unit weight of the water, with units of length) relative to the channel bottom.
+#' It is calculated as: 
+#' \deqn{E = y+\alpha\frac{Q^{2}}{2g\,A^{2}} = y+\alpha\frac{V^{2}}{2g}}
+#' where \eqn{y} is flow depth, \eqn{A} is the cross-sectional flow area, \eqn{{V}=\frac{Q}{A}}, and 
+#' and \eqn{\alpha} is a kinetic energy correction factor to account for non-uniform velocities across 
+#' the cross-section;  \eqn{\alpha=1.0} in this function (as is commonly assumed).
 #'
 #' @examples
 #'

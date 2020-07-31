@@ -14,7 +14,7 @@ manually added}
 friction factors corresponding to the points to be manually added}
 }
 \value{
-a Moody diagram, with the optional added (f,Re) points
+a Moody diagram, with the optional added (Re, f) points
 }
 \description{
 This function plots a standard Moody diagram, and allows additional

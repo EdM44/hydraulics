@@ -7,9 +7,9 @@
 xc_circle(y = NULL, d = NULL)
 }
 \arguments{
-\item{y}{water depth}
+\item{y}{water depth [\eqn{m}{m} or \eqn{ft}{ft}]}
 
-\item{d}{pipe diameter}
+\item{d}{pipe diameter [\eqn{m}{m} or \eqn{ft}{ft}]}
 }
 \value{
 a cross-section diagram

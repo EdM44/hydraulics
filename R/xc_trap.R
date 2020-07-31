@@ -3,8 +3,8 @@
 #' This function plots a cross-section of a  (trapezoid, rectangle, triangle), 
 #' shaded as filled to the level indicated by the values passed to it.
 #'
-#' @param y water depth
-#' @param b bottom width
+#' @param y water depth  [\eqn{m}{m} or \eqn{ft}{ft}]
+#' @param b bottom width  [\eqn{m}{m} or \eqn{ft}{ft}]
 #' @param m side slope (H:1)
 #'
 #' @return a cross-section diagram
