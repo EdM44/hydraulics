@@ -17,7 +17,7 @@ modifications of code in that package.
 
 ``` r
 #Install the stable CRAN version of this package
-install.packages("EdM44/hydraulics")
+install.packages("hydraulics")
 #Install the development version of this package
 devtools::install_github("EdM44/hydraulics")
 ```
