@@ -8,7 +8,7 @@
     function name
   - Added function to calculate critical depth for a circular pipe
 
-## hydraulics 0.2.0
+## hydraulics 0.2.0 (CRAN commit a3f7f8df5d)
 
   - Added functionality to solve for absolute roughness in presure pipe
     flow
