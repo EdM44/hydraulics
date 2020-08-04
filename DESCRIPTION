@@ -1,7 +1,7 @@
 Package: hydraulics
 Type: Package
 Title: Basic Pipe and Open Channel Hydraulics
-Version: 0.2.1
+Version: 0.2.1.9000
 Author: Ed Maurer [aut, cre], Irucka Embry [aut, ctb] (iemisc code)
 Maintainer: Ed Maurer <emaurer@scu.edu>
 Description: Functions for basic hydraulic calculations related to 
@@ -19,6 +19,7 @@ Description: Functions for basic hydraulic calculations related to
     Finnemore and Franzini (2002, ISBN:978-0072432022). For the Manning equation
     solutions, this package uses modifications of original code from the 'iemisc' 
     package by Irucka Embry.
+URL: https://github.com/EdM44/hydraulics
 License: GPL (>= 3) 
 Depends: R (>= 3.6.0)
 Encoding: UTF-8

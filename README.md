@@ -286,7 +286,7 @@ cat(sprintf("Water density: %.3f kg/m3\n", rho))
 moody(Re = c(ans1$Re, ans2$Re, ans3$Re), f = c(ans1$f, ans2$f, ans3$f))
 ```
 
-<img src="man/figures/README-moody-diagram-1.png" width="100%" />
+<img src="man/figures/README-moody-diagram-1.png" width="75%" />
 
 ## Open Channel Flow in a Pipe: solving for Q: SI Units
 
@@ -312,7 +312,7 @@ cat(sprintf("Required diameter: %.2f ft\nFlow depth: %.2f\n", oc2$d, oc2$y))
 xc_circle( y = oc2$y ,d = oc2$d )
 ```
 
-<img src="man/figures/README-xc-plot-circle-1.png" width="100%" />
+<img src="man/figures/README-xc-plot-circle-1.png" width="50%" />
 
 ## Open Channel Flow in a Channel: solving for slope: Eng (US) units
 
@@ -329,7 +329,7 @@ cat(sprintf("Slope: %.5f ft\nCritical depth: %.2f\n", oc3$Sf, oc3$yc))
 spec_energy_trap( Q = oc3$Q, b = oc3$b, m = oc3$m, scale = 4, units = "Eng" )
 ```
 
-<img src="man/figures/README-spec-energy-plot-1-1.png" width="100%" />
+<img src="man/figures/README-spec-energy-plot-1-1.png" width="75%" />
 
 ## Plot the cross section for the last example
 
@@ -337,4 +337,4 @@ spec_energy_trap( Q = oc3$Q, b = oc3$b, m = oc3$m, scale = 4, units = "Eng" )
 xc_trap( y = oc3$y, b = oc3$b, m = oc3$m )
 ```
 
-<img src="man/figures/README-xc-plot-trap-1.png" width="100%" />
+<img src="man/figures/README-xc-plot-trap-1.png" width="50%" />
