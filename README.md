@@ -19,7 +19,8 @@ modifications of code in that package.
 #Install the stable CRAN version of this package
 install.packages("hydraulics")
 #Install the development version of this package
-devtools::install_github("EdM44/hydraulics")
+if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
+remotes::install_github("EdM44/hydraulics")
 ```
 
 # Examples (see more examples in the function descriptions)
