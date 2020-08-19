@@ -7,6 +7,7 @@
 #' @param Q flow rate [\eqn{m^3 s^{-1}}{m^3/s} or \eqn{ft^3 s^{-1}}{ft^3/s}]
 #' @param b bottom width [\eqn{m}{m} or \eqn{ft}{ft}]
 #' @param m side slope (H:1) [unitless]
+#' @param y depth of flow [\eqn{m}{m} or \eqn{ft}{ft}] (optional)
 #' @param scale multiplier (of yc) for axis scales (default is 3)
 #' @param units character vector that contains the system of units [options are
 #'   \code{SI} for International System of Units and \code{Eng} for English (US customary)
@@ -33,7 +34,7 @@
 #' @import grid
 #'
 #' @export
-spec_energy_trap <- function(Q = NULL, b = NULL, m = NULL, scale = 3,
+spec_energy_trap <- function(Q = NULL, b = NULL, m = NULL, y = NULL, scale = 3,
                              units = c("SI", "Eng")) {
 
   # Check for packages needed to create plot
@@ -47,7 +48,7 @@ spec_energy_trap <- function(Q = NULL, b = NULL, m = NULL, scale = 3,
   }
 
   if (length(c(Q, b, m)) != 3) {
-    stop("One of required inputs is missing: Q, b, m. b or m may be zero")
+    stop("One of required inputs is missing: Q, b or m may be zero")
   }
 
   if (any(c(Q, b, m) < 0)) {
@@ -57,7 +58,10 @@ spec_energy_trap <- function(Q = NULL, b = NULL, m = NULL, scale = 3,
   if ( ( b == 0 ) & ( m == 0 ) ) {
     stop("m (side slope) and b (bottom width) are zero. Channel has no area")
   }
-
+  if( class(Q) == "units" ) Q <- units::drop_units(Q)
+  if( class(b) == "units" ) b <- units::drop_units(b)
+  if( class(m) == "units" ) m <- units::drop_units(m)
+  
   scalefact <- scale
   units <- units
   if (units == "SI") {
@@ -80,6 +84,18 @@ spec_energy_trap <- function(Q = NULL, b = NULL, m = NULL, scale = 3,
 
   ymax <- ceiling(yc*scalefact)
 
+  yalt <- E1 <- NULL
+  #if y is given, find alternate depth
+  if ( ! missing (y) ) {
+    if ( y < yc ) stop ("y < yc")
+    if (y > ymax) ymax = ceiling(y)
+    E1 <- y + (Q ^ 2) / (2 * g * (y * (b + m * y))^2)
+    if ( y > yc ) interv <- c(0.0000001, yc)
+    if ( y < yc ) interv <- c(yc, 200)
+    yaltfun <- function(ya) { E1 - (ya + (Q ^ 2) / (2 * g * (ya * (b + m * ya))^2)) }
+    yalt <- uniroot(yaltfun, interval = interv, extendInt = "yes")$root
+  }
+  
   ys <- seq(0.1*yc,ymax,length=1000)
   As <- ys * (b + m * ys)
   Es <- ys + ((Q ^ 2) / (2 * g * As ^ 2))
@@ -93,7 +109,7 @@ spec_energy_trap <- function(Q = NULL, b = NULL, m = NULL, scale = 3,
   txt1 <- sprintf("Emin=%.2f",Emin)
   txt2 <- sprintf("yc=%.2f",yc)
 
-  p <- ggplot() +
+  p <- ggplot2::ggplot() +
     ggplot2::geom_path(data=eycurve,ggplot2::aes(x=xx, y=yy),color="black", size=1.5) +
     ggplot2::scale_x_continuous(txtx, limits = c(0, ymax), expand = c(0,0)) +
     ggplot2::scale_y_continuous(txty, limits = c(0, ymax), expand = c(0,0)) +
@@ -105,6 +121,17 @@ spec_energy_trap <- function(Q = NULL, b = NULL, m = NULL, scale = 3,
     ggplot2::coord_fixed(ratio = 1) +
     ggplot2::theme_bw()
 
+  if ( ! missing (y) ) {
+    txt3 <- sprintf("y=%.2f",y)
+    txt4 <- sprintf("y=%.2f",yalt)
+    txt5 <- sprintf("E=%.2f",E1)
+    p <- p + ggplot2::geom_segment(ggplot2::aes(x=E1, xend=E1, y=0, yend=max(y,yalt)),linetype=3) +
+      ggplot2::geom_segment(ggplot2::aes(x=0, xend=E1, y=yalt, yend=yalt), linetype=3) +
+      ggplot2::geom_segment(ggplot2::aes(x=0, xend=E1, y=y, yend=y), linetype=3) +
+      ggplot2::annotate(geom="text", x=0.1, y=y*1.08, label=txt3, angle = 0, size = 3,hjust = "left") +
+      ggplot2::annotate(geom="text", x=0.1, y=yalt*1.08, label=txt4, angle = 0, size = 3,hjust = "left") +
+      ggplot2::annotate(geom="text", x=E1*1.08, y=(y+yalt)/2, label=txt5, angle = 90, size = 3)
+  }
   return(p)
 }
 

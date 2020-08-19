@@ -6,6 +6,9 @@
 #' @param y water depth  [\eqn{m}{m} or \eqn{ft}{ft}]
 #' @param b bottom width  [\eqn{m}{m} or \eqn{ft}{ft}]
 #' @param m side slope (H:1)
+#' @param units character vector that contains the system of units [options are
+#'   \code{SI} for International System of Units and \code{Eng} for English (US customary)
+#'   units.
 #'
 #' @return a cross-section diagram
 #'
@@ -14,13 +17,13 @@
 #' @examples
 #'
 #' # Draw a cross-section with depth 1, width 2, side slope 3:1 (H:V)
-#' xc_trap(y = 1.0, b = 2.0, m = 3.0)
+#' xc_trap(y = 1.0, b = 2.0, m = 3.0, units = "SI")
 #'
 #' @import ggplot2
 #' @import grid
 #'
 #' @export
-xc_trap <- function(y = NULL, b = NULL, m = NULL) {
+xc_trap <- function(y = NULL, b = NULL, m = NULL, units = c("SI", "Eng")) {
   
   # Check for packages needed to create plot
   if(!requireNamespace("ggplot2", quietly = TRUE)) {
@@ -31,8 +34,23 @@ xc_trap <- function(y = NULL, b = NULL, m = NULL) {
     stop("xc_trap diagram plot requires grid to be installed.",
          call. = FALSE)
   }
+  if( class(b) == "units" ) b <- units::drop_units(b)
+  if( class(y) == "units" ) y <- units::drop_units(y)
+  if( class(m) == "units" ) m <- units::drop_units(m)
 
   B <- b + 2 * ( m * y )
+  
+  if (units == "SI") {
+    txt1 <- sprintf("%.2f m",y)
+    txt2 <- sprintf("%.2f m",b)
+    txt3 <- sprintf("%.2f m",B)
+  } else if (units == "Eng") {
+    txt1 <- sprintf("%.2f ft",y)
+    txt2 <- sprintf("%.2f ft",b)
+    txt3 <- sprintf("%.2f ft",B)
+  } else if (all(c("SI", "Eng") %in% units == FALSE) == FALSE) {
+    stop("Incorrect unit system. Must be SI or Eng")
+  }
   
   xx <- yy <- NULL
   polyvert <- data.frame(
@@ -41,10 +59,6 @@ xc_trap <- function(y = NULL, b = NULL, m = NULL) {
   )
   seg1 <- data.frame(xx = c(0, -0.2*y*m),yy = c(y, 1.2*y))
   seg2 <- data.frame(xx = c(B, B + 0.2*y*m),yy = c(y, 1.2*y))
-  
-  txt1 <- sprintf("%.2f",y)
-  txt2 <- sprintf("%.2f",b)
-  txt3 <- sprintf("%.2f",B)
   
   p <- ggplot() +
     ggplot2::geom_polygon(data=polyvert,ggplot2::aes(x=xx, y=yy),fill="lightblue") +

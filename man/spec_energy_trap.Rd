@@ -8,6 +8,7 @@ spec_energy_trap(
   Q = NULL,
   b = NULL,
   m = NULL,
+  y = NULL,
   scale = 3,
   units = c("SI", "Eng")
 )
@@ -18,6 +19,8 @@ spec_energy_trap(
 \item{b}{bottom width [\eqn{m}{m} or \eqn{ft}{ft}]}
 
 \item{m}{side slope (H:1) [unitless]}
+
+\item{y}{depth of flow [\eqn{m}{m} or \eqn{ft}{ft}] (optional)}
 
 \item{scale}{multiplier (of yc) for axis scales (default is 3)}
 

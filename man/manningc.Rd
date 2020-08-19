@@ -11,7 +11,8 @@ manningc(
   y = NULL,
   d = NULL,
   y_d = NULL,
-  units = c("SI", "Eng")
+  units = c("SI", "Eng"),
+  ret_units = FALSE
 )
 }
 \arguments{
@@ -30,6 +31,9 @@ manningc(
 \item{units}{character vector that contains the system of units [options are
 \code{SI} for International System of Units and \code{Eng} for English (US customary)
 units. This is used for compatibility with iemisc package]}
+
+\item{ret_units}{If set to TRUE the value(s) returned are of class \code{units} with
+units attached to the value. [Default is FALSE]}
 }
 \value{
 Returns a list including the missing parameter:
@@ -77,8 +81,8 @@ an open channel under uniform flow conditions. It is often expressed as:
 \deqn{Q = A\frac{C}{n}{R}^{\frac{2}{3}}{S_f}^{\frac{1}{2}}}
 where \eqn{C} is 1.0 for SI units and 1.49 for Eng (U.S. Customary) units. Critical depth is 
 defined by the relation (at critical conditions):
-\deqn{\frac{Q^{2}T}{g\,A^{3}}=1}{Q^2T/gA^3=1}
-where \eqn{T}{T} is the top width of the water surface. Since T equals zero for a full pipe, critical 
+\deqn{\frac{Q^{2}B}{g\,A^{3}}=1}{Q^2B/gA^3=1}
+where \eqn{B}{B} is the top width of the water surface. Since B equals zero for a full pipe, critical 
 depth is set to the pipe diameter \eqn{d}{d} if the flow \eqn{Q}{Q} exceeds a value that would produce a 
 critical flow at \eqn{\frac{y}{d}=0.99}{y/d=0.99}.
 }

@@ -64,6 +64,13 @@ velocity <- function(D = NULL, Q = NULL) {
 #' @rdname colebrook
 reynolds_number <- function(V = NULL, D = NULL, nu = NULL) {
   checks <- c(V, D, nu)
+  
+  #check if any values have class 'units' and change to numeric if necessary
+  for( i  in c("V", "D", "nu") ) {
+    v <- get(i)
+    if(class(v) == "units" ) assign(i, units::drop_units(v))
+  }
+  
   if (length(checks) < 3) {
     stop("\nFunction requires V, D and nu as input.\n")
   }
@@ -83,8 +90,14 @@ colebrookfcn <- function(f, ks, D, Re) {
 #' @rdname colebrook
 colebrook <- function(ks, V, D, nu) {
 
-  if (ks/D > 0.01) {
-    stop(sprintf("ks/D: %.4f value > 0.01, outside applicable range\n", ks/D))
+  #check if any values have class 'units' and change to numeric if necessary
+  for( i  in c("ks", "V", "D", "nu") ) {
+    v <- get(i)
+    if(class(v) == "units" ) assign(i, units::drop_units(v))
+  }
+  
+  if (ks/D > 0.06) {
+    stop(sprintf("ks/D: %.4f value > 0.06, outside applicable range\n", ks/D))
   }
   Re <- reynolds_number(V = V, D = D, nu = nu)
   if (Re < 2300) {

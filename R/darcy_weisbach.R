@@ -17,6 +17,8 @@
 #' @param units character vector that contains the system of units [options are
 #'   \code{SI} for International System of Units and \code{Eng} for English (US customary)
 #'   units. This is used for compatibility with iemisc package
+#' @param ret_units If set to TRUE the value(s) returned are of class \code{units} with
+#' units attached to the value. [Default is FALSE]
 #'
 #' @return Returns a list including the missing parameter (hf, Q, D, or ks):
 #' \itemize{
@@ -67,13 +69,37 @@ typeks_fcn <- function(ks, D, Q, hf, L, nu, g) {
   # (2.51*(nu/D)*sqrt(L/(g*D*hf)))) - 4*Q/(pi * D^2)
   -0.965 * D^2 * sqrt((D * g * hf)/L) * log((ks/D)/3.7 + (1.784 * (nu/D)/sqrt((g * D * hf/L)))) - Q
 }
+#attaches units to output if specified
+units::units_options(allow_mixed = TRUE)
+return_fcn <- function(x = NULL, units = NULL, ret_units = FALSE) {
+  vnames <- names(x)
+  if (units == "SI") {
+    out_units <- c("m^3/s","m/s","m","m","m","1","m","1")
+  } else {
+    out_units <- c("ft^3/s","ft/s","ft","ft","ft","1","ft","1")
+  }
+  if( ret_units ) {
+    if(length(out_units) != length(as.numeric(x))) stop("Length of units vector not equal to output list")
+    a <- units::mixed_units(as.numeric(x), out_units)
+    names(a) <- vnames
+    x <- a
+  }
+  return(x)
+}
 
 #' @export
 #' @rdname darcyweisbach
 darcyweisbach <- function(Q = NULL, D = NULL, hf = NULL, L = NULL, ks = NULL,
-                          nu = NULL, units = c("SI", "Eng")) {
+                          nu = NULL, units = c("SI", "Eng"), ret_units = FALSE ) {
   checks <- c(Q, D, hf, L, ks)
   units <- units
+  
+  #check if any values have class 'units' and change to numeric if necessary
+  for( i  in c("Q", "D", "hf", "L", "ks", "nu") ) {
+    v <- get(i)
+    if(class(v) == "units" ) assign(i, units::drop_units(v))
+  }
+  
   if (length(checks) < 4) {
     stop("There are not at least 4 known variables. Try again with at least 4 known variables.")
   }
@@ -103,9 +129,12 @@ darcyweisbach <- function(Q = NULL, D = NULL, hf = NULL, L = NULL, ks = NULL,
     Re <- reynolds_number(V = V, D = D, nu = nu)
     f <- colebrook(ks = ks, V = V, D = D, nu = nu)
     hf <- f * L * V^2/(D * 2 * g)
-    return(list(Q = Q, V = V, L = L, D = D, hf = hf, f = f, ks = ks, Re = Re))
-  }
-  if (missing(Q)) {
+    if (Re < 4000) {
+      message(sprintf("Low Reynolds number: %.0f indicates not rough turbulent, Colebrook eq. not valid\n",Re))
+    }
+    out <- list(Q = Q, V = V, L = L, D = D, hf = hf, f = f, ks = ks, Re = Re)
+    return(return_fcn(x = out, units = units, ret_units = ret_units))
+  } else if (missing(Q)) {
     message(sprintf("Q missing: solving a Type 2 problem\n"))
     if (D < dmin | D > dmax) {
       stop(sprintf("Diameter: %.5f. outside allowable range: %.5f, %.5f\n",D, dmin,dmax))
@@ -116,22 +145,31 @@ darcyweisbach <- function(Q = NULL, D = NULL, hf = NULL, L = NULL, ks = NULL,
     Q <- V * pi * (D/2)^2
     Re <- reynolds_number(V = V, D = D, nu = nu)
     f <- colebrook(ks = ks, V = V, D = D, nu = nu)
-    return(list(Q = Q, V = V, L = L, D = D, hf = hf, f = f, ks = ks, Re = Re))
-  }
-  if (missing(D)) {
+    if (Re < 4000) {
+      message(sprintf("Low Reynolds number: %.0f indicates not rough turbulent, Colebrook eq. not valid\n",Re))
+    }
+    out <- list(Q = Q, V = V, L = L, D = D, hf = hf, f = f, ks = ks, Re = Re)
+    return(return_fcn(x = out, units = units, ret_units = ret_units))
+  } else if (missing(D)) {
     message(sprintf("D missing: solving a Type 3 problem\n"))
     D <- uniroot(type3_fcn, interval = c(dmin, dmax), Q, hf, L, ks, nu, g)$root
     Re <- reynolds_number(V = velocity(D = D, Q = Q), D = D, nu = nu)
     f <- colebrook(ks = ks, V = velocity(D = D, Q = Q), D = D, nu = nu)
-    return(list(Q = Q, V = velocity(D = D, Q = Q), L = L, D = D, hf = hf,
-                f = f, ks = ks, Re = Re))
-  }
-  if (missing(ks)) {
+    if (Re < 4000) {
+      message(sprintf("Low Reynolds number: %.0f indicates not rough turbulent, Colebrook eq. not valid\n",Re))
+    }
+    out <- list(Q = Q, V = velocity(D = D, Q = Q), L = L, D = D, hf = hf, f = f, ks = ks, Re = Re)
+    return(return_fcn(x = out, units = units, ret_units = ret_units))
+    
+  } else if (missing(ks)) {
     message(sprintf("ks missing: solving for missing roughness height\n"))
     ks <- uniroot(typeks_fcn, interval = c(0, 0.1), D, Q, hf, L, nu, g)$root
     Re <- reynolds_number(V = velocity(D = D, Q = Q), D = D, nu = nu)
     f <- colebrook(ks = ks, V = velocity(D = D, Q = Q), D = D, nu = nu)
-    return(list(Q = Q, V = velocity(D = D, Q = Q), L = L, D = D, hf = hf,
-                f = f, ks = ks, Re = Re))
+    if (Re < 4000) {
+      message(sprintf("Low Reynolds number: %.0f indicates not rough turbulent, Colebrook eq. not valid\n",Re))
+    }
+    out <- list(Q = Q, V = velocity(D = D, Q = Q), L = L, D = D, hf = hf, f = f, ks = ks, Re = Re)
+    return(return_fcn(x = out, units = units, ret_units = ret_units))
   }
 }

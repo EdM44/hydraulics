@@ -7,18 +7,21 @@
 \alias{kvisc}
 \title{Functions to calculate water properties: density, dynamic and kinematic viscosity}
 \usage{
-dvisc(T = NULL, units = c("SI", "Eng"))
+dvisc(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
 
-dens(T = NULL, units = c("SI", "Eng"))
+dens(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
 
-kvisc(T = NULL, units = c("SI", "Eng"))
+kvisc(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
 }
 \arguments{
-\item{T}{numeric vector that contains the water temperature [\eqn{^{\circ}C}{C} or \eqn{^{\circ}F}{F}]}
+\item{T}{the water temperature [\eqn{^{\circ}C}{C} or \eqn{^{\circ}F}{F}]}
 
 \item{units}{character vector that contains the system of units [options are
 \code{SI} for International System of Units and \code{Eng} for English (US customary)
 units. This is used for compatibility with iemisc package}
+
+\item{ret_units}{If set to TRUE the value(s) returned are of class \code{units} with
+units attached to the value. [Default is FALSE]}
 }
 \value{
 rho, the density of water for the

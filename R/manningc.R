@@ -30,6 +30,8 @@
 #' @param units character vector that contains the system of units [options are
 #'   \code{SI} for International System of Units and \code{Eng} for English (US customary)
 #'   units. This is used for compatibility with iemisc package]
+#' @param ret_units If set to TRUE the value(s) returned are of class \code{units} with
+#' units attached to the value. [Default is FALSE]
 #'
 #' @return Returns a list including the missing parameter:
 #' \itemize{
@@ -55,8 +57,8 @@
 #' \deqn{Q = A\frac{C}{n}{R}^{\frac{2}{3}}{S_f}^{\frac{1}{2}}}
 #' where \eqn{C} is 1.0 for SI units and 1.49 for Eng (U.S. Customary) units. Critical depth is 
 #' defined by the relation (at critical conditions):
-#' \deqn{\frac{Q^{2}T}{g\,A^{3}}=1}{Q^2T/gA^3=1}
-#' where \eqn{T}{T} is the top width of the water surface. Since T equals zero for a full pipe, critical 
+#' \deqn{\frac{Q^{2}B}{g\,A^{3}}=1}{Q^2B/gA^3=1}
+#' where \eqn{B}{B} is the top width of the water surface. Since B equals zero for a full pipe, critical 
 #' depth is set to the pipe diameter \eqn{d}{d} if the flow \eqn{Q}{Q} exceeds a value that would produce a 
 #' critical flow at \eqn{\frac{y}{d}=0.99}{y/d=0.99}.
 #'
@@ -104,13 +106,35 @@ Qfull <- function(d = NULL, Sf = NULL, n = NULL, k = NULL) {
   return(Qf)
 }
 
+#attaches units to output if specified
+units::units_options(allow_mixed = TRUE)
+return_fcn2 <- function(x = NULL, units = NULL, ret_units = FALSE) {
+  if (units == "SI") {
+    out_units <- c("m^3/s","m/s","m^2","m","m","m","m",1,1,"m",1,1,"m^3/s")
+  } else {
+    out_units <- c("ft^3/s","ft/s","ft^2","ft","ft","ft","ft",1,1,"ft",1,1,"ft^3/s")
+  }    
+  if( ret_units ) {
+    a <- units::mixed_units(unlist(x), out_units)
+    #names(a) <- names(x)
+    x <- a
+  }
+  return(x)
+}
+
 #' @export
 #' @rdname manningc
 manningc <- function (Q = NULL, n = NULL, Sf = NULL, y = NULL, d = NULL, y_d = NULL,
-                      units = c("SI", "Eng")) {
+                      units = c("SI", "Eng"), ret_units = FALSE ) {
 
   units <- units
 
+  #check if any values have class 'units' and change to numeric if necessary
+  for( i  in c("Q", "n", "Sf", "y", "d", "y_d") ) {
+    v <- get(i)
+    if(class(v) == "units" ) assign(i, units::drop_units(v))
+  }
+  
   #initial check for missing variables and out of bounds
   if(missing(y_d)) {
     if (length(c(Q, n, Sf, y, d)) != 4) {
@@ -142,12 +166,14 @@ manningc <- function (Q = NULL, n = NULL, Sf = NULL, y = NULL, d = NULL, y_d = N
     mu <- dvisc(T = 20, units = 'SI')
     rho <- dens(T = 20, units = 'SI')
     dmax <- 3.5      #m maximum pipe size
+    
   } else if (units == "Eng") {
     g <- 32.2        #ft / s^2
     k <- 1.4859
     mu <- dvisc(T = 68, units = 'Eng')
     rho <- dens(T = 68, units = 'Eng')
     dmax <- 12      #ft
+
   } else if (all(c("SI", "Eng") %in% units == FALSE) == FALSE) {
     stop("Incorrect unit system. Must be SI or Eng")
   }
@@ -172,8 +198,9 @@ manningc <- function (Q = NULL, n = NULL, Sf = NULL, y = NULL, d = NULL, y_d = N
       }
       Fr <- V / (sqrt(g * D))
       yc <- ycfunc(Q = Q, d = d, g = g)
-      return(list(Q = Q, V = V, A = A, P = P, R = R, y = y, d = d, Sf = Sf, n = n, yc = yc, Fr = Fr, Re = Re, Qf = Qf))
-
+      out <- list(Q = Q, V = V, A = A, P = P, R = R, y = y, d = d, Sf = Sf, n = n, yc = yc, Fr = Fr, Re = Re, Qf = Qf)
+      return(return_fcn2(x = out, units = units, ret_units = ret_units))
+                             
       } else if (missing(n)) {
       theta <- 2 * acos(1 - (2 * (y / d)))
       A <- (theta - sin(theta)) * (d ^ 2 / 8)
@@ -192,8 +219,9 @@ manningc <- function (Q = NULL, n = NULL, Sf = NULL, y = NULL, d = NULL, y_d = N
       }
       Fr <- V / (sqrt(g * D))
       yc <- ycfunc(Q = Q, d = d, g = g)
-      return(list(Q = Q, V = V, A = A, P = P, R = R, y = y, d = d, Sf = Sf, n = n, yc = yc, Fr = Fr, Re = Re, Qf = Qf))
-
+      out <- list(Q = Q, V = V, A = A, P = P, R = R, y = y, d = d, Sf = Sf, n = n, yc = yc, Fr = Fr, Re = Re, Qf = Qf)
+      return(return_fcn2(x = out, units = units, ret_units = ret_units))
+      
       } else if (missing(Sf)) {
         theta <- 2 * acos(1 - (2 * (y / d)))
         A <- (theta - sin(theta)) * (d ^ 2 / 8)
@@ -212,8 +240,9 @@ manningc <- function (Q = NULL, n = NULL, Sf = NULL, y = NULL, d = NULL, y_d = N
         }
         Fr <- V / (sqrt(g * D))
         yc <- ycfunc(Q = Q, d = d, g = g)
-        return(list(Q = Q, V = V, A = A, P = P, R = R, y = y, d = d, Sf = Sf, n = n, yc = yc, Fr = Fr, Re = Re, Qf = Qf))
-
+        out <- list(Q = Q, V = V, A = A, P = P, R = R, y = y, d = d, Sf = Sf, n = n, yc = yc, Fr = Fr, Re = Re, Qf = Qf)
+        return(return_fcn2(x = out, units = units, ret_units = ret_units))
+        
     } else if (missing(y)) {
       Qf <- Qfull(d = d, Sf = Sf, n = n, k = k)
       if ( Q > Qf ) {
@@ -236,7 +265,8 @@ manningc <- function (Q = NULL, n = NULL, Sf = NULL, y = NULL, d = NULL, y_d = N
       }
       Fr <- V / (sqrt(g * D))
       yc <- ycfunc(Q = Q, d = d, g = g)
-      return(list(Q = Q, V = V, A = A, P = P, R = R, y = y, d = d, Sf = Sf, n = n, yc = yc, Fr = Fr, Re = Re, Qf = Qf))
+      out <- list(Q = Q, V = V, A = A, P = P, R = R, y = y, d = d, Sf = Sf, n = n, yc = yc, Fr = Fr, Re = Re, Qf = Qf)
+      return(return_fcn2(x = out, units = units, ret_units = ret_units))
     }
   }
     #########CASE 2########################
@@ -260,6 +290,7 @@ manningc <- function (Q = NULL, n = NULL, Sf = NULL, y = NULL, d = NULL, y_d = N
     }
     Fr <- V / (sqrt(g * D))
     yc <- ycfunc(Q = Q, d = d, g = g)
-    return(list(Q = Q, V = V, A = A, P = P, R = R, y = y, d = d, Sf = Sf, n = n, yc = yc, Fr = Fr, Re = Re, Qf = Qf))
+    out <- list(Q = Q, V = V, A = A, P = P, R = R, y = y, d = d, Sf = Sf, n = n, yc = yc, Fr = Fr, Re = Re, Qf = Qf)
+    return(return_fcn2(x = out, units = units, ret_units = ret_units))
   }
 }

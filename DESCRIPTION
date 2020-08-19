@@ -27,6 +27,10 @@ LazyData: true
 Imports:
     ggplot2,
     grid,
-    reshape2
+    reshape2,
+    units
 Suggests:
-RoxygenNote: 7.0.2
+    knitr,
+    rmarkdown
+RoxygenNote: 7.1.1
+VignetteBuilder: knitr

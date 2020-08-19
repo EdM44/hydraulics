@@ -20,6 +20,9 @@
 #' @param units character vector that contains the system of units [options are
 #'   \code{SI} for International System of Units and \code{Eng} for English (US customary)
 #'   units. This is used for compatibility with iemisc package.
+#' @param ret_units If set to TRUE the value(s) returned are of class \code{units} with
+#'   units attached to the value. [Default is FALSE]
+
 #'
 #' @return Returns a list including the missing parameter:
 #' \itemize{
@@ -46,8 +49,8 @@
 #' \deqn{Q = A\frac{C}{n}{R}^{\frac{2}{3}}{S_f}^{\frac{1}{2}}}
 #' where \eqn{C} is 1.0 for SI units and 1.49 for Eng (U.S. Customary) units. Critical depth is 
 #' defined by the relation (at critical conditions):
-#' \deqn{\frac{Q^{2}T}{g\,A^{3}}=1}{Q^2T/gA^3=1}
-#' where \eqn{T}{T} is the top width of the water surface.
+#' \deqn{\frac{Q^{2}B}{g\,A^{3}}=1}{Q^2B/gA^3=1}
+#' where \eqn{B}{B} is the top width of the water surface.
 #'
 #' @examples
 #'
@@ -69,17 +72,40 @@
 #' @name manningt
 NULL
 
-ycfun <- function(yc = NULL, Q = NULL, g = NULL, b = NULL, m = NULL) {
+ycfun_t <- function(yc = NULL, Q = NULL, g = NULL, b = NULL, m = NULL) {
   (Q^2 / g) - ((b * yc + m * yc^2)^3)/(b + 2 * m * yc)
   }
+
+
+#attaches units to output if specified
+units::units_options(allow_mixed = TRUE)
+return_fcn3 <- function(x = NULL, units = NULL, ret_units = FALSE) {
+  if (units == "SI") {
+    out_units <- c("m^3/s","m/s","m^2","m","m","m","m",1,1,"m",1,"m",1,1)
+  } else {
+    out_units <- c("ft^3/s","ft/s","ft^2","ft","ft","ft","ft",1,1,"ft",1,"ft",1,1)
+  }    
+  if( ret_units ) {
+    a <- units::mixed_units(unlist(x), out_units)
+    #names(a) <- names(x)
+    x <- a
+  }
+  return(x)
+}
 
 #' @export
 #' @rdname manningt
 manningt <- function (Q = NULL, n = NULL, m = NULL, Sf = NULL, y = NULL, b = NULL,
-                      units = c("SI", "Eng")) {
+                      units = c("SI", "Eng"), ret_units = FALSE ) {
 
   units <- units
 
+  #check if any values have class 'units' and change to numeric if necessary
+  for( i  in c("Q", "n", "m", "Sf", "y", "b") ) {
+    v <- get(i)
+    if(class(v) == "units" ) assign(i, units::drop_units(v))
+  }
+  
   #initial check for missing variables and out of bounds
   if (length(c(Q, n, m, Sf, y, b)) != 5) {
     stop("There must be exactly one unknown variable among Q, n, m, Sf, y, b")
@@ -123,8 +149,9 @@ manningt <- function (Q = NULL, n = NULL, m = NULL, Sf = NULL, y = NULL, b = NUL
       message(sprintf("Low Reynolds number: %.0f indicates not rough turbulent, Manning eq. not valid\n",Re))
     }
     Fr <- V / (sqrt(g * D))
-    yc <- uniroot(ycfun, interval = c(0.0000001, 200), Q = Q, g = g, b = b, m = m)$root
-    return(list(Q = Q, V = V, A = A, P = P, R = R, y = y, b = b, m = m, Sf = Sf, B = B, n = n, yc = yc, Fr = Fr, Re = Re))
+    yc <- uniroot(ycfun_t, interval = c(0.0000001, 200), Q = Q, g = g, b = b, m = m)$root
+    out <- list(Q = Q, V = V, A = A, P = P, R = R, y = y, b = b, m = m, Sf = Sf, B = B, n = n, yc = yc, Fr = Fr, Re = Re)
+    return(return_fcn3(x = out, units = units, ret_units = ret_units))
 
     } else if (missing(n)) {
       A <- y * (b + m * y)
@@ -141,9 +168,10 @@ manningt <- function (Q = NULL, n = NULL, m = NULL, Sf = NULL, y = NULL, b = NUL
         message(sprintf("Low Reynolds number: %.0f indicates not rough turbulent, Manning eq. not valid\n",Re))
       }
       Fr <- V / (sqrt(g * D))
-      yc <- uniroot(ycfun, interval = c(0.0000001, 200), Q = Q, g = g, b = b, m = m)$root
-      return(list(Q = Q, V = V, A = A, P = P, R = R, y = y, b = b, m = m, Sf = Sf, B = B, n = n, yc = yc, Fr = Fr, Re = Re))
-
+      yc <- uniroot(ycfun_t, interval = c(0.0000001, 200), Q = Q, g = g, b = b, m = m)$root
+      out <- list(Q = Q, V = V, A = A, P = P, R = R, y = y, b = b, m = m, Sf = Sf, B = B, n = n, yc = yc, Fr = Fr, Re = Re)
+      return(return_fcn3(x = out, units = units, ret_units = ret_units))
+      
     } else if (missing(m)) {
       mfun <- function(m) {Q - (((y * (b + m * y)) ^ (5 / 3) * sqrt(Sf) * (k / n)) / ((b + 2 * y * sqrt(1 + m ^ 2)) ^ (2 / 3)))}
       muse <- uniroot(mfun, interval = c(0, 30), extendInt = "yes")
@@ -159,9 +187,10 @@ manningt <- function (Q = NULL, n = NULL, m = NULL, Sf = NULL, y = NULL, b = NUL
         message(sprintf("Low Reynolds number: %.0f indicates not rough turbulent, Manning eq. not valid\n",Re))
       }
       Fr <- V / (sqrt(g * D))
-      yc <- uniroot(ycfun, interval = c(0.0000001, 200), Q = Q, g = g, b = b, m = m)$root
-      return(list(Q = Q, V = V, A = A, P = P, R = R, y = y, b = b, m = m, Sf = Sf, B = B, n = n, yc = yc, Fr = Fr, Re = Re))
-
+      yc <- uniroot(ycfun_t, interval = c(0.0000001, 200), Q = Q, g = g, b = b, m = m)$root
+      out <- list(Q = Q, V = V, A = A, P = P, R = R, y = y, b = b, m = m, Sf = Sf, B = B, n = n, yc = yc, Fr = Fr, Re = Re)
+      return(return_fcn3(x = out, units = units, ret_units = ret_units))
+      
     } else if (missing(b)) {
       bfun <- function(b) {Q - (((y * (b + m * y)) ^ (5 / 3) * sqrt(Sf)) * (k / n) / ((b + 2 * y * sqrt(1 + m ^ 2)) ^ (2 / 3)))}
       buse <- uniroot(bfun, interval = c(0.0000001, 200), extendInt = "yes")
@@ -177,9 +206,10 @@ manningt <- function (Q = NULL, n = NULL, m = NULL, Sf = NULL, y = NULL, b = NUL
         message(sprintf("Low Reynolds number: %.0f indicates not rough turbulent, Manning eq. not valid\n",Re))
       }
       Fr <- V / (sqrt(g * D))
-      yc <- uniroot(ycfun, interval = c(0.0000001, 200), Q = Q, g = g, b = b, m = m)$root
-      return(list(Q = Q, V = V, A = A, P = P, R = R, y = y, b = b, m = m, Sf = Sf, B = B, n = n, yc = yc, Fr = Fr, Re = Re))
-
+      yc <- uniroot(ycfun_t, interval = c(0.0000001, 200), Q = Q, g = g, b = b, m = m)$root
+      out <- list(Q = Q, V = V, A = A, P = P, R = R, y = y, b = b, m = m, Sf = Sf, B = B, n = n, yc = yc, Fr = Fr, Re = Re)
+      return(return_fcn3(x = out, units = units, ret_units = ret_units))
+      
     } else if (missing(y)) {
       yfun <- function(y) {Q - (((y * (b + m * y)) ^ (5 / 3) * sqrt(Sf)) * (k / n) / ((b + 2 * y * sqrt(1 + m ^ 2)) ^ (2 / 3)))}
       yuse <- uniroot(yfun, interval = c(0.0000001, 200), extendInt = "yes")
@@ -195,9 +225,10 @@ manningt <- function (Q = NULL, n = NULL, m = NULL, Sf = NULL, y = NULL, b = NUL
         message(sprintf("Low Reynolds number: %.0f indicates not rough turbulent, Manning eq. not valid\n",Re))
       }
       Fr <- V / (sqrt(g * D))
-      yc <- uniroot(ycfun, interval = c(0.0000001, 200), Q = Q, g = g, b = b, m = m)$root
-      return(list(Q = Q, V = V, A = A, P = P, R = R, y = y, b = b, m = m, Sf = Sf, B = B, n = n, yc = yc, Fr = Fr, Re = Re))
-
+      yc <- uniroot(ycfun_t, interval = c(0.0000001, 200), Q = Q, g = g, b = b, m = m)$root
+      out <- list(Q = Q, V = V, A = A, P = P, R = R, y = y, b = b, m = m, Sf = Sf, B = B, n = n, yc = yc, Fr = Fr, Re = Re)
+      return(return_fcn3(x = out, units = units, ret_units = ret_units))
+      
     } else if (missing(Sf)) {
       A <- y * (b + m * y)
       P <- b + 2 * y * sqrt(1 + m ^ 2)
@@ -213,8 +244,9 @@ manningt <- function (Q = NULL, n = NULL, m = NULL, Sf = NULL, y = NULL, b = NUL
         message(sprintf("Low Reynolds number: %.0f indicates not rough turbulent, Manning eq. not valid\n",Re))
       }
       Fr <- V / (sqrt(g * D))
-      yc <- uniroot(ycfun, interval = c(0.0000001, 200), Q = Q, g = g, b = b, m = m)$root
-      return(list(Q = Q, V = V, A = A, P = P, R = R, y = y, b = b, m = m, Sf = Sf, B = B, n = n, yc = yc, Fr = Fr, Re = Re))
-     }
+      yc <- uniroot(ycfun_t, interval = c(0.0000001, 200), Q = Q, g = g, b = b, m = m)$root
+      out <- list(Q = Q, V = V, A = A, P = P, R = R, y = y, b = b, m = m, Sf = Sf, B = B, n = n, yc = yc, Fr = Fr, Re = Re)
+      return(return_fcn3(x = out, units = units, ret_units = ret_units))
+    }
 }
 

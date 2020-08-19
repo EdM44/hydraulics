@@ -95,7 +95,7 @@ hf <- 215     #head loss due to friction, in ft
 T <- 68       #water temperature, F
 ans4 <- darcyweisbach(Q = Q, D = D, hf = hf, L = L, nu = kvisc(T=T, units='Eng'), units = c('Eng'))
 #> ks missing: solving for missing roughness height
-kable(setNames(as.data.frame(unlist(ans4)),c('value')), format = "html")
+knitr::kable(setNames(as.data.frame(unlist(ans4)),c('value')), format = "html", padding=0)
 ```
 
 <table>
@@ -310,7 +310,7 @@ cat(sprintf("Required diameter: %.2f ft\nFlow depth: %.2f\n", oc2$d, oc2$y))
 ## Plot the cross section for the last example
 
 ``` r
-xc_circle( y = oc2$y ,d = oc2$d )
+xc_circle( y = oc2$y ,d = oc2$d, units = "Eng" )
 ```
 
 <img src="man/figures/README-xc-plot-circle-1.png" width="50%" />
@@ -335,7 +335,7 @@ spec_energy_trap( Q = oc3$Q, b = oc3$b, m = oc3$m, scale = 4, units = "Eng" )
 ## Plot the cross section for the last example
 
 ``` r
-xc_trap( y = oc3$y, b = oc3$b, m = oc3$m )
+xc_trap( y = oc3$y, b = oc3$b, m = oc3$m, units = "Eng" )
 ```
 
 <img src="man/figures/README-xc-plot-trap-1.png" width="50%" />

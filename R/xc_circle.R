@@ -5,6 +5,9 @@
 #'
 #' @param y water depth [\eqn{m}{m} or \eqn{ft}{ft}]
 #' @param d pipe diameter [\eqn{m}{m} or \eqn{ft}{ft}]
+#' @param units character vector that contains the system of units [options are
+#'   \code{SI} for International System of Units and \code{Eng} for English (US customary)
+#'   units.
 #'
 #' @return a cross-section diagram
 #'
@@ -13,14 +16,19 @@
 #' @examples
 #'
 #' # Draw a cross-section with diameter 1.0 and depth 0.7
-#' xc_circle(y = 0.7, d = 1.0)
+#' xc_circle(y = 0.7, d = 1.0, units = "SI")
 #'
 #' @import ggplot2
 #' @import grid
 #'
 #' @export
-xc_circle <- function(y = NULL, d = NULL) {
+xc_circle <- function(y = NULL, d = NULL, units = c("SI", "Eng")) {
 
+  units <- units
+  
+  if( class(y) == "units" ) y <- units::drop_units(y)
+  if( class(d) == "units" ) d <- units::drop_units(d)
+  
   # Check for packages needed to create plot
   if(!requireNamespace("ggplot2", quietly = TRUE)) {
     stop("xc_circle diagram plot requires ggplot2 to be installed.",
@@ -40,10 +48,18 @@ xc_circle <- function(y = NULL, d = NULL) {
     return(dat)
   }
 
+  if (units == "SI") {
+    txt1 <- sprintf("%.3f m",y)
+    txt2 <- sprintf("%.3f m",d)
+  } else if (units == "Eng") {
+    txt1 <- sprintf("%.3f ft",y)
+    txt2 <- sprintf("%.3f ft",d)
+  } else if (all(c("SI", "Eng") %in% units == FALSE) == FALSE) {
+    stop("Incorrect unit system. Must be SI or Eng")
+  }
+  
   hoverd <- y / d
   angle <- acos(1-2*hoverd)/pi
-  txt1 <- sprintf("%.3f",y)
-  txt2 <- sprintf("%.3f",d)
   dat <- circleFun(start=0, end=2)
   dat2 <- circleFun(start=-angle, end=angle)
   ggplot2::ggplot() +

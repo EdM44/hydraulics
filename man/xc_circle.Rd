@@ -4,12 +4,16 @@
 \alias{xc_circle}
 \title{Creates a cross-section plot for a partially filled pipe}
 \usage{
-xc_circle(y = NULL, d = NULL)
+xc_circle(y = NULL, d = NULL, units = c("SI", "Eng"))
 }
 \arguments{
 \item{y}{water depth [\eqn{m}{m} or \eqn{ft}{ft}]}
 
 \item{d}{pipe diameter [\eqn{m}{m} or \eqn{ft}{ft}]}
+
+\item{units}{character vector that contains the system of units [options are
+\code{SI} for International System of Units and \code{Eng} for English (US customary)
+units.}
 }
 \value{
 a cross-section diagram
@@ -21,7 +25,7 @@ to the level indicated by the depth and diameter values passed to it.
 \examples{
 
 # Draw a cross-section with diameter 1.0 and depth 0.7
-xc_circle(y = 0.7, d = 1.0)
+xc_circle(y = 0.7, d = 1.0, units = "SI")
 
 }
 \author{

@@ -12,7 +12,8 @@ darcyweisbach(
   L = NULL,
   ks = NULL,
   nu = NULL,
-  units = c("SI", "Eng")
+  units = c("SI", "Eng"),
+  ret_units = FALSE
 )
 }
 \arguments{
@@ -33,6 +34,9 @@ Units should be consistent with other input [\eqn{m}{m} or \eqn{ft}{ft}]}
 \item{units}{character vector that contains the system of units [options are
 \code{SI} for International System of Units and \code{Eng} for English (US customary)
 units. This is used for compatibility with iemisc package}
+
+\item{ret_units}{If set to TRUE the value(s) returned are of class \code{units} with
+units attached to the value. [Default is FALSE]}
 }
 \value{
 Returns a list including the missing parameter (hf, Q, D, or ks):

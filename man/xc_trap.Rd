@@ -4,7 +4,7 @@
 \alias{xc_trap}
 \title{Creates a cross-section plot for an open channel}
 \usage{
-xc_trap(y = NULL, b = NULL, m = NULL)
+xc_trap(y = NULL, b = NULL, m = NULL, units = c("SI", "Eng"))
 }
 \arguments{
 \item{y}{water depth  [\eqn{m}{m} or \eqn{ft}{ft}]}
@@ -12,6 +12,10 @@ xc_trap(y = NULL, b = NULL, m = NULL)
 \item{b}{bottom width  [\eqn{m}{m} or \eqn{ft}{ft}]}
 
 \item{m}{side slope (H:1)}
+
+\item{units}{character vector that contains the system of units [options are
+\code{SI} for International System of Units and \code{Eng} for English (US customary)
+units.}
 }
 \value{
 a cross-section diagram
@@ -23,7 +27,7 @@ shaded as filled to the level indicated by the values passed to it.
 \examples{
 
 # Draw a cross-section with depth 1, width 2, side slope 3:1 (H:V)
-xc_trap(y = 1.0, b = 2.0, m = 3.0)
+xc_trap(y = 1.0, b = 2.0, m = 3.0, units = "SI")
 
 }
 \author{
