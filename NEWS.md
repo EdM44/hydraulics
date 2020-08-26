@@ -1,5 +1,11 @@
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
+## hydraulics 0.2.2
+
+  - Added the ability to use the `units` package with most functions
+  - Added a detailed vignette to demonstrate more capabilities of the
+    package
+
 ## hydraulics 0.2.1
 
   - Expanded and where necessary corrected documentation for all

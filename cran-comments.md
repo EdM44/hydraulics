@@ -1,10 +1,10 @@
-##Submission of revised version: v 0.2.1 - August 1, 2020
+##Submission of revised version: v 0.2.2 - August 25, 2020
 
-* New version includes an added function and expanded documentation
+* New version includes added functions for units and a new vignette
 
 * Results from Mac OS X check:
-  + ── R CMD check results ─────────────────────────────────── hydraulics 0.2.1 ────
-  + Duration: 51.8s
+  + ── R CMD check results ─────────────────────────────────── hydraulics 0.2.2 ────
+  + Duration: 52.7s
   + 0 errors ✓ | 0 warnings ✓ | 0 notes ✓
   + R CMD check succeeded
 
