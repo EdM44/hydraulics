@@ -52,6 +52,8 @@ Returns a list including the missing parameter:
   \item yc - critical depth
   \item Fr - Froude number
   \item Re - Reynolds number
+  \item bopt - optimal bottom width (returned if solving for b)
+  \item yopt - optimal water depth (returned if solving for y)
 }
 }
 \description{
@@ -67,13 +69,19 @@ specific energy), as these can be calculated separately. A cross-section figure 
 available.
 }
 \details{
-The Manning equation (also known as the Strickler equation) describes flow conditions in
-an open channel under uniform flow conditions. It is often expressed as: 
+The Manning equation characterizes open channel flow conditions under uniform flow conditions: 
 \deqn{Q = A\frac{C}{n}{R}^{\frac{2}{3}}{S_f}^{\frac{1}{2}}}
-where \eqn{C} is 1.0 for SI units and 1.49 for Eng (U.S. Customary) units. Critical depth is 
-defined by the relation (at critical conditions):
+where \eqn{C}{C} is 1.0 for SI units and 1.49 for Eng (U.S. Customary) units. Using the geometric relationships 
+for hydraulic radius and cross-sectional area of a trapezoid, it takes the form:
+\deqn{Q=\frac{C}{n}{\frac{\left(by+my^2\right)^{\frac{5}{3}}}{\left(b+2y\sqrt{1+m^2}\right)^\frac{2}{3}}}{S_f}^{\frac{1}{2}}}
+
+Critical depth is defined by the relation (at critical conditions):
 \deqn{\frac{Q^{2}B}{g\,A^{3}}=1}{Q^2B/gA^3=1}
-where \eqn{B}{B} is the top width of the water surface.
+where \eqn{B}{B} is the top width of the water surface. For a given Q, m, n, and Sf, the most
+hydraulically efficient channel is found by maximizing R, which can be done by setting 
+in the Manning equation \eqn{\frac{\partial R}{\partial y}=0}{dR/dy=0}. This produces:
+\deqn{y_{opt} = 2^{\frac{1}{4}}\left(\frac{Qn}{C\left(2\sqrt{1+m^2}-m\right)S_f^{\frac{1}{2}}}\right)^{\frac{3}{8}}}
+\deqn{b_{opt} = 2y_{opt}\left(\sqrt{1+m^2}-m\right)}
 }
 \examples{
 

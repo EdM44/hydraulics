@@ -40,17 +40,25 @@
 #'   \item yc - critical depth
 #'   \item Fr - Froude number
 #'   \item Re - Reynolds number
+#'   \item bopt - optimal bottom width (returned if solving for b)
+#'   \item yopt - optimal water depth (returned if solving for y)
 #' }
 #'
 #' @author Ed Maurer, Irucka Embry
 #'
-#' @details The Manning equation (also known as the Strickler equation) describes flow conditions in
-#' an open channel under uniform flow conditions. It is often expressed as: 
+#' @details The Manning equation characterizes open channel flow conditions under uniform flow conditions: 
 #' \deqn{Q = A\frac{C}{n}{R}^{\frac{2}{3}}{S_f}^{\frac{1}{2}}}
-#' where \eqn{C} is 1.0 for SI units and 1.49 for Eng (U.S. Customary) units. Critical depth is 
-#' defined by the relation (at critical conditions):
+#' where \eqn{C}{C} is 1.0 for SI units and 1.49 for Eng (U.S. Customary) units. Using the geometric relationships 
+#' for hydraulic radius and cross-sectional area of a trapezoid, it takes the form:
+#' \deqn{Q=\frac{C}{n}{\frac{\left(by+my^2\right)^{\frac{5}{3}}}{\left(b+2y\sqrt{1+m^2}\right)^\frac{2}{3}}}{S_f}^{\frac{1}{2}}}
+#' 
+#' Critical depth is defined by the relation (at critical conditions):
 #' \deqn{\frac{Q^{2}B}{g\,A^{3}}=1}{Q^2B/gA^3=1}
-#' where \eqn{B}{B} is the top width of the water surface.
+#' where \eqn{B}{B} is the top width of the water surface. For a given Q, m, n, and Sf, the most
+#' hydraulically efficient channel is found by maximizing R, which can be done by setting 
+#' in the Manning equation \eqn{\frac{\partial R}{\partial y}=0}{dR/dy=0}. This produces:
+#' \deqn{y_{opt} = 2^{\frac{1}{4}}\left(\frac{Qn}{C\left(2\sqrt{1+m^2}-m\right)S_f^{\frac{1}{2}}}\right)^{\frac{3}{8}}}
+#' \deqn{b_{opt} = 2y_{opt}\left(\sqrt{1+m^2}-m\right)}
 #'
 #' @examples
 #'
@@ -92,6 +100,20 @@ return_fcn3 <- function(x = NULL, units = NULL, ret_units = FALSE) {
   }
   return(x)
 }
+#append one additional length unit if solving for y or b to add optimal value
+return_fcn4 <- function(x = NULL, units = NULL, ret_units = FALSE) {
+  if (units == "SI") {
+    out_units <- c("m^3/s","m/s","m^2","m","m","m","m",1,1,"m",1,"m",1,1,"m")
+  } else {
+    out_units <- c("ft^3/s","ft/s","ft^2","ft","ft","ft","ft",1,1,"ft",1,"ft",1,1,"ft")
+  }    
+  if( ret_units ) {
+    a <- units::mixed_units(unlist(x), out_units)
+    #names(a) <- names(x)
+    x <- a
+  }
+  return(x)
+}
 
 #' @export
 #' @rdname manningt
@@ -113,11 +135,13 @@ manningt <- function (Q = NULL, n = NULL, m = NULL, Sf = NULL, y = NULL, b = NUL
   if (any(c(Q, n, Sf, y) <= 0)) {
     stop("Either Q, n, Sf, y is <= 0. All of these variables must be positive")
   }
-  if ( ( b < 0 ) | ( m < 0 ) ) {
+  if (any(c(b, m) < 0)) {
     stop("m (side slope) or b (bottom width) is negative. Both must be >=0")
   }
-  if ( ( b == 0 ) & ( m == 0 ) ) {
-    stop("m (side slope) and b (bottom width) are zero. Channel has no area")
+  if ( !(missing(b)) & !(missing(m)) ) {
+    if ( (m == 0) & (b == 0) ) {
+      stop("m (side slope) and b (bottom width) are zero. Channel has no area")
+    }
   }
 
   if (units == "SI") {
@@ -201,14 +225,16 @@ manningt <- function (Q = NULL, n = NULL, m = NULL, Sf = NULL, y = NULL, b = NUL
       R <- A / P
       D <- A / B
       V <- Q / A
+      yopt <- 2^0.25*(Q * n/(k * (2*sqrt(1+m^2)-m)*sqrt(Sf)))^(3/8)
+      bopt <- 2*yopt*(sqrt(1+m^2)-m)
       Re <- (rho * R * V) / mu
       if (Re < 2000) {
         message(sprintf("Low Reynolds number: %.0f indicates not rough turbulent, Manning eq. not valid\n",Re))
       }
       Fr <- V / (sqrt(g * D))
       yc <- uniroot(ycfun_t, interval = c(0.0000001, 200), Q = Q, g = g, b = b, m = m)$root
-      out <- list(Q = Q, V = V, A = A, P = P, R = R, y = y, b = b, m = m, Sf = Sf, B = B, n = n, yc = yc, Fr = Fr, Re = Re)
-      return(return_fcn3(x = out, units = units, ret_units = ret_units))
+      out <- list(Q = Q, V = V, A = A, P = P, R = R, y = y, b = b, m = m, Sf = Sf, B = B, n = n, yc = yc, Fr = Fr, Re = Re, bopt = bopt)
+      return(return_fcn4(x = out, units = units, ret_units = ret_units))
       
     } else if (missing(y)) {
       yfun <- function(y) {Q - (((y * (b + m * y)) ^ (5 / 3) * sqrt(Sf)) * (k / n) / ((b + 2 * y * sqrt(1 + m ^ 2)) ^ (2 / 3)))}
@@ -220,14 +246,15 @@ manningt <- function (Q = NULL, n = NULL, m = NULL, Sf = NULL, y = NULL, b = NUL
       R <- A / P
       D <- A / B
       V <- Q / A
+      yopt <- 2^0.25*(Q * n/(k * (2*sqrt(1+m^2)-m)*sqrt(Sf)))^(3/8)
       Re <- (rho * R * V) / mu
       if (Re < 2000) {
         message(sprintf("Low Reynolds number: %.0f indicates not rough turbulent, Manning eq. not valid\n",Re))
       }
       Fr <- V / (sqrt(g * D))
       yc <- uniroot(ycfun_t, interval = c(0.0000001, 200), Q = Q, g = g, b = b, m = m)$root
-      out <- list(Q = Q, V = V, A = A, P = P, R = R, y = y, b = b, m = m, Sf = Sf, B = B, n = n, yc = yc, Fr = Fr, Re = Re)
-      return(return_fcn3(x = out, units = units, ret_units = ret_units))
+      out <- list(Q = Q, V = V, A = A, P = P, R = R, y = y, b = b, m = m, Sf = Sf, B = B, n = n, yc = yc, Fr = Fr, Re = Re, yopt = yopt)
+      return(return_fcn4(x = out, units = units, ret_units = ret_units))
       
     } else if (missing(Sf)) {
       A <- y * (b + m * y)

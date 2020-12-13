@@ -25,7 +25,7 @@
 #'
 #' @details The Colebrook-White equation was developed to estimate the Darcy-Weisbach friction factor
 #' for commercial pipes under turbulent flow conditions. It is recommended for pipe diameters greater 
-#' than 2.5 mm (0.1 inch).  The equation is: \deqn{\frac{1}{\sqrt{f}} = -2\log\left(\frac{\frac{ks}{D}}{3.7D} + \frac{2.51}{Re\sqrt{f}}\right)}
+#' than 2.5 mm (0.1 inch).  The equation is: \deqn{\frac{1}{\sqrt{f}} = -2\log\left(\frac{\frac{ks}{D}}{3.7} + \frac{2.51}{Re\sqrt{f}}\right)}
 #' where \eqn{Re = \frac{VD}{nu}} is the unitless Reynolds Number.
 #' 
 #' @author Ed Maurer

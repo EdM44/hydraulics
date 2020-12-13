@@ -95,7 +95,7 @@ These constants are calculated internally and returned with the output of many f
 The energy at any point along a pipe containing flowing water is often described by the energy per unit weight, or energy head, E: $$E = z+\frac{P}{\gamma}+\alpha\frac{V^2}{2g}$$ where P is the pressure, $\gamma=\rho g$ is the specific weight of water, _z_ is the elevation of the point, _V_ is the average velocity, and each term has units of length. $\alpha$ is a kinetic energy adjustment factor to account for non-uniform velocity distribution across the cross-section. $\alpha$ is typically assumed to be 1.0 for turbulent flow because the value is close to 1.0 and $\frac{V^2}{2g}$ (the velocity head) tends to be small in relation to other terms in the equation.
 
 As water flows through a pipe energy is lost due to friction with the pipe walls and local disturbances (minor losses). The energy loss between two sections is expressed as ${E_1} - {h_l} = {E_2}$. When pipes are long, with $\frac{L}{D}>1000$, friction losses dominate the energy loss on the system, and the head loss, $h_l$, is calculated as the head loss due to friction, $h_f$. This energy head loss due to friction with the walls of the pipe is described by the Darcy-Weisbach equation, which estimates the energy loss per unit weight, or head loss ${h_f}$, which has units of length. For circular pipes it is expressed as: $$h_f = \frac{fL}{D}\frac{V^2}{2g} = \frac{8fL}{\pi^{2}gD^{5}}Q^{2}$$
-In this equation _f_ is the friction factor, typically calculated with the Colebrook equation: $$\frac{1}{\sqrt{f}} = -2\log\left(\frac{\frac{k_s}{D}}{3.7D} + \frac{2.51}{Re\sqrt{f}}\right)$$ where $k_s$ is the absolute roughness of the pipe wall. There are close approximations to the Colebrook equation that have an explicit form to facilitate hand-calculations, but this package only uses the Colebrook function.
+In this equation _f_ is the friction factor, typically calculated with the Colebrook equation: $$\frac{1}{\sqrt{f}} = -2\log\left(\frac{\frac{k_s}{D}}{3.7} + \frac{2.51}{Re\sqrt{f}}\right)$$ where $k_s$ is the absolute roughness of the pipe wall. There are close approximations to the Colebrook equation that have an explicit form to facilitate hand-calculations, but this package only uses the Colebrook function.
 
 Any one of the variables in the Darcy Weisbach equation, and by extension the Colebrook equation, may be treated as an unknown. For an existing pipe with a known flow rate, the friction loss for a length of pipe may be found:
 
@@ -185,6 +185,12 @@ xc_circle(y = ans$y, d=ans$d, units = "SI")
 
 ## 5.0 Flow in Open Channels (rectangular, triangular, trapezoidal)
 
+As with flow in circular pipes flowing less than full, flow in an open channel of rectangular, triangular, or trapezoidal shape uses the Manning equation. Substituting the geometric relationships for hydraulic radius and cross-sectional area, the Manning equation takes the form:
+$$Q=\frac{C}{n}{\frac{\left(by+my^2\right)^{\frac{5}{3}}}{\left(b+2y\sqrt{1+m^2}\right)^\frac{2}{3}}}{S_f}^{\frac{1}{2}}$$
+For a rectangular channel, the side slope is vertical, so _m_ = 0; for a triangular channel, _b_ = 0. For a given _Q_, _m_, _n_, and _Sf_, the most hydraulically efficient channel is found by maximizing R, which can be done by setting  in the Manning equation $\frac{\partial R}{\partial y}=0$. This produces:
+$$y_{opt} = 2^{\frac{1}{4}}\left(\frac{Qn}{C\left(2\sqrt{1+m^2}-m\right)S_f^{\frac{1}{2}}}\right)^{\frac{3}{8}}$$
+$$b_{opt} = 2y_{opt}\left(\sqrt{1+m^2}-m\right)$$
+
 The _manningt_ function works similarly to the function for circular pipes, in that the excluded argument is the one for which the function determines a solution. For example, a design might require the slope to deliver a required flow, _Q_ through a channel with known geometry (bottom width, _b_, side slope _m_) and a given depth _y_:
 ```{r manningt-1}
 ans <- manningt(Q = 360., n = 0.015, m = 1, b = 20.0, y = 3.0, units = "Eng")
@@ -203,6 +209,19 @@ knitr::kable(format(as.data.frame(ans), digits = 2), format = "pipe", padding=0)
 A simple diagram can be generated for the channel.
 ```{r manningt-2.1, message=FALSE, warning=FALSE, fig.width = 4, fig.asp = 0.6}
 xc_trap( y = 3.0, b = 20.0, m = 1.0, units = "Eng")
+```
+
+When solving for flow depth, _y_, or channel bottom width, _b_, an additional variable is returned for the optimal depth, _yopt_, or optimal width, _bopt_. These are optimal for hydraulic efficiency and practical concerns with construction often result in designs that flow with depths less than the hydraulic optimum. Solving a prior example for bottom width illustrates this.
+```{r manningt-2.2, message=FALSE, warning=FALSE, fig.width = 4, fig.asp = 0.6}
+ans <- manningt(Q = 360., n = 0.015, m = 1, y = 3.0, Sf = 0.00088, units = "Eng")
+knitr::kable(format(as.data.frame(ans), digits = 2), format = "pipe", padding=0)
+cat(sprintf("Optimal bottom width: %.5f ft\n", ans$bopt))
+```
+
+The results show that, aside from the rounding, the width is returned as expected (approximately 20 ft), and the optimal bottom width for hydraulic efficiency would be closer to 4.76 ft. To check the depth that would be associated with a channel of the optimal width, substitute the optimal width for _b_ and solve for _y_:
+```{r manningt-2.3, message=FALSE, warning=FALSE, fig.width = 4, fig.asp = 0.6}
+ans <- manningt(Q = 360., n = 0.015, m = 1, b = 4.767534, Sf = 0.00088, units = "Eng")
+cat(sprintf("Optimal depth: %.5f ft\n", ans$yopt))
 ```
 
 For any channel geometry and flow rate a convenient plot is a specific energy diagram, which illustrates the different flow depths that can occur for any given specific energy. This is important for understanding what may happen to the water surface when flow encounters an obstacle or transition. For the channel of the example above, the diagram is 

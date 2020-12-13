@@ -1,10 +1,14 @@
-##Submission of revised version: v 0.2.2 - August 25, 2020
+##Submission of revised version: v 0.2.3 - December 13, 2020
 
-* New version includes added functions for units and a new vignette
+* New version includes added functions for optimal trapezoidal channel width and depth
+
+* Added new functions to vignette
+
+* Corrected bugs and errors in documentation
 
 * Results from Mac OS X check:
-  + ── R CMD check results ─────────────────────────────────── hydraulics 0.2.2 ────
-  + Duration: 52.7s
+  + ── R CMD check results ─────────────────────────────────── hydraulics 0.2.3 ────
+  + Duration: 56.1s
   + 0 errors ✓ | 0 warnings ✓ | 0 notes ✓
   + R CMD check succeeded
 
