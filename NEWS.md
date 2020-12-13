@@ -1,5 +1,12 @@
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
+## hydraulics 0.2.3
+
+  - Added capabilities to calculate optimal trapezoidal channel width
+    and depth
+  - Added illustrations to vignette for new functions
+  - Corrected equations for Colebrook formula
+
 ## hydraulics 0.2.2
 
   - Added the ability to use the `units` package with most functions
