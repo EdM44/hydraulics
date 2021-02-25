@@ -1,5 +1,9 @@
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
+## hydraulics 0.2.4
+
+  - Improved plotting of specific energy diagrams
+
 ## hydraulics 0.2.3
 
   - Added capabilities to calculate optimal trapezoidal channel width

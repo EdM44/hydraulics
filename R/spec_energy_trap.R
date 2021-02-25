@@ -82,8 +82,13 @@ spec_energy_trap <- function(Q = NULL, b = NULL, m = NULL, y = NULL, scale = 3,
   Ac <- yc * (b + m * yc)
   Emin <- yc + ((Q ^ 2) / (2 * g * Ac ^ 2))
 
-  ymax <- ceiling(yc*scalefact)
-
+  #ymax <- ceiling(yc*scalefact)
+  if ((yc*scalefact) > 0.75 ) {
+    ymax <- ceiling(yc*scalefact)  
+  } else {
+    ymax <- ceiling(yc*scalefact)/floor(1/(yc*scalefact))
+  }
+  
   yalt <- E1 <- NULL
   #if y is given, find alternate depth
   if ( ! missing (y) ) {
@@ -106,8 +111,8 @@ spec_energy_trap <- function(Q = NULL, b = NULL, m = NULL, y = NULL, scale = 3,
   seg1 <- data.frame(xx = c(Emin, Emin),yy = c(0, yc))
   seg2 <- data.frame(xx = c(0, Emin),yy = c(yc, yc))
 
-  txt1 <- sprintf("Emin=%.2f",Emin)
-  txt2 <- sprintf("yc=%.2f",yc)
+  txt1 <- sprintf("Emin=%.3f",Emin)
+  txt2 <- sprintf("yc=%.3f",yc)
 
   p <- ggplot2::ggplot() +
     ggplot2::geom_path(data=eycurve,ggplot2::aes(x=xx, y=yy),color="black", size=1.5) +
@@ -122,9 +127,9 @@ spec_energy_trap <- function(Q = NULL, b = NULL, m = NULL, y = NULL, scale = 3,
     ggplot2::theme_bw()
 
   if ( ! missing (y) ) {
-    txt3 <- sprintf("y=%.2f",y)
-    txt4 <- sprintf("y=%.2f",yalt)
-    txt5 <- sprintf("E=%.2f",E1)
+    txt3 <- sprintf("y=%.3f",y)
+    txt4 <- sprintf("y=%.3f",yalt)
+    txt5 <- sprintf("E=%.3f",E1)
     p <- p + ggplot2::geom_segment(ggplot2::aes(x=E1, xend=E1, y=0, yend=max(y,yalt)),linetype=3) +
       ggplot2::geom_segment(ggplot2::aes(x=0, xend=E1, y=yalt, yend=yalt), linetype=3) +
       ggplot2::geom_segment(ggplot2::aes(x=0, xend=E1, y=y, yend=y), linetype=3) +
