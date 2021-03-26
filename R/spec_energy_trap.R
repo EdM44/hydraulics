@@ -82,25 +82,22 @@ spec_energy_trap <- function(Q = NULL, b = NULL, m = NULL, y = NULL, scale = 3,
   Ac <- yc * (b + m * yc)
   Emin <- yc + ((Q ^ 2) / (2 * g * Ac ^ 2))
 
-  #ymax <- ceiling(yc*scalefact)
-  if ((yc*scalefact) > 0.75 ) {
-    ymax <- ceiling(yc*scalefact)  
-  } else {
-    ymax <- ceiling(yc*scalefact)/floor(1/(yc*scalefact))
-  }
-  
+  ylim <- yc*scalefact
   yalt <- E1 <- NULL
   #if y is given, find alternate depth
   if ( ! missing (y) ) {
-    if ( y < yc ) stop ("y < yc")
-    if (y > ymax) ymax = ceiling(y)
     E1 <- y + (Q ^ 2) / (2 * g * (y * (b + m * y))^2)
     if ( y > yc ) interv <- c(0.0000001, yc)
     if ( y < yc ) interv <- c(yc, 200)
     yaltfun <- function(ya) { E1 - (ya + (Q ^ 2) / (2 * g * (ya * (b + m * ya))^2)) }
     yalt <- uniroot(yaltfun, interval = interv, extendInt = "yes")$root
+    ylim <- max(ylim, y, yalt)
   }
-  
+
+  #round up ylim a little
+  ordr <- floor(log10(ylim))
+  ymax <- round(ylim + 0.5*10^(ordr-1), -(ordr-1))
+
   ys <- seq(0.1*yc,ymax,length=1000)
   As <- ys * (b + m * ys)
   Es <- ys + ((Q ^ 2) / (2 * g * As ^ 2))
@@ -113,7 +110,8 @@ spec_energy_trap <- function(Q = NULL, b = NULL, m = NULL, y = NULL, scale = 3,
 
   txt1 <- sprintf("Emin=%.3f",Emin)
   txt2 <- sprintf("yc=%.3f",yc)
-
+  offst <- ymax*0.0275
+  
   p <- ggplot2::ggplot() +
     ggplot2::geom_path(data=eycurve,ggplot2::aes(x=xx, y=yy),color="black", size=1.5) +
     ggplot2::scale_x_continuous(txtx, limits = c(0, ymax), expand = c(0,0)) +
@@ -121,11 +119,10 @@ spec_energy_trap <- function(Q = NULL, b = NULL, m = NULL, y = NULL, scale = 3,
     ggplot2::geom_abline(slope = 1, intercept = 0 ,color="black",linetype = "dashed") +
     ggplot2::geom_segment(ggplot2::aes(x=Emin, xend=Emin, y=0, yend=yc)) +
     ggplot2::geom_segment(ggplot2::aes(x=0, xend=Emin, y=yc, yend=yc)) +
-    ggplot2::annotate(geom="text", x=Emin*0.92, y=yc/2, label=txt1, angle = 90, size = 3) +
-    ggplot2::annotate(geom="text", x=Emin/2, y=yc*1.08, label=txt2, angle = 0, size = 3) +
+    ggplot2::annotate(geom="text", x=Emin-offst, y=yc/2, label=txt1, angle = 90, size = 3) +
+    ggplot2::annotate(geom="text", x=Emin/2, y=yc+offst, label=txt2, angle = 0, size = 3) +
     ggplot2::coord_fixed(ratio = 1) +
     ggplot2::theme_bw()
-
   if ( ! missing (y) ) {
     txt3 <- sprintf("y=%.3f",y)
     txt4 <- sprintf("y=%.3f",yalt)
@@ -133,9 +130,9 @@ spec_energy_trap <- function(Q = NULL, b = NULL, m = NULL, y = NULL, scale = 3,
     p <- p + ggplot2::geom_segment(ggplot2::aes(x=E1, xend=E1, y=0, yend=max(y,yalt)),linetype=3) +
       ggplot2::geom_segment(ggplot2::aes(x=0, xend=E1, y=yalt, yend=yalt), linetype=3) +
       ggplot2::geom_segment(ggplot2::aes(x=0, xend=E1, y=y, yend=y), linetype=3) +
-      ggplot2::annotate(geom="text", x=0.1, y=y*1.08, label=txt3, angle = 0, size = 3,hjust = "left") +
-      ggplot2::annotate(geom="text", x=0.1, y=yalt*1.08, label=txt4, angle = 0, size = 3,hjust = "left") +
-      ggplot2::annotate(geom="text", x=E1*1.08, y=(y+yalt)/2, label=txt5, angle = 90, size = 3)
+      ggplot2::annotate(geom="text", x=min(Emin/2,E1/2), y=y+offst, label=txt3, angle = 0, size = 3,hjust = "left") +
+      ggplot2::annotate(geom="text", x=min(Emin/2,E1/2), y=yalt+offst, label=txt4, angle = 0, size = 3,hjust = "left") +
+      ggplot2::annotate(geom="text", x=E1+offst, y=(y+yalt)/2, label=txt5, angle = 90, size = 3)
   }
   return(p)
 }
