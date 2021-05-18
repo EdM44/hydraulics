@@ -23,11 +23,11 @@ URL: https://github.com/EdM44/hydraulics
 License: GPL (>= 3) 
 Depends: R (>= 3.6.0)
 Encoding: UTF-8
-LazyData: true
 Imports:
     ggplot2,
     grid,
     reshape2,
+    stats,
     units
 Suggests:
     knitr,
