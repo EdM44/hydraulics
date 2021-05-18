@@ -250,3 +250,60 @@ ggplot2::ggplot(data=x2,ggplot2::aes(x=y,y=Q, group=n, colour=n)) + ggplot2::geo
   ggplot2::labs(x = "y, m", y = expression(paste("Q, ", ~m^3/s)))
 ```
 
+## 6.0 Pump Curve and Operating Points
+
+For any system delivering water through circular pipes with the assistance of a pump, the selection of the pump requires a consideration of both the pump characteristics and the energy required to deliver different flow rates through the system. These are described by the system and pump characteristic curves. Where they intersect defines the operating point, the flow and (energy) head at which the pump would operate in that system.
+
+```{r pump-1, message=FALSE, echo=FALSE, fig.align = 'center', out.width = "60%", fig.cap = "A simple hydraulic system (from https://www.castlepumps.com)"}
+knitr::include_graphics('./TDH_Example_2_Diagram.png')
+```
+
+As described above, for a simple system the loss of head (energy per unit weight) due to friction, $h_f$, is described by the Darcy-Weisbach equation, which can be simplified as:
+$$h_f = \frac{fL}{D}\frac{V^2}{2g} = \frac{8fL}{\pi^{2}gD^{5}}Q^{2} = KQ{^2}$$
+The total dynamic head the system requires a pump to provide, $h_p$, is found by solving the energy equation from the upstream reservoir (point 1) to the downstream reservoir (point 2). $$h_p = \left(z+\frac{P}{\gamma}+\frac{V^2}{2g}\right)_2 - \left(z+\frac{P}{\gamma}+\frac{V^2}{2g}\right)_1+h_f$$
+
+For the simple system in this example, the velocity is negligible in both reservoirs 1 and 2, and the pressures at both reservoirs is atmospheric, so the equation becomes:
+$$h_p = \left(z_2 - z_1\right) + h_f=h_s+h_f=h_s+KQ^2$$
+Using the _hydraulics_ package, the coefficient, _K_, can be calculated manually or using other package functions for friction loss in a pipe system using $Q=1$. As an example:
+```{r pump-2, message=FALSE}
+ans <- darcyweisbach(Q = 1,D = 20/12, L = 3884, ks = 0.0005, nu = 1.23e-5, units = "Eng")
+cat(sprintf("Coefficient K: %.3f\n", ans$hf))
+```
+
+For this example assume a static head of 30 ft and generate a systemcurve object:
+```{r pump-3, message=FALSE}
+scurve <- systemcurve(hs = 30, K = ans$hf, units = "Eng")
+```
+
+The pump characteristic curve is based on data or graphs obtained from a pump manufacturer. 
+```{r pump-4, message=FALSE, echo=FALSE, fig.align = 'center', out.width = "60%", fig.cap = "A sample set of pump curves (from https://www.gouldspumps.com). The three red dots are points selected to approximate the curve"}
+knitr::include_graphics('./goulds_pump_3409.png')
+```
+
+The three selected points are used to generate a polynomial fit to the curve. There are currently three options for the polynomial:
+```{r pump-5, echo=FALSE}
+knitr::kable(data.frame(type=c("poly1","poly2","poly3"), Equation=c("$h=a+{b}{Q}+{c}{Q}^2$","$h=a+{c}{Q}^2$","$h_{shutoff}+{c}{Q}^2$")), format="pipe", padding=0)
+```
+
+The $h_{shutoff}$ value is the pump head at $Q={0}$. The coordinates of the points can be input to the _pumpcurve_ function as numeric vectors. For the flow manufacturer's pump curves often use units that are not what the _hydraulics_ package needs, and the _units_ package provides a convenient way to convert them as needed.
+```{r pump-6, message=FALSE}
+qgpm <- units::set_units(c(0, 5000, 7850), gallons/minute)
+qcfs <- units::set_units(qgpm, ft^3/s)
+hft <- c(81, 60, 20) #units are already in ft so setting units is optional
+pcurve <- pumpcurve(Q = qcfs, h = hft, eq = "poly2", units = "Eng")
+```
+
+The function _pumpcurve_ returns a _pumpcurve_ object that includes the polynomial fit equation and a simple plot to check the fit.
+```{r pump-7, message=FALSE}
+pcurve$p
+```
+
+The two curves can be combined to find the operating point of the selected pump in the defined system.
+operpoint <- function (pcurve = NULL, scurve = NULL)
+```{r pump-8, message=FALSE}
+oppt <- operpoint(pcurve = pcurve, scurve = scurve)
+cat(sprintf("Operating Point: Q = %.3f, h = %.3f\n", oppt$Qop, oppt$hop))
+oppt$p
+```
+
+

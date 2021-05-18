@@ -1,10 +1,10 @@
-##Submission of revised version: v 0.2.4 - February 25, 2021
+##Submission of revised version: v 0.3.0 - May 18, 2021
 
-* New version includes improved plotting of specific energy diagrams
+* New version includes new functions for simple pump analysis
 
 * Results from Mac OS X check:
-  + ── R CMD check results ─────────────────────────────────── hydraulics 0.2.4 ────
-  + Duration: 1m 20.1s
+  + ── R CMD check results ─────────────────────────────────── hydraulics 0.3.0 ────
+  + Duration: 46.8s
   + 0 errors ✓ | 0 warnings ✓ | 0 notes ✓
   + R CMD check succeeded
 
