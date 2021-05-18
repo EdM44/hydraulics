@@ -51,7 +51,7 @@ par(cex=0.8, mgp = c(2,0.7,0))
 plot(Ts, nus, xlab = xlbl, ylab = ylbl, type="l")
 ```
 
-The water property functions can also be called with the _ret_units_ parameter, in which case the function returns an object of class _units_. This enables capabilities for new units being deduced as operations are performed on the values. A concise example of this is in a [blog post by Edzer Pebesma](https://www.r-spatial.org/r/2016/09/29/plot_units.html), the author of the `units` package.
+The water property functions can also be called with the _ret_units_ parameter, in which case the function returns an object of class _units_. This enables capabilities for new units being deduced as operations are performed on the values. A concise example of this is in a [blog post by Edzer Pebesma](https://r-spatial.org/r/2016/09/29/plot_units.html), the author of the `units` package.
 
 ```{r waterprops-4}
 T <- 25

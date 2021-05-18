@@ -339,3 +339,5 @@ xc_trap( y = oc3$y, b = oc3$b, m = oc3$m, units = "Eng" )
 ```
 
 <img src="man/figures/README-xc-plot-trap-1.png" width="50%" />
+
+## See the vignette for fitting of pump curves and finding operating points
