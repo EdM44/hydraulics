@@ -9,12 +9,12 @@
   + R CMD check succeeded
 
 * From Windows check (devtools::check_win_devel()): 
-  + using R Under development (unstable) (2021-02-20 r80030)
+  + using R version 4.1.0 (2021-05-18)
   + using platform: x86_64-w64-mingw32 (64-bit)
   + using session charset: ISO8859-1
   + checking for file 'hydraulics/DESCRIPTION' ... OK
   + checking extension type ... Package
-  + this is package 'hydraulics' version '0.2.4'
+  + this is package 'hydraulics' version '0.3.0'
   + Status: OK
   + no errors, warnings, or notes
 
