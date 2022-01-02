@@ -2,7 +2,10 @@
 title: "Hydraulics Vignette"
 author: "Ed Maurer"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 2
 vignette: >
   %\VignetteIndexEntry{Hydraulics Vignette}
   %\VignetteEngine{knitr::rmarkdown}
@@ -20,15 +23,15 @@ knitr::opts_chunk$set(
 library(hydraulics)
 ```
 
-# Introduction
+# Introduction to the _hydraulics_ package
 
 The _hydraulics_ package was developed to augment education in basic closed conduit and open channel hydraulics. Most common applications in civil engineering involve water flowing under turbulent conditions, so the functions make that assumption. If that assumption is violated, a warning is generated, though that often means there was an input error. Because engineering calculations are burdened by the persistence of U.S. customary (often referred to as English) units, all functions work in either system by designating units as either _SI_ or _Eng_.
 
 ## 1.0 Water properties
 
-When describing the behavior of water in pipes and channels under turbulent flow conditions there are three water properties used used in calculations, all of which vary with water temperature: density ($\rho$), dynamic viscosity($\mu$), and kinematic viscosity($\nu$), where they are related by $\nu=\frac{\mu}{\rho}$.
+When describing the behavior of water in pipes and channels under turbulent flow conditions there are three water properties used used in calculations, all of which vary with water temperature: density ($\rho$), dynamic viscosity($\mu$), and kinematic viscosity($\nu$), where they are related by $\nu=\frac{\mu}{\rho}$. An additional function exists for saturated vapor pressure of water.
 
-These three properties are found using the _dens_, _dvisc_, and _kvisc_ functions. For example, the kinematic viscosity for water temperature of 55 F is found as follows:
+These properties are found using the _dens_, _dvisc_, _kvisc_, and _svp_ functions. For example, the kinematic viscosity for water temperature of 55 F is found as follows:
 
 ```{r waterprops-1}
 nu = kvisc(T = 55, units = 'Eng')
@@ -69,9 +72,19 @@ units::set_units(Kvisc, m^2/s)
 units::set_units(Kvisc, ft^2/s)
 ```
 
+An example finding the saturated vapor pressure to water at $10^{o}C$ follows.
+```{r waterprops-6}
+vps <- svp(T = 10, units = "SI", ret_units = T)
+vps
+#convert to psi - notice the need to enclose "in" with backticks since "in" 
+#has other meanings in R
+units::set_units(vps,lbf/`in`^2)
+```
+
+
 If the results are of class _units_ they also can have the units plot without the cumbersome formatting of axis labels.
 
-```{r waterprops-6, out.width="50%"}
+```{r waterprops-7, out.width="50%"}
 Temperature <- units::set_units(seq(0, 100, 10), degree_Celsius)
 Kinematic_Viscosity <- kvisc(T = Temperature, units = 'SI', ret_units = TRUE)
 par(cex=0.8, mar = par("mar") + c(0, .2, 0, 0))
@@ -304,6 +317,65 @@ operpoint <- function (pcurve = NULL, scurve = NULL)
 oppt <- operpoint(pcurve = pcurve, scurve = scurve)
 cat(sprintf("Operating Point: Q = %.3f, h = %.3f\n", oppt$Qop, oppt$hop))
 oppt$p
+```
+
+## 7.0 Pipe Networks and the Hardy-Cross method
+
+For water pipe networks containing multiple loops a typical method to solve for the flow in each pipe segment uses the Hardy-Cross method. This consists of setting up an initial guess of flow (magnitude and direction) for each pipe segment, ensuring conservation of mass is preserved at each node (or vertex) in the network. Then calculations are performed for each loop, ensuring energy is conserved.
+
+In the _hydraulics_ package, the Darcy-Weisbach equation is used to estimate the head loss in each pipe segment, expressed in a condensed form as ${h_f = rQ^{2}}$ where: $${r = \frac{8fL}{\pi^{2}gD^{5}}}$$
+If needed, the friction factor _f_ is calculted using the Colebrook equation. The flow adjustment in each loop is calculated at each iteration as: 
+$${\Delta{Q_i} = \frac{\sum_{j=1}^{p_i} r_{ij}Q_j|Q_j|}{\sum_{j=1}^{p_i} 2r_{ij}Q_j^2}}$$
+where _i_ is the loop number, _j_ is the pipe number, and ${\Delta{Q_i}}$ is the flow adjustment to be applied to each pipe in loop _i_ for the next iteration.
+
+Input consists of pipe characteristics, pipe order and initial flows for each loop, the number of iterations to perform, and the unit system being used (only needed if fixed _r_ values are not provided).
+
+```{r hc-1, message=FALSE, echo=FALSE, fig.align = 'center', out.width = "75%", fig.cap = "A sample pipe network with pipe numbers indicated in black"}
+knitr::include_graphics('./hardycross_system.png')
+```
+
+Input for this system, assuming fixed _f_ values, would look like the following. (If fixed _r_ values are provided, f, L and D are not needed). These _f_ values were estimated using $ks=0.00025 m$ in the form of the Colebrook equation for fully rough flows: $$\frac{1}{\sqrt{f}}=log\left(\frac{3.7}{\frac{ks}{D}}\right)$$ This simplification removes the velocity dependence of _f_.
+
+```{r hc-2, message=FALSE}
+dfpipes <- data.frame(
+  ID = c(1,2,3,4,5,6,7,8,9,10),                                #pipe ID
+  D = c(0.3,0.2,0.2,0.2,0.2,0.15,0.25,0.15,0.15,0.25),         #diameter in m
+  L = c(250,100,125,125,100,100,125,100,100,125),              #length in m
+  f = c(.01879,.02075,.02075,.02075,.02075,.02233,.01964,.02233,.02233,.01964)
+)
+loops <- list(c(1,2,3,4,5),c(4,6,7,8),c(3,9,10,6))
+Qs <- list(c(.040,.040,.02,-.02,-.04),c(.02,0,0,-.02),c(-.02,.02,0,0))
+```
+
+Running it and looking at the output from three iterations:
+```{r hc-3, message=FALSE}
+ans <- hardycross(dfpipes = dfpipes, loops = loops, Qs = Qs, n_iter = 3, units = "SI")
+knitr::kable(ans$dfloops, digits = 4, format = "pipe", padding=0)
+```
+
+The output pipe data frame has added columns, including the flow (where direction is that for the first loop containing the segment).
+```{r hc-4, message=FALSE}
+knitr::kable(ans$dfpipes, digits = 4, format = "pipe", padding=0)
+```
+
+While the Hardy-Cross method is often used with fixed _f_ (or _r_) values because it is used in exercises performed by hand, the use of the Colebrook equation allows friction losses to vary with Reynolds number. To use this approach the input data must include absolute roughness. Example values are included here:
+
+```{r hc-5, message=FALSE}
+dfpipes <- data.frame(
+  ID = c(1,2,3,4,5,6,7,8,9,10),                         #pipe ID
+  D = c(0.3,0.2,0.2,0.2,0.2,0.15,0.25,0.15,0.15,0.25),  #diameter in m
+  L = c(250,100,125,125,100,100,125,100,100,125),       #length in m
+  ks = rep(0.00025,10)                                  #absolute roughness, m
+)
+loops <- list(c(1,2,3,4,5),c(4,6,7,8),c(3,9,10,6))
+Qs <- list(c(.040,.040,.02,-.02,-.04),c(.02,0,0,-.02),c(-.02,.02,0,0))
+```
+
+The effect of allowing the calculation of _f_ to be (correctly) dependent on velocity (via the Reynolds number) can be seen, though the effect on final flow values is small.
+
+```{r hc-6, message=FALSE}
+ans <- hardycross(dfpipes = dfpipes, loops = loops, Qs = Qs, n_iter = 3, units = "SI")
+knitr::kable(ans$dfpipes, digits = 4, format = "pipe", padding=0)
 ```
 
 

@@ -74,8 +74,8 @@ reynolds_number <- function(V = NULL, D = NULL, nu = NULL) {
   if (length(checks) < 3) {
     stop("\nFunction requires V, D and nu as input.\n")
   }
-  if (any(checks == 0)) {
-    stop("Either V, D, or nu is 0. None of the variables can be 0. Try again.\n")
+  if (D == 0 | nu == 0) {
+    stop("Either D, or nu is 0. Neither can be 0. Try again.\n")
   } else {
     reynolds_number <- abs(V) * D/nu
     return(reynolds_number)

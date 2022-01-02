@@ -5,13 +5,17 @@
 \alias{dvisc}
 \alias{dens}
 \alias{kvisc}
-\title{Functions to calculate water properties: density, dynamic and kinematic viscosity}
+\alias{svp}
+\title{Functions to calculate water properties: density, dynamic and kinematic 
+viscosity, and saturation vapor pressure}
 \usage{
 dvisc(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
 
 dens(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
 
 kvisc(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
+
+svp(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
 }
 \arguments{
 \item{T}{the water temperature [\eqn{^{\circ}C}{C} or \eqn{^{\circ}F}{F}]}
@@ -32,6 +36,9 @@ mu, the dynamic viscosity of water for the
 
 nu, the kinematic viscosity of water for the
   kvisc function [\eqn{m^2 s^{-1}}{m^2/s} or \eqn{ft^2 s^{-1}}{ft^2/s}].
+
+svp, the saturation vapor pressure of water for the
+  svp function [\eqn{N/m^2}{N/m^2} or \eqn{lbf/ft^2}{lbf/ft^2}].
 }
 \description{
 This function calculates water properties that are used in other functions.
@@ -46,6 +53,9 @@ nu = kvisc(units = 'Eng')
 
 #Find water density for water temperature of 25 C
 rho = dens(T = 25, units = 'SI')
+
+#Find saturation vapor pressure for water temperature of 10 C
+vps = svp(T = 10, units = 'SI')
 
 }
 \author{

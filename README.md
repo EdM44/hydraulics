@@ -29,7 +29,7 @@ remotes::install_github("EdM44/hydraulics")
 library(hydraulics)
 ```
 
-## 1\) Type 1 problem (solve for friction loss): Eng (US) units
+## 1) Type 1 problem (solve for friction loss): Eng (US) units
 
 ``` r
 D <- 20/12    #20 inch converted to ft
@@ -53,7 +53,7 @@ cat(sprintf("Reynolds no: %.0f\nFriction Fact: %.4f\nHead Loss: %.2f ft\n", ans1
 #> Head Loss: 5.72 ft
 ```
 
-## 2\) Type 2 (solving for flow rate, Q): SI Units
+## 2) Type 2 (solving for flow rate, Q): SI Units
 
 ``` r
 D <- .5         #m
@@ -99,157 +99,81 @@ knitr::kable(setNames(as.data.frame(unlist(ans4)),c('value')), format = "html", 
 ```
 
 <table>
-
 <thead>
-
 <tr>
-
 <th style="text-align:left;">
-
 </th>
-
 <th style="text-align:right;">
-
 value
-
 </th>
-
 </tr>
-
 </thead>
-
 <tbody>
-
 <tr>
-
 <td style="text-align:left;">
-
 Q
-
 </td>
-
 <td style="text-align:right;">
-
 3.750000e+01
-
 </td>
-
 </tr>
-
 <tr>
-
 <td style="text-align:left;">
-
 V
-
 </td>
-
 <td style="text-align:right;">
-
 1.395076e+01
-
 </td>
-
 </tr>
-
 <tr>
-
 <td style="text-align:left;">
-
 L
-
 </td>
-
 <td style="text-align:right;">
-
 8.000000e+03
-
 </td>
-
 </tr>
-
 <tr>
-
 <td style="text-align:left;">
-
 D
-
 </td>
-
 <td style="text-align:right;">
-
 1.850000e+00
-
 </td>
-
 </tr>
-
 <tr>
-
 <td style="text-align:left;">
-
 hf
-
 </td>
-
 <td style="text-align:right;">
-
 2.150000e+02
-
 </td>
-
 </tr>
-
 <tr>
-
 <td style="text-align:left;">
-
 f
-
 </td>
-
 <td style="text-align:right;">
-
 1.649880e-02
-
 </td>
-
 </tr>
-
 <tr>
-
 <td style="text-align:left;">
-
 ks
-
 </td>
-
 <td style="text-align:right;">
-
 8.176000e-04
-
 </td>
-
 </tr>
-
 <tr>
-
 <td style="text-align:left;">
-
 Re
-
 </td>
-
 <td style="text-align:right;">
-
 2.335866e+06
-
 </td>
-
 </tr>
-
 </tbody>
-
 </table>
 
 ## Utility functions for water properties can be used independently as well:
@@ -298,7 +222,7 @@ cat(sprintf("Flow rate, Q: %.2f m3/s\nFull pipe flow rate, Qf: %.2f\n", oc1$Q, o
 #> Full pipe flow rate, Qf: 0.31
 ```
 
-## Open Channel Flow in a Pipe: solving for diameter, d when given y\_d): Eng (US) units
+## Open Channel Flow in a Pipe: solving for diameter, d when given y_d): Eng (US) units
 
 ``` r
 oc2 <- manningc(Q = 83.5, n = 0.015, Sf = 0.0002, y_d = 0.9, units = "Eng")
@@ -340,4 +264,6 @@ xc_trap( y = oc3$y, b = oc3$b, m = oc3$m, units = "Eng" )
 
 <img src="man/figures/README-xc-plot-trap-1.png" width="50%" />
 
-## See the vignette for fitting of pump curves and finding operating points
+For other functions related to pump characteristic curves and operating
+point determination, and pipe network solutions, refer to the
+*hydraulics* vignette.
