@@ -7,11 +7,13 @@ pressure and gravity flow conditions, and open-channel hydraulics for
 trapezoidal channels, including triangular and rectangular. Pressure
 pipe solutions include functions to 1) describe properties of water, 2)
 solve the Darcy-Weisbach equation for friction loss through pipes, and
-3) plot a Moody diagram. Partially-filled pipe and other open-channel
-flow solutions are solved with the Manning equation. The format of
-functions and pressure pipe solutions are designed to be compatible with
-the *iemisc* package, and the open channel hydraulics solutions are
-modifications of code in that package.
+3) plot a Moody diagram. There are also functions for matching a pump
+characteristic curve to a system curve, and solving for flows in a pipe
+network using the Hardy-Cross method. Partially-filled pipe and other
+open-channel flow solutions are solved with the Manning equation. The
+format of functions and pressure pipe solutions are designed to be
+compatible with the *iemisc* package, and the open channel hydraulics
+solutions are modifications of code in that package.
 
 # Installation
 
