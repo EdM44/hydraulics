@@ -9,13 +9,14 @@
     water flow in circular pipes both flowing full (under pressure), and 
     partially full (gravity flow), and trapezoidal open channels. For 
     pressure flow this includes friction loss calculations by solving 
-    the Darcy-Weisbach equation for head loss, flow or diameter, and 
-    plotting a Moody diagram. The Darcy-Weisbach friction factor is 
-    calculated using the Colebrook (or Colebrook-White equation), 
-    the basis of the Moody diagram, the original citation being 
-    Colebrook (1939) &lt;doi:10.1680/ijoti.1939.13150&gt;. For gravity flow, the
-    Manning equation is used, again solving for missing parameters. The 
-    derivation of and solutions using the Darcy-Weisbach equation and the
+    the Darcy-Weisbach equation for head loss, flow or diameter, 
+    plotting a Moody diagram, matching a pump characteristic curve to a system 
+    curve, and solving for flows in a pipe network using the Hardy-Cross method. 
+    The Darcy-Weisbach friction factor is calculated using the Colebrook 
+    (or Colebrook-White equation), the basis of the Moody diagram, the original 
+    citation being Colebrook (1939) &lt;doi:10.1680/ijoti.1939.13150&gt;. For gravity 
+    flow, the Manning equation is used, again solving for missing parameters. 
+    The derivation of and solutions using the Darcy-Weisbach equation and the
     Manning equation are outlined in many fluid mechanics texts such as 
     Finnemore and Franzini (2002, ISBN:978-0072432022). For the Manning equation
     solutions, this package uses modifications of original code from the iemisc 
@@ -30,13 +31,14 @@
     water flow in circular pipes both flowing full (under pressure), and 
     partially full (gravity flow), and trapezoidal open channels. For 
     pressure flow this includes friction loss calculations by solving 
-    the Darcy-Weisbach equation for head loss, flow or diameter, and 
-    plotting a Moody diagram. The Darcy-Weisbach friction factor is 
-    calculated using the Colebrook (or Colebrook-White equation), 
-    the basis of the Moody diagram, the original citation being 
-    Colebrook (1939) &lt;doi:10.1680/ijoti.1939.13150&gt;. For gravity flow, the
-    Manning equation is used, again solving for missing parameters. The 
-    derivation of and solutions using the Darcy-Weisbach equation and the
+    the Darcy-Weisbach equation for head loss, flow or diameter, 
+    plotting a Moody diagram, matching a pump characteristic curve to a system 
+    curve, and solving for flows in a pipe network using the Hardy-Cross method. 
+    The Darcy-Weisbach friction factor is calculated using the Colebrook 
+    (or Colebrook-White equation), the basis of the Moody diagram, the original 
+    citation being Colebrook (1939) &lt;doi:10.1680/ijoti.1939.13150&gt;. For gravity 
+    flow, the Manning equation is used, again solving for missing parameters. 
+    The derivation of and solutions using the Darcy-Weisbach equation and the
     Manning equation are outlined in many fluid mechanics texts such as 
     Finnemore and Franzini (2002, ISBN:978-0072432022). For the Manning equation
     solutions, this package uses modifications of original code from the iemisc 
@@ -54,7 +56,7 @@
     
     <a class="navbar-brand me-2" href="index.html">hydraulics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,7 +99,7 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="description">Description<a class="anchor" aria-label="anchor" href="#description"></a>
 </h1></div>
-<p>The <em>hydraulics</em> R package solves basic pipe hydraulics for both pressure and gravity flow conditions, and open-channel hydraulics for trapezoidal channels, including triangular and rectangular. Pressure pipe solutions include functions to 1) describe properties of water, 2) solve the Darcy-Weisbach equation for friction loss through pipes, and 3) plot a Moody diagram. Partially-filled pipe and other open-channel flow solutions are solved with the Manning equation. The format of functions and pressure pipe solutions are designed to be compatible with the <em>iemisc</em> package, and the open channel hydraulics solutions are modifications of code in that package.</p>
+<p>The <em>hydraulics</em> R package solves basic pipe hydraulics for both pressure and gravity flow conditions, and open-channel hydraulics for trapezoidal channels, including triangular and rectangular. Pressure pipe solutions include functions to 1) describe properties of water, 2) solve the Darcy-Weisbach equation for friction loss through pipes, and 3) plot a Moody diagram. There are also functions for matching a pump characteristic curve to a system curve, and solving for flows in a pipe network using the Hardy-Cross method. Partially-filled pipe and other open-channel flow solutions are solved with the Manning equation. The format of functions and pressure pipe solutions are designed to be compatible with the <em>iemisc</em> package, and the open channel hydraulics solutions are modifications of code in that package.</p>
 </div>
 <div class="section level1">
 <h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
