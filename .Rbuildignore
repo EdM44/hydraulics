@@ -7,3 +7,6 @@
 ^hydraulics_0\.1\.0\.pdf$
 ^doc$
 ^Meta$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
