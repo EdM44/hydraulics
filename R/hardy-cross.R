@@ -22,7 +22,7 @@
 #'   which are included in the output. If input \eqn{r} or \eqn{f} columns are provided, values 
 #'   for \eqn{ks} are ignored. If an input \eqn{r} column is provided, \eqn{ks} and \eqn{f} are 
 #'   ignored. If the Colebrook equation is used to determine \eqn{f}, a water 
-#'   temperature of 20^{o}C or 68^{o}F is used.
+#'   temperature of \eqn{20^{o}C} or \eqn{68^{o}F} is used.
 #'   
 #'   The number of iterations to perform may be specified with the n_iter input
 #'   value, but execution stops if the average flow adjustment becomes smaller 

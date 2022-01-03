@@ -324,9 +324,9 @@ oppt$p
 For water pipe networks containing multiple loops a typical method to solve for the flow in each pipe segment uses the Hardy-Cross method. This consists of setting up an initial guess of flow (magnitude and direction) for each pipe segment, ensuring conservation of mass is preserved at each node (or vertex) in the network. Then calculations are performed for each loop, ensuring energy is conserved.
 
 In the _hydraulics_ package, the Darcy-Weisbach equation is used to estimate the head loss in each pipe segment, expressed in a condensed form as ${h_f = rQ^{2}}$ where: $${r = \frac{8fL}{\pi^{2}gD^{5}}}$$
-If needed, the friction factor _f_ is calculted using the Colebrook equation. The flow adjustment in each loop is calculated at each iteration as: 
+If needed, the friction factor _f_ is calculated using the Colebrook equation. The flow adjustment in each loop is calculated at each iteration as: 
 $${\Delta{Q_i} = \frac{\sum_{j=1}^{p_i} r_{ij}Q_j|Q_j|}{\sum_{j=1}^{p_i} 2r_{ij}Q_j^2}}$$
-where _i_ is the loop number, _j_ is the pipe number, and ${\Delta{Q_i}}$ is the flow adjustment to be applied to each pipe in loop _i_ for the next iteration.
+where _i_ is the loop number, _j_ is the pipe number, and ${\Delta{Q_i}}$ is the flow adjustment to be applied to each pipe in loop _i_ for the next iteration. Pipes shared between loops receive adjustments from both loops.
 
 Input consists of pipe characteristics, pipe order and initial flows for each loop, the number of iterations to perform, and the unit system being used (only needed if fixed _r_ values are not provided).
 
@@ -347,7 +347,7 @@ loops <- list(c(1,2,3,4,5),c(4,6,7,8),c(3,9,10,6))
 Qs <- list(c(.040,.040,.02,-.02,-.04),c(.02,0,0,-.02),c(-.02,.02,0,0))
 ```
 
-Running it and looking at the output from three iterations:
+Running it and looking at the output after three iterations:
 ```{r hc-3, message=FALSE}
 ans <- hardycross(dfpipes = dfpipes, loops = loops, Qs = Qs, n_iter = 3, units = "SI")
 knitr::kable(ans$dfloops, digits = 4, format = "pipe", padding=0)
