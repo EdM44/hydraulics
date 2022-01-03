@@ -326,7 +326,7 @@ For water pipe networks containing multiple loops a typical method to solve for 
 In the _hydraulics_ package, the Darcy-Weisbach equation is used to estimate the head loss in each pipe segment, expressed in a condensed form as ${h_f = rQ^{2}}$ where: $${r = \frac{8fL}{\pi^{2}gD^{5}}}$$
 If needed, the friction factor _f_ is calculated using the Colebrook equation. The flow adjustment in each loop is calculated at each iteration as: 
 $${\Delta{Q_i} = -\frac{\sum_{j=1}^{p_i} r_{ij}Q_j|Q_j|}{\sum_{j=1}^{p_i} 2r_{ij}Q_j^2}}$$
-where _i_ is the loop number, _j_ is the pipe number, and ${\Delta{Q_i}}$ is the flow adjustment to be applied to each pipe in loop _i_ for the next iteration. Pipes shared between loops receive adjustments from both loops.
+where _i_ is the loop number, _j_ is the pipe number, ${p_i}$ is the number of pipes in loop _i_ and ${\Delta{Q_i}}$ is the flow adjustment to be applied to each pipe in loop _i_ for the next iteration. Pipes shared between loops receive adjustments from both loops.
 
 Input consists of pipe characteristics, pipe order and initial flows for each loop, the number of iterations to perform, and the unit system being used (only needed if fixed _r_ values are not provided).
 
