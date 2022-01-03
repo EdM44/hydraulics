@@ -71,7 +71,7 @@ pipe segment, expressed in a condensed form as \eqn{h_f = rQ^{2}}
 where: \deqn{r = \frac{8fL}{\pi^{2}gD^{5}}}  
 If needed, the friction factor \eqn{f} is calculted using the Colebrook 
 equation. The flow adjustment in each loop is calculated at each iteration as: 
-\deqn{\Delta{Q_i} = \frac{\sum_{j=1}^{p_i} r_{ij}Q_j|Q_j|}{\sum_{j=1}^{p_i} 2r_{ij}Q_j^2}}
+\deqn{\Delta{Q_i} = -\frac{\sum_{j=1}^{p_i} r_{ij}Q_j|Q_j|}{\sum_{j=1}^{p_i} 2r_{ij}Q_j^2}}
 where \eqn{i} is the loop number, \eqn{j} is the pipe number, and \eqn{\Delta{Q_i}} 
 is the flow adjustment to be applied to each pipe in loop \eqn{i} for the next iteration.
 }
