@@ -48,10 +48,10 @@ The input data frame with the pipe data must contain a pipe ID column with
 the pipe numbers used in the loops input list. There are three options for 
 input column of the pipe roughness data frame:
 \tabular{ll}{
-  \strong{Column Name} \tab \strong{Approach for Determining _r_} \cr
-  _ks_ \tab {_f_ calculated using Colebrook equation, _r_ using Darcy-Weisbach} \cr
-  _f_ \tab {_f_ treated as fixed, _r_ calculated using Darcy-Weisbach} \cr
-  _r_ \tab {_r_ treated as fixed}
+  \strong{Column Name} \tab \strong{Approach for Determining r} \cr
+  ks \tab {f calculated using Colebrook equation, r using Darcy-Weisbach} \cr
+  f \tab {f treated as fixed, _r_ calculated using Darcy-Weisbach} \cr
+  r \tab {r treated as fixed}
   }
   In the case where absolute pipe roughness, _ks_ (in _m_ or _ft_), is input, 
   the input pipe data frame must also include columns for the length, _L_ and
