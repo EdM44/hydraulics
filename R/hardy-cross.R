@@ -12,16 +12,16 @@
 #' \tabular{ll}{
 #'   \strong{Column Name} \tab \strong{Approach for Determining r} \cr
 #'   ks \tab {f calculated using Colebrook equation, r using Darcy-Weisbach} \cr
-#'   f \tab {f treated as fixed, _r_ calculated using Darcy-Weisbach} \cr
+#'   f \tab {f treated as fixed, r calculated using Darcy-Weisbach} \cr
 #'   r \tab {r treated as fixed}
 #'   }
-#'   In the case where absolute pipe roughness, _ks_ (in _m_ or _ft_), is input, 
-#'   the input pipe data frame must also include columns for the length, _L_ and
-#'   diameter, _D_, (both in _m_ or _ft_) so _r_ can be calculated. In this case, 
-#'   a new _f_ and _r_ are calculated at each iteration, the final values of 
-#'   which are included in the output. If input _r_ or _f_ columns are provided, values 
-#'   for _ks_ are ignored. If an input _r_ column is provided, _ks_ and _f_ are 
-#'   ignored. If the Colebrook equation is used to determine _f_, a water 
+#'   In the case where absolute pipe roughness, \eqn{ks} (in m or ft), is input, 
+#'   the input pipe data frame must also include columns for the length, \eqn{L} and
+#'   diameter, \eqn{D}, (both in m or ft) so \eqn{r} can be calculated. In this case, 
+#'   a new \eqn{f} and \eqn{r} are calculated at each iteration, the final values of 
+#'   which are included in the output. If input \eqn{r} or \eqn{f} columns are provided, values 
+#'   for \eqn{ks} are ignored. If an input \eqn{r} column is provided, \eqn{ks} and \eqn{f} are 
+#'   ignored. If the Colebrook equation is used to determine \eqn{f}, a water 
 #'   temperature of 20^{o}C or 68^{o}F is used.
 #'   
 #'   The number of iterations to perform may be specified with the n_iter input
