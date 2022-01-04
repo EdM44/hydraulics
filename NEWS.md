@@ -1,5 +1,9 @@
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
+# hydraulics 0.4.1
+
+*   Revised DESCRIPTION to include new functions
+
 # hydraulics 0.4.0
 
 *   Added functions to solve for flows in a pape network with Hardy-Cross method
