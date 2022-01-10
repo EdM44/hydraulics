@@ -6,8 +6,8 @@
 
 # hydraulics 0.4.0
 
-*   Added functions to solve for flows in a pape network with Hardy-Cross method
-*   Added a saturated vapor pressure function for weater properties
+*   Added functions to solve for flows in a pipe network with Hardy-Cross method
+*   Added a saturated vapor pressure function for water properties
 *   Updated the vignette to demonstrate the new functions
 
 # hydraulics 0.3.0
