@@ -33,7 +33,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
@@ -65,12 +65,15 @@
     
   </div>
 </nav><div class="container template-article">
+
+
+
 <script src="hydraulics_vignette_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <main id="main"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Hydraulics Vignette</h1>
                         <h4 data-toc-skip class="author">Ed Maurer</h4>
             
-            <h4 data-toc-skip class="date">2022-01-10</h4>
+            <h4 data-toc-skip class="date">2022-01-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/EdM44/hydraulics/blob/HEAD/vignettes/hydraulics_vignette.Rmd" class="external-link"><code>vignettes/hydraulics_vignette.Rmd</code></a></small>
       <div class="d-none name"><code>hydraulics_vignette.Rmd</code></div>
@@ -79,14 +82,16 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/EdM44/hydraulics" class="external-link">hydraulics</a></span><span class="op">)</span></code></pre></div>
-<div class="section level1">
-<h1 id="introduction-to-the-hydraulics-package">Introduction to the <em>hydraulics</em> package<a class="anchor" aria-label="anchor" href="#introduction-to-the-hydraulics-package"></a>
-</h1>
-<p>The <em>hydraulics</em> package was developed to augment education in basic closed conduit and open channel hydraulics. Most common applications in civil engineering involve water flowing under turbulent conditions, so the functions make that assumption. If that assumption is violated, a warning is generated, though that often means there was an input error. Because engineering calculations are burdened by the persistence of U.S. customary (often referred to as English) units, all functions work in either system by designating units as either <em>SI</em> or <em>Eng</em>.</p>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/EdM44/hydraulics" class="external-link">hydraulics</a></span><span class="op">)</span>
+<span class="co">#&gt; Warning in register(): Can't find generic `scale_type` in package ggplot2 to</span>
+<span class="co">#&gt; register S3 method.</span></code></pre></div>
 <div class="section level2">
-<h2 id="water-properties">1.0 Water properties<a class="anchor" aria-label="anchor" href="#water-properties"></a>
+<h2 id="introduction-to-the-hydraulics-package">Introduction to the <em>hydraulics</em> package<a class="anchor" aria-label="anchor" href="#introduction-to-the-hydraulics-package"></a>
 </h2>
+<p>The <em>hydraulics</em> package was developed to augment education in basic closed conduit and open channel hydraulics. Most common applications in civil engineering involve water flowing under turbulent conditions, so the functions make that assumption. If that assumption is violated, a warning is generated, though that often means there was an input error. Because engineering calculations are burdened by the persistence of U.S. customary (often referred to as English) units, all functions work in either system by designating units as either <em>SI</em> or <em>Eng</em>.</p>
+<div class="section level3">
+<h3 id="water-properties">1.0 Water properties<a class="anchor" aria-label="anchor" href="#water-properties"></a>
+</h3>
 <p>When describing the behavior of water in pipes and channels under turbulent flow conditions there are three water properties used used in calculations, all of which vary with water temperature: density (<span class="math inline">\(\rho\)</span>), dynamic viscosity(<span class="math inline">\(\mu\)</span>), and kinematic viscosity(<span class="math inline">\(\nu\)</span>), where they are related by <span class="math inline">\(\nu=\frac{\mu}{\rho}\)</span>. An additional function exists for saturated vapor pressure of water.</p>
 <p>These properties are found using the <em>dens</em>, <em>dvisc</em>, <em>kvisc</em>, and <em>svp</em> functions. For example, the kinematic viscosity for water temperature of 55 F is found as follows:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -139,9 +144,9 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">Temperature</span>, <span class="va">Kinematic_Viscosity</span>, type<span class="op">=</span><span class="st">"l"</span><span class="op">)</span></code></pre></div>
 <p><img src="hydraulics_vignette_files/figure-html/waterprops-7-1.png" width="50%"></p>
 </div>
-<div class="section level2">
-<h2 id="fundamental-constants">2.0 Fundamental constants<a class="anchor" aria-label="anchor" href="#fundamental-constants"></a>
-</h2>
+<div class="section level3">
+<h3 id="fundamental-constants">2.0 Fundamental constants<a class="anchor" aria-label="anchor" href="#fundamental-constants"></a>
+</h3>
 <p>Two of the most important descriptive quantities in engineering hydraulics are the Reynolds number, <em>Re</em> and the Froude number <em>Fr</em>. <span class="math inline">\(Re=\frac{VD}{\nu}\)</span> describes the turbulence of the flow. It expresses the ratio of kinematic forces, expressed by velocity <em>V</em> and a characteristic length such as pipe diameter, <em>D</em>, to viscous forces as expressed by the kinematic viscosity <span class="math inline">\(\nu\)</span>. For open channels the characteristic length is the <em>hydraulic depth</em>, the area of flow divided by the top width. For adequately turbulent conditions to exists, Reynolds numbers should exceed 4000 for full pipes, and 2000 for open channels.</p>
 <p>For open channel flow, given a channel shape and flow rate, flow can usually exist at two different depths, termed subcritical (slow, deep) and supercritical (shallow, fast). The exception is at critical flow conditions, where only one depth exists, the critical depth. Which depth is exhibited by the flow is determined by the slope and roughness of the channel. The Froude number is defined by <span class="math inline">\(Fr=\frac{V}{\sqrt{gD}}\)</span>. <em>Fr</em> characterizes flow as:</p>
 <table class="table">
@@ -166,9 +171,9 @@
 </table>
 <p>These constants are calculated internally and returned with the output of many functions. Critical flow is important in open-channel flow applications and is discussed further below.</p>
 </div>
-<div class="section level2">
-<h2 id="friction-loss-in-circular-pipes">3.0 Friction Loss in Circular Pipes<a class="anchor" aria-label="anchor" href="#friction-loss-in-circular-pipes"></a>
-</h2>
+<div class="section level3">
+<h3 id="friction-loss-in-circular-pipes">3.0 Friction Loss in Circular Pipes<a class="anchor" aria-label="anchor" href="#friction-loss-in-circular-pipes"></a>
+</h3>
 <p>The energy at any point along a pipe containing flowing water is often described by the energy per unit weight, or energy head, E: <span class="math display">\[E = z+\frac{P}{\gamma}+\alpha\frac{V^2}{2g}\]</span> where P is the pressure, <span class="math inline">\(\gamma=\rho g\)</span> is the specific weight of water, <em>z</em> is the elevation of the point, <em>V</em> is the average velocity, and each term has units of length. <span class="math inline">\(\alpha\)</span> is a kinetic energy adjustment factor to account for non-uniform velocity distribution across the cross-section. <span class="math inline">\(\alpha\)</span> is typically assumed to be 1.0 for turbulent flow because the value is close to 1.0 and <span class="math inline">\(\frac{V^2}{2g}\)</span> (the velocity head) tends to be small in relation to other terms in the equation.</p>
 <p>As water flows through a pipe energy is lost due to friction with the pipe walls and local disturbances (minor losses). The energy loss between two sections is expressed as <span class="math inline">\({E_1} - {h_l} = {E_2}\)</span>. When pipes are long, with <span class="math inline">\(\frac{L}{D}&gt;1000\)</span>, friction losses dominate the energy loss on the system, and the head loss, <span class="math inline">\(h_l\)</span>, is calculated as the head loss due to friction, <span class="math inline">\(h_f\)</span>. This energy head loss due to friction with the walls of the pipe is described by the Darcy-Weisbach equation, which estimates the energy loss per unit weight, or head loss <span class="math inline">\({h_f}\)</span>, which has units of length. For circular pipes it is expressed as: <span class="math display">\[h_f = \frac{fL}{D}\frac{V^2}{2g} = \frac{8fL}{\pi^{2}gD^{5}}Q^{2}\]</span> In this equation <em>f</em> is the friction factor, typically calculated with the Colebrook equation: <span class="math display">\[\frac{1}{\sqrt{f}} = -2\log\left(\frac{\frac{k_s}{D}}{3.7} + \frac{2.51}{Re\sqrt{f}}\right)\]</span> where <span class="math inline">\(k_s\)</span> is the absolute roughness of the pipe wall. There are close approximations to the Colebrook equation that have an explicit form to facilitate hand-calculations, but this package only uses the Colebrook function.</p>
 <p>Any one of the variables in the Darcy Weisbach equation, and by extension the Colebrook equation, may be treated as an unknown. For an existing pipe with a known flow rate, the friction loss for a length of pipe may be found:</p>
@@ -288,9 +293,9 @@
 <span class="fu"><a href="../reference/moody.html">moody</a></span><span class="op">(</span>Re <span class="op">=</span> <span class="va">Re_values</span>, f <span class="op">=</span> <span class="va">f_values</span><span class="op">)</span></code></pre></div>
 <p><img src="hydraulics_vignette_files/figure-html/pipe-6-1.png" width="480"></p>
 </div>
-<div class="section level2">
-<h2 id="flow-in-circular-pipes-flowing-partially-full">4.0 Flow in Circular Pipes Flowing Partially Full<a class="anchor" aria-label="anchor" href="#flow-in-circular-pipes-flowing-partially-full"></a>
-</h2>
+<div class="section level3">
+<h3 id="flow-in-circular-pipes-flowing-partially-full">4.0 Flow in Circular Pipes Flowing Partially Full<a class="anchor" aria-label="anchor" href="#flow-in-circular-pipes-flowing-partially-full"></a>
+</h3>
 <p>The Manning equation (also known as the Strickler equation) describes flow conditions in an open channel under uniform flow conditions. It is often expressed as: <span class="math display">\[Q=A\frac{C}{n}{R}^{\frac{2}{3}}{S_f}^{\frac{1}{2}}\]</span> where <em>C</em> is 1.0 for <em>SI</em> units and 1.49 for <em>Eng</em> (U.S. Customary) units. <em>Q</em> is the flow rate, <em>A</em> is the cross-sectional flow area, <em>n</em> is the Manning roughness coefficient, and R is the hydraulic radius <span class="math inline">\(R=\frac{A}{P}\)</span>, where P is the wetted perimeter. Critical depth is defined by the relation (at critical conditions): <span class="math display">\[\frac{Q^{2}B}{g\,A^{3}}=1\]</span></p>
 <p>where <em>B</em> is the top width of the water surface.</p>
 <p>As with full flow in circular pipes, any one of the variables in the Manning equation, and related geometric variables, may be treated as an unknown. For an existing pipe, a common problem is the determination of the depth, <em>y</em> that a given flow <em>Q</em>, will have given a pipe diameter <em>d</em>, slope <em>S</em> and roughness <em>n</em>. An example of that follows.</p>
@@ -350,9 +355,9 @@
 <span class="fu"><a href="../reference/xc_circle.html">xc_circle</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">ans</span><span class="op">$</span><span class="va">y</span>, d<span class="op">=</span><span class="va">ans</span><span class="op">$</span><span class="va">d</span>, units <span class="op">=</span> <span class="st">"SI"</span><span class="op">)</span></code></pre></div>
 <p><img src="hydraulics_vignette_files/figure-html/manningc-2-1.png" width="40%"></p>
 </div>
-<div class="section level2">
-<h2 id="flow-in-open-channels-rectangular-triangular-trapezoidal">5.0 Flow in Open Channels (rectangular, triangular, trapezoidal)<a class="anchor" aria-label="anchor" href="#flow-in-open-channels-rectangular-triangular-trapezoidal"></a>
-</h2>
+<div class="section level3">
+<h3 id="flow-in-open-channels-rectangular-triangular-trapezoidal">5.0 Flow in Open Channels (rectangular, triangular, trapezoidal)<a class="anchor" aria-label="anchor" href="#flow-in-open-channels-rectangular-triangular-trapezoidal"></a>
+</h3>
 <p>As with flow in circular pipes flowing less than full, flow in an open channel of rectangular, triangular, or trapezoidal shape uses the Manning equation. Substituting the geometric relationships for hydraulic radius and cross-sectional area, the Manning equation takes the form: <span class="math display">\[Q=\frac{C}{n}{\frac{\left(by+my^2\right)^{\frac{5}{3}}}{\left(b+2y\sqrt{1+m^2}\right)^\frac{2}{3}}}{S_f}^{\frac{1}{2}}\]</span> For a rectangular channel, the side slope is vertical, so <em>m</em> = 0; for a triangular channel, <em>b</em> = 0. For a given <em>Q</em>, <em>m</em>, <em>n</em>, and <em>Sf</em>, the most hydraulically efficient channel is found by maximizing R, which can be done by setting in the Manning equation <span class="math inline">\(\frac{\partial R}{\partial y}=0\)</span>. This produces: <span class="math display">\[y_{opt} = 2^{\frac{1}{4}}\left(\frac{Qn}{C\left(2\sqrt{1+m^2}-m\right)S_f^{\frac{1}{2}}}\right)^{\frac{3}{8}}\]</span> <span class="math display">\[b_{opt} = 2y_{opt}\left(\sqrt{1+m^2}-m\right)\]</span></p>
 <p>The <em>manningt</em> function works similarly to the function for circular pipes, in that the excluded argument is the one for which the function determines a solution. For example, a design might require the slope to deliver a required flow, <em>Q</em> through a channel with known geometry (bottom width, <em>b</em>, side slope <em>m</em>) and a given depth <em>y</em>:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
@@ -523,9 +528,9 @@
   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"y, m"</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Q, "</span>, <span class="op">~</span><span class="va">m</span><span class="op">^</span><span class="fl">3</span><span class="op">/</span><span class="va">s</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="hydraulics_vignette_files/figure-html/manningt-5-1.png" width="480"></p>
 </div>
-<div class="section level2">
-<h2 id="pump-curve-and-operating-points">6.0 Pump Curve and Operating Points<a class="anchor" aria-label="anchor" href="#pump-curve-and-operating-points"></a>
-</h2>
+<div class="section level3">
+<h3 id="pump-curve-and-operating-points">6.0 Pump Curve and Operating Points<a class="anchor" aria-label="anchor" href="#pump-curve-and-operating-points"></a>
+</h3>
 <p>For any system delivering water through circular pipes with the assistance of a pump, the selection of the pump requires a consideration of both the pump characteristics and the energy required to deliver different flow rates through the system. These are described by the system and pump characteristic curves. Where they intersect defines the operating point, the flow and (energy) head at which the pump would operate in that system.</p>
 <div class="figure" style="text-align: center">
 <img src="TDH_Example_2_Diagram.png" alt="A simple hydraulic system (from https://www.castlepumps.com)" width="60%"><p class="caption">
@@ -578,7 +583,7 @@ A sample set of pump curves (from <a href="https://www.gouldspumps.com" class="e
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pcurve</span><span class="op">$</span><span class="va">p</span></code></pre></div>
 <p><img src="hydraulics_vignette_files/figure-html/pump-7-1.png" width="700"></p>
-<p>The two curves can be combined to find the operating point of the selected pump in the defined system. operpoint &lt;- function (pcurve = NULL, scurve = NULL)</p>
+<p>The two curves can be combined to find the operating point of the selected pump in the defined system.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">oppt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/operpoint.html">operpoint</a></span><span class="op">(</span>pcurve <span class="op">=</span> <span class="va">pcurve</span>, scurve <span class="op">=</span> <span class="va">scurve</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Operating Point: Q = %.3f, h = %.3f\n"</span>, <span class="va">oppt</span><span class="op">$</span><span class="va">Qop</span>, <span class="va">oppt</span><span class="op">$</span><span class="va">hop</span><span class="op">)</span><span class="op">)</span>
@@ -587,9 +592,9 @@ A sample set of pump curves (from <a href="https://www.gouldspumps.com" class="e
 <span class="co">#&gt; Warning: Removed 1 row(s) containing missing values (geom_path).</span></code></pre></div>
 <p><img src="hydraulics_vignette_files/figure-html/pump-8-1.png" width="700"></p>
 </div>
-<div class="section level2">
-<h2 id="pipe-networks-and-the-hardy-cross-method">7.0 Pipe Networks and the Hardy-Cross method<a class="anchor" aria-label="anchor" href="#pipe-networks-and-the-hardy-cross-method"></a>
-</h2>
+<div class="section level3">
+<h3 id="pipe-networks-and-the-hardy-cross-method">7.0 Pipe Networks and the Hardy-Cross method<a class="anchor" aria-label="anchor" href="#pipe-networks-and-the-hardy-cross-method"></a>
+</h3>
 <p>For water pipe networks containing multiple loops a typical method to solve for the flow in each pipe segment uses the Hardy-Cross method. This consists of setting up an initial guess of flow (magnitude and direction) for each pipe segment, ensuring conservation of mass is preserved at each node (or vertex) in the network. Then calculations are performed for each loop, ensuring energy is conserved.</p>
 <p>In the <em>hydraulics</em> package, the Darcy-Weisbach equation is used to estimate the head loss in each pipe segment, expressed in a condensed form as <span class="math inline">\({h_f = rQ^{2}}\)</span> where: <span class="math display">\[{r = \frac{8fL}{\pi^{2}gD^{5}}}\]</span> If needed, the friction factor <em>f</em> is calculated using the Colebrook equation. The flow adjustment in each loop is calculated at each iteration as: <span class="math display">\[{\Delta{Q_i} = -\frac{\sum_{j=1}^{p_i} r_{ij}Q_j|Q_j|}{\sum_{j=1}^{p_i} 2r_{ij}Q_j^2}}\]</span> where <em>i</em> is the loop number, <em>j</em> is the pipe number, <span class="math inline">\({p_i}\)</span> is the number of pipes in loop <em>i</em> and <span class="math inline">\({\Delta{Q_i}}\)</span> is the flow adjustment to be applied to each pipe in loop <em>i</em> for the next iteration. Pipes shared between loops receive adjustments from both loops.</p>
 <p>Input consists of pipe characteristics, pipe order and initial flows for each loop, the number of iterations to perform, and the unit system being used (only needed if fixed <em>r</em> values are not provided).</p>
@@ -913,7 +918,7 @@ A sample pipe network with pipe numbers indicated in black
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
     </footer>
