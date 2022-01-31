@@ -6,8 +6,10 @@
 \alias{dens}
 \alias{kvisc}
 \alias{svp}
+\alias{surf_tension}
+\alias{Ev}
 \title{Functions to calculate water properties: density, dynamic and kinematic 
-viscosity, and saturation vapor pressure}
+viscosity, saturation vapor pressure, surface tension, and bulk modulus.}
 \usage{
 dvisc(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
 
@@ -16,6 +18,10 @@ dens(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
 kvisc(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
 
 svp(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
+
+surf_tension(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
+
+Ev(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
 }
 \arguments{
 \item{T}{the water temperature [\eqn{^{\circ}C}{C} or \eqn{^{\circ}F}{F}]}
@@ -39,6 +45,12 @@ nu, the kinematic viscosity of water for the
 
 svp, the saturation vapor pressure of water for the
   svp function [\eqn{N m^{-2}}{N/m^2} or \eqn{lbf ft^{-2}}{lbf/ft^2}].
+
+surf_tension, the surface tension of water for the
+  surf_tension function [\eqn{N m^{-1}}{N/m} or \eqn{lbf ft^{-1}}{lbf/ft}].
+
+Ev, the bulk modulus of elasticity of water for the
+  Ev function [\eqn{N m^{-2}}{N/m^2} or \eqn{lbf ft^{-2}}{lbf/ft^2}].
 }
 \description{
 This function calculates water properties that are used in other functions.
@@ -56,6 +68,9 @@ rho = dens(T = 25, units = 'SI')
 
 #Find saturation vapor pressure for water temperature of 10 C
 vps = svp(T = 10, units = 'SI')
+
+#Find surface tension for water temperature of 10 C
+s_tens = surf_tension(T = 10, units = 'SI')
 
 }
 \author{

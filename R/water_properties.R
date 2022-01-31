@@ -282,7 +282,7 @@ Ev <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
   x <- c(0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100)
   y <- c(2.02,2.06,2.1,2.14,2.18,2.22,2.25,2.28,2.29,2.28,2.25,2.20,2.14,2.07)
   #because bulk modulus is slowly varying, linear interpolation works fine
-  Ev <- approx(x,y,T)$y * 10^9   #result in N/m2
+  Ev <- stats::approx(x,y,T)$y * 10^9   #result in N/m2
 
   if (units == "Eng") {
     # for Eng units, convert from N/m2 to lbf/ft2
