@@ -1,5 +1,5 @@
 #' Functions to calculate water properties: density, dynamic and kinematic 
-#' viscosity, and saturation vapor pressure
+#' viscosity, saturation vapor pressure, surface tension, and bulk modulus.
 #'
 #' This function calculates water properties that are used in other functions.
 #'
@@ -18,9 +18,15 @@
 #'
 #' @return nu, the kinematic viscosity of water for the
 #'   kvisc function [\eqn{m^2 s^{-1}}{m^2/s} or \eqn{ft^2 s^{-1}}{ft^2/s}].
-
+#'
 #' @return svp, the saturation vapor pressure of water for the
 #'   svp function [\eqn{N m^{-2}}{N/m^2} or \eqn{lbf ft^{-2}}{lbf/ft^2}].
+#'
+#' @return surf_tension, the surface tension of water for the
+#'   surf_tension function [\eqn{N m^{-1}}{N/m} or \eqn{lbf ft^{-1}}{lbf/ft}].
+#'
+#' @return Ev, the bulk modulus of elasticity of water for the
+#'   Ev function [\eqn{N m^{-2}}{N/m^2} or \eqn{lbf ft^{-2}}{lbf/ft^2}].
 #'
 #' @author Ed Maurer
 #'
@@ -37,6 +43,9 @@
 #' 
 #' #Find saturation vapor pressure for water temperature of 10 C
 #' vps = svp(T = 10, units = 'SI')
+#'
+#' #Find surface tension for water temperature of 10 C
+#' s_tens = surf_tension(T = 10, units = 'SI')
 #'
 #' @name waterprops
 NULL
@@ -201,4 +210,87 @@ svp <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
     if (units == "SI") svp <- units::set_units(svp,"Pa")
   }
   return(svp)
+}
+#' @export
+#' @rdname waterprops
+surf_tension <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
+  # check to make sure that T is given
+  if( class(T) == "units" ) T <- units::drop_units(T)
+  checks <- c(T)
+  units <- units
+  if (length(checks) < 1) {
+    if (units == "SI") {
+      message("\nTemperature not given.\nAssuming T = 20 C\n")
+      T = 20
+    } else if (units == "Eng") {
+      message("\nTemperature not given.\nAssuming T = 68 F\n")
+      T = 68
+    } else if (all(c("SI", "Eng") %in% units == FALSE) == FALSE) {
+      stop("Incorrect unit system. Specify either SI or Eng.")
+    }
+  }
+  if (units == "Eng") {
+    # convert units if necessary
+    T = (T - 32) * 5/9
+  }
+  if (min(T) < 0 | max(T) > 100) {
+    stop("\nTemperature outside range for liquid water.\n")
+  }
+  #Use approximation from Vargaftic, Volkov & Voljak, International Tables of
+  #the Surface Tension of Water, J. Phys. Chemn. Ref. Data 12(3), 1983.
+  TC <- 647.15
+  surf_tension <- 235.8e-3 * ((TC-(T+273.15))/TC)^1.256*(1-0.625*(TC-(T+273.15))/TC)
+  #results in N/m  
+  if (units == "Eng") {
+    # for Eng units, convert from N/m to lbf/ft
+    surf_tension <- surf_tension * 0.06852176
+  }
+  if( ret_units ) {
+    if (units == "Eng") surf_tension <- units::set_units(surf_tension,"lbf/ft")
+    if (units == "SI") surf_tension <- units::set_units(surf_tension,"N/m")
+  }
+  return(surf_tension)
+}
+#' @export
+#' @rdname waterprops
+Ev <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
+  # check to make sure that T is given
+  if( class(T) == "units" ) T <- units::drop_units(T)
+  checks <- c(T)
+  units <- units
+  if (length(checks) < 1) {
+    if (units == "SI") {
+      message("\nTemperature not given.\nAssuming T = 20 C\n")
+      T = 20
+    } else if (units == "Eng") {
+      message("\nTemperature not given.\nAssuming T = 68 F\n")
+      T = 68
+    } else if (all(c("SI", "Eng") %in% units == FALSE) == FALSE) {
+      stop("Incorrect unit system. Specify either SI or Eng.")
+    }
+  }
+  if (units == "Eng") {
+    # convert units if necessary
+    T = (T - 32) * 5/9
+  }
+  if (min(T) < 0 | max(T) > 100) {
+    stop("\nTemperature outside range for liquid water.\n")
+  }
+  #Bulk Modulus of Elasticity at sea-level atmospheric pressure from 
+  #Finnemore and Franzini, Fluid Mechanics with Engineering Applications, 
+  #10th edition.
+  x <- c(0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100)
+  y <- c(2.02,2.06,2.1,2.14,2.18,2.22,2.25,2.28,2.29,2.28,2.25,2.20,2.14,2.07)
+  #because bulk modulus is slowly varying, linear interpolation works fine
+  Ev <- approx(x,y,T)$y * 10^9   #result in N/m2
+
+  if (units == "Eng") {
+    # for Eng units, convert from N/m2 to lbf/ft2
+    Ev <- Ev * 0.020885
+  }
+  if( ret_units ) {
+    if (units == "Eng") Ev <- units::set_units(Ev,"lbf/ft^2")
+    if (units == "SI") Ev <- units::set_units(Ev,"Pa")
+  }
+  return(Ev)
 }
