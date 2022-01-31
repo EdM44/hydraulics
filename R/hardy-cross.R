@@ -40,7 +40,7 @@
 #'
 #' @return Returns a list of two data frames:
 #' \itemize{
-#'   \item dfloops - the final flow magnitude and direction (clockwise positive) for each loops and pipe
+#'   \item dfloops - the final flow magnitude and direction (clockwise positive) for each loop and pipe
 #'   \item dfpipes - the input pipe data frame, with additional columns including final Q
 #' }
 #'
@@ -74,8 +74,8 @@
 #' ID = c(1,2,3,4,5),                     #pipe ID
 #' r = c(200,2500,500,800,300)            #resistance used in hf=rQ^2
 #' )
-#' loops <- list(c(1,2,3),c(4,2,5))
-#' Qs <- list(c(0.3,0.1,-0.2),c(0.2,-0.1,-0.3))
+#' loops <- list(c(1,2,3),c(2,4,5))
+#' Qs <- list(c(0.3,0.1,-0.2),c(-0.1,0.2,-0.3))
 #' hardycross(dfpipes = dfpipes, loops = loops, Qs = Qs, n_iter = 1, units = "SI")
 #'
 #' @seealso \code{\link{colebrook}}, \code{\link{darcyweisbach}}

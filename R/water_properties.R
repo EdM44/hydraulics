@@ -20,7 +20,7 @@
 #'   kvisc function [\eqn{m^2 s^{-1}}{m^2/s} or \eqn{ft^2 s^{-1}}{ft^2/s}].
 
 #' @return svp, the saturation vapor pressure of water for the
-#'   svp function [\eqn{N/m^2}{N/m^2} or \eqn{lbf/ft^2}{lbf/ft^2}].
+#'   svp function [\eqn{N m^{-2}}{N/m^2} or \eqn{lbf ft^{-2}}{lbf/ft^2}].
 #'
 #' @author Ed Maurer
 #'

@@ -3,7 +3,7 @@
 \name{pumpcurve}
 \alias{pumpcurve}
 \title{Fits a polynomial curve to three or more points from a pump characteristic
-curve. This allows solving for an operating point of the pump in a 
+curve to be used in solving for an operating point of the pump in a 
 piping system.}
 \usage{
 pumpcurve(Q = NULL, h = NULL, eq = "poly1", units = c("SI", "Eng"))
@@ -30,7 +30,9 @@ Returns an object of class \code{pumpcurve} consisting of a list including:
 }
 }
 \description{
-A portion of this is based on
+Fits a polynomial curve to three or more points from a pump characteristic
+curve. This allows solving for an operating point of the pump in a 
+piping system. A portion of this is based on
 https://github.com/PhDMeiwp/basicTrendline/blob/master/R/trendline.R
 }
 \details{

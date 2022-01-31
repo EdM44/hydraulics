@@ -312,7 +312,6 @@ pcurve$p
 ```
 
 The two curves can be combined to find the operating point of the selected pump in the defined system.
-operpoint <- function (pcurve = NULL, scurve = NULL)
 ```{r pump-8, message=FALSE}
 oppt <- operpoint(pcurve = pcurve, scurve = scurve)
 cat(sprintf("Operating Point: Q = %.3f, h = %.3f\n", oppt$Qop, oppt$hop))

@@ -38,7 +38,7 @@ nu, the kinematic viscosity of water for the
   kvisc function [\eqn{m^2 s^{-1}}{m^2/s} or \eqn{ft^2 s^{-1}}{ft^2/s}].
 
 svp, the saturation vapor pressure of water for the
-  svp function [\eqn{N/m^2}{N/m^2} or \eqn{lbf/ft^2}{lbf/ft^2}].
+  svp function [\eqn{N m^{-2}}{N/m^2} or \eqn{lbf ft^{-2}}{lbf/ft^2}].
 }
 \description{
 This function calculates water properties that are used in other functions.

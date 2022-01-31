@@ -1,8 +1,10 @@
 #' Fits a polynomial curve to three or more points from a pump characteristic
-#' curve. This allows solving for an operating point of the pump in a 
+#' curve to be used in solving for an operating point of the pump in a 
 #' piping system.
 #' 
-#' A portion of this is based on
+#' Fits a polynomial curve to three or more points from a pump characteristic
+#' curve. This allows solving for an operating point of the pump in a 
+#' piping system. A portion of this is based on
 #' https://github.com/PhDMeiwp/basicTrendline/blob/master/R/trendline.R
 #' 
 #' @param Q  Numeric vector of flow rates for selected points on the pump curve [\eqn{m^3 s^{-1}}{m^3/s} or \eqn{ft^3 s^{-1}}{ft^3/s}]
