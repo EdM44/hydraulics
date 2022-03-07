@@ -3,7 +3,7 @@ pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   hydraulics_vignette: hydraulics_vignette.html
-last_built: 2022-03-06T21:02Z
+last_built: 2022-03-07T00:45Z
 urls:
   reference: https://edm44.github.io/hydraulics/reference
   article: https://edm44.github.io/hydraulics/articles
