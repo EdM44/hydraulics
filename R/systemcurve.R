@@ -39,7 +39,7 @@ systemcurve <- function (hs = NULL, K = NULL, units = c("SI", "Eng")) {
   #check if any values have class 'units' and change to numeric if necessary
   for( i  in c("hs", "K") ) {
     v <- get(i)
-    if(class(v) == "units" ) assign(i, units::drop_units(v))
+    if(inherits(v, "units")) assign(i, units::drop_units(v))
   }
   
   if(length(hs) != 1 || length(K) != 1){

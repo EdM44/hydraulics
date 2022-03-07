@@ -68,7 +68,7 @@ reynolds_number <- function(V = NULL, D = NULL, nu = NULL) {
   #check if any values have class 'units' and change to numeric if necessary
   for( i  in c("V", "D", "nu") ) {
     v <- get(i)
-    if(class(v) == "units" ) assign(i, units::drop_units(v))
+    if(inherits(v, "units")) assign(i, units::drop_units(v))
   }
   
   if (length(checks) < 3) {
@@ -93,7 +93,7 @@ colebrook <- function(ks, V, D, nu) {
   #check if any values have class 'units' and change to numeric if necessary
   for( i  in c("ks", "V", "D", "nu") ) {
     v <- get(i)
-    if(class(v) == "units" ) assign(i, units::drop_units(v))
+    if(inherits(v, "units")) assign(i, units::drop_units(v))
   }
   
   if (ks/D > 0.06) {

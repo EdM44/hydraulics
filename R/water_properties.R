@@ -54,7 +54,7 @@ NULL
 #' @rdname waterprops
 dvisc <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE ) {
   # check to make sure that T is given
-  if( class(T) == "units" ) T <- units::drop_units(T)
+  if( inherits(T, "units") ) T <- units::drop_units(T)
   checks <- c(T)
   units <- units
   if (length(checks) < 1) {
@@ -99,7 +99,7 @@ dvisc <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE ) {
 #' @rdname waterprops
 dens <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
   # check to make sure that T is given
-  if( class(T) == "units" ) T <- units::drop_units(T)
+  if( inherits(T, "units") ) T <- units::drop_units(T)
   checks <- c(T)
   units <- units
   if (length(checks) < 1) {
@@ -139,7 +139,7 @@ dens <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
 #' @rdname waterprops
 kvisc <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
   # check to make sure that T is given
-  if( class(T) == "units" ) T <- units::drop_units(T)
+  if( inherits(T, "units") ) T <- units::drop_units(T)
   checks <- c(T)
   units <- units
   if (length(checks) < 1) {
@@ -175,7 +175,7 @@ kvisc <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
 #' @rdname waterprops
 svp <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
   # check to make sure that T is given
-  if( class(T) == "units" ) T <- units::drop_units(T)
+  if( inherits(T, "units") ) T <- units::drop_units(T)
   checks <- c(T)
   units <- units
   if (length(checks) < 1) {
@@ -215,7 +215,7 @@ svp <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
 #' @rdname waterprops
 surf_tension <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
   # check to make sure that T is given
-  if( class(T) == "units" ) T <- units::drop_units(T)
+  if( inherits(T, "units") ) T <- units::drop_units(T)
   checks <- c(T)
   units <- units
   if (length(checks) < 1) {
@@ -255,7 +255,7 @@ surf_tension <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
 #' @rdname waterprops
 Ev <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
   # check to make sure that T is given
-  if( class(T) == "units" ) T <- units::drop_units(T)
+  if( inherits(T, "units") ) T <- units::drop_units(T)
   checks <- c(T)
   units <- units
   if (length(checks) < 1) {

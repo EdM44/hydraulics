@@ -125,7 +125,7 @@ manningt <- function (Q = NULL, n = NULL, m = NULL, Sf = NULL, y = NULL, b = NUL
   #check if any values have class 'units' and change to numeric if necessary
   for( i  in c("Q", "n", "m", "Sf", "y", "b") ) {
     v <- get(i)
-    if(class(v) == "units" ) assign(i, units::drop_units(v))
+    if(inherits(v, "units")) assign(i, units::drop_units(v))
   }
   
   #initial check for missing variables and out of bounds

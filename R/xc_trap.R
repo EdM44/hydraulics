@@ -34,9 +34,9 @@ xc_trap <- function(y = NULL, b = NULL, m = NULL, units = c("SI", "Eng")) {
     stop("xc_trap diagram plot requires grid to be installed.",
          call. = FALSE)
   }
-  if( class(b) == "units" ) b <- units::drop_units(b)
-  if( class(y) == "units" ) y <- units::drop_units(y)
-  if( class(m) == "units" ) m <- units::drop_units(m)
+  if( inherits(b, "units") ) b <- units::drop_units(b)
+  if( inherits(y, "units") ) y <- units::drop_units(y)
+  if( inherits(m, "units") ) m <- units::drop_units(m)
 
   B <- b + 2 * ( m * y )
   

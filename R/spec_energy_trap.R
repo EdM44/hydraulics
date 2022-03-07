@@ -58,9 +58,9 @@ spec_energy_trap <- function(Q = NULL, b = NULL, m = NULL, y = NULL, scale = 3,
   if ( ( b == 0 ) & ( m == 0 ) ) {
     stop("m (side slope) and b (bottom width) are zero. Channel has no area")
   }
-  if( class(Q) == "units" ) Q <- units::drop_units(Q)
-  if( class(b) == "units" ) b <- units::drop_units(b)
-  if( class(m) == "units" ) m <- units::drop_units(m)
+  if( inherits(Q, "units")) Q <- units::drop_units(Q)
+  if( inherits(b, "units")) b <- units::drop_units(b)
+  if( inherits(m, "units")) m <- units::drop_units(m)
   
   scalefact <- scale
   units <- units

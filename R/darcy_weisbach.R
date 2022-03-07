@@ -97,7 +97,7 @@ darcyweisbach <- function(Q = NULL, D = NULL, hf = NULL, L = NULL, ks = NULL,
   #check if any values have class 'units' and change to numeric if necessary
   for( i  in c("Q", "D", "hf", "L", "ks", "nu") ) {
     v <- get(i)
-    if(class(v) == "units" ) assign(i, units::drop_units(v))
+    if(inherits(v, "units")) assign(i, units::drop_units(v))
   }
   
   if (length(checks) < 4) {

@@ -68,7 +68,7 @@ pumpcurve <- function (Q = NULL, h = NULL, eq = "poly1", units = c("SI", "Eng"))
   #check if any values have class 'units' and change to numeric if necessary
   for( i  in c("Q", "h") ) {
     v <- get(i)
-    if(class(v) == "units" ) assign(i, units::drop_units(v))
+    if(inherits(v, "units")) assign(i, units::drop_units(v))
   }
   
   nQ <- length(Q)

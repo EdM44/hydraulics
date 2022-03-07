@@ -26,8 +26,8 @@ xc_circle <- function(y = NULL, d = NULL, units = c("SI", "Eng")) {
 
   units <- units
   
-  if( class(y) == "units" ) y <- units::drop_units(y)
-  if( class(d) == "units" ) d <- units::drop_units(d)
+  if( inherits(y, "units") ) y <- units::drop_units(y)
+  if( inherits(d, "units") ) d <- units::drop_units(d)
   
   # Check for packages needed to create plot
   if(!requireNamespace("ggplot2", quietly = TRUE)) {

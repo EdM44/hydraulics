@@ -199,7 +199,7 @@ hardycross <- function (dfpipes = dfpipes, loops = loops, Qs = Qs, n_iter = 1,
   #Drop units if they exist
   dfpipes <- units::drop_units(dfpipes)
   for( i  in 1:length(Qs) ) {
-    if(class(Qs[[i]]) == "units" ) assign(Qs[[i]], units::drop_units(Qs[[i]]))
+    if(inherits(Qs[[i]], "units")) assign(Qs[[i]], units::drop_units(Qs[[i]]))
   }
   
   #assign initial flows to dfpipes
