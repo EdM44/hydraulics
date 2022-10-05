@@ -1,5 +1,5 @@
-#' Functions to calculate water properties: density, specific weight, dynamic and 
-#' kinematic viscosity, saturation vapor pressure, surface tension, and bulk modulus.
+#' Functions to calculate water properties: density, dynamic and kinematic 
+#' viscosity, saturation vapor pressure, surface tension, and bulk modulus.
 #'
 #' This function calculates water properties that are used in other functions.
 #'
@@ -12,9 +12,6 @@
 #'
 #' @return rho, the density of water for the
 #'   dens function [\eqn{{kg}\,{m^{-3}}}{kg/m^3} or \eqn{{slug}\,{ft^{-3}}}{slug/ft^3}]
-#'
-#' @return spwt, the specific weight of water for the
-#'   specwt function [\eqn{{N}\,{m^{-3}}}{N/m^3} or \eqn{{lbf}\,{ft^{-3}}}{lbf/ft^3}]
 #'
 #' @return mu, the dynamic viscosity of water for the
 #'   dvisc function [\eqn{{N}\,{s}\,{m^{-2}}}{N s/m^2} or \eqn{{lbf}\,{s}\,{ft^{-2}}}{lbf s/ft^2}]
@@ -129,8 +126,8 @@ dens <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
   rho <- (1000 * (1 - (T + 288.9414) * (T - 3.9863)^2/(508929.2 * (T +
                                                                      68.12963))))
   if (units == "Eng") {
-    # for Eng units, convert from kg m-3 to slug ft-3
-    rho <- rho * 0.062427960841 / 32.2
+    # for Eng units, convert from kg m-3 to lbf ft-3
+    rho <- rho * 0.062427960841
   }
   if( ret_units ) {
     if (units == "Eng") rho <- units::set_units(rho,"slug/ft^3")
@@ -138,49 +135,6 @@ dens <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
   }
   return(rho)
 }
-
-#' @export
-#' @rdname waterprops
-specwt <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
-  # check to make sure that T is given
-  if( inherits(T, "units") ) T <- units::drop_units(T)
-  checks <- c(T)
-  units <- units
-  if (length(checks) < 1) {
-    if (units == "SI") {
-      message("\nTemperature not given.\nAssuming T = 20 C\n")
-      T = 20
-    } else if (units == "Eng") {
-      message("\nTemperature not given.\nAssuming T = 68 F\n")
-      T = 68
-    } else if (all(c("SI", "Eng") %in% units == FALSE) == FALSE) {
-      stop("Incorrect unit system. Specify either SI or Eng.")
-    }
-  }
-  if (units == "Eng") {
-    # convert F to C if necessary
-    T = (T - 32) * 5/9
-  }
-  if (min(T) < 0 | max(T) > 100) {
-    stop("\nTemperature outside range for liquid water.\n")
-  }
-  # fresh water density - taken from water.density.R in rLakeAnalyzer
-  # from Martin, J.L., McCutcheon, S.C., 1999. Hydrodynamics and
-  # Transport for Water Quality Modeling.
-  rho <- (1000 * (1 - (T + 288.9414) * (T - 3.9863)^2/(508929.2 * (T +
-                                                                     68.12963))))
-  spwt <- rho * 9.81
-  if (units == "Eng") {
-    # for Eng units, convert to lbf ft-3
-    spwt <- rho * 0.062427960841
-  }
-  if( ret_units ) {
-    if (units == "Eng") spwt <- units::set_units(spwt,"lbf/ft^3")
-    if (units == "SI") spwt <- units::set_units(spwt,"N/m^3")
-  }
-  return(spwt)
-}
-
 #' @export
 #' @rdname waterprops
 kvisc <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {

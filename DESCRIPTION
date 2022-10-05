@@ -1,7 +1,7 @@
 Package: hydraulics
 Type: Package
 Title: Basic Pipe and Open Channel Hydraulics
-Version: 0.4.1
+Version: 0.5.0
 Author: Ed Maurer [aut, cre], Irucka Embry [aut, ctb] (iemisc code)
 Maintainer: Ed Maurer <emaurer@scu.edu>
 Description: Functions for basic hydraulic calculations related to 
@@ -31,6 +31,7 @@ Imports:
     gtools,
     reshape2,
     stats,
+    tibble,
     units
 Suggests:
     knitr,

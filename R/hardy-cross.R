@@ -26,7 +26,7 @@
 #'   
 #'   The number of iterations to perform may be specified with the n_iter input
 #'   value, but execution stops if the average flow adjustment becomes smaller 
-#'   than 1% of the average flow in all pipes.
+#'   than 1 percent of the average flow in all pipes.
 #'
 #' @param dfpipes data frame with the pipe data. Format is described above, but must contain a column named _ID_.
 #' @param loops integer list defining pipes in each loop of the network.
