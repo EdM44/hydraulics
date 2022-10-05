@@ -3,7 +3,7 @@
 equations for conservation of mass and energy in a water pipe network.
 The input consists of a data frame with the pipe characteristics and lists 
 of the pipes in each loop (listed in a clockwise direction) and the initial
-guesses of flows in each pipe (positive flows are in a clockwise direction)."><title>Applies the Hardy-Cross method to solve for pipe flows in a network. — hardycross • hydraulics</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Applies the Hardy-Cross method to solve for pipe flows in a network. — hardycross"><meta property="og:description" content="This function uses the Hardy-Cross method to iteratively solve the
+guesses of flows in each pipe (positive flows are in a clockwise direction)."><title>Applies the Hardy-Cross method to solve for pipe flows in a network. — hardycross • hydraulics</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Applies the Hardy-Cross method to solve for pipe flows in a network. — hardycross"><meta property="og:description" content="This function uses the Hardy-Cross method to iteratively solve the
 equations for conservation of mass and energy in a water pipe network.
 The input consists of a data frame with the pipe characteristics and lists 
 of the pipes in each loop (listed in a clockwise direction) and the initial
@@ -18,7 +18,7 @@ guesses of flows in each pipe (positive flows are in a clockwise direction)."><!
     
     <a class="navbar-brand me-2" href="../index.html">hydraulics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,37 +69,50 @@ guesses of flows in each pipe (positive flows are in a clockwise direction).</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">hardycross</span><span class="op">(</span>
-  dfpipes <span class="op">=</span> <span class="va">dfpipes</span>,
-  loops <span class="op">=</span> <span class="va">loops</span>,
-  Qs <span class="op">=</span> <span class="va">Qs</span>,
-  n_iter <span class="op">=</span> <span class="fl">1</span>,
-  units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SI"</span>, <span class="st">"Eng"</span><span class="op">)</span>,
-  ret_units <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">hardycross</span><span class="op">(</span></span>
+<span>  dfpipes <span class="op">=</span> <span class="va">dfpipes</span>,</span>
+<span>  loops <span class="op">=</span> <span class="va">loops</span>,</span>
+<span>  Qs <span class="op">=</span> <span class="va">Qs</span>,</span>
+<span>  n_iter <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SI"</span>, <span class="st">"Eng"</span><span class="op">)</span>,</span>
+<span>  ret_units <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>dfpipes</dt>
 <dd><p>data frame with the pipe data. Format is described above, but must contain a column named _ID_.</p></dd>
+
+
 <dt>loops</dt>
 <dd><p>integer list defining pipes in each loop of the network.</p></dd>
+
+
 <dt>Qs</dt>
 <dd><p>numeric list of initial flows for each pipe in each loop [\(m^3 s^{-1}\) or \(ft^3 s^{-1}\)]</p></dd>
+
+
 <dt>n_iter</dt>
 <dd><p>integer identifying the number of iterations to perform.</p></dd>
+
+
 <dt>units</dt>
 <dd><p>character vector that contains the system of units [options are
 <code>SI</code> for International System of Units and <code>Eng</code> for English (US customary)
 units.</p></dd>
+
+
 <dt>ret_units</dt>
 <dd><p>If set to TRUE the value(s) returned for pipe flows are of 
 class <code>units</code> with units attached to the value. [Default is FALSE]</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>Returns a list of two data frames:</p><ul><li><p>dfloops - the final flow magnitude and direction (clockwise positive) for each loop and pipe</p></li>
+    
+
+<p>Returns a list of two data frames:</p><ul><li><p>dfloops - the final flow magnitude and direction (clockwise positive) for each loop and pipe</p></li>
 <li><p>dfpipes - the input pipe data frame, with additional columns including final Q</p></li>
 </ul></div>
     <div class="section level2">
@@ -134,28 +147,28 @@ to each pipe in loop \(i\) for the next iteration.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co">#              A----------B --&gt; 0.5m^3/s</span></span>
-<span class="r-in"><span class="co">#              |\   (4)   |</span></span>
-<span class="r-in"><span class="co">#              | \        |</span></span>
-<span class="r-in"><span class="co">#              |  \       |</span></span>
-<span class="r-in"><span class="co">#              |   \(2)   |</span></span>
-<span class="r-in"><span class="co">#              |    \     |(5)</span></span>
-<span class="r-in"><span class="co">#              |(1)  \    |</span></span>
-<span class="r-in"><span class="co">#              |      \   |</span></span>
-<span class="r-in"><span class="co">#              |       \  |</span></span>
-<span class="r-in"><span class="co">#              |        \ |</span></span>
-<span class="r-in"><span class="co">#              |   (3)   \|</span></span>
-<span class="r-in"><span class="co"># 0.5m^3/s --&gt; C----------D</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">#Input pipe characteristics data frame. With r given other columns not needed</span></span>
-<span class="r-in"><span class="va">dfpipes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span class="r-in">ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>,                     <span class="co">#pipe ID</span></span>
-<span class="r-in">r <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">200</span>,<span class="fl">2500</span>,<span class="fl">500</span>,<span class="fl">800</span>,<span class="fl">300</span><span class="op">)</span>            <span class="co">#resistance used in hf=rQ^2</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">loops</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">Qs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.3</span>,<span class="fl">0.1</span>,<span class="op">-</span><span class="fl">0.2</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="op">-</span><span class="fl">0.3</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">hardycross</span><span class="op">(</span>dfpipes <span class="op">=</span> <span class="va">dfpipes</span>, loops <span class="op">=</span> <span class="va">loops</span>, Qs <span class="op">=</span> <span class="va">Qs</span>, n_iter <span class="op">=</span> <span class="fl">1</span>, units <span class="op">=</span> <span class="st">"SI"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#              A----------B --&gt; 0.5m^3/s</span></span></span>
+<span class="r-in"><span><span class="co">#              |\   (4)   |</span></span></span>
+<span class="r-in"><span><span class="co">#              | \        |</span></span></span>
+<span class="r-in"><span><span class="co">#              |  \       |</span></span></span>
+<span class="r-in"><span><span class="co">#              |   \(2)   |</span></span></span>
+<span class="r-in"><span><span class="co">#              |    \     |(5)</span></span></span>
+<span class="r-in"><span><span class="co">#              |(1)  \    |</span></span></span>
+<span class="r-in"><span><span class="co">#              |      \   |</span></span></span>
+<span class="r-in"><span><span class="co">#              |       \  |</span></span></span>
+<span class="r-in"><span><span class="co">#              |        \ |</span></span></span>
+<span class="r-in"><span><span class="co">#              |   (3)   \|</span></span></span>
+<span class="r-in"><span><span class="co"># 0.5m^3/s --&gt; C----------D</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#Input pipe characteristics data frame. With r given other columns not needed</span></span></span>
+<span class="r-in"><span><span class="va">dfpipes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>,                     <span class="co">#pipe ID</span></span></span>
+<span class="r-in"><span>r <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">200</span>,<span class="fl">2500</span>,<span class="fl">500</span>,<span class="fl">800</span>,<span class="fl">300</span><span class="op">)</span>            <span class="co">#resistance used in hf=rQ^2</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">loops</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">Qs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.3</span>,<span class="fl">0.1</span>,<span class="op">-</span><span class="fl">0.2</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="op">-</span><span class="fl">0.3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">hardycross</span><span class="op">(</span>dfpipes <span class="op">=</span> <span class="va">dfpipes</span>, loops <span class="op">=</span> <span class="va">loops</span>, Qs <span class="op">=</span> <span class="va">Qs</span>, n_iter <span class="op">=</span> <span class="fl">1</span>, units <span class="op">=</span> <span class="st">"SI"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using fixed r values</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Iteration: 1, Loop: 1, dQ: -0.02805</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Iteration: 1, Loop: 2, dQ: 0.02000</span>
@@ -176,7 +189,7 @@ to each pipe in loop \(i\) for the next iteration.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4  4  800  0.22000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5  5  300 -0.28000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -188,7 +201,7 @@ to each pipe in loop \(i\) for the next iteration.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer></div>
