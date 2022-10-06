@@ -34,8 +34,8 @@ water_table <- function(units = c("SI", "Eng"), ret_units = TRUE ) {
     Temperature = temps,
     Density = dens(T = temps, units = units, ret_units = ret_units),
     Spec_Weight = specwt(T = temps, units = units, ret_units = ret_units),
-    dvisc(T = temps, units = units, ret_units = ret_units),
-    kvisc(T = temps, units = units, ret_units = ret_units),
+    Viscosity = dvisc(T = temps, units = units, ret_units = ret_units),
+    Kinem_Visc = kvisc(T = temps, units = units, ret_units = ret_units),
     Sat_VP = svp(T = temps, units = units, ret_units = ret_units),
     Surf_Tens = surf_tension(T = temps, units = units, ret_units = ret_units),
     Bulk_Mod = Ev(T = temps, units = units, ret_units = ret_units)
