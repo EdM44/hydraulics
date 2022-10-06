@@ -19,6 +19,12 @@
     <loc>https://edm44.github.io/hydraulics/news/index.html</loc>
   </url>
   <url>
+    <loc>https://edm44.github.io/hydraulics/reference/atmos_table.html</loc>
+  </url>
+  <url>
+    <loc>https://edm44.github.io/hydraulics/reference/atmosprops.html</loc>
+  </url>
+  <url>
     <loc>https://edm44.github.io/hydraulics/reference/colebrook.html</loc>
   </url>
   <url>
@@ -50,6 +56,9 @@
   </url>
   <url>
     <loc>https://edm44.github.io/hydraulics/reference/systemcurve.html</loc>
+  </url>
+  <url>
+    <loc>https://edm44.github.io/hydraulics/reference/water_table.html</loc>
   </url>
   <url>
     <loc>https://edm44.github.io/hydraulics/reference/waterprops.html</loc>
