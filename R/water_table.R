@@ -10,6 +10,8 @@
 #'
 #' @examples
 #'
+#' water_table(units = 'SI')
+#'
 #' @import tibble
 #'
 #' @name water_table
@@ -20,10 +22,10 @@ water_table <- function(units = c("SI", "Eng"), ret_units = TRUE ) {
   units <- units
   if (units == "SI") {
     temps <- seq(from=0, to=100, by=5)
-    temps <- units::set_units(temps,C)
+    temps <- units::set_units(temps,"C")
   } else if (units == "Eng") {
     temps <- seq(from=32, to=212, by=10)
-    temps <- units::set_units(temps,F)
+    temps <- units::set_units(temps,"F")
   } else if (all(c("SI", "Eng") %in% units == FALSE) == FALSE) {
     stop("Incorrect unit system. Specify either SI or Eng.")
   }

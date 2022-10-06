@@ -64,7 +64,7 @@ input column of the pipe roughness data frame:
   
   The number of iterations to perform may be specified with the n_iter input
   value, but execution stops if the average flow adjustment becomes smaller 
-  than 1% of the average flow in all pipes.
+  than 1 percent of the average flow in all pipes.
 
 The Darcy-Weisbach equation is used to estimate the head loss in each
 pipe segment, expressed in a condensed form as \eqn{h_f = rQ^{2}}

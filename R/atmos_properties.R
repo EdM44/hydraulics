@@ -25,7 +25,7 @@
 #' atmtemp(alt = 8000, units = 'SI')
 #'
 #' #Find standard atmospheric pressure assuming default altitude of zero (sea-level)
-#' atmpres(units = 'Eng')
+#' atmpres(units = 'Eng', ret_units = TRUE)
 #'
 #' #Find standard atmospheric density at altitude 15000 ft 
 #' atmdens(alt = 15000, units = 'Eng')
@@ -35,7 +35,10 @@ NULL
 # 
 
 #function to perform calculations based on altitude
-atmos <- function(alt = NULL) {
+atmos <- function(alt = NULL, v = NULL) {
+  if (! v %in% c('dens','pres','temp')) {
+    stop("\nIncorrect variable name in atmos function.\n")
+  }
   if (min(alt) < 0 | max(alt) > 86000) {
     stop("\nAltitude outside range for valid values.\n")
   }
@@ -70,9 +73,9 @@ atmos <- function(alt = NULL) {
   #need to use alt in km here -- h is also in km
   h = (alt/1000)*REARTH/((alt/1000) + REARTH)	# geometric to geopotential altitude
   
-  if (alt/1000 >= htab[length(htab)]) {
+  if (max(alt/1000) >= htab[length(htab)]) {
     i <- length(htab)
-  } else if (alt/1000 <= htab[1]) {
+  } else if (min(alt/1000) <= htab[1]) {
     i <- 1
   } else {
     i <- max(which(htab < h))
@@ -89,7 +92,16 @@ atmos <- function(alt = NULL) {
     delta=ptab[i]*(tbase/tlocal)^(GMR/tgrad)
   }
   sigma = delta/theta
-  return ( atm_dens=sigma*ATMDENS, p_abs=delta*SLP, t_atm=theta+ttab[1]-273.15 )
+  atm_dens=sigma*ATMDENS
+  p_abs=delta*SLP
+  t_atm=theta*ttab[1]-273.15
+  if (v == 'dens') {
+    return(atm_dens)
+  } else if (v == 'pres') {
+    return(p_abs)
+  } else if (v == 'temp') {
+    return(t_atm)
+  }
 }
 
 #' @export
@@ -115,7 +127,7 @@ atmtemp <- function(alt = NULL, units = c("SI", "Eng"), ret_units = FALSE ) {
     alt = alt / 3.28084
   }
   #call atmos function for three parameters and to check input
-  atmtmp() <- atmos(alt = alt)$t_atm
+  atmtmp <- atmos(alt = alt, v = 'temp')
   if (units == "Eng") {
     # for Eng units, convert to F
     atmtmp <- ( atmtmp * 5/9) + 32
@@ -149,7 +161,7 @@ atmpres <- function(alt = NULL, units = c("SI", "Eng"), ret_units = FALSE ) {
     # convert alt from ft to m if necessary
     alt = alt / 3.28084
   }
-  p_atm() <- atmos(alt = alt)$p_abs
+  p_atm <- atmos(alt = alt, v = 'pres')
   if (units == "Eng") {
     # for Eng units, convert kPa to psf
     p_atm <-  p_atm * 20.88543
@@ -188,7 +200,7 @@ atmdens <- function(alt = NULL, units = c("SI", "Eng"), ret_units = FALSE ) {
     # convert alt from ft to m if necessary
     alt = alt / 3.28084
   }
-  dens_atm() <- atmos(alt = alt)$atm_dens
+  dens_atm <- atmos(alt = alt, v = 'dens')
   if (units == "Eng") {
     # for Eng units, convert kg/m^3 to slug/ft^3
     dens_atm <-  dens_atm * 0.062427960841 / 32.2

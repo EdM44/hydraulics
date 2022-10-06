@@ -4,16 +4,19 @@
 \alias{waterprops}
 \alias{dvisc}
 \alias{dens}
+\alias{specwt}
 \alias{kvisc}
 \alias{svp}
 \alias{surf_tension}
 \alias{Ev}
-\title{Functions to calculate water properties: density, dynamic and kinematic 
-viscosity, saturation vapor pressure, surface tension, and bulk modulus.}
+\title{Functions to calculate water properties: density, specific weight, dynamic and 
+kinematic viscosity, saturation vapor pressure, surface tension, and bulk modulus.}
 \usage{
 dvisc(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
 
 dens(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
+
+specwt(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
 
 kvisc(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
 
@@ -36,6 +39,9 @@ units attached to the value. [Default is FALSE]}
 \value{
 rho, the density of water for the
   dens function [\eqn{{kg}\,{m^{-3}}}{kg/m^3} or \eqn{{slug}\,{ft^{-3}}}{slug/ft^3}]
+
+spwt, the specific weight of water for the
+  specwt function [\eqn{{N}\,{m^{-3}}}{N/m^3} or \eqn{{lbf}\,{ft^{-3}}}{lbf/ft^3}]
 
 mu, the dynamic viscosity of water for the
   dvisc function [\eqn{{N}\,{s}\,{m^{-2}}}{N s/m^2} or \eqn{{lbf}\,{s}\,{ft^{-2}}}{lbf s/ft^2}]
