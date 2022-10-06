@@ -1,5 +1,5 @@
-#' Functions to calculate ICAO standard atmospheric properties: density, dynamic and kinematic 
-#' viscosity, saturation vapor pressure, surface tension, and bulk modulus.
+#' Functions to calculate ICAO standard atmospheric properties: temperature, 
+#' density, and pressure.
 #'
 #' @param alt the altitude (above mean sea level). If excluded, sea level is assumed [\eqn{m}{m} or \eqn{ft}{ft}]
 #' @param units character vector that contains the system of units [options are
@@ -21,20 +21,14 @@
 #'
 #' @examples
 #'
-#' #Find kinematic viscocity for water temperature of 55 F
-#' nu = kvisc(T = 55, units = 'Eng')
+#' #Find standard atmospheric temperature at altitude 8000 m
+#' atmtemp(alt = 8000, units = 'SI')
 #'
-#' #Find kinematic viscocity assuming default water temperature of 68 F
-#' nu = kvisc(units = 'Eng')
+#' #Find standard atmospheric pressure assuming default altitude of zero (sea-level)
+#' atmpres(units = 'Eng')
 #'
-#' #Find water density for water temperature of 25 C
-#' rho = dens(T = 25, units = 'SI')
-#' 
-#' #Find saturation vapor pressure for water temperature of 10 C
-#' vps = svp(T = 10, units = 'SI')
-#'
-#' #Find surface tension for water temperature of 10 C
-#' s_tens = surf_tension(T = 10, units = 'SI')
+#' #Find standard atmospheric density at altitude 15000 ft 
+#' atmdens(alt = 15000, units = 'Eng')
 #'
 #' @name atmosprops
 NULL
