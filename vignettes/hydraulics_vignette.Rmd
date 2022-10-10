@@ -31,14 +31,14 @@ The _hydraulics_ package was developed to augment education in basic closed cond
 
 When describing the behavior of water in pipes and channels under turbulent flow conditions there are three water properties used used in calculations, all of which vary with water temperature: density ($\rho$), dynamic viscosity($\mu$), and kinematic viscosity($\nu$), where they are related by $\nu=\frac{\mu}{\rho}$. An additional function exists for saturated vapor pressure of water.
 
-These properties are found using the _dens_, _dvisc_, _kvisc_, and _svp_ functions. For example, the kinematic viscosity for water temperature of 55 F is found as follows:
+These properties are found using the _dens_, _dvisc_, _kvisc_, and _svp_ functions. For example, the kinematic viscosity for water temperature of 55 $^\circ$F is found as follows:
 
 ```{r waterprops-1}
 nu = kvisc(T = 55, units = 'Eng')
 cat(sprintf("Kinematic viscosity: %.3e ft2/s\n", nu))
 ```
 
-Similarly the water density for water temperature of 25 C can be determined by:
+Similarly the water density for water temperature of 25 $^\circ$C can be determined by:
 ```{r waterprops-2}
 rho = dens(T = 25, units = 'SI')
 cat(sprintf("Water density: %.3f kg/m3\n", rho))
@@ -54,7 +54,7 @@ par(cex=0.8, mgp = c(2,0.7,0))
 plot(Ts, nus, xlab = xlbl, ylab = ylbl, type="l")
 ```
 
-The water property functions can also be called with the _ret_units_ parameter, in which case the function returns an object of class _units_. This enables capabilities for new units being deduced as operations are performed on the values. A concise example of this is in a [blog post by Edzer Pebesma](https://r-spatial.org/r/2016/09/29/plot_units.html), the author of the `units` package.
+The water property functions can also be called with the _ret_units_ parameter, in which case the function returns an object of class _units_, as designated by the package `units`. This enables capabilities for new units being deduced as operations are performed on the values. Concise examples are in the [vignettes for the 'units' package](https://cran.r-project.org/web/packages/units/).
 
 ```{r waterprops-4}
 T <- 25
@@ -72,7 +72,7 @@ units::set_units(Kvisc, m^2/s)
 units::set_units(Kvisc, ft^2/s)
 ```
 
-An example finding the saturated vapor pressure to water at $10^{o}C$ follows.
+An example finding the saturated vapor pressure to water at 10 $^\circ$C follows.
 ```{r waterprops-6}
 vps <- svp(T = 10, units = "SI", ret_units = T)
 vps
@@ -89,6 +89,40 @@ Temperature <- units::set_units(seq(0, 100, 10), degree_Celsius)
 Kinematic_Viscosity <- kvisc(T = Temperature, units = 'SI', ret_units = TRUE)
 par(cex=0.8, mar = par("mar") + c(0, .2, 0, 0))
 plot(Temperature, Kinematic_Viscosity, type="l")
+```
+
+Sometimes it is useful to have a table containing water properties organized by temperature. The 'hydraulics' package includes a _water_table_ function to generate a table in either _SI_ or _Eng_ units.
+
+```{r waterprops-table}
+tbl <- water_table(units = "SI")
+tbl
+```
+
+The table can be reformatted to something more attractive using the _kableExtra_ and _docxtools_ packages.
+```{r waterprops-table2}
+unitlist <- sapply(unname(tbl),units::deparse_unit)
+colnames <- names(tbl)
+tbl <- docxtools::format_engr(units::drop_units(tbl), sigdig = c(0, 4, 4, 4, 4, 4, 3, 3))
+tbl2 <- knitr::kable(tbl, col.names = unitlist, align = "c", format = "html")
+kableExtra::add_header_above(tbl2, header = colnames, line = F, align = "c")
+```
+
+While the _hydraulics_ package is focused on water, properties of the atmosphere are important for characterizing the interaction of water with air. The is particularly important for phenomena such as evaporation and condensation. Selected characteristics of the standard atmosphere, as determined by the International Civil Aviation Organization (ICAO), are included in the package. Three functions return different properties of the standard atmosphere:
+```{r waterprops-atmtable1, echo=FALSE}
+knitr::kable(data.frame(Function=c("atmtemp","atmpres","atmdens"), Returns=c("Atmospheric Temperature","Pressure","Density")), format="pipe", padding=0)
+```
+
+All atmospheric functions have input arguments of altitude (_ft_ or _m_), unit system (_SI_ or _Eng_), and whether or not units should be returned. 
+
+```{r waterprops-atmtable2}
+atmpres(alt = 3000, units = "SI", ret_units = TRUE)
+```
+
+Similar to the water properties table, a summary of the standard atmosphere can be obtained with the function _atmos_table_.
+
+```{r waterprops-atmtable3}
+tbl <- atmos_table(units = "SI")
+tbl
 ```
 
 ## 2.0 Fundamental constants
@@ -143,7 +177,7 @@ ans <- darcyweisbach(Q = Q, hf = hf, L = L, ks = ks, nu = kvisc(T=T, units='Eng'
 cat(sprintf("Reynolds no: %.0f\nFriction Fact: %.4f\nDiameter: %.2f ft\n", ans$Re, ans$f, ans$D))
 ```
 
-The usefulness of an R package is not so much for individual calculations, but repeated trials to see how one variable might vary with another. For example, it might be interesting to see how the required diameter varies with changing flow rate. The following example illustrates the calculation of diameters required to meet the specified head loss for flows varying from 30 - 45 ft^3/s.
+The usefulness of an R package is not so much for individual calculations, but repeated trials to see how one variable might vary with another. For example, it might be interesting to see how the required diameter varies with changing flow rate. The following example illustrates the calculation of diameters required to meet the specified head loss for flows varying from 30 - 45 ft$^3$/s.
 ```{r pipe-4, message=FALSE, out.width="50%"}
 Qs <- seq(30, 45, 1.0)    #flows in ft^3/s
 L <- 8000                 #pipe length in ft

@@ -1,8 +1,8 @@
-##Submission of revised version: v 0.4.1 - March 6, 2022
+##Submission of revised version: v 0.5 - October 10, 2022
 
-* New version includes new functions for pipe network analysis
+* New version includes functions for atmospheric properties and corrects a bug
 
-* Results from macOS Monterey 12.0.1 check:
+* Results from macOS Monterey 12.4 check:
 
   + ── R CMD check results ───────────── hydraulics 0.4.1 ────
   +  Duration: 1m 1.8s

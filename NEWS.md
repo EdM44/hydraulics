@@ -1,10 +1,18 @@
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
+## hydraulics 0.5.0
+
+-   Added functions for specific weight, atmospheric properties, and
+    summary tables
+-   Corrected dens function that incorrectly returned specific weight
+    with Eng units
+-   Updated the vignette to show new functions
+
 ## hydraulics 0.4.1
 
 -   Added functions for surface tension and bulk modulus of elasticity
 -   Corrected typos
--   Updated the vignette to demonstrate the new functions
+-   Updated the vignette
 
 ## hydraulics 0.4.0
 

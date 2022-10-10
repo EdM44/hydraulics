@@ -34,7 +34,9 @@ Imports:
     tibble,
     units
 Suggests:
+    docxtools,
+    kableExtra,
     knitr,
     rmarkdown
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 VignetteBuilder: knitr, rmarkdown
