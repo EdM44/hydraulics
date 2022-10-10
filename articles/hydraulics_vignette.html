@@ -68,12 +68,13 @@
 
 
 
-<script src="hydraulics_vignette_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+<script src="hydraulics_vignette_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="hydraulics_vignette_files/kePrint-0.0.1/kePrint.js"></script><link href="hydraulics_vignette_files/lightable-0.0.1/lightable.css" rel="stylesheet">
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Hydraulics Vignette</h1>
                         <h4 data-toc-skip class="author">Ed Maurer</h4>
             
-            <h4 data-toc-skip class="date">2022-10-06</h4>
+            <h4 data-toc-skip class="date">2022-10-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/EdM44/hydraulics/blob/HEAD/vignettes/hydraulics_vignette.Rmd" class="external-link"><code>vignettes/hydraulics_vignette.Rmd</code></a></small>
       <div class="d-none name"><code>hydraulics_vignette.Rmd</code></div>
@@ -91,12 +92,12 @@
 <h3 id="water-properties">1.0 Water properties<a class="anchor" aria-label="anchor" href="#water-properties"></a>
 </h3>
 <p>When describing the behavior of water in pipes and channels under turbulent flow conditions there are three water properties used used in calculations, all of which vary with water temperature: density (<span class="math inline">\(\rho\)</span>), dynamic viscosity(<span class="math inline">\(\mu\)</span>), and kinematic viscosity(<span class="math inline">\(\nu\)</span>), where they are related by <span class="math inline">\(\nu=\frac{\mu}{\rho}\)</span>. An additional function exists for saturated vapor pressure of water.</p>
-<p>These properties are found using the <em>dens</em>, <em>dvisc</em>, <em>kvisc</em>, and <em>svp</em> functions. For example, the kinematic viscosity for water temperature of 55 F is found as follows:</p>
+<p>These properties are found using the <em>dens</em>, <em>dvisc</em>, <em>kvisc</em>, and <em>svp</em> functions. For example, the kinematic viscosity for water temperature of 55 <span class="math inline">\(^\circ\)</span>F is found as follows:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nu</span> <span class="op">=</span> <span class="fu"><a href="../reference/waterprops.html">kvisc</a></span><span class="op">(</span>T <span class="op">=</span> <span class="fl">55</span>, units <span class="op">=</span> <span class="st">'Eng'</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Kinematic viscosity: %.3e ft2/s\n"</span>, <span class="va">nu</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Kinematic viscosity: 1.318e-05 ft2/s</span></span></code></pre></div>
-<p>Similarly the water density for water temperature of 25 C can be determined by:</p>
+<p>Similarly the water density for water temperature of 25 <span class="math inline">\(^\circ\)</span>C can be determined by:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rho</span> <span class="op">=</span> <span class="fu"><a href="../reference/waterprops.html">dens</a></span><span class="op">(</span>T <span class="op">=</span> <span class="fl">25</span>, units <span class="op">=</span> <span class="st">'SI'</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Water density: %.3f kg/m3\n"</span>, <span class="va">rho</span><span class="op">)</span><span class="op">)</span></span>
@@ -110,7 +111,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>cex<span class="op">=</span><span class="fl">0.8</span>, mgp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0.7</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">Ts</span>, <span class="va">nus</span>, xlab <span class="op">=</span> <span class="va">xlbl</span>, ylab <span class="op">=</span> <span class="va">ylbl</span>, type<span class="op">=</span><span class="st">"l"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="hydraulics_vignette_files/figure-html/waterprops-3-1.png" width="50%"></p>
-<p>The water property functions can also be called with the <em>ret_units</em> parameter, in which case the function returns an object of class <em>units</em>. This enables capabilities for new units being deduced as operations are performed on the values. A concise example of this is in a <a href="https://r-spatial.org/r/2016/09/29/plot_units.html" class="external-link">blog post by Edzer Pebesma</a>, the author of the <code>units</code> package.</p>
+<p>The water property functions can also be called with the <em>ret_units</em> parameter, in which case the function returns an object of class <em>units</em>, as designated by the package <code>units</code>. This enables capabilities for new units being deduced as operations are performed on the values. Concise examples are in the <a href="https://cran.r-project.org/web/packages/units/" class="external-link">vignettes for the ‘units’ package</a>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="cn">T</span> <span class="op">&lt;-</span> <span class="fl">25</span></span>
 <span><span class="va">Dens</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/waterprops.html">dens</a></span><span class="op">(</span>T <span class="op">=</span> <span class="cn">T</span>, units <span class="op">=</span> <span class="st">'SI'</span>, ret_units <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -125,7 +126,7 @@
 <span><span class="co">#&gt; 9.134879e-07 [m^2/s]</span></span>
 <span><span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/units.html" class="external-link">set_units</a></span><span class="op">(</span><span class="va">Kvisc</span>, <span class="va">ft</span><span class="op">^</span><span class="fl">2</span><span class="op">/</span><span class="va">s</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 9.832702e-06 [ft^2/s]</span></span></code></pre></div>
-<p>An example finding the saturated vapor pressure to water at <span class="math inline">\(10^{o}C\)</span> follows.</p>
+<p>An example finding the saturated vapor pressure to water at 10 <span class="math inline">\(^\circ\)</span>C follows.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/waterprops.html">svp</a></span><span class="op">(</span>T <span class="op">=</span> <span class="fl">10</span>, units <span class="op">=</span> <span class="st">"SI"</span>, ret_units <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span><span class="va">vps</span></span>
@@ -141,6 +142,699 @@
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>cex<span class="op">=</span><span class="fl">0.8</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="st">"mar"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">.2</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">Temperature</span>, <span class="va">Kinematic_Viscosity</span>, type<span class="op">=</span><span class="st">"l"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="hydraulics_vignette_files/figure-html/waterprops-7-1.png" width="50%"></p>
+<p>Sometimes it is useful to have a table containing water properties organized by temperature. The ‘hydraulics’ package includes a <em>water_table</em> function to generate a table in either <em>SI</em> or <em>Eng</em> units.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/water_table.html">water_table</a></span><span class="op">(</span>units <span class="op">=</span> <span class="st">"SI"</span><span class="op">)</span></span>
+<span><span class="va">tbl</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 21 × 8</span></span></span>
+<span><span class="co">#&gt;    Temperature  Density Spec_Weight Viscosity  Kinem_Visc Sat_VP Surf_…¹ Bulk_…²</span></span>
+<span><span class="co">#&gt;            <span style="color: #949494;">[C]</span> <span style="color: #949494;">[kg/m^3]</span>     <span style="color: #949494;">[N/m^3]</span> <span style="color: #949494;">[N*s/m^2]</span>     <span style="color: #949494;">[m^2/s]</span>   <span style="color: #949494;">[Pa]</span>   <span style="color: #949494;">[N/m]</span>    <span style="color: #949494;">[Pa]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>           0    <span style="text-decoration: underline;">1</span>000.       <span style="text-decoration: underline;">9</span>809.  0.001<span style="text-decoration: underline;">73</span>  0.000<span style="text-decoration: underline;">001</span>73    611.  0.075<span style="text-decoration: underline;">7</span>  2.02<span style="color: #949494;">e</span>9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>           5    <span style="text-decoration: underline;">1</span>000.       <span style="text-decoration: underline;">9</span>810.  0.001<span style="text-decoration: underline;">50</span>  0.000<span style="text-decoration: underline;">001</span>50    873.  0.074<span style="text-decoration: underline;">9</span>  2.06<span style="color: #949494;">e</span>9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>          10    <span style="text-decoration: underline;">1</span>000.       <span style="text-decoration: underline;">9</span>807.  0.001<span style="text-decoration: underline;">31</span>  0.000<span style="text-decoration: underline;">001</span>31   <span style="text-decoration: underline;">1</span>228.  0.074<span style="text-decoration: underline;">2</span>  2.1 <span style="color: #949494;">e</span>9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>          15     999.       <span style="text-decoration: underline;">9</span>801.  0.001<span style="text-decoration: underline;">15</span>  0.000<span style="text-decoration: underline;">001</span>15   <span style="text-decoration: underline;">1</span>706.  0.073<span style="text-decoration: underline;">5</span>  2.14<span style="color: #949494;">e</span>9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>          20     998.       <span style="text-decoration: underline;">9</span>793.  0.001<span style="text-decoration: underline;">02</span>  0.000<span style="text-decoration: underline;">001</span>02   <span style="text-decoration: underline;">2</span>339.  0.072<span style="text-decoration: underline;">7</span>  2.18<span style="color: #949494;">e</span>9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>          25     997.       <span style="text-decoration: underline;">9</span>781.  0.000<span style="text-decoration: underline;">911</span> 0.000<span style="text-decoration: underline;">000</span>913  <span style="text-decoration: underline;">3</span>170.  0.072<span style="text-decoration: underline;">0</span>  2.22<span style="color: #949494;">e</span>9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>          30     996.       <span style="text-decoration: underline;">9</span>768.  0.000<span style="text-decoration: underline;">817</span> 0.000<span style="text-decoration: underline;">000</span>821  <span style="text-decoration: underline;">4</span>247.  0.071<span style="text-decoration: underline;">2</span>  2.25<span style="color: #949494;">e</span>9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>          35     994.       <span style="text-decoration: underline;">9</span>752.  0.000<span style="text-decoration: underline;">738</span> 0.000<span style="text-decoration: underline;">000</span>742  <span style="text-decoration: underline;">5</span>629.  0.070<span style="text-decoration: underline;">4</span>  2.26<span style="color: #949494;">e</span>9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>          40     992.       <span style="text-decoration: underline;">9</span>734.  0.000<span style="text-decoration: underline;">670</span> 0.000<span style="text-decoration: underline;">000</span>675  <span style="text-decoration: underline;">7</span>385.  0.069<span style="text-decoration: underline;">6</span>  2.28<span style="color: #949494;">e</span>9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>          45     990.       <span style="text-decoration: underline;">9</span>714.  0.000<span style="text-decoration: underline;">611</span> 0.000<span style="text-decoration: underline;">000</span>617  <span style="text-decoration: underline;">9</span>595.  0.068<span style="text-decoration: underline;">8</span>  2.28<span style="color: #949494;">e</span>9</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 11 more rows, and abbreviated variable names ¹​Surf_Tens, ²​Bulk_Mod</span></span></span></code></pre></div>
+<p>The table can be reformatted to something more attractive using the <em>kableExtra</em> and <em>docxtools</em> packages.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">unitlist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unname.html" class="external-link">unname</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span>,<span class="fu">units</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/units/man/deparse_unit.html" class="external-link">deparse_unit</a></span><span class="op">)</span></span>
+<span><span class="va">colnames</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span></span>
+<span><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu">docxtools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/docxtools/man/format_engr.html" class="external-link">format_engr</a></span><span class="op">(</span><span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/drop_units.html" class="external-link">drop_units</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span>, sigdig <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">tbl2</span> <span class="op">&lt;-</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">tbl</span>, col.names <span class="op">=</span> <span class="va">unitlist</span>, align <span class="op">=</span> <span class="st">"c"</span>, format <span class="op">=</span> <span class="st">"html"</span><span class="op">)</span></span>
+<span><span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/add_header_above.html" class="external-link">add_header_above</a></span><span class="op">(</span><span class="va">tbl2</span>, header <span class="op">=</span> <span class="va">colnames</span>, line <span class="op">=</span> <span class="cn">F</span>, align <span class="op">=</span> <span class="st">"c"</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead>
+<tr>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="">
+Temperature
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="">
+Density
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="">
+Spec_Weight
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="">
+Viscosity
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="">
+Kinem_Visc
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="">
+Sat_VP
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="">
+Surf_Tens
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="">
+Bulk_Mod
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:center;">
+C
+</th>
+<th style="text-align:center;">
+kg m-3
+</th>
+<th style="text-align:center;">
+N m-3
+</th>
+<th style="text-align:center;">
+N s m-2
+</th>
+<th style="text-align:center;">
+m2 s-1
+</th>
+<th style="text-align:center;">
+Pa
+</th>
+<th style="text-align:center;">
+N m-1
+</th>
+<th style="text-align:center;">
+Pa
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(0\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(999.9\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.809}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({1.734}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({1.734}\times 10^{-6}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(611.2\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({75.7}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.02}\times 10^{9}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(5\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(1000\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.810}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({1.501}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({1.501}\times 10^{-6}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(872.6\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({74.9}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.06}\times 10^{9}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(10\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(999.7\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.807}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({1.310}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({1.311}\times 10^{-6}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({1.228}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({74.2}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.10}\times 10^{9}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(15\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(999.1\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.801}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({1.153}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({1.154}\times 10^{-6}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({1.706}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({73.5}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.14}\times 10^{9}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(20\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(998.2\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.793}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({1.021}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({1.023}\times 10^{-6}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.339}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({72.7}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.18}\times 10^{9}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(25\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(997.1\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.781}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({910.8}\times 10^{-6}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({913.5}\times 10^{-9}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({3.170}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({72.0}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.22}\times 10^{9}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(30\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(995.7\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.768}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({817.4}\times 10^{-6}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({821.0}\times 10^{-9}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({4.247}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({71.2}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.25}\times 10^{9}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(35\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(994.1\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.752}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({738.0}\times 10^{-6}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({742.4}\times 10^{-9}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({5.629}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({70.4}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.26}\times 10^{9}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(40\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(992.2\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.734}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({669.9}\times 10^{-6}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({675.1}\times 10^{-9}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({7.385}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({69.6}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.28}\times 10^{9}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(45\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(990.2\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.714}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({611.2}\times 10^{-6}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({617.3}\times 10^{-9}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.595}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({68.8}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.28}\times 10^{9}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(50\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(988.1\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.693}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({560.5}\times 10^{-6}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({567.2}\times 10^{-9}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({12.35}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({67.9}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.29}\times 10^{9}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(55\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(985.7\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.670}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({516.2}\times 10^{-6}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({523.7}\times 10^{-9}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({15.76}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({67.1}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.28}\times 10^{9}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(60\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(983.2\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.645}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({477.6}\times 10^{-6}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({485.7}\times 10^{-9}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({19.95}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({66.2}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.28}\times 10^{9}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(65\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(980.6\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.619}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({443.5}\times 10^{-6}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({452.3}\times 10^{-9}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({25.04}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({65.4}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.26}\times 10^{9}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(70\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(977.7\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.592}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({413.5}\times 10^{-6}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({422.9}\times 10^{-9}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({31.20}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({64.5}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.25}\times 10^{9}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(75\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(974.8\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.563}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({386.9}\times 10^{-6}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({396.9}\times 10^{-9}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({38.60}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({63.6}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.22}\times 10^{9}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(80\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(971.7\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.533}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({363.1}\times 10^{-6}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({373.7}\times 10^{-9}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({47.42}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({62.7}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.20}\times 10^{9}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(85\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(968.5\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.501}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({341.9}\times 10^{-6}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({353.0}\times 10^{-9}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({57.87}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({61.8}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.17}\times 10^{9}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(90\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(965.2\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.468}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({322.9}\times 10^{-6}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({334.5}\times 10^{-9}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({70.18}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({60.8}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.14}\times 10^{9}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(95\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(961.7\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.434}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({305.7}\times 10^{-6}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({317.9}\times 10^{-9}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({84.61}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({59.9}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.10}\times 10^{9}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(100\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(958.1\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({9.399}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({290.2}\times 10^{-6}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({302.9}\times 10^{-9}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({101.4}\times 10^{3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({58.9}\times 10^{-3}\)</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">\({2.07}\times 10^{9}\)</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p>While the <em>hydraulics</em> package is focused on water, properties of the atmosphere are important for characterizing the interaction of water with air. The is particularly important for phenomena such as evaporation and condensation. Selected characteristics of the standard atmosphere, as determined by the International Civil Aviation Organization (ICAO), are included in the package. Three functions return different properties of the standard atmosphere:</p>
+<table class="table">
+<thead><tr class="header">
+<th align="left">Function</th>
+<th align="left">Returns</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">atmtemp</td>
+<td align="left">Atmospheric Temperature</td>
+</tr>
+<tr class="even">
+<td align="left">atmpres</td>
+<td align="left">Pressure</td>
+</tr>
+<tr class="odd">
+<td align="left">atmdens</td>
+<td align="left">Density</td>
+</tr>
+</tbody>
+</table>
+<p>All atmospheric functions have input arguments of altitude (<em>ft</em> or <em>m</em>), unit system (<em>SI</em> or <em>Eng</em>), and whether or not units should be returned.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/atmosprops.html">atmpres</a></span><span class="op">(</span>alt <span class="op">=</span> <span class="fl">3000</span>, units <span class="op">=</span> <span class="st">"SI"</span>, ret_units <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 70121.14 [Pa]</span></span></code></pre></div>
+<p>Similar to the water properties table, a summary of the standard atmosphere can be obtained with the function <em>atmos_table</em>.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atmos_table.html">atmos_table</a></span><span class="op">(</span>units <span class="op">=</span> <span class="st">"SI"</span><span class="op">)</span></span>
+<span><span class="va">tbl</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 16 × 4</span></span></span>
+<span><span class="co">#&gt;    Altitude Temperature Pressure  Density</span></span>
+<span><span class="co">#&gt;         <span style="color: #949494;">[m]</span>         <span style="color: #949494;">[C]</span>     <span style="color: #949494;">[Pa]</span> <span style="color: #949494;">[kg/m^3]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>        0       15     <span style="text-decoration: underline;">101</span>325     1.23 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     <span style="text-decoration: underline;">1</span>000        8.50   <span style="text-decoration: underline;">89</span>876.    1.11 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     <span style="text-decoration: underline;">2</span>000        2.00   <span style="text-decoration: underline;">79</span>501.    1.01 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     <span style="text-decoration: underline;">3</span>000       -<span style="color: #BB0000;">4.49</span>   <span style="text-decoration: underline;">70</span>121.    0.909</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     <span style="text-decoration: underline;">4</span>000      -<span style="color: #BB0000;">11.0</span>    <span style="text-decoration: underline;">61</span>660.    0.819</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     <span style="text-decoration: underline;">5</span>000      -<span style="color: #BB0000;">17.5</span>    <span style="text-decoration: underline;">54</span>048.    0.736</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     <span style="text-decoration: underline;">6</span>000      -<span style="color: #BB0000;">24.0</span>    <span style="text-decoration: underline;">47</span>218.    0.660</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     <span style="text-decoration: underline;">7</span>000      -<span style="color: #BB0000;">30.5</span>    <span style="text-decoration: underline;">41</span>105.    0.590</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     <span style="text-decoration: underline;">8</span>000      -<span style="color: #BB0000;">36.9</span>    <span style="text-decoration: underline;">35</span>652.    0.526</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     <span style="text-decoration: underline;">9</span>000      -<span style="color: #BB0000;">43.4</span>    <span style="text-decoration: underline;">30</span>801.    0.467</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>    <span style="text-decoration: underline;">10</span>000      -<span style="color: #BB0000;">49.9</span>    <span style="text-decoration: underline;">26</span>500.    0.414</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>    <span style="text-decoration: underline;">11</span>000      -<span style="color: #BB0000;">56.4</span>    <span style="text-decoration: underline;">22</span>700.    0.365</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>    <span style="text-decoration: underline;">12</span>000      -<span style="color: #BB0000;">62.9</span>    <span style="text-decoration: underline;">19</span>355.    0.321</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>    <span style="text-decoration: underline;">13</span>000      -<span style="color: #BB0000;">69.3</span>    <span style="text-decoration: underline;">16</span>421.    0.281</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>    <span style="text-decoration: underline;">14</span>000      -<span style="color: #BB0000;">75.8</span>    <span style="text-decoration: underline;">13</span>859.    0.245</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>    <span style="text-decoration: underline;">15</span>000      -<span style="color: #BB0000;">82.3</span>    <span style="text-decoration: underline;">11</span>632.    0.212</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="fundamental-constants">2.0 Fundamental constants<a class="anchor" aria-label="anchor" href="#fundamental-constants"></a>
@@ -175,7 +869,7 @@
 <p>The energy at any point along a pipe containing flowing water is often described by the energy per unit weight, or energy head, E: <span class="math display">\[E = z+\frac{P}{\gamma}+\alpha\frac{V^2}{2g}\]</span> where P is the pressure, <span class="math inline">\(\gamma=\rho g\)</span> is the specific weight of water, <em>z</em> is the elevation of the point, <em>V</em> is the average velocity, and each term has units of length. <span class="math inline">\(\alpha\)</span> is a kinetic energy adjustment factor to account for non-uniform velocity distribution across the cross-section. <span class="math inline">\(\alpha\)</span> is typically assumed to be 1.0 for turbulent flow because the value is close to 1.0 and <span class="math inline">\(\frac{V^2}{2g}\)</span> (the velocity head) tends to be small in relation to other terms in the equation.</p>
 <p>As water flows through a pipe energy is lost due to friction with the pipe walls and local disturbances (minor losses). The energy loss between two sections is expressed as <span class="math inline">\({E_1} - {h_l} = {E_2}\)</span>. When pipes are long, with <span class="math inline">\(\frac{L}{D}&gt;1000\)</span>, friction losses dominate the energy loss on the system, and the head loss, <span class="math inline">\(h_l\)</span>, is calculated as the head loss due to friction, <span class="math inline">\(h_f\)</span>. This energy head loss due to friction with the walls of the pipe is described by the Darcy-Weisbach equation, which estimates the energy loss per unit weight, or head loss <span class="math inline">\({h_f}\)</span>, which has units of length. For circular pipes it is expressed as: <span class="math display">\[h_f = \frac{fL}{D}\frac{V^2}{2g} = \frac{8fL}{\pi^{2}gD^{5}}Q^{2}\]</span> In this equation <em>f</em> is the friction factor, typically calculated with the Colebrook equation: <span class="math display">\[\frac{1}{\sqrt{f}} = -2\log\left(\frac{\frac{k_s}{D}}{3.7} + \frac{2.51}{Re\sqrt{f}}\right)\]</span> where <span class="math inline">\(k_s\)</span> is the absolute roughness of the pipe wall. There are close approximations to the Colebrook equation that have an explicit form to facilitate hand-calculations, but this package only uses the Colebrook function.</p>
 <p>Any one of the variables in the Darcy Weisbach equation, and by extension the Colebrook equation, may be treated as an unknown. For an existing pipe with a known flow rate, the friction loss for a length of pipe may be found:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">D</span> <span class="op">&lt;-</span> <span class="fl">20</span><span class="op">/</span><span class="fl">12</span>    <span class="co">#20 inch converted to ft</span></span>
 <span><span class="va">L</span> <span class="op">&lt;-</span> <span class="fl">10560</span>    <span class="co">#ft</span></span>
 <span><span class="va">Q</span> <span class="op">&lt;-</span> <span class="fl">4</span>        <span class="co">#ft^3/s</span></span>
@@ -191,7 +885,7 @@
 <span><span class="co">#&gt; Friction Fact: 0.0173</span></span>
 <span><span class="co">#&gt; Head Loss: 5.72 ft</span></span></code></pre></div>
 <p>The Reynolds number is adequately high to ensure flow is turbulent and the Colebrook equation is valid. As with the water properties function, it can be called with <em>ret_units = TRUE</em> to return a list of <code>units</code> objects (using the same input as above):</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/darcyweisbach.html">darcyweisbach</a></span><span class="op">(</span>Q <span class="op">=</span> <span class="fl">4.0</span>,D <span class="op">=</span> <span class="fl">20</span><span class="op">/</span><span class="fl">12</span>, L <span class="op">=</span> <span class="fl">10560</span>, ks <span class="op">=</span> <span class="fl">0.0005</span>, nu <span class="op">=</span> <span class="fu"><a href="../reference/waterprops.html">kvisc</a></span><span class="op">(</span>T<span class="op">=</span><span class="cn">T</span>, units<span class="op">=</span><span class="st">"Eng"</span><span class="op">)</span>,</span>
 <span>                     units <span class="op">=</span> <span class="st">"Eng"</span>, ret_units <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">ans</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"pipe"</span><span class="op">)</span></span></code></pre></div>
@@ -228,7 +922,7 @@
 </tr></tbody>
 </table>
 <p>A new design problem can involve the calculation of a required diameter for a given head loss and flow rate, so that the pipe has a specified pressure and flow at some downstream point. An example of that follows.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Q</span> <span class="op">&lt;-</span> <span class="fl">37.5</span>     <span class="co">#flow in ft^3/s</span></span>
 <span><span class="va">L</span> <span class="op">&lt;-</span> <span class="fl">8000</span>     <span class="co">#pipe length in ft</span></span>
 <span><span class="va">hf</span> <span class="op">&lt;-</span> <span class="fl">215</span>     <span class="co">#head loss due to friction, in ft</span></span>
@@ -240,8 +934,8 @@
 <span><span class="co">#&gt; Reynolds no: 2336974</span></span>
 <span><span class="co">#&gt; Friction Fact: 0.0164</span></span>
 <span><span class="co">#&gt; Diameter: 1.85 ft</span></span></code></pre></div>
-<p>The usefulness of an R package is not so much for individual calculations, but repeated trials to see how one variable might vary with another. For example, it might be interesting to see how the required diameter varies with changing flow rate. The following example illustrates the calculation of diameters required to meet the specified head loss for flows varying from 30 - 45 ft^3/s.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<p>The usefulness of an R package is not so much for individual calculations, but repeated trials to see how one variable might vary with another. For example, it might be interesting to see how the required diameter varies with changing flow rate. The following example illustrates the calculation of diameters required to meet the specified head loss for flows varying from 30 - 45 ft<span class="math inline">\(^3\)</span>/s.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Qs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">45</span>, <span class="fl">1.0</span><span class="op">)</span>    <span class="co">#flows in ft^3/s</span></span>
 <span><span class="va">L</span> <span class="op">&lt;-</span> <span class="fl">8000</span>                 <span class="co">#pipe length in ft</span></span>
 <span><span class="va">hf</span> <span class="op">&lt;-</span> <span class="fl">215</span>                 <span class="co">#head loss due to friction, in ft</span></span>
@@ -275,7 +969,7 @@
 </tbody>
 </table>
 <p>Roughness values are calculated as shown below, and the results plotted on a Moody diagram as a reality check.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Qs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.00020</span>, <span class="fl">0.00024</span>, <span class="fl">0.00030</span><span class="op">)</span> <span class="co">#converted to m^3/s</span></span>
 <span><span class="va">hfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.052</span>,<span class="fl">0.073</span>,<span class="fl">0.110</span><span class="op">)</span></span>
 <span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html" class="external-link">mapply</a></span><span class="op">(</span><span class="va">darcyweisbach</span>, Q<span class="op">=</span><span class="va">Qs</span>, hf<span class="op">=</span><span class="va">hfs</span>, MoreArgs <span class="op">=</span> </span>
@@ -297,7 +991,7 @@
 <p>The Manning equation (also known as the Strickler equation) describes flow conditions in an open channel under uniform flow conditions. It is often expressed as: <span class="math display">\[Q=A\frac{C}{n}{R}^{\frac{2}{3}}{S_f}^{\frac{1}{2}}\]</span> where <em>C</em> is 1.0 for <em>SI</em> units and 1.49 for <em>Eng</em> (U.S. Customary) units. <em>Q</em> is the flow rate, <em>A</em> is the cross-sectional flow area, <em>n</em> is the Manning roughness coefficient, and R is the hydraulic radius <span class="math inline">\(R=\frac{A}{P}\)</span>, where P is the wetted perimeter. Critical depth is defined by the relation (at critical conditions): <span class="math display">\[\frac{Q^{2}B}{g\,A^{3}}=1\]</span></p>
 <p>where <em>B</em> is the top width of the water surface.</p>
 <p>As with full flow in circular pipes, any one of the variables in the Manning equation, and related geometric variables, may be treated as an unknown. For an existing pipe, a common problem is the determination of the depth, <em>y</em> that a given flow <em>Q</em>, will have given a pipe diameter <em>d</em>, slope <em>S</em> and roughness <em>n</em>. An example of that follows.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/manningc.html">manningc</a></span><span class="op">(</span>Q<span class="op">=</span><span class="fl">0.01</span>, n<span class="op">=</span><span class="fl">0.013</span>, Sf<span class="op">=</span><span class="fl">0.001</span>, d <span class="op">=</span> <span class="fl">0.2</span>, units<span class="op">=</span><span class="st">"SI"</span>, ret_units <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">ans</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"pipe"</span>, padding<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <table style="width:100%;" class="table">
@@ -348,7 +1042,7 @@
 </tr></tbody>
 </table>
 <p>It is also sometimes convenient to see a cross-section diagram.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/manningc.html">manningc</a></span><span class="op">(</span>Q<span class="op">=</span><span class="fl">0.01</span>, n<span class="op">=</span><span class="fl">0.013</span>, Sf<span class="op">=</span><span class="fl">0.001</span>, d <span class="op">=</span> <span class="fl">0.2</span>, units<span class="op">=</span><span class="st">"SI"</span>, ret_units <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/xc_circle.html">xc_circle</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">ans</span><span class="op">$</span><span class="va">y</span>, d<span class="op">=</span><span class="va">ans</span><span class="op">$</span><span class="va">d</span>, units <span class="op">=</span> <span class="st">"SI"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="hydraulics_vignette_files/figure-html/manningc-2-1.png" width="40%"></p>
@@ -358,7 +1052,7 @@
 </h3>
 <p>As with flow in circular pipes flowing less than full, flow in an open channel of rectangular, triangular, or trapezoidal shape uses the Manning equation. Substituting the geometric relationships for hydraulic radius and cross-sectional area, the Manning equation takes the form: <span class="math display">\[Q=\frac{C}{n}{\frac{\left(by+my^2\right)^{\frac{5}{3}}}{\left(b+2y\sqrt{1+m^2}\right)^\frac{2}{3}}}{S_f}^{\frac{1}{2}}\]</span> For a rectangular channel, the side slope is vertical, so <em>m</em> = 0; for a triangular channel, <em>b</em> = 0. For a given <em>Q</em>, <em>m</em>, <em>n</em>, and <em>Sf</em>, the most hydraulically efficient channel is found by maximizing R, which can be done by setting in the Manning equation <span class="math inline">\(\frac{\partial R}{\partial y}=0\)</span>. This produces: <span class="math display">\[y_{opt} = 2^{\frac{1}{4}}\left(\frac{Qn}{C\left(2\sqrt{1+m^2}-m\right)S_f^{\frac{1}{2}}}\right)^{\frac{3}{8}}\]</span> <span class="math display">\[b_{opt} = 2y_{opt}\left(\sqrt{1+m^2}-m\right)\]</span></p>
 <p>The <em>manningt</em> function works similarly to the function for circular pipes, in that the excluded argument is the one for which the function determines a solution. For example, a design might require the slope to deliver a required flow, <em>Q</em> through a channel with known geometry (bottom width, <em>b</em>, side slope <em>m</em>) and a given depth <em>y</em>:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/manningt.html">manningt</a></span><span class="op">(</span>Q <span class="op">=</span> <span class="fl">360.</span>, n <span class="op">=</span> <span class="fl">0.015</span>, m <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">20.0</span>, y <span class="op">=</span> <span class="fl">3.0</span>, units <span class="op">=</span> <span class="st">"Eng"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Slope: %.5f ft\n"</span>, <span class="va">ans</span><span class="op">$</span><span class="va">Sf</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Slope: 0.00088 ft</span></span>
@@ -399,7 +1093,7 @@
 </table>
 <p>Thus, a longitudinal slope for the channel would need to be 0.00088, or a drop of 0.88 ft per 1000 ft. The critical depth <em>yc</em> is lower than the normal depth <em>y</em>, indicating flow under these conditions is subcritical, also seen with <em>Fr &lt; 1.0</em>.</p>
 <p>Units can also be returned by this function.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/manningt.html">manningt</a></span><span class="op">(</span>Q <span class="op">=</span> <span class="fl">360.</span>, n <span class="op">=</span> <span class="fl">0.015</span>, m <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">20.0</span>, y <span class="op">=</span> <span class="fl">3.0</span>, units <span class="op">=</span> <span class="st">"Eng"</span>, ret_units <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">ans</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"pipe"</span>, padding<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -453,11 +1147,11 @@
 </tr></tbody>
 </table>
 <p>A simple diagram can be generated for the channel.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/xc_trap.html">xc_trap</a></span><span class="op">(</span> y <span class="op">=</span> <span class="fl">3.0</span>, b <span class="op">=</span> <span class="fl">20.0</span>, m <span class="op">=</span> <span class="fl">1.0</span>, units <span class="op">=</span> <span class="st">"Eng"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="hydraulics_vignette_files/figure-html/manningt-2.1-1.png" width="384"></p>
 <p>When solving for flow depth, <em>y</em>, or channel bottom width, <em>b</em>, an additional variable is returned for the optimal depth, <em>yopt</em>, or optimal width, <em>bopt</em>. These are optimal for hydraulic efficiency and practical concerns with construction often result in designs that flow with depths less than the hydraulic optimum. Solving a prior example for bottom width illustrates this.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/manningt.html">manningt</a></span><span class="op">(</span>Q <span class="op">=</span> <span class="fl">360.</span>, n <span class="op">=</span> <span class="fl">0.015</span>, m <span class="op">=</span> <span class="fl">1</span>, y <span class="op">=</span> <span class="fl">3.0</span>, Sf <span class="op">=</span> <span class="fl">0.00088</span>, units <span class="op">=</span> <span class="st">"Eng"</span><span class="op">)</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">ans</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"pipe"</span>, padding<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -496,25 +1190,25 @@
 <td align="left">4.8</td>
 </tr></tbody>
 </table>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Optimal bottom width: %.5f ft\n"</span>, <span class="va">ans</span><span class="op">$</span><span class="va">bopt</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Optimal bottom width: 4.76753 ft</span></span></code></pre></div>
 <p>The results show that, aside from the rounding, the width is returned as expected (approximately 20 ft), and the optimal bottom width for hydraulic efficiency would be closer to 4.76 ft. To check the depth that would be associated with a channel of the optimal width, substitute the optimal width for <em>b</em> and solve for <em>y</em>:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/manningt.html">manningt</a></span><span class="op">(</span>Q <span class="op">=</span> <span class="fl">360.</span>, n <span class="op">=</span> <span class="fl">0.015</span>, m <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">4.767534</span>, Sf <span class="op">=</span> <span class="fl">0.00088</span>, units <span class="op">=</span> <span class="st">"Eng"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Optimal depth: %.5f ft\n"</span>, <span class="va">ans</span><span class="op">$</span><span class="va">yopt</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Optimal depth: 5.75492 ft</span></span></code></pre></div>
 <p>For any channel geometry and flow rate a convenient plot is a specific energy diagram, which illustrates the different flow depths that can occur for any given specific energy. This is important for understanding what may happen to the water surface when flow encounters an obstacle or transition. For the channel of the example above, the diagram is</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/spec_energy_trap.html">spec_energy_trap</a></span><span class="op">(</span> Q <span class="op">=</span> <span class="fl">360</span>, b <span class="op">=</span> <span class="fl">20</span>, m <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">4</span>, units <span class="op">=</span> <span class="st">"Eng"</span> <span class="op">)</span></span></code></pre></div>
 <p><img src="hydraulics_vignette_files/figure-html/manningt-3-1.png" width="384"></p>
 <p>This provides an illustration that for y=3 ft the flow is subcritical (above the critical depth). Specific energy for the conditions of the prior example is <span class="math inline">\(E=y+\frac{V^2}{2g}=3.0+\frac{5.22^2}{2*32.2}=3.42 ft\)</span>. If the channel bottom had an abrupt rise of <span class="math inline">\(E-E_c=3.42-3.03=0.39 ft\)</span> critical depth would occur over the hump. A rise of anything greater than that would cause damming to occur. Once flow over a hump is critical, downstream of the hump the flow will be in supercritical conditions, flowing at the <em>alternate depth</em>.</p>
 <p>The specific energy for a given depth <em>y</em> and alternate depth can be added to the plot by including an argument for depth, y.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/spec_energy_trap.html">spec_energy_trap</a></span><span class="op">(</span> Q <span class="op">=</span> <span class="fl">360</span>, b <span class="op">=</span> <span class="fl">20</span>, m <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">4</span>, y<span class="op">=</span><span class="fl">3.0</span>, units <span class="op">=</span> <span class="st">"Eng"</span> <span class="op">)</span></span></code></pre></div>
 <p><img src="hydraulics_vignette_files/figure-html/manningt-4-1.png" width="384"></p>
 <p>A final example shows how to vary multiple input variables simultaneously. How does flow <em>Q</em> vary over a range of <em>n</em> and <em>y</em> values? The <em>expand.grid</em> function produces all combinations of different variables. The functions can be run for all of the problem permutations and the results plotted in many different ways. One example follows.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0.011</span>, <span class="fl">0.021</span>, <span class="fl">0.002</span><span class="op">)</span></span>
 <span><span class="va">ys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1.5</span>, <span class="fl">2.1</span>, <span class="fl">0.1</span><span class="op">)</span></span>
 <span><span class="va">ny</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span>n<span class="op">=</span><span class="va">ns</span>, y<span class="op">=</span><span class="va">ys</span><span class="op">)</span></span>
@@ -537,12 +1231,12 @@ A simple hydraulic system (from <a href="https://www.castlepumps.com" class="ext
 </div>
 <p>As described above, for a simple system the loss of head (energy per unit weight) due to friction, <span class="math inline">\(h_f\)</span>, is described by the Darcy-Weisbach equation, which can be simplified as: <span class="math display">\[h_f = \frac{fL}{D}\frac{V^2}{2g} = \frac{8fL}{\pi^{2}gD^{5}}Q^{2} = KQ{^2}\]</span> The total dynamic head the system requires a pump to provide, <span class="math inline">\(h_p\)</span>, is found by solving the energy equation from the upstream reservoir (point 1) to the downstream reservoir (point 2). <span class="math display">\[h_p = \left(z+\frac{P}{\gamma}+\frac{V^2}{2g}\right)_2 - \left(z+\frac{P}{\gamma}+\frac{V^2}{2g}\right)_1+h_f\]</span></p>
 <p>For the simple system in this example, the velocity is negligible in both reservoirs 1 and 2, and the pressures at both reservoirs is atmospheric, so the equation becomes: <span class="math display">\[h_p = \left(z_2 - z_1\right) + h_f=h_s+h_f=h_s+KQ^2\]</span> Using the <em>hydraulics</em> package, the coefficient, <em>K</em>, can be calculated manually or using other package functions for friction loss in a pipe system using <span class="math inline">\(Q=1\)</span>. As an example:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/darcyweisbach.html">darcyweisbach</a></span><span class="op">(</span>Q <span class="op">=</span> <span class="fl">1</span>,D <span class="op">=</span> <span class="fl">20</span><span class="op">/</span><span class="fl">12</span>, L <span class="op">=</span> <span class="fl">3884</span>, ks <span class="op">=</span> <span class="fl">0.0005</span>, nu <span class="op">=</span> <span class="fl">1.23e-5</span>, units <span class="op">=</span> <span class="st">"Eng"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Coefficient K: %.3f\n"</span>, <span class="va">ans</span><span class="op">$</span><span class="va">hf</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Coefficient K: 0.160</span></span></code></pre></div>
 <p>For this example assume a static head of 30 ft and generate a systemcurve object:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scurve</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/systemcurve.html">systemcurve</a></span><span class="op">(</span>hs <span class="op">=</span> <span class="fl">30</span>, K <span class="op">=</span> <span class="va">ans</span><span class="op">$</span><span class="va">hf</span>, units <span class="op">=</span> <span class="st">"Eng"</span><span class="op">)</span></span></code></pre></div>
 The pump characteristic curve is based on data or graphs obtained from a pump manufacturer.
 <div class="figure" style="text-align: center">
@@ -572,17 +1266,17 @@ A sample set of pump curves (from <a href="https://www.gouldspumps.com" class="e
 </tbody>
 </table>
 <p>The <span class="math inline">\(h_{shutoff}\)</span> value is the pump head at <span class="math inline">\(Q={0}\)</span>. The coordinates of the points can be input to the <em>pumpcurve</em> function as numeric vectors. For the flow manufacturer’s pump curves often use units that are not what the <em>hydraulics</em> package needs, and the <em>units</em> package provides a convenient way to convert them as needed.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">qgpm</span> <span class="op">&lt;-</span> <span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/units.html" class="external-link">set_units</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5000</span>, <span class="fl">7850</span><span class="op">)</span>, <span class="va">gallons</span><span class="op">/</span><span class="va">minute</span><span class="op">)</span></span>
 <span><span class="va">qcfs</span> <span class="op">&lt;-</span> <span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/units.html" class="external-link">set_units</a></span><span class="op">(</span><span class="va">qgpm</span>, <span class="va">ft</span><span class="op">^</span><span class="fl">3</span><span class="op">/</span><span class="va">s</span><span class="op">)</span></span>
 <span><span class="va">hft</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">81</span>, <span class="fl">60</span>, <span class="fl">20</span><span class="op">)</span> <span class="co">#units are already in ft so setting units is optional</span></span>
 <span><span class="va">pcurve</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pumpcurve.html">pumpcurve</a></span><span class="op">(</span>Q <span class="op">=</span> <span class="va">qcfs</span>, h <span class="op">=</span> <span class="va">hft</span>, eq <span class="op">=</span> <span class="st">"poly2"</span>, units <span class="op">=</span> <span class="st">"Eng"</span><span class="op">)</span></span></code></pre></div>
 <p>The function <em>pumpcurve</em> returns a <em>pumpcurve</em> object that includes the polynomial fit equation and a simple plot to check the fit.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pcurve</span><span class="op">$</span><span class="va">p</span></span></code></pre></div>
 <p><img src="hydraulics_vignette_files/figure-html/pump-7-1.png" width="700"></p>
 <p>The two curves can be combined to find the operating point of the selected pump in the defined system.</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">oppt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/operpoint.html">operpoint</a></span><span class="op">(</span>pcurve <span class="op">=</span> <span class="va">pcurve</span>, scurve <span class="op">=</span> <span class="va">scurve</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Operating Point: Q = %.3f, h = %.3f\n"</span>, <span class="va">oppt</span><span class="op">$</span><span class="va">Qop</span>, <span class="va">oppt</span><span class="op">$</span><span class="va">hop</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Operating Point: Q = 12.051, h = 53.285</span></span>
@@ -602,7 +1296,7 @@ A sample pipe network with pipe numbers indicated in black
 </p>
 </div>
 <p>Input for this system, assuming fixed <em>f</em> values, would look like the following. (If fixed <em>r</em> values are provided, f, L and D are not needed). These <em>f</em> values were estimated using <span class="math inline">\(ks=0.00025 m\)</span> in the form of the Colebrook equation for fully rough flows: <span class="math display">\[\frac{1}{\sqrt{f}}=log\left(\frac{3.7}{\frac{ks}{D}}\right)\]</span> This simplification removes the velocity dependence of <em>f</em>.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dfpipes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">10</span><span class="op">)</span>,                                <span class="co">#pipe ID</span></span>
 <span>  D <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.3</span>,<span class="fl">0.2</span>,<span class="fl">0.2</span>,<span class="fl">0.2</span>,<span class="fl">0.2</span>,<span class="fl">0.15</span>,<span class="fl">0.25</span>,<span class="fl">0.15</span>,<span class="fl">0.15</span>,<span class="fl">0.25</span><span class="op">)</span>,         <span class="co">#diameter in m</span></span>
@@ -612,7 +1306,7 @@ A sample pipe network with pipe numbers indicated in black
 <span><span class="va">loops</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">9</span>,<span class="fl">10</span>,<span class="fl">6</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">Qs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.040</span>,<span class="fl">.040</span>,<span class="fl">.02</span>,<span class="op">-</span><span class="fl">.02</span>,<span class="op">-</span><span class="fl">.04</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.02</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="op">-</span><span class="fl">.02</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">.02</span>,<span class="fl">.02</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Running it and looking at the output after three iterations:</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hardycross.html">hardycross</a></span><span class="op">(</span>dfpipes <span class="op">=</span> <span class="va">dfpipes</span>, loops <span class="op">=</span> <span class="va">loops</span>, Qs <span class="op">=</span> <span class="va">Qs</span>, n_iter <span class="op">=</span> <span class="fl">3</span>, units <span class="op">=</span> <span class="st">"SI"</span><span class="op">)</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">ans</span><span class="op">$</span><span class="va">dfloops</span>, digits <span class="op">=</span> <span class="fl">4</span>, format <span class="op">=</span> <span class="st">"pipe"</span>, padding<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -690,7 +1384,7 @@ A sample pipe network with pipe numbers indicated in black
 </tbody>
 </table>
 <p>The output pipe data frame has added columns, including the flow (where direction is that for the first loop containing the segment).</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">ans</span><span class="op">$</span><span class="va">dfpipes</span>, digits <span class="op">=</span> <span class="fl">4</span>, format <span class="op">=</span> <span class="st">"pipe"</span>, padding<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
@@ -785,7 +1479,7 @@ A sample pipe network with pipe numbers indicated in black
 </tbody>
 </table>
 <p>While the Hardy-Cross method is often used with fixed <em>f</em> (or <em>r</em>) values because it is used in exercises performed by hand, the use of the Colebrook equation allows friction losses to vary with Reynolds number. To use this approach the input data must include absolute roughness. Example values are included here:</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dfpipes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">10</span><span class="op">)</span>,                         <span class="co">#pipe ID</span></span>
 <span>  D <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.3</span>,<span class="fl">0.2</span>,<span class="fl">0.2</span>,<span class="fl">0.2</span>,<span class="fl">0.2</span>,<span class="fl">0.15</span>,<span class="fl">0.25</span>,<span class="fl">0.15</span>,<span class="fl">0.15</span>,<span class="fl">0.25</span><span class="op">)</span>,  <span class="co">#diameter in m</span></span>
@@ -795,7 +1489,7 @@ A sample pipe network with pipe numbers indicated in black
 <span><span class="va">loops</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">9</span>,<span class="fl">10</span>,<span class="fl">6</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">Qs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.040</span>,<span class="fl">.040</span>,<span class="fl">.02</span>,<span class="op">-</span><span class="fl">.02</span>,<span class="op">-</span><span class="fl">.04</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.02</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="op">-</span><span class="fl">.02</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">.02</span>,<span class="fl">.02</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>The effect of allowing the calculation of <em>f</em> to be (correctly) dependent on velocity (via the Reynolds number) can be seen, though the effect on final flow values is small.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hardycross.html">hardycross</a></span><span class="op">(</span>dfpipes <span class="op">=</span> <span class="va">dfpipes</span>, loops <span class="op">=</span> <span class="va">loops</span>, Qs <span class="op">=</span> <span class="va">Qs</span>, n_iter <span class="op">=</span> <span class="fl">3</span>, units <span class="op">=</span> <span class="st">"SI"</span><span class="op">)</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">ans</span><span class="op">$</span><span class="va">dfpipes</span>, digits <span class="op">=</span> <span class="fl">4</span>, format <span class="op">=</span> <span class="st">"pipe"</span>, padding<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
