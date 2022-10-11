@@ -1,26 +1,28 @@
-##Submission of revised version: v 0.5 - October 10, 2022
+##Submission of revised version: v 0.5.0 - October 10, 2022
 
 * New version includes functions for atmospheric properties and corrects a bug
 
 * Results from macOS Monterey 12.4 check:
 
-  + ── R CMD check results ───────────── hydraulics 0.4.1 ────
-  +  Duration: 1m 1.8s
+  + ── R CMD check results ───────────── hydraulics 0.5.0 ────
+  +  Duration: 1m 10.9s
 
   + 0 errors ✓ | 0 warnings ✓ | 0 notes ✓
   + R CMD check succeeded
 
-* From Windows check (devtools::check_win_devel()): 
+  + From Windows check (devtools::check_win_devel()): 
   + using log directory 'd:/RCompile/CRANguest/R-devel/hydraulics.Rcheck'
-  + using R Under development (unstable) (2022-03-04 r81849 ucrt)
+  + using R Under development (unstable) (2022-10-08 r83047 ucrt)
   + using platform: x86_64-w64-mingw32 (64-bit)
   + using session charset: UTF-8
   + checking for file 'hydraulics/DESCRIPTION' ... OK
   + checking extension type ... Package
-  + this is package 'hydraulics' version '0.4.1'
+  + this is package 'hydraulics' version '0.5.0'
   + package encoding: UTF-8
-  + checking CRAN incoming feasibility ... Note_to_CRAN_maintainers
+  + checking CRAN incoming feasibility ... [12s] Note_to_CRAN_maintainers
   + Maintainer: 'Ed Maurer <emaurer@scu.edu>'
+  + ...
+  + Done
   + Status: OK
   + no errors, warnings, or notes
 
