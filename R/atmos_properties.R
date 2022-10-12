@@ -130,7 +130,7 @@ atmtemp <- function(alt = NULL, units = c("SI", "Eng"), ret_units = FALSE ) {
   atmtmp <- atmos(alt = alt, v = 'temp')
   if (units == "Eng") {
     # for Eng units, convert to F
-    atmtmp <- ( atmtmp * 5/9) + 32
+    atmtmp <- ( atmtmp * 9/5) + 32
   }
   if( ret_units ) {
     if (units == "Eng") atmtmp <- units::set_units(atmtmp,"F")
