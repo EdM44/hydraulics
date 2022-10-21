@@ -74,7 +74,7 @@
       <img src="" class="logo" alt=""><h1>Hydraulics Vignette</h1>
                         <h4 data-toc-skip class="author">Ed Maurer</h4>
             
-            <h4 data-toc-skip class="date">2022-10-12</h4>
+            <h4 data-toc-skip class="date">2022-10-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/EdM44/hydraulics/blob/HEAD/vignettes/hydraulics_vignette.Rmd" class="external-link"><code>vignettes/hydraulics_vignette.Rmd</code></a></small>
       <div class="d-none name"><code>hydraulics_vignette.Rmd</code></div>
@@ -1288,14 +1288,14 @@ A sample set of pump curves (from <a href="https://www.gouldspumps.com" class="e
 <h3 id="pipe-networks-and-the-hardy-cross-method">7.0 Pipe Networks and the Hardy-Cross method<a class="anchor" aria-label="anchor" href="#pipe-networks-and-the-hardy-cross-method"></a>
 </h3>
 <p>For water pipe networks containing multiple loops a typical method to solve for the flow in each pipe segment uses the Hardy-Cross method. This consists of setting up an initial guess of flow (magnitude and direction) for each pipe segment, ensuring conservation of mass is preserved at each node (or vertex) in the network. Then calculations are performed for each loop, ensuring energy is conserved.</p>
-<p>In the <em>hydraulics</em> package, the Darcy-Weisbach equation is used to estimate the head loss in each pipe segment, expressed in a condensed form as <span class="math inline">\({h_f = rQ^{2}}\)</span> where: <span class="math display">\[{r = \frac{8fL}{\pi^{2}gD^{5}}}\]</span> If needed, the friction factor <em>f</em> is calculated using the Colebrook equation. The flow adjustment in each loop is calculated at each iteration as: <span class="math display">\[{\Delta{Q_i} = -\frac{\sum_{j=1}^{p_i} r_{ij}Q_j|Q_j|}{\sum_{j=1}^{p_i} 2r_{ij}Q_j^2}}\]</span> where <em>i</em> is the loop number, <em>j</em> is the pipe number, <span class="math inline">\({p_i}\)</span> is the number of pipes in loop <em>i</em> and <span class="math inline">\({\Delta{Q_i}}\)</span> is the flow adjustment to be applied to each pipe in loop <em>i</em> for the next iteration. Pipes shared between loops receive adjustments from both loops.</p>
-<p>Input consists of pipe characteristics, pipe order and initial flows for each loop, the number of iterations to perform, and the unit system being used (only needed if fixed <em>r</em> values are not provided).</p>
+<p>In the <em>hydraulics</em> package, the Darcy-Weisbach equation is used to estimate the head loss in each pipe segment, expressed in a condensed form as <span class="math inline">\({h_f = KQ^{2}}\)</span> where: <span class="math display">\[{K = \frac{8fL}{\pi^{2}gD^{5}}}\]</span> If needed, the friction factor <em>f</em> is calculated using the Colebrook equation. The flow adjustment in each loop is calculated at each iteration as: <span class="math display">\[{\Delta{Q_i} = -\frac{\sum_{j=1}^{p_i} K_{ij}Q_j|Q_j|}{\sum_{j=1}^{p_i} 2K_{ij}Q_j^2}}\]</span> where <em>i</em> is the loop number, <em>j</em> is the pipe number, <span class="math inline">\({p_i}\)</span> is the number of pipes in loop <em>i</em> and <span class="math inline">\({\Delta{Q_i}}\)</span> is the flow adjustment to be applied to each pipe in loop <em>i</em> for the next iteration. Pipes shared between loops receive adjustments from both loops.</p>
+<p>Input consists of pipe characteristics, pipe order and initial flows for each loop, the number of iterations to perform, and the unit system being used (only needed if fixed <em>K</em> values are not provided).</p>
 <div class="figure" style="text-align: center">
 <img src="hardycross_system.png" alt="A sample pipe network with pipe numbers indicated in black" width="75%"><p class="caption">
 A sample pipe network with pipe numbers indicated in black
 </p>
 </div>
-<p>Input for this system, assuming fixed <em>f</em> values, would look like the following. (If fixed <em>r</em> values are provided, f, L and D are not needed). These <em>f</em> values were estimated using <span class="math inline">\(ks=0.00025 m\)</span> in the form of the Colebrook equation for fully rough flows: <span class="math display">\[\frac{1}{\sqrt{f}}=log\left(\frac{3.7}{\frac{ks}{D}}\right)\]</span> This simplification removes the velocity dependence of <em>f</em>.</p>
+<p>Input for this system, assuming fixed <em>f</em> values, would look like the following. (If fixed <em>K</em> values are provided, f, L and D are not needed). These <em>f</em> values were estimated using <span class="math inline">\(ks=0.00025 m\)</span> in the form of the Colebrook equation for fully rough flows: <span class="math display">\[\frac{1}{\sqrt{f}}=log\left(\frac{3.7}{\frac{ks}{D}}\right)\]</span> This simplification removes the velocity dependence of <em>f</em>.</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dfpipes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">10</span><span class="op">)</span>,                                <span class="co">#pipe ID</span></span>
@@ -1393,7 +1393,7 @@ A sample pipe network with pipe numbers indicated in black
 <th align="right">L</th>
 <th align="right">f</th>
 <th align="right">Q</th>
-<th align="right">r</th>
+<th align="right">K</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -1478,7 +1478,7 @@ A sample pipe network with pipe numbers indicated in black
 </tr>
 </tbody>
 </table>
-<p>While the Hardy-Cross method is often used with fixed <em>f</em> (or <em>r</em>) values because it is used in exercises performed by hand, the use of the Colebrook equation allows friction losses to vary with Reynolds number. To use this approach the input data must include absolute roughness. Example values are included here:</p>
+<p>While the Hardy-Cross method is often used with fixed <em>f</em> (or <em>K</em>) values because it is used in exercises performed by hand, the use of the Colebrook equation allows friction losses to vary with Reynolds number. To use this approach the input data must include absolute roughness. Example values are included here:</p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dfpipes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">10</span><span class="op">)</span>,                         <span class="co">#pipe ID</span></span>
@@ -1500,7 +1500,7 @@ A sample pipe network with pipe numbers indicated in black
 <th align="right">ks</th>
 <th align="right">Q</th>
 <th align="right">f</th>
-<th align="right">r</th>
+<th align="right">K</th>
 </tr></thead>
 <tbody>
 <tr class="odd">

@@ -119,23 +119,23 @@ class <code>units</code> with units attached to the value. [Default is FALSE]</p
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The input data frame with the pipe data must contain a pipe ID column with 
 the pipe numbers used in the loops input list. There are three options for 
-input column of the pipe roughness data frame:</p><table class="table table"><tr><td><strong>Column Name</strong></td><td><strong>Approach for Determining r</strong></td></tr><tr><td>ks</td><td>f calculated using Colebrook equation, r using Darcy-Weisbach</td></tr><tr><td>f</td><td>f treated as fixed, r calculated using Darcy-Weisbach</td></tr><tr><td>r</td><td>r treated as fixed</td></tr></table><p>In the case where absolute pipe roughness, \(ks\) (in m or ft), is input, 
+input column of the pipe roughness data frame:</p><table class="table table"><tr><td><strong>Column Name</strong></td><td><strong>Approach for Determining K</strong></td></tr><tr><td>ks</td><td>f calculated using Colebrook equation, K using Darcy-Weisbach</td></tr><tr><td>f</td><td>f treated as fixed, K calculated using Darcy-Weisbach</td></tr><tr><td>K</td><td>K treated as fixed</td></tr></table><p>In the case where absolute pipe roughness, \(ks\) (in m or ft), is input, 
   the input pipe data frame must also include columns for the length, \(L\) and
-  diameter, \(D\), (both in m or ft) so \(r\) can be calculated. In this case, 
-  a new \(f\) and \(r\) are calculated at each iteration, the final values of 
-  which are included in the output. If input \(r\) or \(f\) columns are provided, values 
-  for \(ks\) are ignored. If an input \(r\) column is provided, \(ks\) and \(f\) are 
+  diameter, \(D\), (both in m or ft) so \(K\) can be calculated. In this case, 
+  a new \(f\) and \(K\) are calculated at each iteration, the final values of 
+  which are included in the output. If input \(K\) or \(f\) columns are provided, values 
+  for \(ks\) are ignored. If an input \(K\) column is provided, \(ks\) and \(f\) are 
   ignored. If the Colebrook equation is used to determine \(f\), a water 
   temperature of \(20^{o}C\) or \(68^{o}F\) is used.</p>  
 <p>The number of iterations to perform may be specified with the n_iter input
   value, but execution stops if the average flow adjustment becomes smaller 
   than 1 percent of the average flow in all pipes.</p>
 <p>The Darcy-Weisbach equation is used to estimate the head loss in each
-pipe segment, expressed in a condensed form as \(h_f = rQ^{2}\)
-where: $$r = \frac{8fL}{\pi^{2}gD^{5}}$$  
-If needed, the friction factor \(f\) is calculted using the Colebrook 
+pipe segment, expressed in a condensed form as \(h_f = KQ^{2}\)
+where: $$K = \frac{8fL}{\pi^{2}gD^{5}}$$  
+If needed, the friction factor \(f\) is calculated using the Colebrook 
 equation. The flow adjustment in each loop is calculated at each iteration as: 
-$$\Delta{Q_i} = -\frac{\sum_{j=1}^{p_i} r_{ij}Q_j|Q_j|}{\sum_{j=1}^{p_i} 2r_{ij}Q_j^2}$$
+$$\Delta{Q_i} = -\frac{\sum_{j=1}^{p_i} K_{ij}Q_j|Q_j|}{\sum_{j=1}^{p_i} 2K_{ij}Q_j^2}$$
 where \(i\) is the loop number, \(j\) is the pipe number, \(p_i\) is the number of 
 pipes in loop \(i\) and \(\Delta{Q_i}\) is the flow adjustment to be applied 
 to each pipe in loop \(i\) for the next iteration.</p>
@@ -161,15 +161,15 @@ to each pipe in loop \(i\) for the next iteration.</p>
 <span class="r-in"><span><span class="co">#              |   (3)   \|</span></span></span>
 <span class="r-in"><span><span class="co"># 0.5m^3/s --&gt; C----------D</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">#Input pipe characteristics data frame. With r given other columns not needed</span></span></span>
+<span class="r-in"><span><span class="co">#Input pipe characteristics data frame. With K given other columns not needed</span></span></span>
 <span class="r-in"><span><span class="va">dfpipes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>,                     <span class="co">#pipe ID</span></span></span>
-<span class="r-in"><span>r <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">200</span>,<span class="fl">2500</span>,<span class="fl">500</span>,<span class="fl">800</span>,<span class="fl">300</span><span class="op">)</span>            <span class="co">#resistance used in hf=rQ^2</span></span></span>
+<span class="r-in"><span>K <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">200</span>,<span class="fl">2500</span>,<span class="fl">500</span>,<span class="fl">800</span>,<span class="fl">300</span><span class="op">)</span>            <span class="co">#resistance used in hf=KQ^2</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">loops</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">Qs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.3</span>,<span class="fl">0.1</span>,<span class="op">-</span><span class="fl">0.2</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="op">-</span><span class="fl">0.3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">hardycross</span><span class="op">(</span>dfpipes <span class="op">=</span> <span class="va">dfpipes</span>, loops <span class="op">=</span> <span class="va">loops</span>, Qs <span class="op">=</span> <span class="va">Qs</span>, n_iter <span class="op">=</span> <span class="fl">1</span>, units <span class="op">=</span> <span class="st">"SI"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Using fixed r values</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using fixed K values</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Iteration: 1, Loop: 1, dQ: -0.02805</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Iteration: 1, Loop: 2, dQ: 0.02000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $dfloops</span>
@@ -182,7 +182,7 @@ to each pipe in loop \(i\) for the next iteration.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6    2    5 -0.28000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $dfpipes</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ID    r           Q</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ID    K           Q</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  1  200  0.27195122</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  2 2500  0.05195122</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3  3  500 -0.22804878</span>
