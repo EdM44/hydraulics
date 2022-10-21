@@ -1,5 +1,11 @@
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
+## hydraulics 0.5.1 - development
+
+-   Corrected erroneous unit conversion in atmtemp function
+-   Update for variable consistency between pump and hardy-cross
+    equations (r to K)
+
 ## hydraulics 0.5.0
 
 -   Added functions for specific weight, atmospheric properties, and
