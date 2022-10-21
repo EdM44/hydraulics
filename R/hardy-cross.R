@@ -10,17 +10,17 @@
 #' the pipe numbers used in the loops input list. There are three options for 
 #' input column of the pipe roughness data frame:
 #' \tabular{ll}{
-#'   \strong{Column Name} \tab \strong{Approach for Determining r} \cr
-#'   ks \tab {f calculated using Colebrook equation, r using Darcy-Weisbach} \cr
-#'   f \tab {f treated as fixed, r calculated using Darcy-Weisbach} \cr
-#'   r \tab {r treated as fixed}
+#'   \strong{Column Name} \tab \strong{Approach for Determining K} \cr
+#'   ks \tab {f calculated using Colebrook equation, K using Darcy-Weisbach} \cr
+#'   f \tab {f treated as fixed, K calculated using Darcy-Weisbach} \cr
+#'   K \tab {K treated as fixed}
 #'   }
 #'   In the case where absolute pipe roughness, \eqn{ks} (in m or ft), is input, 
 #'   the input pipe data frame must also include columns for the length, \eqn{L} and
-#'   diameter, \eqn{D}, (both in m or ft) so \eqn{r} can be calculated. In this case, 
-#'   a new \eqn{f} and \eqn{r} are calculated at each iteration, the final values of 
-#'   which are included in the output. If input \eqn{r} or \eqn{f} columns are provided, values 
-#'   for \eqn{ks} are ignored. If an input \eqn{r} column is provided, \eqn{ks} and \eqn{f} are 
+#'   diameter, \eqn{D}, (both in m or ft) so \eqn{K} can be calculated. In this case, 
+#'   a new \eqn{f} and \eqn{K} are calculated at each iteration, the final values of 
+#'   which are included in the output. If input \eqn{K} or \eqn{f} columns are provided, values 
+#'   for \eqn{ks} are ignored. If an input \eqn{K} column is provided, \eqn{ks} and \eqn{f} are 
 #'   ignored. If the Colebrook equation is used to determine \eqn{f}, a water 
 #'   temperature of \eqn{20^{o}C} or \eqn{68^{o}F} is used.
 #'   
@@ -45,11 +45,11 @@
 #' }
 #'
 #' @details The Darcy-Weisbach equation is used to estimate the head loss in each
-#' pipe segment, expressed in a condensed form as \eqn{h_f = rQ^{2}}
-#' where: \deqn{r = \frac{8fL}{\pi^{2}gD^{5}}}  
-#' If needed, the friction factor \eqn{f} is calculted using the Colebrook 
+#' pipe segment, expressed in a condensed form as \eqn{h_f = KQ^{2}}
+#' where: \deqn{K = \frac{8fL}{\pi^{2}gD^{5}}}  
+#' If needed, the friction factor \eqn{f} is calculated using the Colebrook 
 #' equation. The flow adjustment in each loop is calculated at each iteration as: 
-#' \deqn{\Delta{Q_i} = -\frac{\sum_{j=1}^{p_i} r_{ij}Q_j|Q_j|}{\sum_{j=1}^{p_i} 2r_{ij}Q_j^2}}
+#' \deqn{\Delta{Q_i} = -\frac{\sum_{j=1}^{p_i} K_{ij}Q_j|Q_j|}{\sum_{j=1}^{p_i} 2K_{ij}Q_j^2}}
 #' where \eqn{i} is the loop number, \eqn{j} is the pipe number, \eqn{p_i} is the number of 
 #' pipes in loop \eqn{i} and \eqn{\Delta{Q_i}} is the flow adjustment to be applied 
 #' to each pipe in loop \eqn{i} for the next iteration.
@@ -69,10 +69,10 @@
 #' #              |   (3)   \|
 #' # 0.5m^3/s --> C----------D
 #' 
-#' #Input pipe characteristics data frame. With r given other columns not needed
+#' #Input pipe characteristics data frame. With K given other columns not needed
 #' dfpipes <- data.frame(
 #' ID = c(1,2,3,4,5),                     #pipe ID
-#' r = c(200,2500,500,800,300)            #resistance used in hf=rQ^2
+#' K = c(200,2500,500,800,300)            #resistance used in hf=KQ^2
 #' )
 #' loops <- list(c(1,2,3),c(2,4,5))
 #' Qs <- list(c(0.3,0.1,-0.2),c(-0.1,0.2,-0.3))
@@ -82,8 +82,8 @@
 #'
 #' @name hardycross
 NULL
-assign_pipe_r <- function(dfp, g) {
-  dfp$r <-  8.0*dfp$f*dfp$L/(g*pi^2*dfp$D^5)
+assign_pipe_K <- function(dfp, g) {
+  dfp$K <-  8.0*dfp$f*dfp$L/(g*pi^2*dfp$D^5)
   return(dfp)
 }
 
@@ -164,9 +164,9 @@ calc_loop_dQ <- function(lp, qs, dfp) {
   for(m in 1:length(lp)) {
     pipenum <- lp[m]
     q <- qs[m]
-    r <- dfp$r[dfp$ID == pipenum]
-    num <- num + r*q*abs(q)
-    denom <- denom + 2*r*abs(q)
+    K <- dfp$K[dfp$ID == pipenum]
+    num <- num + K*q*abs(q)
+    denom <- denom + 2*K*abs(q)
   }
   return(-1*num/denom)
 }
@@ -208,25 +208,25 @@ hardycross <- function (dfpipes = dfpipes, loops = loops, Qs = Qs, n_iter = 1,
   
   #find if f, r missing and fill in pipe dataframe
   fixed_f <- FALSE
-  fixed_r <- FALSE
-  if ( is.null(dfpipes$r)){
+  fixed_K <- FALSE
+  if ( is.null(dfpipes$K)){
     if ( is.null(dfpipes$f)){
       if ( is.null(dfpipes$ks)){
-        stop("Input pipe data must include at least one of r, f or ks\n")
+        stop("Input pipe data must include at least one of K, f or ks\n")
       } else { #ks has values, f does not
         dfpipes <- assign_pipe_f(dfpipes, nu)
-        dfpipes <- assign_pipe_r(dfpipes, g)
-        message("Using ks values to calculate f and r\n")
+        dfpipes <- assign_pipe_K(dfpipes, g)
+        message("Using ks values to calculate f and K\n")
       }
-    } else { #f has values, r does not
-      dfpipes <- assign_pipe_r(dfpipes, g)
+    } else { #f has values, K does not
+      dfpipes <- assign_pipe_K(dfpipes, g)
       fixed_f <- TRUE
-      fixed_r <- TRUE
-      message("Using fixed f values to calculate fixed r\n")
+      fixed_K <- TRUE
+      message("Using fixed f values to calculate fixed K\n")
     }
-  } else { #r has values, f, ks do not
-    fixed_r <- TRUE
-    message("Using fixed r values\n")
+  } else { #K has values, f, ks do not
+    fixed_K <- TRUE
+    message("Using fixed K values\n")
   }
   
   #find shared edge between two loops -- check that shared flows are reversed
@@ -262,10 +262,10 @@ hardycross <- function (dfpipes = dfpipes, loops = loops, Qs = Qs, n_iter = 1,
       break
     }
     #if only ks specified, update f, r values
-    if ( !(fixed_f) & !(fixed_r)) {
+    if ( !(fixed_f) & !(fixed_K)) {
       dfpipes <- assign_pipe_Q(dfpipes, loops, Qs)
       dfpipes <- assign_pipe_f(dfpipes, nu)
-      dfpipes <- assign_pipe_r(dfpipes, g)
+      dfpipes <- assign_pipe_K(dfpipes, g)
     }
   }
   
