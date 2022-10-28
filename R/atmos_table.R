@@ -32,7 +32,7 @@ atmos_table <- function(units = c("SI", "Eng"), ret_units = TRUE ) {
 
   df <- tibble::tibble(
     Altitude = alts,
-    Temperature = atmtemp(alt = alts, units = units, ret_units = ret_units),
+    Temp = atmtemp(alt = alts, units = units, ret_units = ret_units),
     Pressure = atmpres(alt = alts, units = units, ret_units = ret_units),
     Density = atmdens(alt = alts, units = units, ret_units = ret_units)
   )

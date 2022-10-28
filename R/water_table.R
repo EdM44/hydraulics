@@ -31,7 +31,7 @@ water_table <- function(units = c("SI", "Eng"), ret_units = TRUE ) {
   }
 
   df <- tibble::tibble(
-    Temperature = temps,
+    Temp = temps,
     Density = dens(T = temps, units = units, ret_units = ret_units),
     Spec_Weight = specwt(T = temps, units = units, ret_units = ret_units),
     Viscosity = dvisc(T = temps, units = units, ret_units = ret_units),
