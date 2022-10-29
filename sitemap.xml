@@ -31,6 +31,9 @@
     <loc>https://edm44.github.io/hydraulics/reference/darcyweisbach.html</loc>
   </url>
   <url>
+    <loc>https://edm44.github.io/hydraulics/reference/direct_step.html</loc>
+  </url>
+  <url>
     <loc>https://edm44.github.io/hydraulics/reference/hardycross.html</loc>
   </url>
   <url>
@@ -50,6 +53,9 @@
   </url>
   <url>
     <loc>https://edm44.github.io/hydraulics/reference/pumpcurve.html</loc>
+  </url>
+  <url>
+    <loc>https://edm44.github.io/hydraulics/reference/sequent_depth.html</loc>
   </url>
   <url>
     <loc>https://edm44.github.io/hydraulics/reference/spec_energy_trap.html</loc>
