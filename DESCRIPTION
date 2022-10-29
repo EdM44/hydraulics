@@ -29,7 +29,6 @@ Imports:
     ggplot2,
     grid,
     gtools,
-    magrittr,
     purrr,
     reshape2,
     stats,
