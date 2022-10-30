@@ -37,7 +37,7 @@
 #' locations are input with channel geometry and flow rate, and the distance between
 #' the two locations, \eqn{{\Delta}X}, is calculated: 
 #' \deqn{{\Delta}X = \frac{E_1 - E_2}{S_f-S_o}}
-#' where \eqn{E_1}{E1} and  \eqn{E_2}{E2} are the secific energy values at the locations 
+#' where \eqn{E_1}{E1} and  \eqn{E_2}{E2} are the specific energy values at the locations 
 #' of \eqn{y_1}{y1} and  \eqn{y_2}{y2},  \eqn{S_f}{Sf} is the slope of the energy grade line, 
 #' and \eqn{S_o}{So} is the slope of the channel bed.
 #'
