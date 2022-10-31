@@ -16,7 +16,7 @@
 #'   units attached to the value. [Default is FALSE]
 
 #'
-#' @return Returns a list including the missing parameter:
+#' @return Returns a list including:
 #' \itemize{
 #'   \item y - input depth
 #'   \item y_seq - sequent depth
@@ -31,9 +31,9 @@
 #'
 #' @details The Momentum equation for open channel flow conditions in a trapezoidal channel: 
 #' \deqn{M = \frac{by^2}{2}+\frac{my^3}{3}+\frac{Q^2}{gy\left(b+my\right)}}
-#' where \eqn{C}{C} is 1.0 for SI units and 1.49 for Eng (U.S. Customary) units. Using the geometric relationships 
-#' for hydraulic radius and cross-sectional area of a trapezoid, it takes the form:
-#' \deqn{Q=\frac{C}{n}{\frac{\left(by+my^2\right)^{\frac{5}{3}}}{\left(b+2y\sqrt{1+m^2}\right)^\frac{2}{3}}}{S_f}^{\frac{1}{2}}}
+#' where \eqn{C}{C} is 1.0 for SI units and 1.49 for Eng (U.S. Customary) units. 
+#' The momentum function is assumed to be the same on both sides of a hydraulic
+#' jump, allowing the determination of the sequent depth.
 #'
 #' @examples
 #'
