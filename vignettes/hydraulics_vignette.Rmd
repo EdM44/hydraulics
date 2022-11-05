@@ -415,3 +415,7 @@ knitr::kable(ans$dfpipes, digits = 4, format = "pipe", padding=0)
 
 Other functions have been added to the _hydraulics_ package to add some capabilities for calculations related to gradually- and rapidly-varied flow. Additional documentation on these may be found in the online reference [Hydraulics and Water Resources: Examples Using R](https://edm44.github.io/hydr-watres-book/).
 
+## License
+
+[GPL-3](https://cran.r-project.org/web/licenses/GPL-3) `r Sys.Date()` Ed Maurer
+
