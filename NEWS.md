@@ -1,10 +1,13 @@
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-## hydraulics 0.5.1 - development
+## hydraulics 0.6.0
 
 -   Corrected erroneous unit conversion in atmtemp function
 -   Update for variable consistency between pump and hardy-cross
     equations (r to K)
+-   Added function to use the direct step method for water profile
+    calculation
+-   Added a function to find the sequent depth for an open channel
 
 ## hydraulics 0.5.0
 
