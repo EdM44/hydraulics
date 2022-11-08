@@ -7,7 +7,7 @@
     equations (r to K)
 -   Added function to use the direct step method for water profile
     calculation
--   Added a function to find the sequent depth for an open channel
+-   Added a function to find the sequent depth for a hydraulic jump
 
 ## hydraulics 0.5.0
 
