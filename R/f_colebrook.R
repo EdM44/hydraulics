@@ -43,7 +43,6 @@
 #'
 #' f <- colebrook(ks=ks,V=velocity(D,Q), D=D, nu=kvisc(T=T, units="Eng"))
 #' 
-#' @importFrom utils tail
 #' @importFrom stats uniroot
 #'
 #' @name colebrook

@@ -22,6 +22,8 @@
 #' f = c(0.04, 0.03)
 #' moody( Re = Re, f = f )
 #'
+#'
+#' @importFrom utils tail
 #' @import ggplot2
 #' @import reshape2
 #' @import grid
@@ -76,7 +78,7 @@ moody <- function(Re = NULL, f = NULL) {
   flam <- 64/Relam
   dflam <- as.data.frame(cbind(Relam, flam))
   # Turbulent Regions Re values from 3000 to 1E8
-  Returb <- tail(c(2:10 %o% 10^(3:7)), -1)
+  Returb <- utils::tail(c(2:10 %o% 10^(3:7)), -1)
   fsmooth = 0.316 * Returb^(-0.25)  # Blausis formula for smooth turbulent pipe flow
   dfsmooth <- as.data.frame(cbind(Returb, fsmooth))
   # set up empty array for lines for various values of relative roughness
