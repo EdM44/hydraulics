@@ -12,7 +12,7 @@ kinematic viscosity, saturation vapor pressure, surface tension, and bulk modulu
     
     <a class="navbar-brand me-2" href="../index.html">hydraulics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,19 +60,19 @@ kinematic viscosity, saturation vapor pressure, surface tension, and bulk modulu
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dvisc</span><span class="op">(</span>T <span class="op">=</span> <span class="cn">NULL</span>, units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SI"</span>, <span class="st">"Eng"</span><span class="op">)</span>, ret_units <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dvisc</span><span class="op">(</span>T <span class="op">=</span> <span class="cn">NULL</span>, units <span class="op">=</span> <span class="cn">NULL</span>, ret_units <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">dens</span><span class="op">(</span>T <span class="op">=</span> <span class="cn">NULL</span>, units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SI"</span>, <span class="st">"Eng"</span><span class="op">)</span>, ret_units <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">dens</span><span class="op">(</span>T <span class="op">=</span> <span class="cn">NULL</span>, units <span class="op">=</span> <span class="cn">NULL</span>, ret_units <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">specwt</span><span class="op">(</span>T <span class="op">=</span> <span class="cn">NULL</span>, units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SI"</span>, <span class="st">"Eng"</span><span class="op">)</span>, ret_units <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">specwt</span><span class="op">(</span>T <span class="op">=</span> <span class="cn">NULL</span>, units <span class="op">=</span> <span class="cn">NULL</span>, ret_units <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">kvisc</span><span class="op">(</span>T <span class="op">=</span> <span class="cn">NULL</span>, units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SI"</span>, <span class="st">"Eng"</span><span class="op">)</span>, ret_units <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">kvisc</span><span class="op">(</span>T <span class="op">=</span> <span class="cn">NULL</span>, units <span class="op">=</span> <span class="cn">NULL</span>, ret_units <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">svp</span><span class="op">(</span>T <span class="op">=</span> <span class="cn">NULL</span>, units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SI"</span>, <span class="st">"Eng"</span><span class="op">)</span>, ret_units <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">svp</span><span class="op">(</span>T <span class="op">=</span> <span class="cn">NULL</span>, units <span class="op">=</span> <span class="cn">NULL</span>, ret_units <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">surf_tension</span><span class="op">(</span>T <span class="op">=</span> <span class="cn">NULL</span>, units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SI"</span>, <span class="st">"Eng"</span><span class="op">)</span>, ret_units <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">surf_tension</span><span class="op">(</span>T <span class="op">=</span> <span class="cn">NULL</span>, units <span class="op">=</span> <span class="cn">NULL</span>, ret_units <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">Ev</span><span class="op">(</span>T <span class="op">=</span> <span class="cn">NULL</span>, units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SI"</span>, <span class="st">"Eng"</span><span class="op">)</span>, ret_units <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">Ev</span><span class="op">(</span>T <span class="op">=</span> <span class="cn">NULL</span>, units <span class="op">=</span> <span class="cn">NULL</span>, ret_units <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
