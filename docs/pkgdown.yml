@@ -1,0 +1,10 @@
+pandoc: 2.19.2
+pkgdown: 2.0.6
+pkgdown_sha: ~
+articles:
+  hydraulics_vignette: hydraulics_vignette.html
+last_built: 2022-12-06T21:41Z
+urls:
+  reference: https://edm44.github.io/hydraulics/reference
+  article: https://edm44.github.io/hydraulics/articles
+
