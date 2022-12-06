@@ -64,6 +64,7 @@ spec_energy_trap <- function(Q = NULL, b = NULL, m = NULL, y = NULL, scale = 3,
   
   scalefact <- scale
   units <- units
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
   if (units == "SI") {
     g <- 9.80665     # m / s^2
     txtx <- sprintf("Specific Energy, E (m)")

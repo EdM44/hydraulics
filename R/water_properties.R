@@ -55,11 +55,12 @@ NULL
 # dynamic viscocity
 #' @export
 #' @rdname waterprops
-dvisc <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE ) {
+dvisc <- function(T = NULL, units = NULL, ret_units = FALSE ) {
   # check to make sure that T is given
   if( inherits(T, "units") ) T <- units::drop_units(T)
   checks <- c(T)
   units <- units
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
   if (length(checks) < 1) {
     if (units == "SI") {
       message("\nTemperature not given.\nAssuming T = 20 C\n")
@@ -100,11 +101,12 @@ dvisc <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE ) {
 }
 #' @export
 #' @rdname waterprops
-dens <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
+dens <- function(T = NULL, units = NULL, ret_units = FALSE) {
   # check to make sure that T is given
   if( inherits(T, "units") ) T <- units::drop_units(T)
   checks <- c(T)
   units <- units
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
   if (length(checks) < 1) {
     if (units == "SI") {
       message("\nTemperature not given.\nAssuming T = 20 C\n")
@@ -141,11 +143,12 @@ dens <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
 
 #' @export
 #' @rdname waterprops
-specwt <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
+specwt <- function(T = NULL, units = NULL, ret_units = FALSE) {
   # check to make sure that T is given
   if( inherits(T, "units") ) T <- units::drop_units(T)
   checks <- c(T)
   units <- units
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
   if (length(checks) < 1) {
     if (units == "SI") {
       message("\nTemperature not given.\nAssuming T = 20 C\n")
@@ -183,11 +186,12 @@ specwt <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
 
 #' @export
 #' @rdname waterprops
-kvisc <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
+kvisc <- function(T = NULL, units = NULL, ret_units = FALSE) {
   # check to make sure that T is given
   if( inherits(T, "units") ) T <- units::drop_units(T)
   checks <- c(T)
   units <- units
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
   if (length(checks) < 1) {
     if (units == "SI") {
       message("\nTemperature not given.\nAssuming T = 20 C\n")
@@ -219,11 +223,12 @@ kvisc <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
 }
 #' @export
 #' @rdname waterprops
-svp <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
+svp <- function(T = NULL, units = NULL, ret_units = FALSE) {
   # check to make sure that T is given
   if( inherits(T, "units") ) T <- units::drop_units(T)
   checks <- c(T)
   units <- units
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
   if (length(checks) < 1) {
     if (units == "SI") {
       message("\nTemperature not given.\nAssuming T = 20 C\n")
@@ -259,11 +264,12 @@ svp <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
 }
 #' @export
 #' @rdname waterprops
-surf_tension <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
+surf_tension <- function(T = NULL, units = NULL, ret_units = FALSE) {
   # check to make sure that T is given
   if( inherits(T, "units") ) T <- units::drop_units(T)
   checks <- c(T)
   units <- units
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
   if (length(checks) < 1) {
     if (units == "SI") {
       message("\nTemperature not given.\nAssuming T = 20 C\n")
@@ -299,11 +305,12 @@ surf_tension <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
 }
 #' @export
 #' @rdname waterprops
-Ev <- function(T = NULL, units = c("SI", "Eng"), ret_units = FALSE) {
+Ev <- function(T = NULL, units = NULL, ret_units = FALSE) {
   # check to make sure that T is given
   if( inherits(T, "units") ) T <- units::drop_units(T)
   checks <- c(T)
   units <- units
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
   if (length(checks) < 1) {
     if (units == "SI") {
       message("\nTemperature not given.\nAssuming T = 20 C\n")

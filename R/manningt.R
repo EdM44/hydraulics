@@ -121,6 +121,7 @@ manningt <- function (Q = NULL, n = NULL, m = NULL, Sf = NULL, y = NULL, b = NUL
                       units = c("SI", "Eng"), ret_units = FALSE ) {
 
   units <- units
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
 
   #check if any values have class 'units' and change to numeric if necessary
   for( i  in c("Q", "n", "m", "Sf", "y", "b") ) {

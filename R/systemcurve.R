@@ -32,6 +32,7 @@ NULL
 systemcurve <- function (hs = NULL, K = NULL, units = c("SI", "Eng")) {
  
   units <- units
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
   if (units != "SI" && units != "Eng") {
     stop("Incorrect unit system. Must be SI or Eng")
   }

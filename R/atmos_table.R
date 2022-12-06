@@ -20,6 +20,7 @@ NULL
 #' @rdname atmos_table
 atmos_table <- function(units = c("SI", "Eng"), ret_units = TRUE ) {
   units <- units
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
   if (units == "SI") {
     alts <- seq(from=0, to=15000, by=1000)
     alts <- units::set_units(alts,"m")

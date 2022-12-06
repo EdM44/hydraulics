@@ -20,6 +20,7 @@ NULL
 #' @rdname water_table
 water_table <- function(units = c("SI", "Eng"), ret_units = TRUE ) {
   units <- units
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
   if (units == "SI") {
     temps <- seq(from=0, to=100, by=5)
     temps <- units::set_units(temps,"C")

@@ -8,11 +8,11 @@
 \title{Functions to calculate ICAO standard atmospheric properties: temperature, 
 density, and pressure.}
 \usage{
-atmtemp(alt = NULL, units = c("SI", "Eng"), ret_units = FALSE)
+atmtemp(alt = NULL, units = NULL, ret_units = FALSE)
 
-atmpres(alt = NULL, units = c("SI", "Eng"), ret_units = FALSE)
+atmpres(alt = NULL, units = NULL, ret_units = FALSE)
 
-atmdens(alt = NULL, units = c("SI", "Eng"), ret_units = FALSE)
+atmdens(alt = NULL, units = NULL, ret_units = FALSE)
 }
 \arguments{
 \item{alt}{the altitude (above mean sea level). If excluded, sea level is assumed [\eqn{m}{m} or \eqn{ft}{ft}]}

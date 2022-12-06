@@ -55,6 +55,7 @@ NULL
 pumpcurve <- function (Q = NULL, h = NULL, eq = "poly1", units = c("SI", "Eng")) {
   
   units <- units
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
   if (units == "SI") {
     txtx <- expression("Flow, "~m^{3}/s)
     txty <- sprintf("Head, m")

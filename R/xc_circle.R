@@ -25,6 +25,7 @@
 xc_circle <- function(y = NULL, d = NULL, units = c("SI", "Eng")) {
 
   units <- units
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
   
   if( inherits(y, "units") ) y <- units::drop_units(y)
   if( inherits(d, "units") ) d <- units::drop_units(d)

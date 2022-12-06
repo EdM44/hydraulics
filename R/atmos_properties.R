@@ -106,11 +106,12 @@ atmos <- function(alt = NULL, v = NULL) {
 
 #' @export
 #' @rdname atmosprops
-atmtemp <- function(alt = NULL, units = c("SI", "Eng"), ret_units = FALSE ) {
+atmtemp <- function(alt = NULL, units = NULL, ret_units = FALSE ) {
   # check to make sure that alt is given
   if( inherits(alt, "units") ) alt <- units::drop_units(alt)
   checks <- c(alt)
   units <- units
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
   if (length(checks) < 1) {
     if (units == "SI") {
       message("\nAltitude not given.\nAssuming alt = 0 m\n")
@@ -140,12 +141,13 @@ atmtemp <- function(alt = NULL, units = c("SI", "Eng"), ret_units = FALSE ) {
 }
 #' @export
 #' @rdname atmosprops
-atmpres <- function(alt = NULL, units = c("SI", "Eng"), ret_units = FALSE ) {
+atmpres <- function(alt = NULL, units = NULL, ret_units = FALSE ) {
   #call atmos function for three parameters and to check input
   # check to make sure that alt is given
   if( inherits(alt, "units") ) alt <- units::drop_units(alt)
   checks <- c(alt)
   units <- units
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
   if (length(checks) < 1) {
     if (units == "SI") {
       message("\nAltitude not given.\nAssuming alt = 0 m\n")
@@ -179,12 +181,13 @@ atmpres <- function(alt = NULL, units = c("SI", "Eng"), ret_units = FALSE ) {
 
 #' @export
 #' @rdname atmosprops
-atmdens <- function(alt = NULL, units = c("SI", "Eng"), ret_units = FALSE ) {
+atmdens <- function(alt = NULL, units = NULL, ret_units = FALSE ) {
   #call atmos function for three parameters and to check input
   # check to make sure that alt is given
   if( inherits(alt, "units") ) alt <- units::drop_units(alt)
   checks <- c(alt)
   units <- units
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
   if (length(checks) < 1) {
     if (units == "SI") {
       message("\nAltitude not given.\nAssuming alt = 0 m\n")

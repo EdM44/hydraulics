@@ -93,6 +93,7 @@ darcyweisbach <- function(Q = NULL, D = NULL, hf = NULL, L = NULL, ks = NULL,
                           nu = NULL, units = c("SI", "Eng"), ret_units = FALSE ) {
   checks <- c(Q, D, hf, L, ks)
   units <- units
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
   
   #check if any values have class 'units' and change to numeric if necessary
   for( i  in c("Q", "D", "hf", "L", "ks", "nu") ) {

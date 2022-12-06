@@ -12,19 +12,19 @@
 \title{Functions to calculate water properties: density, specific weight, dynamic and 
 kinematic viscosity, saturation vapor pressure, surface tension, and bulk modulus.}
 \usage{
-dvisc(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
+dvisc(T = NULL, units = NULL, ret_units = FALSE)
 
-dens(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
+dens(T = NULL, units = NULL, ret_units = FALSE)
 
-specwt(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
+specwt(T = NULL, units = NULL, ret_units = FALSE)
 
-kvisc(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
+kvisc(T = NULL, units = NULL, ret_units = FALSE)
 
-svp(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
+svp(T = NULL, units = NULL, ret_units = FALSE)
 
-surf_tension(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
+surf_tension(T = NULL, units = NULL, ret_units = FALSE)
 
-Ev(T = NULL, units = c("SI", "Eng"), ret_units = FALSE)
+Ev(T = NULL, units = NULL, ret_units = FALSE)
 }
 \arguments{
 \item{T}{the water temperature [\eqn{^{\circ}C}{C} or \eqn{^{\circ}F}{F}]}

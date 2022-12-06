@@ -37,6 +37,7 @@ operpoint <- function (pcurve = NULL, scurve = NULL) {
   }
   
   units <- scurve$units
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
   
   if (units == "SI") {
     txtx <- expression("Flow, "~m^{3}/s)

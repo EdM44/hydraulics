@@ -110,6 +110,7 @@ direct_step <- function (So = NULL, n = NULL, Q = NULL, y1 = NULL, y2 = NULL, b 
                          m = NULL, nsteps = 1, units = c("SI", "Eng"), ret_units = FALSE ) {
 
   units <- units
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
 
   #check if any values have class 'units' and change to numeric if necessary
   for( i  in c("So", "n", "Q", "y1", "y2", "b", "m") ) {

@@ -178,6 +178,7 @@ hardycross <- function (dfpipes = dfpipes, loops = loops, Qs = Qs, n_iter = 1,
 
   #Check input data and formats
   units <- units
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
   if (units == "SI") {
     g <- 9.80665     # m / s^2
     nu = suppressMessages(kvisc(units = "SI"))

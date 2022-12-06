@@ -40,6 +40,7 @@ xc_trap <- function(y = NULL, b = NULL, m = NULL, units = c("SI", "Eng")) {
 
   B <- b + 2 * ( m * y )
   
+  if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
   if (units == "SI") {
     txt1 <- sprintf("%.2f m",y)
     txt2 <- sprintf("%.2f m",b)
