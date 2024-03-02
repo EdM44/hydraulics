@@ -98,11 +98,31 @@ tbl <- water_table(units = "SI")
 tbl
 ```
 
-The table can be reformatted to something more attractive using the _kableExtra_ and _docxtools_ packages.
-```{r waterprops-table2}
-unitlist <- sapply(unname(tbl),units::deparse_unit)
+The table can be reformatted to something more attractive using the _kableExtra_ and _formatdown_ packages.
+
+```{r waterprops-table2b}
+unitlist <- sapply(unname(tbl), units::deparse_unit)
 colnames <- names(tbl)
-tbl <- docxtools::format_engr(units::drop_units(tbl), sigdig = c(0, 4, 4, 4, 4, 4, 3, 3))
+tbl <- units::drop_units(tbl)
+
+# Format as integer
+cols_we_want = c("Temp", "Spec_Weight")
+tbl[, cols_we_want] <- lapply(tbl[, cols_we_want], function (x) {formatdown::format_decimal(x, digits = 0)}
+)
+
+# Format to 4 digits, omit power of ten notation
+tbl$Density <- formatdown::format_power(tbl$Density, digits = 4, omit_power = c(0, 3))
+
+# Format using power-of-ten notation to 4 significant digits
+cols_we_want = c("Viscosity", "Kinem_Visc", "Sat_VP")
+tbl[, cols_we_want] <- lapply(tbl[, cols_we_want], function (x) {formatdown::format_power(x, digits = 4, format = "engr")}
+)
+
+# Format using power-of-ten notation to 3 significant digits
+cols_we_want = c("Surf_Tens", "Bulk_Mod")
+tbl[, cols_we_want] <- lapply(tbl[, cols_we_want], function (x) {formatdown::format_power(x, digits = 3, format = "engr")}
+)
+
 tbl2 <- knitr::kable(tbl, col.names = unitlist, align = "c", format = "html")
 kableExtra::add_header_above(tbl2, header = colnames, line = F, align = "c")
 ```
