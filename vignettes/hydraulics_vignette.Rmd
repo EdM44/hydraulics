@@ -54,7 +54,7 @@ par(cex=0.8, mgp = c(2,0.7,0))
 plot(Ts, nus, xlab = xlbl, ylab = ylbl, type="l")
 ```
 
-The water property functions can also be called with the _ret_units_ parameter, in which case the function returns an object of class _units_, as designated by the package `units`. This enables capabilities for new units being deduced as operations are performed on the values. Concise examples are in the [vignettes for the 'units' package](https://cran.r-project.org/package=units).
+The water property functions can also be called with the _ret_units_ parameter, in which case the function returns an object of class _units_, as designated by the package [units](https://cran.r-project.org/package=units). This enables capabilities for new units being deduced as operations are performed on the values. Concise examples are in the [vignettes for the 'units' package](https://cran.r-project.org/package=units).
 
 ```{r waterprops-4}
 T <- 25
@@ -98,11 +98,23 @@ tbl <- water_table(units = "SI")
 tbl
 ```
 
-The table can be reformatted to something more attractive using the _kableExtra_ and _docxtools_ packages.
+The table can be reformatted to something more attractive using the [kableExtra](https://cran.r-project.org/package=kableExtra) and [formatdown](https://cran.r-project.org/package=formatdown) packages.
 ```{r waterprops-table2}
 unitlist <- sapply(unname(tbl),units::deparse_unit)
 colnames <- names(tbl)
-tbl <- docxtools::format_engr(units::drop_units(tbl), sigdig = c(0, 4, 4, 4, 4, 4, 3, 3))
+tbl <- units::drop_units(tbl)
+# Format column as integer
+tbl$Temp <- formatdown::format_decimal(tbl$Temp, digits = 0)
+# Format column with one decimal
+tbl$Density <- formatdown::format_decimal(tbl$Density, digits = 1)
+# Format multiple columns using power-of-ten notation to 4 significant digits
+cols_we_want = c("Spec_Weight", "Viscosity", "Kinem_Visc", "Sat_VP")
+tbl[, cols_we_want] <- lapply(tbl[, cols_we_want], function (x) {formatdown::format_power(x, digits = 4, format = "sci", omit_power = c(-1, 4))}
+)
+# Format multiple columns using power-of-ten notation to 3 significant digits
+cols_we_want = c("Surf_Tens", "Bulk_Mod")
+tbl[, cols_we_want] <- lapply(tbl[, cols_we_want], function (x) {formatdown::format_power(x, digits = 3, format = "sci", omit_power = c(-1, 4))}
+)
 tbl2 <- knitr::kable(tbl, col.names = unitlist, align = "c", format = "html")
 kableExtra::add_header_above(tbl2, header = colnames, line = F, align = "c")
 ```

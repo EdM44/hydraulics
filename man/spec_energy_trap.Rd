@@ -20,7 +20,7 @@ spec_energy_trap(
 
 \item{m}{side slope (H:1) [unitless]}
 
-\item{y}{depth of flow [\eqn{m}{m} or \eqn{ft}{ft}] (optional)}
+\item{y}{depth(s) of flow (a numeric vector of length <= 2) [\eqn{m}{m} or \eqn{ft}{ft}] (optional)}
 
 \item{scale}{multiplier (of yc) for axis scales (default is 3)}
 
@@ -47,8 +47,11 @@ the cross-section;  \eqn{\alpha=1.0} in this function (as is commonly assumed).
 }
 \examples{
 
-# Draw a specific cross-section with flow 1, width 2, side slope 3:1 (H:V)
+# Draw a specific energy diagram for a cross-section with flow 1, width 2, side slope 3:1 (H:V)
 spec_energy_trap(Q = 1.0, b = 2.0, m = 3.0, scale = 4, units = "SI")
+
+# Draw the same specific energy diagram adding lines for depths, y = 0.5 and 0.8 m
+spec_energy_trap(Q = 1.0, b = 2.0, m = 3.0, scale = 4, y = c(0.5, 0.8), units = "SI")
 
 }
 \author{

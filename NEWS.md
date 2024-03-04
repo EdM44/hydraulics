@@ -1,5 +1,12 @@
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
+## hydraulics 0.6.2
+
+- Update vignette and DESCRIPTION to replace package docxtools with
+  formatdown
+- Modify the spec_energy_trap plotting function to include more than one
+  added depth line
+
 ## hydraulics 0.6.1
 
 - Modifications for R 4.2 change from warning to error for if()

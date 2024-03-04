@@ -7,7 +7,7 @@
 #' @param Q flow rate [\eqn{m^3 s^{-1}}{m^3/s} or \eqn{ft^3 s^{-1}}{ft^3/s}]
 #' @param b bottom width [\eqn{m}{m} or \eqn{ft}{ft}]
 #' @param m side slope (H:1) [unitless]
-#' @param y depth of flow [\eqn{m}{m} or \eqn{ft}{ft}] (optional)
+#' @param y depth(s) of flow (a numeric vector of length <= 2) [\eqn{m}{m} or \eqn{ft}{ft}] (optional)
 #' @param scale multiplier (of yc) for axis scales (default is 3)
 #' @param units character vector that contains the system of units [options are
 #'   \code{SI} for International System of Units and \code{Eng} for English (US customary)
@@ -27,9 +27,12 @@
 #'
 #' @examples
 #'
-#' # Draw a specific cross-section with flow 1, width 2, side slope 3:1 (H:V)
+#' # Draw a specific energy diagram for a cross-section with flow 1, width 2, side slope 3:1 (H:V)
 #' spec_energy_trap(Q = 1.0, b = 2.0, m = 3.0, scale = 4, units = "SI")
 #'
+#' # Draw the same specific energy diagram adding lines for depths, y = 0.5 and 0.8 m
+#' spec_energy_trap(Q = 1.0, b = 2.0, m = 3.0, scale = 4, y = c(0.5, 0.8), units = "SI")
+#' 
 #' @import ggplot2
 #' @import grid
 #'
@@ -84,15 +87,26 @@ spec_energy_trap <- function(Q = NULL, b = NULL, m = NULL, y = NULL, scale = 3,
   Emin <- yc + ((Q ^ 2) / (2 * g * Ac ^ 2))
 
   ylim <- yc*scalefact
-  yalt <- E1 <- NULL
+  yalt <- E1 <- yalt2 <- E2 <- NULL
   #if y is given, find alternate depth
-  if ( ! missing (y) ) {
-    E1 <- y + (Q ^ 2) / (2 * g * (y * (b + m * y))^2)
-    if ( y > yc ) interv <- c(0.0000001, yc)
-    if ( y < yc ) interv <- c(yc, 200)
+  if (length(y) > 2) {
+    stop("y cannot be greater than 2")
+  }
+  if ( length(y) >= 1 ) {
+    E1 <- y[1] + (Q ^ 2) / (2 * g * (y[1] * (b + m * y[1]))^2)
+    if ( y[1] > yc ) interv <- c(0.0000001, yc)
+    if ( y[1] < yc ) interv <- c(yc, 200)
     yaltfun <- function(ya) { E1 - (ya + (Q ^ 2) / (2 * g * (ya * (b + m * ya))^2)) }
     yalt <- uniroot(yaltfun, interval = interv, extendInt = "yes")$root
-    ylim <- max(ylim, y, yalt)
+    ylim <- max(ylim, y[1], yalt)
+    if ( length(y) == 2 ) {
+      E2 <- y[2] + (Q ^ 2) / (2 * g * (y[2] * (b + m * y[2]))^2)
+      if ( y[2] > yc ) interv <- c(0.0000001, yc)
+      if ( y[2] < yc ) interv <- c(yc, 200)
+      yaltfun2 <- function(ya) { E2 - (ya + (Q ^ 2) / (2 * g * (ya * (b + m * ya))^2)) }
+      yalt2 <- uniroot(yaltfun2, interval = interv, extendInt = "yes")$root
+      ylim <- max(ylim, y[1], y[2], yalt)
+    }
   }
 
   #round up ylim a little
@@ -114,7 +128,7 @@ spec_energy_trap <- function(Q = NULL, b = NULL, m = NULL, y = NULL, scale = 3,
   offst <- ymax*0.0275
   
   p <- ggplot2::ggplot() +
-    ggplot2::geom_path(data=eycurve,ggplot2::aes(x=xx, y=yy),color="black", size=1.5) +
+    ggplot2::geom_path(data=eycurve,ggplot2::aes(x=xx, y=yy),color="black", linewidth=1.5) +
     ggplot2::scale_x_continuous(txtx, limits = c(0, ymax), expand = c(0,0)) +
     ggplot2::scale_y_continuous(txty, limits = c(0, ymax), expand = c(0,0)) +
     ggplot2::geom_abline(slope = 1, intercept = 0 ,color="black",linetype = "dashed") +
@@ -124,16 +138,27 @@ spec_energy_trap <- function(Q = NULL, b = NULL, m = NULL, y = NULL, scale = 3,
     ggplot2::annotate(geom="text", x=Emin/2, y=yc+offst, label=txt2, angle = 0, size = 3) +
     ggplot2::coord_fixed(ratio = 1) +
     ggplot2::theme_bw()
-  if ( ! missing (y) ) {
-    txt3 <- sprintf("y=%.3f",y)
+  if ( ! is.null(yalt) ) {
+    txt3 <- sprintf("y=%.3f",y[1])
     txt4 <- sprintf("y=%.3f",yalt)
     txt5 <- sprintf("E=%.3f",E1)
-    p <- p + ggplot2::geom_segment(ggplot2::aes(x=E1, xend=E1, y=0, yend=max(y,yalt)),linetype=3) +
+    p <- p + ggplot2::geom_segment(ggplot2::aes(x=E1, xend=E1, y=0, yend=max(y[1],yalt)),linetype=3) +
       ggplot2::geom_segment(ggplot2::aes(x=0, xend=E1, y=yalt, yend=yalt), linetype=3) +
-      ggplot2::geom_segment(ggplot2::aes(x=0, xend=E1, y=y, yend=y), linetype=3) +
-      ggplot2::annotate(geom="text", x=min(Emin/2,E1/2), y=y+offst, label=txt3, angle = 0, size = 3,hjust = "left") +
+      ggplot2::geom_segment(ggplot2::aes(x=0, xend=E1, y=y[1], yend=y[1]), linetype=3) +
+      ggplot2::annotate(geom="text", x=min(Emin/2,E1/2), y=y[1]+offst, label=txt3, angle = 0, size = 3,hjust = "left") +
       ggplot2::annotate(geom="text", x=min(Emin/2,E1/2), y=yalt+offst, label=txt4, angle = 0, size = 3,hjust = "left") +
-      ggplot2::annotate(geom="text", x=E1+offst, y=(y+yalt)/2, label=txt5, angle = 90, size = 3)
+      ggplot2::annotate(geom="text", x=E1+offst, y=(y[1]+yalt)/2, label=txt5, angle = 90, size = 3)
+  }
+  if ( ! is.null(yalt2) ) {
+    txt3 <- sprintf("y=%.3f",y[2])
+    txt4 <- sprintf("y=%.3f",yalt2)
+    txt5 <- sprintf("E=%.3f",E2)
+    p <- p + ggplot2::geom_segment(ggplot2::aes(x=E2, xend=E2, y=0, yend=max(y[2],yalt2)),linetype=3) +
+      ggplot2::geom_segment(ggplot2::aes(x=0, xend=E2, y=yalt2, yend=yalt2), linetype=3) +
+      ggplot2::geom_segment(ggplot2::aes(x=0, xend=E2, y=y[2], yend=y[2]), linetype=3) +
+      ggplot2::annotate(geom="text", x=min(Emin/2,E2/2), y=y[2]+offst, label=txt3, angle = 0, size = 3,hjust = "left") +
+      ggplot2::annotate(geom="text", x=min(Emin/2,E2/2), y=yalt2+offst, label=txt4, angle = 0, size = 3,hjust = "left") +
+      ggplot2::annotate(geom="text", x=E2+offst, y=(y[2]+yalt2)/2, label=txt5, angle = 90, size = 3)
   }
   return(p)
 }
