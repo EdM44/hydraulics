@@ -74,7 +74,7 @@
       <img src="" class="logo" alt=""><h1>Hydraulics Vignette</h1>
                         <h4 data-toc-skip class="author">Ed Maurer</h4>
             
-            <h4 data-toc-skip class="date">2024-03-04</h4>
+            <h4 data-toc-skip class="date">2024-03-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/EdM44/hydraulics/blob/HEAD/vignettes/hydraulics_vignette.Rmd" class="external-link"><code>vignettes/hydraulics_vignette.Rmd</code></a></small>
       <div class="d-none name"><code>hydraulics_vignette.Rmd</code></div>
@@ -1091,9 +1091,18 @@ the following head losses were observed for different flow rates:</p>
 </tr>
 </tbody>
 </table>
-<p>Roughness values are calculated as shown below, and the results
-plotted on a Moody diagram as a reality check.</p>
+<p>The absolute roughness can be calculated by providing the other
+variables.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/darcyweisbach.html">darcyweisbach</a></span><span class="op">(</span>Q <span class="op">=</span> <span class="fl">0.00020</span>, hf <span class="op">=</span> <span class="fl">0.052</span>, L <span class="op">=</span> <span class="fl">3.0</span>, D <span class="op">=</span> <span class="fl">0.025</span>, nu <span class="op">=</span> <span class="fu"><a href="../reference/waterprops.html">kvisc</a></span><span class="op">(</span>T<span class="op">=</span><span class="fl">20</span>, units<span class="op">=</span><span class="st">'SI'</span><span class="op">)</span>, units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'SI'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Absolute roughness: %.6f m\nFriction Factor: %.4f\nDiameter: %.2f m\n"</span>, <span class="va">ans</span><span class="op">$</span><span class="va">ks</span>, <span class="va">ans</span><span class="op">$</span><span class="va">f</span>, <span class="va">ans</span><span class="op">$</span><span class="va">D</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Absolute roughness: 0.000473 m</span></span>
+<span><span class="co">#&gt; Friction Factor: 0.0514</span></span>
+<span><span class="co">#&gt; Diameter: 0.03 m</span></span></code></pre></div>
+<p>Several roughness values can be calculated in one call as shown
+below, and the results plotted on a Moody diagram as a reality
+check.</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Qs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.00020</span>, <span class="fl">0.00024</span>, <span class="fl">0.00030</span><span class="op">)</span> <span class="co">#converted to m^3/s</span></span>
 <span><span class="va">hfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.052</span>,<span class="fl">0.073</span>,<span class="fl">0.110</span><span class="op">)</span></span>
 <span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html" class="external-link">mapply</a></span><span class="op">(</span><span class="va">darcyweisbach</span>, Q<span class="op">=</span><span class="va">Qs</span>, hf<span class="op">=</span><span class="va">hfs</span>, MoreArgs <span class="op">=</span> </span>
@@ -1107,7 +1116,7 @@ plotted on a Moody diagram as a reality check.</p>
 <span><span class="va">Re_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">ans</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">Re</span><span class="op">)</span></span>
 <span><span class="va">f_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">ans</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">f</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/moody.html">moody</a></span><span class="op">(</span>Re <span class="op">=</span> <span class="va">Re_values</span>, f <span class="op">=</span> <span class="va">f_values</span><span class="op">)</span></span></code></pre></div>
-<p><img src="hydraulics_vignette_files/figure-html/pipe-6-1.png" width="480"></p>
+<p><img src="hydraulics_vignette_files/figure-html/pipe-7-1.png" width="480"></p>
 </div>
 <div class="section level3">
 <h3 id="flow-in-circular-pipes-flowing-partially-full">4.0 Flow in Circular Pipes Flowing Partially Full<a class="anchor" aria-label="anchor" href="#flow-in-circular-pipes-flowing-partially-full"></a>
@@ -1128,7 +1137,7 @@ unknown. For an existing pipe, a common problem is the determination of
 the depth, <em>y</em> that a given flow <em>Q</em>, will have given a
 pipe diameter <em>d</em>, slope <em>S</em> and roughness <em>n</em>. An
 example of that follows.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/manningc.html">manningc</a></span><span class="op">(</span>Q<span class="op">=</span><span class="fl">0.01</span>, n<span class="op">=</span><span class="fl">0.013</span>, Sf<span class="op">=</span><span class="fl">0.001</span>, d <span class="op">=</span> <span class="fl">0.2</span>, units<span class="op">=</span><span class="st">"SI"</span>, ret_units <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">ans</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"pipe"</span>, padding<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -1192,7 +1201,7 @@ example of that follows.</p>
 </tbody>
 </table>
 <p>It is also sometimes convenient to see a cross-section diagram.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/manningc.html">manningc</a></span><span class="op">(</span>Q<span class="op">=</span><span class="fl">0.01</span>, n<span class="op">=</span><span class="fl">0.013</span>, Sf<span class="op">=</span><span class="fl">0.001</span>, d <span class="op">=</span> <span class="fl">0.2</span>, units<span class="op">=</span><span class="st">"SI"</span>, ret_units <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/xc_circle.html">xc_circle</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">ans</span><span class="op">$</span><span class="va">y</span>, d<span class="op">=</span><span class="va">ans</span><span class="op">$</span><span class="va">d</span>, units <span class="op">=</span> <span class="st">"SI"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="hydraulics_vignette_files/figure-html/manningc-2-1.png" width="40%"></p>
@@ -1221,7 +1230,7 @@ function determines a solution. For example, a design might require the
 slope to deliver a required flow, <em>Q</em> through a channel with
 known geometry (bottom width, <em>b</em>, side slope <em>m</em>) and a
 given depth <em>y</em>:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/manningt.html">manningt</a></span><span class="op">(</span>Q <span class="op">=</span> <span class="fl">360.</span>, n <span class="op">=</span> <span class="fl">0.015</span>, m <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">20.0</span>, y <span class="op">=</span> <span class="fl">3.0</span>, units <span class="op">=</span> <span class="st">"Eng"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Slope: %.5f ft\n"</span>, <span class="va">ans</span><span class="op">$</span><span class="va">Sf</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Slope: 0.00088 ft</span></span>
@@ -1265,7 +1274,7 @@ or a drop of 0.88 ft per 1000 ft. The critical depth <em>yc</em> is
 lower than the normal depth <em>y</em>, indicating flow under these
 conditions is subcritical, also seen with <em>Fr &lt; 1.0</em>.</p>
 <p>Units can also be returned by this function.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/manningt.html">manningt</a></span><span class="op">(</span>Q <span class="op">=</span> <span class="fl">360.</span>, n <span class="op">=</span> <span class="fl">0.015</span>, m <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">20.0</span>, y <span class="op">=</span> <span class="fl">3.0</span>, units <span class="op">=</span> <span class="st">"Eng"</span>, ret_units <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">ans</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"pipe"</span>, padding<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -1333,7 +1342,7 @@ conditions is subcritical, also seen with <em>Fr &lt; 1.0</em>.</p>
 </tbody>
 </table>
 <p>A simple diagram can be generated for the channel.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/xc_trap.html">xc_trap</a></span><span class="op">(</span> y <span class="op">=</span> <span class="fl">3.0</span>, b <span class="op">=</span> <span class="fl">20.0</span>, m <span class="op">=</span> <span class="fl">1.0</span>, units <span class="op">=</span> <span class="st">"Eng"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="hydraulics_vignette_files/figure-html/manningt-2.1-1.png" width="384"></p>
 <p>When solving for flow depth, <em>y</em>, or channel bottom width,
@@ -1342,7 +1351,7 @@ conditions is subcritical, also seen with <em>Fr &lt; 1.0</em>.</p>
 hydraulic efficiency and practical concerns with construction often
 result in designs that flow with depths less than the hydraulic optimum.
 Solving a prior example for bottom width illustrates this.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/manningt.html">manningt</a></span><span class="op">(</span>Q <span class="op">=</span> <span class="fl">360.</span>, n <span class="op">=</span> <span class="fl">0.015</span>, m <span class="op">=</span> <span class="fl">1</span>, y <span class="op">=</span> <span class="fl">3.0</span>, Sf <span class="op">=</span> <span class="fl">0.00088</span>, units <span class="op">=</span> <span class="st">"Eng"</span><span class="op">)</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">ans</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"pipe"</span>, padding<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <table style="width:100%;" class="table">
@@ -1398,7 +1407,7 @@ Solving a prior example for bottom width illustrates this.</p>
 <td align="left">4.8</td>
 </tr></tbody>
 </table>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Optimal bottom width: %.5f ft\n"</span>, <span class="va">ans</span><span class="op">$</span><span class="va">bopt</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Optimal bottom width: 4.76753 ft</span></span></code></pre></div>
 <p>The results show that, aside from the rounding, the width is returned
@@ -1406,7 +1415,7 @@ as expected (approximately 20 ft), and the optimal bottom width for
 hydraulic efficiency would be closer to 4.76 ft. To check the depth that
 would be associated with a channel of the optimal width, substitute the
 optimal width for <em>b</em> and solve for <em>y</em>:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/manningt.html">manningt</a></span><span class="op">(</span>Q <span class="op">=</span> <span class="fl">360.</span>, n <span class="op">=</span> <span class="fl">0.015</span>, m <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">4.767534</span>, Sf <span class="op">=</span> <span class="fl">0.00088</span>, units <span class="op">=</span> <span class="st">"Eng"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Optimal depth: %.5f ft\n"</span>, <span class="va">ans</span><span class="op">$</span><span class="va">yopt</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Optimal depth: 5.75492 ft</span></span></code></pre></div>
@@ -1416,7 +1425,7 @@ that can occur for any given specific energy. This is important for
 understanding what may happen to the water surface when flow encounters
 an obstacle or transition. For the channel of the example above, the
 diagram is</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/spec_energy_trap.html">spec_energy_trap</a></span><span class="op">(</span> Q <span class="op">=</span> <span class="fl">360</span>, b <span class="op">=</span> <span class="fl">20</span>, m <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">4</span>, units <span class="op">=</span> <span class="st">"Eng"</span> <span class="op">)</span></span></code></pre></div>
 <p><img src="hydraulics_vignette_files/figure-html/manningt-3-1.png" width="384"></p>
 <p>This provides an illustration that for y=3 ft the flow is subcritical
@@ -1429,7 +1438,7 @@ the hump the flow will be in supercritical conditions, flowing at the
 <em>alternate depth</em>.</p>
 <p>The specific energy for a given depth <em>y</em> and alternate depth
 can be added to the plot by including an argument for depth, y.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/spec_energy_trap.html">spec_energy_trap</a></span><span class="op">(</span> Q <span class="op">=</span> <span class="fl">360</span>, b <span class="op">=</span> <span class="fl">20</span>, m <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">4</span>, y<span class="op">=</span><span class="fl">3.0</span>, units <span class="op">=</span> <span class="st">"Eng"</span> <span class="op">)</span></span></code></pre></div>
 <p><img src="hydraulics_vignette_files/figure-html/manningt-4-1.png" width="384"></p>
 <p>A final example shows how to vary multiple input variables
@@ -1438,7 +1447,7 @@ and <em>y</em> values? The <em>expand.grid</em> function produces all
 combinations of different variables. The functions can be run for all of
 the problem permutations and the results plotted in many different ways.
 One example follows.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0.011</span>, <span class="fl">0.021</span>, <span class="fl">0.002</span><span class="op">)</span></span>
 <span><span class="va">ys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1.5</span>, <span class="fl">2.1</span>, <span class="fl">0.1</span><span class="op">)</span></span>
 <span><span class="va">ny</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span>n<span class="op">=</span><span class="va">ns</span>, y<span class="op">=</span><span class="va">ys</span><span class="op">)</span></span>
@@ -1483,13 +1492,13 @@ atmospheric, so the equation becomes: <span class="math display">\[h_p =
 calculated manually or using other package functions for friction loss
 in a pipe system using <span class="math inline">\(Q=1\)</span>. As an
 example:</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/darcyweisbach.html">darcyweisbach</a></span><span class="op">(</span>Q <span class="op">=</span> <span class="fl">1</span>,D <span class="op">=</span> <span class="fl">20</span><span class="op">/</span><span class="fl">12</span>, L <span class="op">=</span> <span class="fl">3884</span>, ks <span class="op">=</span> <span class="fl">0.0005</span>, nu <span class="op">=</span> <span class="fl">1.23e-5</span>, units <span class="op">=</span> <span class="st">"Eng"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Coefficient K: %.3f\n"</span>, <span class="va">ans</span><span class="op">$</span><span class="va">hf</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Coefficient K: 0.160</span></span></code></pre></div>
 <p>For this example assume a static head of 30 ft and generate a
 systemcurve object:</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scurve</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/systemcurve.html">systemcurve</a></span><span class="op">(</span>hs <span class="op">=</span> <span class="fl">30</span>, K <span class="op">=</span> <span class="va">ans</span><span class="op">$</span><span class="va">hf</span>, units <span class="op">=</span> <span class="st">"Eng"</span><span class="op">)</span></span></code></pre></div>
 The pump characteristic curve is based on data or graphs obtained from a
 pump manufacturer.
@@ -1528,7 +1537,7 @@ vectors. For the flow manufacturer’s pump curves often use units that
 are not what the <em>hydraulics</em> package needs, and the
 <em>units</em> package provides a convenient way to convert them as
 needed.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">qgpm</span> <span class="op">&lt;-</span> <span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://r-quantities.github.io/units/reference/units.html" class="external-link">set_units</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5000</span>, <span class="fl">7850</span><span class="op">)</span>, <span class="va">gallons</span><span class="op">/</span><span class="va">minute</span><span class="op">)</span></span>
 <span><span class="va">qcfs</span> <span class="op">&lt;-</span> <span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://r-quantities.github.io/units/reference/units.html" class="external-link">set_units</a></span><span class="op">(</span><span class="va">qgpm</span>, <span class="va">ft</span><span class="op">^</span><span class="fl">3</span><span class="op">/</span><span class="va">s</span><span class="op">)</span></span>
 <span><span class="va">hft</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">81</span>, <span class="fl">60</span>, <span class="fl">20</span><span class="op">)</span> <span class="co">#units are already in ft so setting units is optional</span></span>
@@ -1536,12 +1545,12 @@ needed.</p>
 <p>The function <em>pumpcurve</em> returns a <em>pumpcurve</em> object
 that includes the polynomial fit equation and a simple plot to check the
 fit.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pcurve</span><span class="op">$</span><span class="va">p</span></span></code></pre></div>
 <p><img src="hydraulics_vignette_files/figure-html/pump-7-1.png" width="700"></p>
 <p>The two curves can be combined to find the operating point of the
 selected pump in the defined system.</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">oppt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/operpoint.html">operpoint</a></span><span class="op">(</span>pcurve <span class="op">=</span> <span class="va">pcurve</span>, scurve <span class="op">=</span> <span class="va">scurve</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Operating Point: Q = %.3f, h = %.3f\n"</span>, <span class="va">oppt</span><span class="op">$</span><span class="va">Qop</span>, <span class="va">oppt</span><span class="op">$</span><span class="va">hop</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Operating Point: Q = 12.051, h = 53.285</span></span>
@@ -1586,7 +1595,7 @@ like the following. (If fixed <em>K</em> values are provided, f, L and D
 are not needed). These <em>f</em> values were estimated using <span class="math inline">\(ks=0.00025 m\)</span> in the form of the Colebrook
 equation for fully rough flows: <span class="math display">\[\frac{1}{\sqrt{f}}=log\left(\frac{3.7}{\frac{ks}{D}}\right)\]</span>
 This simplification removes the velocity dependence of <em>f</em>.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dfpipes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">10</span><span class="op">)</span>,                                <span class="co">#pipe ID</span></span>
 <span>  D <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.3</span>,<span class="fl">0.2</span>,<span class="fl">0.2</span>,<span class="fl">0.2</span>,<span class="fl">0.2</span>,<span class="fl">0.15</span>,<span class="fl">0.25</span>,<span class="fl">0.15</span>,<span class="fl">0.15</span>,<span class="fl">0.25</span><span class="op">)</span>,         <span class="co">#diameter in m</span></span>
@@ -1596,7 +1605,7 @@ This simplification removes the velocity dependence of <em>f</em>.</p>
 <span><span class="va">loops</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">9</span>,<span class="fl">10</span>,<span class="fl">6</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">Qs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.040</span>,<span class="fl">.040</span>,<span class="fl">.02</span>,<span class="op">-</span><span class="fl">.02</span>,<span class="op">-</span><span class="fl">.04</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.02</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="op">-</span><span class="fl">.02</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">.02</span>,<span class="fl">.02</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Running it and looking at the output after three iterations:</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hardycross.html">hardycross</a></span><span class="op">(</span>dfpipes <span class="op">=</span> <span class="va">dfpipes</span>, loops <span class="op">=</span> <span class="va">loops</span>, Qs <span class="op">=</span> <span class="va">Qs</span>, n_iter <span class="op">=</span> <span class="fl">3</span>, units <span class="op">=</span> <span class="st">"SI"</span><span class="op">)</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">ans</span><span class="op">$</span><span class="va">dfloops</span>, digits <span class="op">=</span> <span class="fl">4</span>, format <span class="op">=</span> <span class="st">"pipe"</span>, padding<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -1675,7 +1684,7 @@ This simplification removes the velocity dependence of <em>f</em>.</p>
 </table>
 <p>The output pipe data frame has added columns, including the flow
 (where direction is that for the first loop containing the segment).</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">ans</span><span class="op">$</span><span class="va">dfpipes</span>, digits <span class="op">=</span> <span class="fl">4</span>, format <span class="op">=</span> <span class="st">"pipe"</span>, padding<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
@@ -1774,7 +1783,7 @@ This simplification removes the velocity dependence of <em>f</em>.</p>
 the use of the Colebrook equation allows friction losses to vary with
 Reynolds number. To use this approach the input data must include
 absolute roughness. Example values are included here:</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dfpipes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">10</span><span class="op">)</span>,                         <span class="co">#pipe ID</span></span>
 <span>  D <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.3</span>,<span class="fl">0.2</span>,<span class="fl">0.2</span>,<span class="fl">0.2</span>,<span class="fl">0.2</span>,<span class="fl">0.15</span>,<span class="fl">0.25</span>,<span class="fl">0.15</span>,<span class="fl">0.15</span>,<span class="fl">0.25</span><span class="op">)</span>,  <span class="co">#diameter in m</span></span>
@@ -1786,7 +1795,7 @@ absolute roughness. Example values are included here:</p>
 <p>The effect of allowing the calculation of <em>f</em> to be
 (correctly) dependent on velocity (via the Reynolds number) can be seen,
 though the effect on final flow values is small.</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hardycross.html">hardycross</a></span><span class="op">(</span>dfpipes <span class="op">=</span> <span class="va">dfpipes</span>, loops <span class="op">=</span> <span class="va">loops</span>, Qs <span class="op">=</span> <span class="va">Qs</span>, n_iter <span class="op">=</span> <span class="fl">3</span>, units <span class="op">=</span> <span class="st">"SI"</span><span class="op">)</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">ans</span><span class="op">$</span><span class="va">dfpipes</span>, digits <span class="op">=</span> <span class="fl">4</span>, format <span class="op">=</span> <span class="st">"pipe"</span>, padding<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -1906,7 +1915,7 @@ Resources: Examples Using R</a>.</p>
 <h3 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
 </h3>
 <p><a href="https://cran.r-project.org/web/licenses/GPL-3" class="external-link">GPL-3</a>
-2024-03-04 Ed Maurer</p>
+2024-03-05 Ed Maurer</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
