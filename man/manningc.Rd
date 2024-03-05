@@ -11,6 +11,7 @@ manningc(
   y = NULL,
   d = NULL,
   y_d = NULL,
+  n_var = FALSE,
   units = c("SI", "Eng"),
   ret_units = FALSE
 )
@@ -18,7 +19,7 @@ manningc(
 \arguments{
 \item{Q}{numeric vector that contains the flow rate [\eqn{m^3 s^{-1}}{m^3/s} or \eqn{ft^3 s^{-1}}{ft^3/s}]}
 
-\item{n}{numeric vector that contains the Manning roughness coefficient.}
+\item{n}{numeric vector that contains the Manning roughness coefficient (for full flow or fixed).}
 
 \item{Sf}{numeric vector that contains the slope of the pipe [unitless]}
 
@@ -27,6 +28,8 @@ manningc(
 \item{d}{numeric vector that contains the pipe diameter [\eqn{m}{m} or \eqn{ft}{ft}]}
 
 \item{y_d}{numeric vector that contains the ratio of depth to diameter [unitless]}
+
+\item{n_var}{If set to TRUE the value of n for full flow is adjusted with depth. [Default is FALSE]}
 
 \item{units}{character vector that contains the system of units [options are
 \code{SI} for International System of Units and \code{Eng} for English (US customary)
@@ -46,7 +49,7 @@ Returns a list including the missing parameter:
   \item y - flow depth
   \item d - pipe diameter
   \item Sf - slope
-  \item n - Manning's roughness
+  \item n - Manning's roughness (for full flow, or as adjusted if n_var is TRUE)
   \item yc - critical depth
   \item Fr - Froude number
   \item Re - Reynolds number
@@ -62,7 +65,9 @@ The iemisc::manningcirc function was adapted here for more limited cases
 commonly used in classroom exercises, additional checks were included to ensure
 the pipe is flowing less than full, and a cross-section figure is also
 available. The iemisc::manningcirc and iemisc::manningcircy functions were
-combined into a single function.
+combined into a single function. Manning n supplied is assumed to be that for
+full pipe flow; an optional argument may be supplied to account for n varying 
+with depth.
 }
 \details{
 The possible applications of this function for solving the Manning equation
@@ -100,9 +105,13 @@ manningc(d = 0.6, Q = 0.17, n = 0.013, y = 0.3, units = "SI")
 manningc(Q = 83.5, n = 0.015, Sf = 0.0002, y_d = 0.9, units = "Eng")
 #returns 7.0 ft required diameter
 
-#Solving for depth, d when given Q: SI units
-manningc(Q=0.01, n=0.0013, Sf=0.001, d = 0.2, units="SI")
-#returns depth  y = 0.042 m, critical depth, yc = 0.085 m
+#Solving for depth, y when given Q: SI units
+manningc(Q=0.01, n=0.013, Sf=0.001, d = 0.2, units="SI")
+#returns depth  y = 0.158 m, critical depth, yc = 0.085 m
+
+#Solving for depth, y when given Q: SI units, and n variable with depth
+manningc(Q=0.01, n=0.013, Sf=0.001, d = 0.2, n_var = TRUE, units="SI")
+#returns depth  y = 0.174 m, critical depth, yc = 0.085 m
 
 }
 \seealso{

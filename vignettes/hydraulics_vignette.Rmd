@@ -208,8 +208,14 @@ Another example of the use of this package would be in a laboratory setting, whe
 knitr::kable(data.frame(Q_liter_s=c("0.20","0.24","0.30"), Headloss_m=c("0.052","0.073","0.110")), format="pipe", padding=0)
 ```
 
-Roughness values are calculated as shown below, and the results plotted on a Moody diagram as a reality check.
-```{r pipe-6, message=FALSE, fig.width = 5, fig.asp = .62}
+The absolute roughness can be calculated by providing the other variables.
+```{r pipe-6, message=FALSE}
+ans <- darcyweisbach(Q = 0.00020, hf = 0.052, L = 3.0, D = 0.025, nu = kvisc(T=20, units='SI'), units = c('SI'))
+cat(sprintf("Absolute roughness: %.6f m\nFriction Factor: %.4f\nDiameter: %.2f m\n", ans$ks, ans$f, ans$D))
+```
+
+Several roughness values can be calculated in one call as shown below, and the results plotted on a Moody diagram as a reality check.
+```{r pipe-7, message=FALSE, fig.width = 5, fig.asp = .62}
 Qs = c(0.00020, 0.00024, 0.00030) #converted to m^3/s
 hfs <- c(0.052,0.073,0.110)
 ans <- mapply(darcyweisbach, Q=Qs, hf=hfs, MoreArgs = 

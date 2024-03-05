@@ -8,7 +8,9 @@
 #' commonly used in classroom exercises, additional checks were included to ensure
 #' the pipe is flowing less than full, and a cross-section figure is also
 #' available. The iemisc::manningcirc and iemisc::manningcircy functions were
-#' combined into a single function.
+#' combined into a single function. Manning n supplied is assumed to be that for
+#' full pipe flow; an optional argument may be supplied to account for n varying 
+#' with depth.
 #'
 #' The possible applications of this function for solving the Manning equation
 #' for circular pipes are:
@@ -26,7 +28,8 @@
 #' @param Sf numeric vector that contains the slope of the pipe [unitless]
 #' @param y numeric vector that contains the water depth [\eqn{m}{m} or \eqn{ft}{ft}]
 #' @param y_d numeric vector that contains the ratio of depth to diameter [unitless]
-#' @param n numeric vector that contains the Manning roughness coefficient.
+#' @param n numeric vector that contains the Manning roughness coefficient (for full flow or fixed).
+#' @param n_var If set to TRUE the value of n for full flow is adjusted with depth. [Default is FALSE]
 #' @param units character vector that contains the system of units [options are
 #'   \code{SI} for International System of Units and \code{Eng} for English (US customary)
 #'   units. This is used for compatibility with iemisc package]
@@ -43,7 +46,7 @@
 #'   \item y - flow depth
 #'   \item d - pipe diameter
 #'   \item Sf - slope
-#'   \item n - Manning's roughness
+#'   \item n - Manning's roughness (for full flow, or as adjusted if n_var is TRUE)
 #'   \item yc - critical depth
 #'   \item Fr - Froude number
 #'   \item Re - Reynolds number
@@ -76,18 +79,24 @@
 #' manningc(Q = 83.5, n = 0.015, Sf = 0.0002, y_d = 0.9, units = "Eng")
 #' #returns 7.0 ft required diameter
 #' 
-#' #Solving for depth, d when given Q: SI units
-#' manningc(Q=0.01, n=0.0013, Sf=0.001, d = 0.2, units="SI")
-#' #returns depth  y = 0.042 m, critical depth, yc = 0.085 m
+#' #Solving for depth, y when given Q: SI units
+#' manningc(Q=0.01, n=0.013, Sf=0.001, d = 0.2, units="SI")
+#' #returns depth  y = 0.158 m, critical depth, yc = 0.085 m
 #'
+#' #Solving for depth, y when given Q: SI units, and n variable with depth
+#' manningc(Q=0.01, n=0.013, Sf=0.001, d = 0.2, n_var = TRUE, units="SI")
+#' #returns depth  y = 0.174 m, critical depth, yc = 0.085 m
+#' 
 #' @seealso \code{\link{xc_circle}} for a cross-section diagram of the circular channel
+#'
+#' @importFrom pracma fsolve
 #'
 #' @name manningc
 NULL
 
-#function for finding critical depth
+# Function for finding critical depth
 ycfunc <- function(Q = NULL, d = NULL, g = NULL) {
-  #find theta for 99% full (y/D = 0.99)
+  # Find theta for 99% full (y/D = 0.99)
   thetafull <- 2 * acos(1 - (2 * (0.99)))
   Qcfull <- sqrt(g * d^5 * ((thetafull - sin(thetafull))^3)/(8^3 * sin(thetafull/2.0)))
   if ( Q >= Qcfull ) {
@@ -106,7 +115,14 @@ Qfull <- function(d = NULL, Sf = NULL, n = NULL, k = NULL) {
   return(Qf)
 }
 
-#attaches units to output if specified
+# Calculates n/nf using Eq. 30 from Akgiray, 2005, Can. J. Civ. Eng. 32: 490-499
+n_adj_func <- function(yd) {
+  X <- 1 - yd
+  n_nf <- 1 - 0.8627*X^5 + 0.4281*X^4 + 0.7626*X^3 - 1.02*X^2 + 0.8057*X
+  return(max(n_nf, 1.0))
+}
+
+# Attaches units to output if specified
 units::units_options(allow_mixed = TRUE)
 return_fcn2 <- function(x = NULL, units = NULL, ret_units = FALSE) {
   if (units == "SI") {
@@ -125,8 +141,7 @@ return_fcn2 <- function(x = NULL, units = NULL, ret_units = FALSE) {
 #' @export
 #' @rdname manningc
 manningc <- function (Q = NULL, n = NULL, Sf = NULL, y = NULL, d = NULL, y_d = NULL,
-                      units = c("SI", "Eng"), ret_units = FALSE ) {
-
+                      n_var = FALSE, units = c("SI", "Eng"), ret_units = FALSE ) {
   units <- units
   if (length(units) != 1) stop("Incorrect unit system. Specify either SI or Eng.")
 
@@ -182,7 +197,9 @@ manningc <- function (Q = NULL, n = NULL, Sf = NULL, y = NULL, d = NULL, y_d = N
   #########CASE 1########################
   if (case == 1) {
     if (missing(Q)) {
-      Qf <- Qfull(d = d, Sf = Sf, n = n, k = k)
+      nf <- n
+      if (n_var == TRUE) n <- n * n_adj_func(y/d)
+      Qf <- Qfull(d = d, Sf = Sf, n = nf, k = k)
       theta <- 2 * acos(1 - (2 * (y / d)))
       A <- (theta - sin(theta)) * (d ^ 2 / 8)
       P <- ((theta * d) / 2)
@@ -202,17 +219,43 @@ manningc <- function (Q = NULL, n = NULL, Sf = NULL, y = NULL, d = NULL, y_d = N
       out <- list(Q = Q, V = V, A = A, P = P, R = R, y = y, d = d, Sf = Sf, n = n, yc = yc, Fr = Fr, Re = Re, Qf = Qf)
       return(return_fcn2(x = out, units = units, ret_units = ret_units))
                              
-      } else if (missing(n)) {
+    } else if (missing(n)) {
       theta <- 2 * acos(1 - (2 * (y / d)))
       A <- (theta - sin(theta)) * (d ^ 2 / 8)
       P <- ((theta * d) / 2)
       B <- d * sin(theta / 2)
       R <- A / P
       D <- A / B
+      # In this case, if n_var == TRUE, what is returned is assumed to be the adjusted n value (variable with depth)
       nfun <- function(n) {Q - ((((theta - sin(theta)) * (d ^ 2 / 8)) ^ (5 / 3) * sqrt(Sf)) * (k / n) / ((theta * d) / 2) ^ (2 / 3))}
       nuse <- uniroot(nfun, interval = c(0.0000001, 200), extendInt = "yes")
       n <- nuse$root
-      Qf <- Qfull(d = d, Sf = Sf, n = n, k = k)
+      # If n_var == TRUE, convert n back to n_full for the next calculation
+      if (n_var == TRUE) nf <- n / n_adj_func(y/d)
+      Qf <- Qfull(d = d, Sf = Sf, n = nf, k = k)
+      V <- Q / A
+      Re <- (rho * R * V) / mu
+      if (Re < 2000) {
+        message(sprintf("Low Reynolds number: %.0f indicates not rough turbulent, Manning eq. not valid\n",Re))
+      }
+      Fr <- V / (sqrt(g * D))
+      yc <- ycfunc(Q = Q, d = d, g = g)
+      out <- list(Q = Q, V = V, A = A, P = P, R = R, y = y, d = d, Sf = Sf, n = n, yc = yc, Fr = Fr, Re = Re, Qf = Qf)
+      return(return_fcn2(x = out, units = units, ret_units = ret_units))
+    
+    } else if (missing(Sf)) {
+      nf <- n
+      if (n_var == TRUE) n <- n * n_adj_func(y/d)
+      theta <- 2 * acos(1 - (2 * (y / d)))
+      A <- (theta - sin(theta)) * (d ^ 2 / 8)
+      P <- ((theta * d) / 2)
+      B <- d * sin(theta / 2)
+      R <- A / P
+      D <- A / B
+      Sffun <- function(Sf) {Q - ((((theta - sin(theta)) * (d ^ 2 / 8)) ^ (5 / 3) * sqrt(Sf)) * (k / n) / ((theta * d) / 2) ^ (2 / 3))}
+      Sfuse <- uniroot(Sffun, interval = c(0.0000001, 200), extendInt = "yes")
+      Sf <- Sfuse$root
+      Qf <- Qfull(d = d, Sf = Sf, n = nf, k = k)
       V <- Q / A
       Re <- (rho * R * V) / mu
       if (Re < 2000) {
@@ -223,37 +266,54 @@ manningc <- function (Q = NULL, n = NULL, Sf = NULL, y = NULL, d = NULL, y_d = N
       out <- list(Q = Q, V = V, A = A, P = P, R = R, y = y, d = d, Sf = Sf, n = n, yc = yc, Fr = Fr, Re = Re, Qf = Qf)
       return(return_fcn2(x = out, units = units, ret_units = ret_units))
       
-      } else if (missing(Sf)) {
-        theta <- 2 * acos(1 - (2 * (y / d)))
-        A <- (theta - sin(theta)) * (d ^ 2 / 8)
-        P <- ((theta * d) / 2)
-        B <- d * sin(theta / 2)
-        R <- A / P
-        D <- A / B
-        Sffun <- function(Sf) {Q - ((((theta - sin(theta)) * (d ^ 2 / 8)) ^ (5 / 3) * sqrt(Sf)) * (k / n) / ((theta * d) / 2) ^ (2 / 3))}
-        Sfuse <- uniroot(Sffun, interval = c(0.0000001, 200), extendInt = "yes")
-        Sf <- Sfuse$root
-        Qf <- Qfull(d = d, Sf = Sf, n = n, k = k)
-        V <- Q / A
-        Re <- (rho * R * V) / mu
-        if (Re < 2000) {
-          message(sprintf("Low Reynolds number: %.0f indicates not rough turbulent, Manning eq. not valid\n",Re))
-        }
-        Fr <- V / (sqrt(g * D))
-        yc <- ycfunc(Q = Q, d = d, g = g)
-        out <- list(Q = Q, V = V, A = A, P = P, R = R, y = y, d = d, Sf = Sf, n = n, yc = yc, Fr = Fr, Re = Re, Qf = Qf)
-        return(return_fcn2(x = out, units = units, ret_units = ret_units))
-        
     } else if (missing(y)) {
-      Qf <- Qfull(d = d, Sf = Sf, n = n, k = k)
+      nf <- n
+      Qf <- Qfull(d = d, Sf = Sf, n = nf, k = k)
       if ( Q > Qf ) {
         stop("Flow Q exceeds full flow for the pipe.")
       }
-      rh <- (n * Q) / (k * sqrt(Sf))
-      thetafun <- function (theta) ((theta - sin(theta)) * (d ^ 2 / 8)) * (((theta - sin(theta)) * (d ^ 2 / 8) / ((theta * d) / 2)) ^ (2 / 3)) - rh
-      thetause <- uniroot(thetafun, c(-1000, 1000), extendInt = "yes")
-      theta <- thetause$root
-      y <- (d / 2) * (1 - cos(theta / 2))
+      if (n_var == TRUE) {
+        # Find the depth with n = nf, used as initial guess in search for y
+        rh <- (n * Q) / (k * sqrt(Sf))
+        thetafun <- function (theta) ((theta - sin(theta)) * (d ^ 2 / 8)) * (((theta - sin(theta)) * (d ^ 2 / 8) / ((theta * d) / 2)) ^ (2 / 3)) - rh
+        thetause <- uniroot(thetafun, c(0.001, 2*pi), extendInt = "yes")
+        theta <- thetause$root
+        y_fixedn <- (d / 2) * (1 - cos(theta / 2))
+        # Find n that would fill pipe at given Q, S, d -- upper bound for n
+        #n_full <- k / Q * (pi/4)*d^2 * (d/4)^(2/3) * sqrt(Sf)
+        #set up 2 unknowns (x) and 2 equations (y)
+        fnc_trial <- function(x) {
+          n1 <- x[1]
+          y1 <- x[2]
+          X <- 1 - y1/d
+          theta <- 2 * acos(1 - (2 * (y1 / d)))
+          A <- (theta - sin(theta)) * (d ^ 2 / 8)
+          P <- ((theta * d) / 2)
+          R <- A / P
+          V1 <- (k / n1) * (R^(2.0/3.0))*sqrt(Sf)
+          Q1 <- V1 * A
+          y <- numeric(length(x))
+          # n/nf for estimated for the depth equals the n/nf
+          y[1] <- 1 - 0.8627*X^5 + 0.4281*X^4 + 0.7626*X^3 - 1.02*X^2 + 0.8057*X - n1/nf
+          # flow equals the calculated flow given n and 
+          y[2] <- Q - Q1
+          return(y)
+        }
+        #provide initial guesses for unknowns and run the fsolve command
+        xstart <- c(nf, y_fixedn)
+        z <- pracma::fsolve(fnc_trial, xstart)
+        n <- z$x[1]
+        y <- z$x[2]
+        if (y > d) stop("feasible solution not found\n")
+        theta <- 2 * acos(1 - (2 * (y / d)))
+      } 
+      else {
+        rh <- (n * Q) / (k * sqrt(Sf))
+        thetafun <- function (theta) ((theta - sin(theta)) * (d ^ 2 / 8)) * (((theta - sin(theta)) * (d ^ 2 / 8) / ((theta * d) / 2)) ^ (2 / 3)) - rh
+        thetause <- uniroot(thetafun, c(0.001, 2*pi), extendInt = "yes")
+        theta <- thetause$root
+        y <- (d / 2) * (1 - cos(theta / 2))
+      }
       A <- (theta - sin(theta)) * (d ^ 2 / 8)
       P <- ((theta * d) / 2)
       B <- d * sin(theta / 2)
@@ -272,12 +332,14 @@ manningc <- function (Q = NULL, n = NULL, Sf = NULL, y = NULL, d = NULL, y_d = N
   }
     #########CASE 2########################
   if (case == 2) {
+    nf <- n
+    if (n_var == TRUE) n <- n * n_adj_func(y_d)
     theta <- 2 * acos(1 - (2 * (y_d)))
     rh <- (n * Q) / (k * sqrt(Sf))
     dfun <- function (d) ((theta - sin(theta)) * (d ^ 2 / 8)) * (((theta - sin(theta)) * (d ^ 2 / 8) / ((theta * d) / 2)) ^ (2 / 3)) - rh
     duse <- uniroot(dfun, interval = c(0.001, dmax), extendInt = "yes")
     d <- duse$root
-    Qf <- Qfull(d = d, Sf = Sf, n = n, k = k)
+    Qf <- Qfull(d = d, Sf = Sf, n = nf, k = k)
     y <- y_d * d
     A <- (theta - sin(theta)) * (d ^ 2 / 8)
     P <- ((theta * d) / 2)
