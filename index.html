@@ -58,7 +58,7 @@
     
     <a class="navbar-brand me-2" href="index.html">hydraulics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -345,7 +345,11 @@ Re
 <h2 id="plot-the-cross-section-for-the-last-example-1">Plot the cross section for the last example<a class="anchor" aria-label="anchor" href="#plot-the-cross-section-for-the-last-example-1"></a>
 </h2>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/xc_trap.html">xc_trap</a></span><span class="op">(</span> y <span class="op">=</span> <span class="va">oc3</span><span class="op">$</span><span class="va">y</span>, b <span class="op">=</span> <span class="va">oc3</span><span class="op">$</span><span class="va">b</span>, m <span class="op">=</span> <span class="va">oc3</span><span class="op">$</span><span class="va">m</span>, units <span class="op">=</span> <span class="st">"Eng"</span> <span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/xc_trap.html">xc_trap</a></span><span class="op">(</span> y <span class="op">=</span> <span class="va">oc3</span><span class="op">$</span><span class="va">y</span>, b <span class="op">=</span> <span class="va">oc3</span><span class="op">$</span><span class="va">b</span>, m <span class="op">=</span> <span class="va">oc3</span><span class="op">$</span><span class="va">m</span>, units <span class="op">=</span> <span class="st">"Eng"</span> <span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in ggplot2::geom_segment(data = seg1, ggplot2::aes(x = 0, xend = -0.1 * : All aesthetics have length 1, but the data has 2 rows.</span></span>
+<span><span class="co">#&gt; ℹ Did you mean to use `annotate()`?</span></span>
+<span><span class="co">#&gt; Warning in ggplot2::geom_segment(data = seg1, ggplot2::aes(x = B, xend = B + : All aesthetics have length 1, but the data has 2 rows.</span></span>
+<span><span class="co">#&gt; ℹ Did you mean to use `annotate()`?</span></span></code></pre></div>
 <p><img src="reference/figures/README-xc-plot-trap-1.png" width="50%"></p>
 <p>For other functions related to pump characteristic curves and operating point determination, and pipe network solutions, refer to the <em>hydraulics</em> vignette.</p>
 </div>
