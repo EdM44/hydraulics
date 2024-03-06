@@ -262,6 +262,10 @@ spec_energy_trap( Q = oc3$Q, b = oc3$b, m = oc3$m, scale = 4, units = "Eng" )
 
 ``` r
 xc_trap( y = oc3$y, b = oc3$b, m = oc3$m, units = "Eng" )
+#> Warning in ggplot2::geom_segment(data = seg1, ggplot2::aes(x = 0, xend = -0.1 * : All aesthetics have length 1, but the data has 2 rows.
+#> ℹ Did you mean to use `annotate()`?
+#> Warning in ggplot2::geom_segment(data = seg1, ggplot2::aes(x = B, xend = B + : All aesthetics have length 1, but the data has 2 rows.
+#> ℹ Did you mean to use `annotate()`?
 ```
 
 <img src="man/figures/README-xc-plot-trap-1.png" width="50%" />

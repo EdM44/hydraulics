@@ -1,11 +1,13 @@
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-## hydraulics 0.6.2
+## hydraulics 0.7.0
 
 - Update vignette and DESCRIPTION to replace package docxtools with
   formatdown
+- Add option to manningc to allow n to vary with depth
 - Modify the spec_energy_trap plotting function to include more than one
   added depth line
+- Update the vignette to include new capabilities
 
 ## hydraulics 0.6.1
 

@@ -242,6 +242,12 @@ ans <- manningc(Q=0.01, n=0.013, Sf=0.001, d = 0.2, units="SI", ret_units = TRUE
 knitr::kable(format(as.data.frame(ans), digits = 2), format = "pipe", padding=0)
 ```
 
+For circular pipes, there is also an option to allow Manning _n_ to vary with depth, in which case the specified _n_ is assumed to be that corresponding to full pipe flow. The output contains the _n_ as adjusted.
+```{r manningc-1b, message=FALSE, warning=FALSE}
+ans <- manningc(Q=0.01, n=0.013, Sf=0.001, d = 0.2, n_var=TRUE, units="SI", ret_units = TRUE)
+knitr::kable(format(as.data.frame(ans), digits = 2), format = "pipe", padding=0)
+```
+
 It is also sometimes convenient to see a cross-section diagram.
 ```{r manningc-2, message=FALSE, warning=FALSE, out.width="40%"}
 ans <- manningc(Q=0.01, n=0.013, Sf=0.001, d = 0.2, units="SI", ret_units = TRUE)
@@ -296,7 +302,7 @@ spec_energy_trap( Q = 360, b = 20, m = 1, scale = 4, units = "Eng" )
 
 This provides an illustration that for y=3 ft the flow is subcritical (above the critical depth). Specific energy for the conditions of the prior example is $E=y+\frac{V^2}{2g}=3.0+\frac{5.22^2}{2*32.2}=3.42 ft$. If the channel bottom had an abrupt rise of $E-E_c=3.42-3.03=0.39 ft$ critical depth would occur over the hump. A rise of anything greater than that would cause damming to occur. Once flow over a hump is critical, downstream of the hump the flow will be in supercritical conditions, flowing at the _alternate depth_.
 
-The specific energy for a given depth _y_ and alternate depth can be added to the plot by including an argument for depth, y.
+The specific energy for a given depth _y_ and alternate depth can be added to the plot by including an argument for depth, y (two depths may also be specified using the argument `y=c(<depth1>, <depth2>)`.
 ```{r manningt-4, fig.width = 4, fig.asp = 1.0}
 spec_energy_trap( Q = 360, b = 20, m = 1, scale = 4, y=3.0, units = "Eng" )
 ```
