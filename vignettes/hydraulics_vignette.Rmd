@@ -118,7 +118,6 @@ tbl[, cols_we_want] <- lapply(tbl[, cols_we_want], function (x) {formatdown::for
 tbl2 <- knitr::kable(tbl, col.names = unitlist, align = "c", format = "html")
 kableExtra::add_header_above(tbl2, header = colnames, line = F, align = "c")
 ```
-
 While the _hydraulics_ package is focused on water, properties of the atmosphere are important for characterizing the interaction of water with air. The is particularly important for phenomena such as evaporation and condensation. Selected characteristics of the standard atmosphere, as determined by the International Civil Aviation Organization (ICAO), are included in the package. Three functions return different properties of the standard atmosphere:
 ```{r waterprops-atmtable1, echo=FALSE}
 knitr::kable(data.frame(Function=c("atmtemp","atmpres","atmdens"), Returns=c("Atmospheric Temperature","Pressure","Density")), format="pipe", padding=0)
