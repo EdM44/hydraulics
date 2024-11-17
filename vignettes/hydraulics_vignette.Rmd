@@ -99,22 +99,33 @@ tbl
 ```
 
 The table can be reformatted to something more attractive using the [kableExtra](https://cran.r-project.org/package=kableExtra) and [formatdown](https://cran.r-project.org/package=formatdown) packages.
-```{r waterprops-table2}
-unitlist <- sapply(unname(tbl),units::deparse_unit)
+```{r waterprops-table2b}
+# Manage units
+unitlist <- sapply(unname(tbl), units::deparse_unit)
 colnames <- names(tbl)
 tbl <- units::drop_units(tbl)
-# Format column as integer
-tbl$Temp <- formatdown::format_decimal(tbl$Temp, digits = 0)
-# Format column with one decimal
-tbl$Density <- formatdown::format_decimal(tbl$Density, digits = 1)
-# Format multiple columns using power-of-ten notation to 4 significant digits
-cols_we_want = c("Spec_Weight", "Viscosity", "Kinem_Visc", "Sat_VP")
-tbl[, cols_we_want] <- lapply(tbl[, cols_we_want], function (x) {formatdown::format_power(x, digits = 4, format = "sci", omit_power = c(-1, 4))}
+
+# Assign size argument for table output
+formatdown::formatdown_options(size = "small")
+# Format text as-is (i.e., as integers)
+tbl$Temp <- formatdown::format_text(tbl$Temp)
+# Format decimals to 4 significant digits
+cols_we_want = c("Density", "Spec_Weight")
+tbl[, cols_we_want] <- lapply(tbl[, cols_we_want], function (x) {formatdown::format_dcml(x, digits = 4)}
 )
-# Format multiple columns using power-of-ten notation to 3 significant digits
+# Format using power-of-ten notation to 4 significant digits
+cols_we_want = c("Viscosity", "Kinem_Visc")
+tbl[, cols_we_want] <- lapply(tbl[, cols_we_want], function (x) {formatdown::format_engr(x, digits = 4)}
+)
+# Exponent set to 3 for all entries
+tbl$Sat_VP <- formatdown::format_engr(tbl$Sat_VP, digits = 4, set_power = 3)
+# Format using power-of-ten notation to 3 significant digits
 cols_we_want = c("Surf_Tens", "Bulk_Mod")
-tbl[, cols_we_want] <- lapply(tbl[, cols_we_want], function (x) {formatdown::format_power(x, digits = 3, format = "sci", omit_power = c(-1, 4))}
+tbl[, cols_we_want] <- lapply(tbl[, cols_we_want], function (x) {formatdown::format_engr(x, digits = 3)}
 )
+# Reset size option
+formatdown::formatdown_options(reset = TRUE)
+
 tbl2 <- knitr::kable(tbl, col.names = unitlist, align = "c", format = "html")
 kableExtra::add_header_above(tbl2, header = colnames, line = F, align = "c")
 ```
