@@ -5,64 +5,48 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="hydraulics">
 <title>Hydraulics Vignette • hydraulics</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Hydraulics Vignette">
-<meta property="og:description" content="hydraulics">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Hydraulics Vignette">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">hydraulics</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.0</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/hydraulics_vignette.html">Hydraulics Vignette</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/hydraulics_vignette.html">Hydraulics Vignette</a></li>
+  </ul>
 </li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/EdM44/hydraulics/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/EdM44/hydraulics/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article">
 
@@ -71,12 +55,13 @@
 <script src="hydraulics_vignette_files/kePrint-0.0.1/kePrint.js"></script><link href="hydraulics_vignette_files/lightable-0.0.1/lightable.css" rel="stylesheet">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>Hydraulics Vignette</h1>
+
+      <h1>Hydraulics Vignette</h1>
                         <h4 data-toc-skip class="author">Ed Maurer</h4>
             
-            <h4 data-toc-skip class="date">2024-03-06</h4>
+            <h4 data-toc-skip class="date">2024-11-17</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/EdM44/hydraulics/blob/HEAD/vignettes/hydraulics_vignette.Rmd" class="external-link"><code>vignettes/hydraulics_vignette.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/EdM44/hydraulics/blob/master/vignettes/hydraulics_vignette.Rmd" class="external-link"><code>vignettes/hydraulics_vignette.Rmd</code></a></small>
       <div class="d-none name"><code>hydraulics_vignette.Rmd</code></div>
     </div>
 
@@ -101,16 +86,27 @@ functions work in either system by designating units as either
 </h3>
 <p>When describing the behavior of water in pipes and channels under
 turbulent flow conditions there are three water properties used used in
-calculations, all of which vary with water temperature: density (<span class="math inline">\(\rho\)</span>), dynamic viscosity(<span class="math inline">\(\mu\)</span>), and kinematic viscosity(<span class="math inline">\(\nu\)</span>), where they are related by <span class="math inline">\(\nu=\frac{\mu}{\rho}\)</span>. An additional
-function exists for saturated vapor pressure of water.</p>
+calculations, all of which vary with water temperature: density
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ρ</mi><annotation encoding="application/x-tex">\rho</annotation></semantics></math>),
+dynamic
+viscosity(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math>),
+and kinematic
+viscosity(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ν</mi><annotation encoding="application/x-tex">\nu</annotation></semantics></math>),
+where they are related by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ν</mi><mo>=</mo><mfrac><mi>μ</mi><mi>ρ</mi></mfrac></mrow><annotation encoding="application/x-tex">\nu=\frac{\mu}{\rho}</annotation></semantics></math>.
+An additional function exists for saturated vapor pressure of water.</p>
 <p>These properties are found using the <em>dens</em>, <em>dvisc</em>,
 <em>kvisc</em>, and <em>svp</em> functions. For example, the kinematic
-viscosity for water temperature of 55 <span class="math inline">\(^\circ\)</span>F is found as follows:</p>
+viscosity for water temperature of 55
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mo>∘</mo></msup><annotation encoding="application/x-tex">^\circ</annotation></semantics></math>F
+is found as follows:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nu</span> <span class="op">=</span> <span class="fu"><a href="../reference/waterprops.html">kvisc</a></span><span class="op">(</span>T <span class="op">=</span> <span class="fl">55</span>, units <span class="op">=</span> <span class="st">'Eng'</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Kinematic viscosity: %.3e ft2/s\n"</span>, <span class="va">nu</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Kinematic viscosity: 1.318e-05 ft2/s</span></span></code></pre></div>
-<p>Similarly the water density for water temperature of 25 <span class="math inline">\(^\circ\)</span>C can be determined by:</p>
+<p>Similarly the water density for water temperature of 25
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mo>∘</mo></msup><annotation encoding="application/x-tex">^\circ</annotation></semantics></math>C
+can be determined by:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rho</span> <span class="op">=</span> <span class="fu"><a href="../reference/waterprops.html">dens</a></span><span class="op">(</span>T <span class="op">=</span> <span class="fl">25</span>, units <span class="op">=</span> <span class="st">'SI'</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Water density: %.3f kg/m3\n"</span>, <span class="va">rho</span><span class="op">)</span><span class="op">)</span></span>
@@ -148,7 +144,9 @@ same way.</p>
 <span><span class="co">#&gt; 9.134879e-07 [m^2/s]</span></span>
 <span><span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://r-quantities.github.io/units/reference/units.html" class="external-link">set_units</a></span><span class="op">(</span><span class="va">Kvisc</span>, <span class="va">ft</span><span class="op">^</span><span class="fl">2</span><span class="op">/</span><span class="va">s</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 9.832702e-06 [ft^2/s]</span></span></code></pre></div>
-<p>An example finding the saturated vapor pressure to water at 10 <span class="math inline">\(^\circ\)</span>C follows.</p>
+<p>An example finding the saturated vapor pressure to water at 10
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mo>∘</mo></msup><annotation encoding="application/x-tex">^\circ</annotation></semantics></math>C
+follows.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/waterprops.html">svp</a></span><span class="op">(</span>T <span class="op">=</span> <span class="fl">10</span>, units <span class="op">=</span> <span class="st">"SI"</span>, ret_units <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span><span class="va">vps</span></span>
@@ -191,21 +189,32 @@ or <em>Eng</em> units.</p>
 and <a href="https://cran.r-project.org/package=formatdown" class="external-link">formatdown</a>
 packages.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">unitlist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unname.html" class="external-link">unname</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span>,<span class="fu">units</span><span class="fu">::</span><span class="va"><a href="https://r-quantities.github.io/units/reference/deparse_unit.html" class="external-link">deparse_unit</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># Manage units</span></span>
+<span><span class="va">unitlist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unname.html" class="external-link">unname</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span>, <span class="fu">units</span><span class="fu">::</span><span class="va"><a href="https://r-quantities.github.io/units/reference/deparse_unit.html" class="external-link">deparse_unit</a></span><span class="op">)</span></span>
 <span><span class="va">colnames</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span></span>
 <span><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://r-quantities.github.io/units/reference/drop_units.html" class="external-link">drop_units</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span></span>
-<span><span class="co"># Format column as integer</span></span>
-<span><span class="va">tbl</span><span class="op">$</span><span class="va">Temp</span> <span class="op">&lt;-</span> <span class="fu">formatdown</span><span class="fu">::</span><span class="fu"><a href="https://graphdr.github.io/formatdown/reference/format_decimal.html" class="external-link">format_decimal</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">Temp</span>, digits <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
-<span><span class="co"># Format column with one decimal</span></span>
-<span><span class="va">tbl</span><span class="op">$</span><span class="va">Density</span> <span class="op">&lt;-</span> <span class="fu">formatdown</span><span class="fu">::</span><span class="fu"><a href="https://graphdr.github.io/formatdown/reference/format_decimal.html" class="external-link">format_decimal</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">Density</span>, digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="co"># Format multiple columns using power-of-ten notation to 4 significant digits</span></span>
-<span><span class="va">cols_we_want</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Spec_Weight"</span>, <span class="st">"Viscosity"</span>, <span class="st">"Kinem_Visc"</span>, <span class="st">"Sat_VP"</span><span class="op">)</span></span>
-<span><span class="va">tbl</span><span class="op">[</span>, <span class="va">cols_we_want</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="va">cols_we_want</span><span class="op">]</span>, <span class="kw">function</span> <span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span><span class="fu">formatdown</span><span class="fu">::</span><span class="fu"><a href="https://graphdr.github.io/formatdown/reference/format_power.html" class="external-link">format_power</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fl">4</span>, format <span class="op">=</span> <span class="st">"sci"</span>, omit_power <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Assign size argument for table output</span></span>
+<span><span class="fu">formatdown</span><span class="fu">::</span><span class="fu"><a href="https://graphdr.github.io/formatdown/reference/formatdown_options.html" class="external-link">formatdown_options</a></span><span class="op">(</span>size <span class="op">=</span> <span class="st">"small"</span><span class="op">)</span></span>
+<span><span class="co"># Format text as-is (i.e., as integers)</span></span>
+<span><span class="va">tbl</span><span class="op">$</span><span class="va">Temp</span> <span class="op">&lt;-</span> <span class="fu">formatdown</span><span class="fu">::</span><span class="fu"><a href="https://graphdr.github.io/formatdown/reference/format_text.html" class="external-link">format_text</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">Temp</span><span class="op">)</span></span>
+<span><span class="co"># Format decimals to 4 significant digits</span></span>
+<span><span class="va">cols_we_want</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Density"</span>, <span class="st">"Spec_Weight"</span><span class="op">)</span></span>
+<span><span class="va">tbl</span><span class="op">[</span>, <span class="va">cols_we_want</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="va">cols_we_want</span><span class="op">]</span>, <span class="kw">function</span> <span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span><span class="fu">formatdown</span><span class="fu">::</span><span class="fu"><a href="https://graphdr.github.io/formatdown/reference/format_dcml.html" class="external-link">format_dcml</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">}</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co"># Format multiple columns using power-of-ten notation to 3 significant digits</span></span>
+<span><span class="co"># Format using power-of-ten notation to 4 significant digits</span></span>
+<span><span class="va">cols_we_want</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Viscosity"</span>, <span class="st">"Kinem_Visc"</span><span class="op">)</span></span>
+<span><span class="va">tbl</span><span class="op">[</span>, <span class="va">cols_we_want</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="va">cols_we_want</span><span class="op">]</span>, <span class="kw">function</span> <span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span><span class="fu">formatdown</span><span class="fu">::</span><span class="fu"><a href="https://graphdr.github.io/formatdown/reference/format_engr.html" class="external-link">format_engr</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co"># Exponent set to 3 for all entries</span></span>
+<span><span class="va">tbl</span><span class="op">$</span><span class="va">Sat_VP</span> <span class="op">&lt;-</span> <span class="fu">formatdown</span><span class="fu">::</span><span class="fu"><a href="https://graphdr.github.io/formatdown/reference/format_engr.html" class="external-link">format_engr</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">Sat_VP</span>, digits <span class="op">=</span> <span class="fl">4</span>, set_power <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co"># Format using power-of-ten notation to 3 significant digits</span></span>
 <span><span class="va">cols_we_want</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Surf_Tens"</span>, <span class="st">"Bulk_Mod"</span><span class="op">)</span></span>
-<span><span class="va">tbl</span><span class="op">[</span>, <span class="va">cols_we_want</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="va">cols_we_want</span><span class="op">]</span>, <span class="kw">function</span> <span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span><span class="fu">formatdown</span><span class="fu">::</span><span class="fu"><a href="https://graphdr.github.io/formatdown/reference/format_power.html" class="external-link">format_power</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fl">3</span>, format <span class="op">=</span> <span class="st">"sci"</span>, omit_power <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">}</span></span>
+<span><span class="va">tbl</span><span class="op">[</span>, <span class="va">cols_we_want</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span>, <span class="va">cols_we_want</span><span class="op">]</span>, <span class="kw">function</span> <span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span><span class="fu">formatdown</span><span class="fu">::</span><span class="fu"><a href="https://graphdr.github.io/formatdown/reference/format_engr.html" class="external-link">format_engr</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">}</span></span>
 <span><span class="op">)</span></span>
+<span><span class="co"># Reset size option</span></span>
+<span><span class="fu">formatdown</span><span class="fu">::</span><span class="fu"><a href="https://graphdr.github.io/formatdown/reference/formatdown_options.html" class="external-link">formatdown_options</a></span><span class="op">(</span>reset <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">tbl2</span> <span class="op">&lt;-</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">tbl</span>, col.names <span class="op">=</span> <span class="va">unitlist</span>, align <span class="op">=</span> <span class="st">"c"</span>, format <span class="op">=</span> <span class="st">"html"</span><span class="op">)</span></span>
 <span><span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/add_header_above.html" class="external-link">add_header_above</a></span><span class="op">(</span><span class="va">tbl2</span>, header <span class="op">=</span> <span class="va">colnames</span>, line <span class="op">=</span> <span class="cn">F</span>, align <span class="op">=</span> <span class="st">"c"</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -282,548 +291,548 @@ Pa
 <tbody>
 <tr>
 <td style="text-align:center;">
-<span class="math inline">\(0\)</span>
+<span class="math inline">$\small \mathrm{0}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(999.9\)</span>
+<span class="math inline">$\small 999.9$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(9809\)</span>
+<span class="math inline">$\small 9809$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(1.734 \times 10^{-3}\)</span>
+<span class="math inline">$\small 1.734 \times 10^{-3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(1.734 \times 10^{-6}\)</span>
+<span class="math inline">$\small 1.734 \times 10^{-6}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(611.2\)</span>
+<span class="math inline">$\small 0.6112 \times 10^{3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(7.57 \times 10^{-2}\)</span>
+<span class="math inline">$\small 75.7 \times 10^{-3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(2.02 \times 10^{9}\)</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-<span class="math inline">\(5\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(1000.0\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(9810\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(1.501 \times 10^{-3}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(1.501 \times 10^{-6}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(872.6\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(7.49 \times 10^{-2}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(2.06 \times 10^{9}\)</span>
+<span class="math inline">$\small 2.02 \times 10^{9}$</span>
 </td>
 </tr>
 <tr>
 <td style="text-align:center;">
-<span class="math inline">\(10\)</span>
+<span class="math inline">$\small \mathrm{5}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(999.7\)</span>
+<span class="math inline">$\small 1000$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(9807\)</span>
+<span class="math inline">$\small 9810$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(1.310 \times 10^{-3}\)</span>
+<span class="math inline">$\small 1.501 \times 10^{-3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(1.311 \times 10^{-6}\)</span>
+<span class="math inline">$\small 1.501 \times 10^{-6}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(1228\)</span>
+<span class="math inline">$\small 0.8726 \times 10^{3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(7.42 \times 10^{-2}\)</span>
+<span class="math inline">$\small 74.9 \times 10^{-3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(2.10 \times 10^{9}\)</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-<span class="math inline">\(15\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(999.1\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(9801\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(1.153 \times 10^{-3}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(1.154 \times 10^{-6}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(1706\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(7.35 \times 10^{-2}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(2.14 \times 10^{9}\)</span>
+<span class="math inline">$\small 2.06 \times 10^{9}$</span>
 </td>
 </tr>
 <tr>
 <td style="text-align:center;">
-<span class="math inline">\(20\)</span>
+<span class="math inline">$\small \mathrm{10}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(998.2\)</span>
+<span class="math inline">$\small 999.7$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(9793\)</span>
+<span class="math inline">$\small 9807$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(1.021 \times 10^{-3}\)</span>
+<span class="math inline">$\small 1.310 \times 10^{-3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(1.023 \times 10^{-6}\)</span>
+<span class="math inline">$\small 1.311 \times 10^{-6}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(2339\)</span>
+<span class="math inline">$\small 1.228 \times 10^{3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(7.27 \times 10^{-2}\)</span>
+<span class="math inline">$\small 74.2 \times 10^{-3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(2.18 \times 10^{9}\)</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-<span class="math inline">\(25\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(997.1\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(9781\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(9.108 \times 10^{-4}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(9.135 \times 10^{-7}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(3170\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(7.20 \times 10^{-2}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(2.22 \times 10^{9}\)</span>
+<span class="math inline">$\small 2.10 \times 10^{9}$</span>
 </td>
 </tr>
 <tr>
 <td style="text-align:center;">
-<span class="math inline">\(30\)</span>
+<span class="math inline">$\small \mathrm{15}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(995.7\)</span>
+<span class="math inline">$\small 999.1$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(9768\)</span>
+<span class="math inline">$\small 9801$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(8.174 \times 10^{-4}\)</span>
+<span class="math inline">$\small 1.153 \times 10^{-3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(8.210 \times 10^{-7}\)</span>
+<span class="math inline">$\small 1.154 \times 10^{-6}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(4247\)</span>
+<span class="math inline">$\small 1.706 \times 10^{3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(7.12 \times 10^{-2}\)</span>
+<span class="math inline">$\small 73.5 \times 10^{-3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(2.25 \times 10^{9}\)</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-<span class="math inline">\(35\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(994.1\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(9752\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(7.380 \times 10^{-4}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(7.424 \times 10^{-7}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(5629\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(7.04 \times 10^{-2}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(2.26 \times 10^{9}\)</span>
+<span class="math inline">$\small 2.14 \times 10^{9}$</span>
 </td>
 </tr>
 <tr>
 <td style="text-align:center;">
-<span class="math inline">\(40\)</span>
+<span class="math inline">$\small \mathrm{20}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(992.2\)</span>
+<span class="math inline">$\small 998.2$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(9734\)</span>
+<span class="math inline">$\small 9793$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(6.699 \times 10^{-4}\)</span>
+<span class="math inline">$\small 1.021 \times 10^{-3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(6.751 \times 10^{-7}\)</span>
+<span class="math inline">$\small 1.023 \times 10^{-6}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(7385\)</span>
+<span class="math inline">$\small 2.339 \times 10^{3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(6.96 \times 10^{-2}\)</span>
+<span class="math inline">$\small 72.7 \times 10^{-3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(2.28 \times 10^{9}\)</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-<span class="math inline">\(45\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(990.2\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(9714\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(6.112 \times 10^{-4}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(6.173 \times 10^{-7}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(9595\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(6.88 \times 10^{-2}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(2.29 \times 10^{9}\)</span>
+<span class="math inline">$\small 2.18 \times 10^{9}$</span>
 </td>
 </tr>
 <tr>
 <td style="text-align:center;">
-<span class="math inline">\(50\)</span>
+<span class="math inline">$\small \mathrm{25}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(988.1\)</span>
+<span class="math inline">$\small 997.1$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(9693\)</span>
+<span class="math inline">$\small 9781$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(5.605 \times 10^{-4}\)</span>
+<span class="math inline">$\small 910.8 \times 10^{-6}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(5.672 \times 10^{-7}\)</span>
+<span class="math inline">$\small 913.5 \times 10^{-9}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(1.235 \times 10^{4}\)</span>
+<span class="math inline">$\small 3.170 \times 10^{3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(6.79 \times 10^{-2}\)</span>
+<span class="math inline">$\small 72.0 \times 10^{-3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(2.29 \times 10^{9}\)</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-<span class="math inline">\(55\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(985.7\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(9670\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(5.162 \times 10^{-4}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(5.237 \times 10^{-7}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(1.576 \times 10^{4}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(6.71 \times 10^{-2}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(2.29 \times 10^{9}\)</span>
+<span class="math inline">$\small 2.22 \times 10^{9}$</span>
 </td>
 </tr>
 <tr>
 <td style="text-align:center;">
-<span class="math inline">\(60\)</span>
+<span class="math inline">$\small \mathrm{30}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(983.2\)</span>
+<span class="math inline">$\small 995.7$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(9645\)</span>
+<span class="math inline">$\small 9768$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(4.776 \times 10^{-4}\)</span>
+<span class="math inline">$\small 817.4 \times 10^{-6}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(4.857 \times 10^{-7}\)</span>
+<span class="math inline">$\small 821.0 \times 10^{-9}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(1.995 \times 10^{4}\)</span>
+<span class="math inline">$\small 4.247 \times 10^{3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(6.62 \times 10^{-2}\)</span>
+<span class="math inline">$\small 71.2 \times 10^{-3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(2.28 \times 10^{9}\)</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-<span class="math inline">\(65\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(980.6\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(9619\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(4.435 \times 10^{-4}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(4.523 \times 10^{-7}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(2.504 \times 10^{4}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(6.54 \times 10^{-2}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(2.26 \times 10^{9}\)</span>
+<span class="math inline">$\small 2.25 \times 10^{9}$</span>
 </td>
 </tr>
 <tr>
 <td style="text-align:center;">
-<span class="math inline">\(70\)</span>
+<span class="math inline">$\small \mathrm{35}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(977.7\)</span>
+<span class="math inline">$\small 994.1$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(9592\)</span>
+<span class="math inline">$\small 9752$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(4.135 \times 10^{-4}\)</span>
+<span class="math inline">$\small 738.0 \times 10^{-6}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(4.229 \times 10^{-7}\)</span>
+<span class="math inline">$\small 742.4 \times 10^{-9}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(3.120 \times 10^{4}\)</span>
+<span class="math inline">$\small 5.629 \times 10^{3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(6.45 \times 10^{-2}\)</span>
+<span class="math inline">$\small 70.4 \times 10^{-3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(2.25 \times 10^{9}\)</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-<span class="math inline">\(75\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(974.8\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(9563\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(3.869 \times 10^{-4}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(3.969 \times 10^{-7}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(3.860 \times 10^{4}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(6.36 \times 10^{-2}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(2.23 \times 10^{9}\)</span>
+<span class="math inline">$\small 2.26 \times 10^{9}$</span>
 </td>
 </tr>
 <tr>
 <td style="text-align:center;">
-<span class="math inline">\(80\)</span>
+<span class="math inline">$\small \mathrm{40}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(971.7\)</span>
+<span class="math inline">$\small 992.2$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(9533\)</span>
+<span class="math inline">$\small 9734$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(3.631 \times 10^{-4}\)</span>
+<span class="math inline">$\small 669.9 \times 10^{-6}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(3.737 \times 10^{-7}\)</span>
+<span class="math inline">$\small 675.1 \times 10^{-9}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(4.742 \times 10^{4}\)</span>
+<span class="math inline">$\small 7.385 \times 10^{3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(6.27 \times 10^{-2}\)</span>
+<span class="math inline">$\small 69.6 \times 10^{-3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(2.20 \times 10^{9}\)</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-<span class="math inline">\(85\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(968.5\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(9501\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(3.419 \times 10^{-4}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(3.530 \times 10^{-7}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(5.787 \times 10^{4}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(6.18 \times 10^{-2}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(2.17 \times 10^{9}\)</span>
+<span class="math inline">$\small 2.28 \times 10^{9}$</span>
 </td>
 </tr>
 <tr>
 <td style="text-align:center;">
-<span class="math inline">\(90\)</span>
+<span class="math inline">$\small \mathrm{45}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(965.2\)</span>
+<span class="math inline">$\small 990.2$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(9468\)</span>
+<span class="math inline">$\small 9714$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(3.229 \times 10^{-4}\)</span>
+<span class="math inline">$\small 611.2 \times 10^{-6}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(3.345 \times 10^{-7}\)</span>
+<span class="math inline">$\small 617.3 \times 10^{-9}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(7.018 \times 10^{4}\)</span>
+<span class="math inline">$\small 9.595 \times 10^{3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(6.08 \times 10^{-2}\)</span>
+<span class="math inline">$\small 68.8 \times 10^{-3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(2.14 \times 10^{9}\)</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-<span class="math inline">\(95\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(961.7\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(9434\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(3.057 \times 10^{-4}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(3.179 \times 10^{-7}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(8.461 \times 10^{4}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(5.99 \times 10^{-2}\)</span>
-</td>
-<td style="text-align:center;">
-<span class="math inline">\(2.10 \times 10^{9}\)</span>
+<span class="math inline">$\small 2.28 \times 10^{9}$</span>
 </td>
 </tr>
 <tr>
 <td style="text-align:center;">
-<span class="math inline">\(100\)</span>
+<span class="math inline">$\small \mathrm{50}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(958.1\)</span>
+<span class="math inline">$\small 988.1$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(9399\)</span>
+<span class="math inline">$\small 9693$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(2.902 \times 10^{-4}\)</span>
+<span class="math inline">$\small 560.5 \times 10^{-6}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(3.029 \times 10^{-7}\)</span>
+<span class="math inline">$\small 567.2 \times 10^{-9}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(1.014 \times 10^{5}\)</span>
+<span class="math inline">$\small 12.35 \times 10^{3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(5.89 \times 10^{-2}\)</span>
+<span class="math inline">$\small 67.9 \times 10^{-3}$</span>
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(2.07 \times 10^{9}\)</span>
+<span class="math inline">$\small 2.29 \times 10^{9}$</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">$\small \mathrm{55}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 985.7$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 9670$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 516.2 \times 10^{-6}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 523.7 \times 10^{-9}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 15.76 \times 10^{3}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 67.1 \times 10^{-3}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 2.28 \times 10^{9}$</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">$\small \mathrm{60}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 983.2$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 9645$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 477.6 \times 10^{-6}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 485.7 \times 10^{-9}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 19.95 \times 10^{3}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 66.2 \times 10^{-3}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 2.28 \times 10^{9}$</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">$\small \mathrm{65}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 980.6$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 9619$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 443.5 \times 10^{-6}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 452.3 \times 10^{-9}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 25.04 \times 10^{3}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 65.4 \times 10^{-3}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 2.26 \times 10^{9}$</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">$\small \mathrm{70}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 977.7$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 9592$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 413.5 \times 10^{-6}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 422.9 \times 10^{-9}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 31.20 \times 10^{3}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 64.5 \times 10^{-3}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 2.25 \times 10^{9}$</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">$\small \mathrm{75}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 974.8$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 9563$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 386.9 \times 10^{-6}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 396.9 \times 10^{-9}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 38.60 \times 10^{3}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 63.6 \times 10^{-3}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 2.22 \times 10^{9}$</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">$\small \mathrm{80}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 971.7$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 9533$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 363.1 \times 10^{-6}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 373.7 \times 10^{-9}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 47.42 \times 10^{3}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 62.7 \times 10^{-3}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 2.20 \times 10^{9}$</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">$\small \mathrm{85}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 968.5$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 9501$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 341.9 \times 10^{-6}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 353.0 \times 10^{-9}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 57.87 \times 10^{3}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 61.8 \times 10^{-3}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 2.17 \times 10^{9}$</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">$\small \mathrm{90}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 965.2$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 9468$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 322.9 \times 10^{-6}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 334.5 \times 10^{-9}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 70.18 \times 10^{3}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 60.8 \times 10^{-3}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 2.14 \times 10^{9}$</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">$\small \mathrm{95}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 961.7$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 9434$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 305.7 \times 10^{-6}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 317.9 \times 10^{-9}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 84.61 \times 10^{3}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 59.9 \times 10^{-3}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 2.10 \times 10^{9}$</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">$\small \mathrm{100}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 958.1$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 9399$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 290.2 \times 10^{-6}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 302.9 \times 10^{-9}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 101.4 \times 10^{3}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 58.9 \times 10^{-3}$</span>
+</td>
+<td style="text-align:center;">
+<span class="math inline">$\small 2.07 \times 10^{9}$</span>
 </td>
 </tr>
 </tbody>
@@ -891,22 +900,25 @@ atmosphere can be obtained with the function <em>atmos_table</em>.</p>
 </h3>
 <p>Two of the most important descriptive quantities in engineering
 hydraulics are the Reynolds number, <em>Re</em> and the Froude number
-<em>Fr</em>. <span class="math inline">\(Re=\frac{VD}{\nu}\)</span>
+<em>Fr</em>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mi>e</mi><mo>=</mo><mfrac><mrow><mi>V</mi><mi>D</mi></mrow><mi>ν</mi></mfrac></mrow><annotation encoding="application/x-tex">Re=\frac{VD}{\nu}</annotation></semantics></math>
 describes the turbulence of the flow. It expresses the ratio of
 kinematic forces, expressed by velocity <em>V</em> and a characteristic
 length such as pipe diameter, <em>D</em>, to viscous forces as expressed
-by the kinematic viscosity <span class="math inline">\(\nu\)</span>. For
-open channels the characteristic length is the <em>hydraulic depth</em>,
-the area of flow divided by the top width. For adequately turbulent
-conditions to exists, Reynolds numbers should exceed 4000 for full
-pipes, and 2000 for open channels.</p>
+by the kinematic viscosity
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ν</mi><annotation encoding="application/x-tex">\nu</annotation></semantics></math>.
+For open channels the characteristic length is the <em>hydraulic
+depth</em>, the area of flow divided by the top width. For adequately
+turbulent conditions to exists, Reynolds numbers should exceed 4000 for
+full pipes, and 2000 for open channels.</p>
 <p>For open channel flow, given a channel shape and flow rate, flow can
 usually exist at two different depths, termed subcritical (slow, deep)
 and supercritical (shallow, fast). The exception is at critical flow
 conditions, where only one depth exists, the critical depth. Which depth
 is exhibited by the flow is determined by the slope and roughness of the
-channel. The Froude number is defined by <span class="math inline">\(Fr=\frac{V}{\sqrt{gD}}\)</span>. <em>Fr</em>
-characterizes flow as:</p>
+channel. The Froude number is defined by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mi>r</mi><mo>=</mo><mfrac><mi>V</mi><msqrt><mrow><mi>g</mi><mi>D</mi></mrow></msqrt></mfrac></mrow><annotation encoding="application/x-tex">Fr=\frac{V}{\sqrt{gD}}</annotation></semantics></math>.
+<em>Fr</em> characterizes flow as:</p>
 <table class="table">
 <thead><tr class="header">
 <th align="left">Fr</th>
@@ -935,36 +947,48 @@ flow applications and is discussed further below.</p>
 <h3 id="friction-loss-in-circular-pipes">3.0 Friction Loss in Circular Pipes<a class="anchor" aria-label="anchor" href="#friction-loss-in-circular-pipes"></a>
 </h3>
 <p>The energy at any point along a pipe containing flowing water is
-often described by the energy per unit weight, or energy head, E: <span class="math display">\[E =
-z+\frac{P}{\gamma}+\alpha\frac{V^2}{2g}\]</span> where P is the
-pressure, <span class="math inline">\(\gamma=\rho g\)</span> is the
-specific weight of water, <em>z</em> is the elevation of the point,
-<em>V</em> is the average velocity, and each term has units of length.
-<span class="math inline">\(\alpha\)</span> is a kinetic energy
-adjustment factor to account for non-uniform velocity distribution
-across the cross-section. <span class="math inline">\(\alpha\)</span> is
-typically assumed to be 1.0 for turbulent flow because the value is
-close to 1.0 and <span class="math inline">\(\frac{V^2}{2g}\)</span>
+often described by the energy per unit weight, or energy head, E:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>=</mo><mi>z</mi><mo>+</mo><mfrac><mi>P</mi><mi>γ</mi></mfrac><mo>+</mo><mi>α</mi><mfrac><msup><mi>V</mi><mn>2</mn></msup><mrow><mn>2</mn><mi>g</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">E = z+\frac{P}{\gamma}+\alpha\frac{V^2}{2g}</annotation></semantics></math>
+where P is the pressure,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>γ</mi><mo>=</mo><mi>ρ</mi><mi>g</mi></mrow><annotation encoding="application/x-tex">\gamma=\rho g</annotation></semantics></math>
+is the specific weight of water, <em>z</em> is the elevation of the
+point, <em>V</em> is the average velocity, and each term has units of
+length.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>
+is a kinetic energy adjustment factor to account for non-uniform
+velocity distribution across the cross-section.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>
+is typically assumed to be 1.0 for turbulent flow because the value is
+close to 1.0 and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac><msup><mi>V</mi><mn>2</mn></msup><mrow><mn>2</mn><mi>g</mi></mrow></mfrac><annotation encoding="application/x-tex">\frac{V^2}{2g}</annotation></semantics></math>
 (the velocity head) tends to be small in relation to other terms in the
 equation.</p>
 <p>As water flows through a pipe energy is lost due to friction with the
 pipe walls and local disturbances (minor losses). The energy loss
-between two sections is expressed as <span class="math inline">\({E_1} -
-{h_l} = {E_2}\)</span>. When pipes are long, with <span class="math inline">\(\frac{L}{D}&gt;1000\)</span>, friction losses
-dominate the energy loss on the system, and the head loss, <span class="math inline">\(h_l\)</span>, is calculated as the head loss due
-to friction, <span class="math inline">\(h_f\)</span>. This energy head
-loss due to friction with the walls of the pipe is described by the
-Darcy-Weisbach equation, which estimates the energy loss per unit
-weight, or head loss <span class="math inline">\({h_f}\)</span>, which
-has units of length. For circular pipes it is expressed as: <span class="math display">\[h_f = \frac{fL}{D}\frac{V^2}{2g} =
-\frac{8fL}{\pi^{2}gD^{5}}Q^{2}\]</span> In this equation <em>f</em> is
-the friction factor, typically calculated with the Colebrook equation:
-<span class="math display">\[\frac{1}{\sqrt{f}} =
--2\log\left(\frac{\frac{k_s}{D}}{3.7} +
-\frac{2.51}{Re\sqrt{f}}\right)\]</span> where <span class="math inline">\(k_s\)</span> is the absolute roughness of the pipe
-wall. There are close approximations to the Colebrook equation that have
-an explicit form to facilitate hand-calculations, but this package only
-uses the Colebrook function.</p>
+between two sections is expressed as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>E</mi><mn>1</mn></msub><mo>−</mo><msub><mi>h</mi><mi>l</mi></msub><mo>=</mo><msub><mi>E</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">{E_1} - {h_l} = {E_2}</annotation></semantics></math>.
+When pipes are long, with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>L</mi><mi>D</mi></mfrac><mo>&gt;</mo><mn>1000</mn></mrow><annotation encoding="application/x-tex">\frac{L}{D}&gt;1000</annotation></semantics></math>,
+friction losses dominate the energy loss on the system, and the head
+loss,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mi>l</mi></msub><annotation encoding="application/x-tex">h_l</annotation></semantics></math>,
+is calculated as the head loss due to friction,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mi>f</mi></msub><annotation encoding="application/x-tex">h_f</annotation></semantics></math>.
+This energy head loss due to friction with the walls of the pipe is
+described by the Darcy-Weisbach equation, which estimates the energy
+loss per unit weight, or head loss
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mi>f</mi></msub><annotation encoding="application/x-tex">{h_f}</annotation></semantics></math>,
+which has units of length. For circular pipes it is expressed as:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>f</mi></msub><mo>=</mo><mfrac><mrow><mi>f</mi><mi>L</mi></mrow><mi>D</mi></mfrac><mfrac><msup><mi>V</mi><mn>2</mn></msup><mrow><mn>2</mn><mi>g</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>8</mn><mi>f</mi><mi>L</mi></mrow><mrow><msup><mi>π</mi><mn>2</mn></msup><mi>g</mi><msup><mi>D</mi><mn>5</mn></msup></mrow></mfrac><msup><mi>Q</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">h_f = \frac{fL}{D}\frac{V^2}{2g} = \frac{8fL}{\pi^{2}gD^{5}}Q^{2}</annotation></semantics></math>
+In this equation <em>f</em> is the friction factor, typically calculated
+with the Colebrook equation:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><msqrt><mi>f</mi></msqrt></mfrac><mo>=</mo><mo>−</mo><mn>2</mn><mo>log</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mfrac><msub><mi>k</mi><mi>s</mi></msub><mi>D</mi></mfrac><mn>3.7</mn></mfrac><mo>+</mo><mfrac><mn>2.51</mn><mrow><mi>R</mi><mi>e</mi><msqrt><mi>f</mi></msqrt></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\frac{1}{\sqrt{f}} = -2\log\left(\frac{\frac{k_s}{D}}{3.7} + \frac{2.51}{Re\sqrt{f}}\right)</annotation></semantics></math>
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mi>s</mi></msub><annotation encoding="application/x-tex">k_s</annotation></semantics></math>
+is the absolute roughness of the pipe wall. There are close
+approximations to the Colebrook equation that have an explicit form to
+facilitate hand-calculations, but this package only uses the Colebrook
+function.</p>
 <p>Any one of the variables in the Darcy Weisbach equation, and by
 extension the Colebrook equation, may be treated as an unknown. For an
 existing pipe with a known flow rate, the friction loss for a length of
@@ -1053,7 +1077,8 @@ calculations, but repeated trials to see how one variable might vary
 with another. For example, it might be interesting to see how the
 required diameter varies with changing flow rate. The following example
 illustrates the calculation of diameters required to meet the specified
-head loss for flows varying from 30 - 45 ft<span class="math inline">\(^3\)</span>/s.</p>
+head loss for flows varying from 30 - 45
+ft<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mn>3</mn></msup><annotation encoding="application/x-tex">^3</annotation></semantics></math>/s.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Qs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">45</span>, <span class="fl">1.0</span><span class="op">)</span>    <span class="co">#flows in ft^3/s</span></span>
 <span><span class="va">L</span> <span class="op">&lt;-</span> <span class="fl">8000</span>                 <span class="co">#pipe length in ft</span></span>
@@ -1123,13 +1148,16 @@ check.</p>
 </h3>
 <p>The Manning equation (also known as the Strickler equation) describes
 flow conditions in an open channel under uniform flow conditions. It is
-often expressed as: <span class="math display">\[Q=A\frac{C}{n}{R}^{\frac{2}{3}}{S_f}^{\frac{1}{2}}\]</span>
+often expressed as:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>=</mo><mi>A</mi><mfrac><mi>C</mi><mi>n</mi></mfrac><msup><mi>R</mi><mfrac><mn>2</mn><mn>3</mn></mfrac></msup><msup><msub><mi>S</mi><mi>f</mi></msub><mfrac><mn>1</mn><mn>2</mn></mfrac></msup></mrow><annotation encoding="application/x-tex">Q=A\frac{C}{n}{R}^{\frac{2}{3}}{S_f}^{\frac{1}{2}}</annotation></semantics></math>
 where <em>C</em> is 1.0 for <em>SI</em> units and 1.49 for <em>Eng</em>
 (U.S. Customary) units. <em>Q</em> is the flow rate, <em>A</em> is the
 cross-sectional flow area, <em>n</em> is the Manning roughness
-coefficient, and R is the hydraulic radius <span class="math inline">\(R=\frac{A}{P}\)</span>, where P is the wetted
-perimeter. Critical depth is defined by the relation (at critical
-conditions): <span class="math display">\[\frac{Q^{2}B}{g\,A^{3}}=1\]</span></p>
+coefficient, and R is the hydraulic radius
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><mfrac><mi>A</mi><mi>P</mi></mfrac></mrow><annotation encoding="application/x-tex">R=\frac{A}{P}</annotation></semantics></math>,
+where P is the wetted perimeter. Critical depth is defined by the
+relation (at critical conditions):
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><msup><mi>Q</mi><mn>2</mn></msup><mi>B</mi></mrow><mrow><mi>g</mi><mspace width="0.167em"></mspace><msup><mi>A</mi><mn>3</mn></msup></mrow></mfrac><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\frac{Q^{2}B}{g\,A^{3}}=1</annotation></semantics></math></p>
 <p>where <em>B</em> is the top width of the water surface.</p>
 <p>As with full flow in circular pipes, any one of the variables in the
 Manning equation, and related geometric variables, may be treated as an
@@ -1281,16 +1309,15 @@ trapezoidal)<a class="anchor" aria-label="anchor" href="#flow-in-open-channels-r
 open channel of rectangular, triangular, or trapezoidal shape uses the
 Manning equation. Substituting the geometric relationships for hydraulic
 radius and cross-sectional area, the Manning equation takes the form:
-<span class="math display">\[Q=\frac{C}{n}{\frac{\left(by+my^2\right)^{\frac{5}{3}}}{\left(b+2y\sqrt{1+m^2}\right)^\frac{2}{3}}}{S_f}^{\frac{1}{2}}\]</span>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>=</mo><mfrac><mi>C</mi><mi>n</mi></mfrac><mfrac><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>b</mi><mi>y</mi><mo>+</mo><mi>m</mi><msup><mi>y</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow><mfrac><mn>5</mn><mn>3</mn></mfrac></msup><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>b</mi><mo>+</mo><mn>2</mn><mi>y</mi><msqrt><mrow><mn>1</mn><mo>+</mo><msup><mi>m</mi><mn>2</mn></msup></mrow></msqrt><mo stretchy="true" form="postfix">)</mo></mrow><mfrac><mn>2</mn><mn>3</mn></mfrac></msup></mfrac><msup><msub><mi>S</mi><mi>f</mi></msub><mfrac><mn>1</mn><mn>2</mn></mfrac></msup></mrow><annotation encoding="application/x-tex">Q=\frac{C}{n}{\frac{\left(by+my^2\right)^{\frac{5}{3}}}{\left(b+2y\sqrt{1+m^2}\right)^\frac{2}{3}}}{S_f}^{\frac{1}{2}}</annotation></semantics></math>
 For a rectangular channel, the side slope is vertical, so <em>m</em> =
 0; for a triangular channel, <em>b</em> = 0. For a given <em>Q</em>,
 <em>m</em>, <em>n</em>, and <em>Sf</em>, the most hydraulically
 efficient channel is found by maximizing R, which can be done by setting
-in the Manning equation <span class="math inline">\(\frac{\partial
-R}{\partial y}=0\)</span>. This produces: <span class="math display">\[y_{opt} =
-2^{\frac{1}{4}}\left(\frac{Qn}{C\left(2\sqrt{1+m^2}-m\right)S_f^{\frac{1}{2}}}\right)^{\frac{3}{8}}\]</span>
-<span class="math display">\[b_{opt} =
-2y_{opt}\left(\sqrt{1+m^2}-m\right)\]</span></p>
+in the Manning equation
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>∂</mi><mi>R</mi></mrow><mrow><mi>∂</mi><mi>y</mi></mrow></mfrac><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\frac{\partial R}{\partial y}=0</annotation></semantics></math>.
+This produces:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>y</mi><mrow><mi>o</mi><mi>p</mi><mi>t</mi></mrow></msub><mo>=</mo><msup><mn>2</mn><mfrac><mn>1</mn><mn>4</mn></mfrac></msup><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>Q</mi><mi>n</mi></mrow><mrow><mi>C</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><msqrt><mrow><mn>1</mn><mo>+</mo><msup><mi>m</mi><mn>2</mn></msup></mrow></msqrt><mo>−</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow><msubsup><mi>S</mi><mi>f</mi><mfrac><mn>1</mn><mn>2</mn></mfrac></msubsup></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mfrac><mn>3</mn><mn>8</mn></mfrac></msup></mrow><annotation encoding="application/x-tex">y_{opt} = 2^{\frac{1}{4}}\left(\frac{Qn}{C\left(2\sqrt{1+m^2}-m\right)S_f^{\frac{1}{2}}}\right)^{\frac{3}{8}}</annotation></semantics></math><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mrow><mi>o</mi><mi>p</mi><mi>t</mi></mrow></msub><mo>=</mo><mn>2</mn><msub><mi>y</mi><mrow><mi>o</mi><mi>p</mi><mi>t</mi></mrow></msub><mrow><mo stretchy="true" form="prefix">(</mo><msqrt><mrow><mn>1</mn><mo>+</mo><msup><mi>m</mi><mn>2</mn></msup></mrow></msqrt><mo>−</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">b_{opt} = 2y_{opt}\left(\sqrt{1+m^2}-m\right)</annotation></semantics></math></p>
 <p>The <em>manningt</em> function works similarly to the function for
 circular pipes, in that the excluded argument is the one for which the
 function determines a solution. For example, a design might require the
@@ -1497,12 +1524,14 @@ diagram is</p>
 <p><img src="hydraulics_vignette_files/figure-html/manningt-3-1.png" width="384"></p>
 <p>This provides an illustration that for y=3 ft the flow is subcritical
 (above the critical depth). Specific energy for the conditions of the
-prior example is <span class="math inline">\(E=y+\frac{V^2}{2g}=3.0+\frac{5.22^2}{2*32.2}=3.42
-ft\)</span>. If the channel bottom had an abrupt rise of <span class="math inline">\(E-E_c=3.42-3.03=0.39 ft\)</span> critical depth
-would occur over the hump. A rise of anything greater than that would
-cause damming to occur. Once flow over a hump is critical, downstream of
-the hump the flow will be in supercritical conditions, flowing at the
-<em>alternate depth</em>.</p>
+prior example is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>=</mo><mi>y</mi><mo>+</mo><mfrac><msup><mi>V</mi><mn>2</mn></msup><mrow><mn>2</mn><mi>g</mi></mrow></mfrac><mo>=</mo><mn>3.0</mn><mo>+</mo><mfrac><msup><mn>5.22</mn><mn>2</mn></msup><mrow><mn>2</mn><mo>*</mo><mn>32.2</mn></mrow></mfrac><mo>=</mo><mn>3.42</mn><mi>f</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">E=y+\frac{V^2}{2g}=3.0+\frac{5.22^2}{2*32.2}=3.42 ft</annotation></semantics></math>.
+If the channel bottom had an abrupt rise of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>−</mo><msub><mi>E</mi><mi>c</mi></msub><mo>=</mo><mn>3.42</mn><mo>−</mo><mn>3.03</mn><mo>=</mo><mn>0.39</mn><mi>f</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">E-E_c=3.42-3.03=0.39 ft</annotation></semantics></math>
+critical depth would occur over the hump. A rise of anything greater
+than that would cause damming to occur. Once flow over a hump is
+critical, downstream of the hump the flow will be in supercritical
+conditions, flowing at the <em>alternate depth</em>.</p>
 <p>The specific energy for a given depth <em>y</em> and alternate depth
 can be added to the plot by including an argument for depth, y (two
 depths may also be specified using the argument
@@ -1544,23 +1573,24 @@ A simple hydraulic system (from <a href="https://www.castlepumps.com" class="ext
 </p>
 </div>
 <p>As described above, for a simple system the loss of head (energy per
-unit weight) due to friction, <span class="math inline">\(h_f\)</span>,
+unit weight) due to friction,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mi>f</mi></msub><annotation encoding="application/x-tex">h_f</annotation></semantics></math>,
 is described by the Darcy-Weisbach equation, which can be simplified as:
-<span class="math display">\[h_f = \frac{fL}{D}\frac{V^2}{2g} =
-\frac{8fL}{\pi^{2}gD^{5}}Q^{2} = KQ{^2}\]</span> The total dynamic head
-the system requires a pump to provide, <span class="math inline">\(h_p\)</span>, is found by solving the energy
-equation from the upstream reservoir (point 1) to the downstream
-reservoir (point 2). <span class="math display">\[h_p =
-\left(z+\frac{P}{\gamma}+\frac{V^2}{2g}\right)_2 -
-\left(z+\frac{P}{\gamma}+\frac{V^2}{2g}\right)_1+h_f\]</span></p>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>f</mi></msub><mo>=</mo><mfrac><mrow><mi>f</mi><mi>L</mi></mrow><mi>D</mi></mfrac><mfrac><msup><mi>V</mi><mn>2</mn></msup><mrow><mn>2</mn><mi>g</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>8</mn><mi>f</mi><mi>L</mi></mrow><mrow><msup><mi>π</mi><mn>2</mn></msup><mi>g</mi><msup><mi>D</mi><mn>5</mn></msup></mrow></mfrac><msup><mi>Q</mi><mn>2</mn></msup><mo>=</mo><mi>K</mi><mi>Q</mi><msup><mi></mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">h_f = \frac{fL}{D}\frac{V^2}{2g} = \frac{8fL}{\pi^{2}gD^{5}}Q^{2} = KQ{^2}</annotation></semantics></math>
+The total dynamic head the system requires a pump to provide,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mi>p</mi></msub><annotation encoding="application/x-tex">h_p</annotation></semantics></math>,
+is found by solving the energy equation from the upstream reservoir
+(point 1) to the downstream reservoir (point 2).
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>p</mi></msub><mo>=</mo><msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo>+</mo><mfrac><mi>P</mi><mi>γ</mi></mfrac><mo>+</mo><mfrac><msup><mi>V</mi><mn>2</mn></msup><mrow><mn>2</mn><mi>g</mi></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msub><mo>−</mo><msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo>+</mo><mfrac><mi>P</mi><mi>γ</mi></mfrac><mo>+</mo><mfrac><msup><mi>V</mi><mn>2</mn></msup><mrow><mn>2</mn><mi>g</mi></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>1</mn></msub><mo>+</mo><msub><mi>h</mi><mi>f</mi></msub></mrow><annotation encoding="application/x-tex">h_p = \left(z+\frac{P}{\gamma}+\frac{V^2}{2g}\right)_2 - \left(z+\frac{P}{\gamma}+\frac{V^2}{2g}\right)_1+h_f</annotation></semantics></math></p>
 <p>For the simple system in this example, the velocity is negligible in
 both reservoirs 1 and 2, and the pressures at both reservoirs is
-atmospheric, so the equation becomes: <span class="math display">\[h_p =
-\left(z_2 - z_1\right) + h_f=h_s+h_f=h_s+KQ^2\]</span> Using the
-<em>hydraulics</em> package, the coefficient, <em>K</em>, can be
-calculated manually or using other package functions for friction loss
-in a pipe system using <span class="math inline">\(Q=1\)</span>. As an
-example:</p>
+atmospheric, so the equation becomes:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>p</mi></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>z</mi><mn>2</mn></msub><mo>−</mo><msub><mi>z</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><msub><mi>h</mi><mi>f</mi></msub><mo>=</mo><msub><mi>h</mi><mi>s</mi></msub><mo>+</mo><msub><mi>h</mi><mi>f</mi></msub><mo>=</mo><msub><mi>h</mi><mi>s</mi></msub><mo>+</mo><mi>K</mi><msup><mi>Q</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">h_p = \left(z_2 - z_1\right) + h_f=h_s+h_f=h_s+KQ^2</annotation></semantics></math>
+Using the <em>hydraulics</em> package, the coefficient, <em>K</em>, can
+be calculated manually or using other package functions for friction
+loss in a pipe system using
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">Q=1</annotation></semantics></math>.
+As an example:</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/darcyweisbach.html">darcyweisbach</a></span><span class="op">(</span>Q <span class="op">=</span> <span class="fl">1</span>,D <span class="op">=</span> <span class="fl">20</span><span class="op">/</span><span class="fl">12</span>, L <span class="op">=</span> <span class="fl">3884</span>, ks <span class="op">=</span> <span class="fl">0.0005</span>, nu <span class="op">=</span> <span class="fl">1.23e-5</span>, units <span class="op">=</span> <span class="st">"Eng"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Coefficient K: %.3f\n"</span>, <span class="va">ans</span><span class="op">$</span><span class="va">hf</span><span class="op">)</span><span class="op">)</span></span>
@@ -1587,25 +1617,27 @@ the curve. There are currently three options for the polynomial:</p>
 <tbody>
 <tr class="odd">
 <td align="left">poly1</td>
-<td align="left"><span class="math inline">\(h=a+{b}{Q}+{c}{Q}^2\)</span></td>
+<td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>=</mo><mi>a</mi><mo>+</mo><mi>b</mi><mi>Q</mi><mo>+</mo><mi>c</mi><msup><mi>Q</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">h=a+{b}{Q}+{c}{Q}^2</annotation></semantics></math></td>
 </tr>
 <tr class="even">
 <td align="left">poly2</td>
-<td align="left"><span class="math inline">\(h=a+{c}{Q}^2\)</span></td>
+<td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>=</mo><mi>a</mi><mo>+</mo><mi>c</mi><msup><mi>Q</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">h=a+{c}{Q}^2</annotation></semantics></math></td>
 </tr>
 <tr class="odd">
 <td align="left">poly3</td>
-<td align="left"><span class="math inline">\(h_{shutoff}+{c}{Q}^2\)</span></td>
+<td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mrow><mi>s</mi><mi>h</mi><mi>u</mi><mi>t</mi><mi>o</mi><mi>f</mi><mi>f</mi></mrow></msub><mo>+</mo><mi>c</mi><msup><mi>Q</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">h_{shutoff}+{c}{Q}^2</annotation></semantics></math></td>
 </tr>
 </tbody>
 </table>
-<p>The <span class="math inline">\(h_{shutoff}\)</span> value is the
-pump head at <span class="math inline">\(Q={0}\)</span>. The coordinates
-of the points can be input to the <em>pumpcurve</em> function as numeric
-vectors. For the flow manufacturer’s pump curves often use units that
-are not what the <em>hydraulics</em> package needs, and the
-<em>units</em> package provides a convenient way to convert them as
-needed.</p>
+<p>The
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mrow><mi>s</mi><mi>h</mi><mi>u</mi><mi>t</mi><mi>o</mi><mi>f</mi><mi>f</mi></mrow></msub><annotation encoding="application/x-tex">h_{shutoff}</annotation></semantics></math>
+value is the pump head at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">Q={0}</annotation></semantics></math>.
+The coordinates of the points can be input to the <em>pumpcurve</em>
+function as numeric vectors. For the flow manufacturer’s pump curves
+often use units that are not what the <em>hydraulics</em> package needs,
+and the <em>units</em> package provides a convenient way to convert them
+as needed.</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">qgpm</span> <span class="op">&lt;-</span> <span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://r-quantities.github.io/units/reference/units.html" class="external-link">set_units</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5000</span>, <span class="fl">7850</span><span class="op">)</span>, <span class="va">gallons</span><span class="op">/</span><span class="va">minute</span><span class="op">)</span></span>
 <span><span class="va">qcfs</span> <span class="op">&lt;-</span> <span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://r-quantities.github.io/units/reference/units.html" class="external-link">set_units</a></span><span class="op">(</span><span class="va">qgpm</span>, <span class="va">ft</span><span class="op">^</span><span class="fl">3</span><span class="op">/</span><span class="va">s</span><span class="op">)</span></span>
@@ -1639,17 +1671,21 @@ preserved at each node (or vertex) in the network. Then calculations are
 performed for each loop, ensuring energy is conserved.</p>
 <p>In the <em>hydraulics</em> package, the Darcy-Weisbach equation is
 used to estimate the head loss in each pipe segment, expressed in a
-condensed form as <span class="math inline">\({h_f = KQ^{2}}\)</span>
-where: <span class="math display">\[{K =
-\frac{8fL}{\pi^{2}gD^{5}}}\]</span> If needed, the friction factor
-<em>f</em> is calculated using the Colebrook equation. The flow
-adjustment in each loop is calculated at each iteration as: <span class="math display">\[{\Delta{Q_i} = -\frac{\sum_{j=1}^{p_i}
-K_{ij}Q_j|Q_j|}{\sum_{j=1}^{p_i} 2K_{ij}Q_j^2}}\]</span> where
-<em>i</em> is the loop number, <em>j</em> is the pipe number, <span class="math inline">\({p_i}\)</span> is the number of pipes in loop
-<em>i</em> and <span class="math inline">\({\Delta{Q_i}}\)</span> is the
-flow adjustment to be applied to each pipe in loop <em>i</em> for the
-next iteration. Pipes shared between loops receive adjustments from both
-loops.</p>
+condensed form as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>f</mi></msub><mo>=</mo><mi>K</mi><msup><mi>Q</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">{h_f = KQ^{2}}</annotation></semantics></math>
+where:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mo>=</mo><mfrac><mrow><mn>8</mn><mi>f</mi><mi>L</mi></mrow><mrow><msup><mi>π</mi><mn>2</mn></msup><mi>g</mi><msup><mi>D</mi><mn>5</mn></msup></mrow></mfrac></mrow><annotation encoding="application/x-tex">{K = \frac{8fL}{\pi^{2}gD^{5}}}</annotation></semantics></math>
+If needed, the friction factor <em>f</em> is calculated using the
+Colebrook equation. The flow adjustment in each loop is calculated at
+each iteration as:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><msub><mi>Q</mi><mi>i</mi></msub><mo>=</mo><mo>−</mo><mfrac><mrow><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><msub><mi>p</mi><mi>i</mi></msub></munderover><msub><mi>K</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><msub><mi>Q</mi><mi>j</mi></msub><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>Q</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">|</mo></mrow></mrow><mrow><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><msub><mi>p</mi><mi>i</mi></msub></munderover><mn>2</mn><msub><mi>K</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><msubsup><mi>Q</mi><mi>j</mi><mn>2</mn></msubsup></mrow></mfrac></mrow><annotation encoding="application/x-tex">{\Delta{Q_i} = -\frac{\sum_{j=1}^{p_i} K_{ij}Q_j|Q_j|}{\sum_{j=1}^{p_i} 2K_{ij}Q_j^2}}</annotation></semantics></math>
+where <em>i</em> is the loop number, <em>j</em> is the pipe number,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mi>i</mi></msub><annotation encoding="application/x-tex">{p_i}</annotation></semantics></math>
+is the number of pipes in loop <em>i</em> and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><msub><mi>Q</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">{\Delta{Q_i}}</annotation></semantics></math>
+is the flow adjustment to be applied to each pipe in loop <em>i</em> for
+the next iteration. Pipes shared between loops receive adjustments from
+both loops.</p>
 <p>Input consists of pipe characteristics, pipe order and initial flows
 for each loop, the number of iterations to perform, and the unit system
 being used (only needed if fixed <em>K</em> values are not
@@ -1661,8 +1697,10 @@ A sample pipe network with pipe numbers indicated in black
 </div>
 <p>Input for this system, assuming fixed <em>f</em> values, would look
 like the following. (If fixed <em>K</em> values are provided, f, L and D
-are not needed). These <em>f</em> values were estimated using <span class="math inline">\(ks=0.00025 m\)</span> in the form of the Colebrook
-equation for fully rough flows: <span class="math display">\[\frac{1}{\sqrt{f}}=log\left(\frac{3.7}{\frac{ks}{D}}\right)\]</span>
+are not needed). These <em>f</em> values were estimated using
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mi>s</mi><mo>=</mo><mn>0.00025</mn><mi>m</mi></mrow><annotation encoding="application/x-tex">ks=0.00025 m</annotation></semantics></math>
+in the form of the Colebrook equation for fully rough flows:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><msqrt><mi>f</mi></msqrt></mfrac><mo>=</mo><mi>l</mi><mi>o</mi><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mn>3.7</mn><mfrac><mrow><mi>k</mi><mi>s</mi></mrow><mi>D</mi></mfrac></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\frac{1}{\sqrt{f}}=log\left(\frac{3.7}{\frac{ks}{D}}\right)</annotation></semantics></math>
 This simplification removes the velocity dependence of <em>f</em>.</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dfpipes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
@@ -1984,31 +2022,29 @@ Resources: Examples Using R</a>.</p>
 <h3 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
 </h3>
 <p><a href="https://cran.r-project.org/web/licenses/GPL-3" class="external-link">GPL-3</a>
-2024-03-06 Ed Maurer</p>
+2024-11-17 Ed Maurer</p>
 </div>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by Ed Maurer.</p>
+  <p>Developed by Ed Maurer.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>

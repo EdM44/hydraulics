@@ -1,78 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://edm44.github.io/hydraulics/404.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/articles/hydraulics_vignette.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/index.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/reference/atmos_table.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/reference/atmosprops.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/reference/colebrook.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/reference/darcyweisbach.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/reference/direct_step.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/reference/hardycross.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/reference/manningc.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/reference/manningt.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/reference/moody.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/reference/operpoint.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/reference/pumpcurve.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/reference/sequent_depth.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/reference/spec_energy_trap.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/reference/systemcurve.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/reference/water_table.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/reference/waterprops.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/reference/xc_circle.html</loc>
-  </url>
-  <url>
-    <loc>https://edm44.github.io/hydraulics/reference/xc_trap.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://edm44.github.io/hydraulics/404.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/articles/hydraulics_vignette.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/articles/index.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/authors.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/index.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/news/index.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/reference/atmos_table.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/reference/atmosprops.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/reference/colebrook.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/reference/darcyweisbach.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/reference/direct_step.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/reference/hardycross.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/reference/index.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/reference/manningc.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/reference/manningt.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/reference/moody.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/reference/operpoint.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/reference/pumpcurve.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/reference/sequent_depth.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/reference/spec_energy_trap.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/reference/systemcurve.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/reference/water_table.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/reference/waterprops.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/reference/xc_circle.html</loc></url>
+<url><loc>https://edm44.github.io/hydraulics/reference/xc_trap.html</loc></url>
 </urlset>
+
