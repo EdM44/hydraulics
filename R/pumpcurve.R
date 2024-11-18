@@ -106,7 +106,7 @@ pumpcurve <- function (Q = NULL, h = NULL, eq = "poly1", units = c("SI", "Eng"))
     if( c > 0 ) {
       stop("Concavity of pump characteristic curve is reversed.")
     }
-    eqn <- paste0( 'h == ',a,' + ',b,' - ',abs(c),'*Q^2')
+    eqn <- paste0( 'h == ',a,' + ',b,'*Q - ',abs(c),'*Q^2')
   } else if ( eq == "poly2" ) {
     hqfit <- lm(h ~ I(Q^2), data = z) #remove linear term
     r2 <- summary(hqfit)$r.squared

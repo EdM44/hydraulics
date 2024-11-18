@@ -1,8 +1,15 @@
 Package: hydraulics
 Type: Package
 Title: Basic Pipe and Open Channel Hydraulics
-Version: 0.7.0
-Author: Ed Maurer [aut, cre], Irucka Embry [aut, ctb] (iemisc code)
+Version: 0.7.1
+Authors@R: c(person(given = "Ed",
+                    family = "Maurer",
+                    role = c("aut", "cre"),
+                    email = "emaurer@scu.edu"),
+            person(given = "Irucka",
+                    family = "Embry",
+                    role = c("aut", "ctb"),
+                    comment = "iemisc code"))
 Maintainer: Ed Maurer <emaurer@scu.edu>
 Description: Functions for basic hydraulic calculations related to 
     water flow in circular pipes both flowing full (under pressure), and 

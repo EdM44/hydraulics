@@ -1,5 +1,10 @@
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
+## hydraulics 0.7.1
+
+- Update vignette to avoid deprecated formatdown functions
+- Correct pump system equation typo
+
 ## hydraulics 0.7.0
 
 - Update vignette and DESCRIPTION to replace package docxtools with

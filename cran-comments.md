@@ -1,57 +1,65 @@
-##Submission of revised version: v 0.6.1 - December 6, 2022
+##Submission of revised version: v 0.7.1 - November 17, 2024
 
-* New version includes modifications to accommodate the change for R 4.2 where
-  warnings are now errors for if() statements with a condition of length greater 
-  than one
+* New version includes correction to equation in pumpcurve.R and updates
+  to vignette to accommodate deprecated functions in formatdown package
 
 * Results from macOS Monterey 12.4 check:
 
-  + ── R CMD check results ──────────────────────── hydraulics 0.6.1 ────
-  + Duration: 1m 11.4s
-
+  + ── R CMD check results ───────────────────────── hydraulics 0.7.1 ────
+  + Duration: 42.4s
   + 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
-
   + R CMD check succeeded
-  
-* From Windows check (devtools::check_win_devel()): 
-  + using log directory 'd:/RCompile/CRANguest/R-devel/hydraulics.Rcheck'
-  + using R Under development (unstable) (2022-12-05 r83406 ucrt)
-  + using platform: x86_64-w64-mingw32 (64-bit)
+r
+  + From Windows check (devtools::check_win_devel()): 
+  + using R Under development (unstable) (2024-11-15 r87338 ucrt)
+  + using platform: x86_64-w64-mingw32
+  + R was compiled by
+    gcc.exe (GCC) 13.3.0
+    GNU Fortran (GCC) 13.3.0
+  + running under: Windows Server 2022 x64 (build 20348)
   + using session charset: UTF-8
   + checking for file 'hydraulics/DESCRIPTION' ... OK
   + checking extension type ... Package
-  + this is package 'hydraulics' version '0.6.1'
-  + package encoding: UTF-8
-  + checking CRAN incoming feasibility ... [17s] Note_to_CRAN_maintainers
-  + Maintainer: 'Ed Maurer <emaurer@scu.edu>'
+  + this is package 'hydraulics' version '0.7.1'
   + ...
-  + checking for unstated dependencies in vignettes ... OK
-  + checking package vignettes in 'inst/doc' ... OK
-  + checking re-building of vignette outputs ... [15s] OK
-  + checking PDF version of manual ... [24s] OK
-  + checking HTML version of manual ... [4s] OK
-  + checking for detritus in the temp directory ... OK
+  + checking package vignettes ... OK
+  + checking re-building of vignette outputs ... OK
+  + checking PDF version of manual ... [16s] OK
+  + checking HTML version of manual ... OK
   + DONE
   + Status: OK
-  + no errors, warnings, or notes
 
-* From linux check using devtools::check_rhub(pkg='.',platforms = "fedora-gcc-devel")
-  + ── hydraulics 0.6.1: NOTE
+* From linux check using rhub::rhub_check(platforms = "ubuntu-release")
+  + ── hydraulics 0.7.0: NOTE
 
-  + Build ID:   hydraulics_0.6.1.tar.gz-4a347917bbae479aa2ce68cf635f28d2
+  + Build ID:   hydraulics_0.7.0.tar.gz-9c3db248b9ae44f1bb0baf8e072fc9bf
   + Platform:   Fedora Linux, R-devel, GCC
-  + Submitted:  1h 7m 38.1s ago
-  + Build time: 1h 7m 28.4s
-
+  + Submitted:  45m 7.3s ago
+  + Build time: 44m 38.4s
+  + Maintainer: ‘Ed Maurer <emaurer@scu.edu>’
+  + Possibly misspelled words in DESCRIPTION:
+    Maurer (20:19)
+  + Found the following (possibly) invalid URLs:
+    URL: https://www.gouldspumps.com
+      From: inst/doc/hydraulics_vignette.html
+      Status: Error
   + checking HTML version of manual ... NOTE
-  + Skipping checking HTML validation: no command 'tidy' found
-  + Skipping checking math rendering: package 'V8' unavailable
+    Skipping checking HTML validation: no command 'tidy' found
+    Skipping checking math rendering: package 'V8' unavailable
 
-  + 0 errors ✔ | 0 warnings ✔ | 1 note ✖  + ...
+0 errors ✔ | 0 warnings ✔ | 2 notes ✖
 
 * The html version of the manual was validated on other operating systems but for
   some reason generates a note on fedora. The documentation does not have a "tidy" 
-  command so it is unclear what this note refers to.
+  command so it is unclear what the first note refers to. No 'V8' package is used.
+  My name is spoelled correctly in the DESCRIPTION. The URL flagged as (possibly)
+  invalid is correct and works correctly.
 
-* Downstream dependencies: None.
+* Downstream dependencies: iemisc.
+  + Results from revdepcheck::revdep_check(num_workers = 4)
+  + Installing CRAN version of hydraulics
+  + Installing DEV version of hydraulics
+  + CHECK ────────────────────────────────────────────────────────────── 1 packages
+  + ✔ iemisc 1.0.4                           ── E: 0     | W: 0     | N: 0                                                
+  + OK: 1   
 
