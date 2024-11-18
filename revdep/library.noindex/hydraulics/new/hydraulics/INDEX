@@ -1,0 +1,45 @@
+atmos_table             Tabulates into a tibble some properties of the
+                        standard atmosphere: temperature, density, and
+                        pressure.
+atmosprops              Functions to calculate ICAO standard
+                        atmospheric properties: temperature, density,
+                        and pressure.
+colebrook               Calculates the Darcy-Weisbach Friction Factor f
+darcyweisbach           Solves the Darcy-Weisbach Equation for the
+                        either head loss (hf), flow rate (Q), diameter
+                        (D), or roughness height (ks).
+direct_step             Uses the direct step method to find the
+                        distance between two known depths in a
+                        trapezoidal channel
+hardycross              Applies the Hardy-Cross method to solve for
+                        pipe flows in a network.
+manningc                Solves the Manning Equation for gravity flow in
+                        a circular pipe
+manningt                Solves the Manning Equation for water flow in
+                        an open channel
+moody                   Creates a Moody diagram with optional manually
+                        added points
+operpoint               Uses input pump and system curves to find the
+                        operating point for a pump and create a plot.
+pumpcurve               Fits a polynomial curve to three or more points
+                        from a pump characteristic curve to be used in
+                        solving for an operating point of the pump in a
+                        piping system.
+sequent_depth           Solves the Momentum Equation for sequent (or
+                        conjugate) depth in a trapezoidal channel
+spec_energy_trap        Creates a specific energy diagram for a
+                        trapezoidal channel
+systemcurve             Creates a system curve for a piping system
+                        using the static head and a coefficient.
+water_table             Tabulates into a tibble the basic water
+                        properties: density, dynamic and kinematic
+                        viscosity, saturation vapor pressure, surface
+                        tension, and bulk modulus.
+waterprops              Functions to calculate water properties:
+                        density, specific weight, dynamic and kinematic
+                        viscosity, saturation vapor pressure, surface
+                        tension, and bulk modulus.
+xc_circle               Creates a cross-section plot for a partially
+                        filled pipe
+xc_trap                 Creates a cross-section plot for an open
+                        channel
