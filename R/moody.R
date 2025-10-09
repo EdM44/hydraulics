@@ -52,6 +52,7 @@ moody <- function(Re = NULL, f = NULL) {
     }
     dfpts <- as.data.frame(cbind(Re, f))
   }
+  
   # Function used for friction factor Use approximation of the
   # Swamee-Jain equation for turbulent conditions Swamee,P.K.,Jain, A.K.
   # (1976).Journal of the Hydraulics Division 102(5):657–664.
@@ -79,7 +80,7 @@ moody <- function(Re = NULL, f = NULL) {
   dflam <- as.data.frame(cbind(Relam, flam))
   # Turbulent Regions Re values from 3000 to 1E8
   Returb <- utils::tail(c(2:10 %o% 10^(3:7)), -1)
-  fsmooth = 0.316 * Returb^(-0.25)  # Blausis formula for smooth turbulent pipe flow
+  fsmooth = 0.316 * Returb^(-0.25)  # Blasius formula for smooth turbulent pipe flow
   dfsmooth <- as.data.frame(cbind(Returb, fsmooth))
   # set up empty array for lines for various values of relative roughness
   f_rough <- array(numeric(), c(length(Returb), length(kd)))
@@ -102,16 +103,18 @@ moody <- function(Re = NULL, f = NULL) {
                                                                    to = 0.1, by = 0.005))
   ybreaks <- ytickloc
   # plot lines for turbulent region
-  p1 <- ggplot2::ggplot(dfrough2, ggplot2::aes_string(x = "Re", y = "f", group = ksd_colname)) +
+  p1 <- ggplot2::ggplot(dfrough2, ggplot2::aes(x = Re, y = f, group = ks_d)) +  
     ggplot2::geom_line() +
     ggplot2::scale_y_log10(limits = c(ymin, ymax), expand = c(0, 0),
-                           breaks = ybreaks, minor_breaks = yminor_breaks) +
+                           breaks = ybreaks, minor_breaks = yminor_breaks,
+                           sec.axis = ggplot2::dup_axis(
+                             breaks = ks_d_tics,
+                             labels = ks_d_labels,
+                             name = "ks/D")
+                          ) +
     ggplot2::scale_x_log10(limits = c(xmin, xmax), expand = c(0, 0),
                            breaks = breaks, minor_breaks = minor_breaks) +
     ggplot2::scale_colour_discrete(guide = "none") +
-    ggplot2::geom_text(data = subset(dfrough2, Re == 1e+08),
-                       ggplot2::aes_string(label = ksd_colname, x = "1e+08", y = "f"), hjust = -0.3, size=3) +
-    ggplot2::annotate("text", x = 1e+08, y = 0.092, label = "ks/D", hjust = -0.3, size=3) +
     ggplot2::theme_bw() +
     ggplot2::theme(plot.margin = grid::unit(c(1,3, 1, 1), "lines"))
   # add the smooth, turbulent line
