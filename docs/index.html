@@ -8,8 +8,8 @@
 <title>Basic Pipe and Open Channel Hydraulics • hydraulics</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Basic Pipe and Open Channel Hydraulics">
 <meta name="description" content="Functions for basic hydraulic calculations related to water flow in circular pipes both flowing full (under pressure), and partially full (gravity flow), and trapezoidal open channels. For pressure flow this includes friction loss calculations by solving the Darcy-Weisbach equation for head loss, flow or diameter, plotting a Moody diagram, matching a pump characteristic curve to a system curve, and solving for flows in a pipe network using the Hardy-Cross method. The Darcy-Weisbach friction factor is calculated using the Colebrook (or Colebrook-White equation), the basis of the Moody diagram, the original citation being Colebrook (1939) &lt;doi:10.1680/ijoti.1939.13150&gt;. For gravity flow, the Manning equation is used, again solving for missing parameters. The derivation of and solutions using the Darcy-Weisbach equation and the Manning equation are outlined in many fluid mechanics texts such as Finnemore and Maurer (2024, ISBN:978-1-264-78729-6). Some gradually- and rapidly-varied flow functions are included. For the Manning equation solutions, this package uses modifications of original code from the iemisc package by Irucka Embry.">
 <meta property="og:description" content="Functions for basic hydraulic calculations related to water flow in circular pipes both flowing full (under pressure), and partially full (gravity flow), and trapezoidal open channels. For pressure flow this includes friction loss calculations by solving the Darcy-Weisbach equation for head loss, flow or diameter, plotting a Moody diagram, matching a pump characteristic curve to a system curve, and solving for flows in a pipe network using the Hardy-Cross method. The Darcy-Weisbach friction factor is calculated using the Colebrook (or Colebrook-White equation), the basis of the Moody diagram, the original citation being Colebrook (1939) &lt;doi:10.1680/ijoti.1939.13150&gt;. For gravity flow, the Manning equation is used, again solving for missing parameters. The derivation of and solutions using the Darcy-Weisbach equation and the Manning equation are outlined in many fluid mechanics texts such as Finnemore and Maurer (2024, ISBN:978-1-264-78729-6). Some gradually- and rapidly-varied flow functions are included. For the Manning equation solutions, this package uses modifications of original code from the iemisc package by Irucka Embry.">
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">hydraulics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,6 +56,8 @@
 <div class="page-header"><h1 id="description">Description<a class="anchor" aria-label="anchor" href="#description"></a>
 </h1></div>
 <p>The <em>hydraulics</em> R package solves basic pipe hydraulics for both pressure and gravity flow conditions, and open-channel hydraulics for trapezoidal channels, including triangular and rectangular. Pressure pipe solutions include functions to 1) describe properties of water, 2) solve the Darcy-Weisbach equation for friction loss through pipes, and 3) plot a Moody diagram. There are also functions for matching a pump characteristic curve to a system curve, and solving for flows in a pipe network using the Hardy-Cross method. Partially-filled pipe and other open-channel flow solutions are solved with the Manning equation. The format of functions and pressure pipe solutions are designed to be compatible with the <em>iemisc</em> package, and the open channel hydraulics solutions are modifications of code in that package.</p>
+<!-- badges: start -->
+
 </div>
 <div class="section level1">
 <h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -301,9 +303,11 @@ Re
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/xc_trap.html">xc_trap</a></span><span class="op">(</span> y <span class="op">=</span> <span class="va">oc3</span><span class="op">$</span><span class="va">y</span>, b <span class="op">=</span> <span class="va">oc3</span><span class="op">$</span><span class="va">b</span>, m <span class="op">=</span> <span class="va">oc3</span><span class="op">$</span><span class="va">m</span>, units <span class="op">=</span> <span class="st">"Eng"</span> <span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in ggplot2::geom_segment(data = seg1, ggplot2::aes(x = 0, xend = -0.1 * : All aesthetics have length 1, but the data has 2 rows.</span></span>
-<span><span class="co">#&gt; ℹ Did you mean to use `annotate()`?</span></span>
+<span><span class="co">#&gt; ℹ Please consider using `annotate()` or provide this layer with data containing</span></span>
+<span><span class="co">#&gt;   a single row.</span></span>
 <span><span class="co">#&gt; Warning in ggplot2::geom_segment(data = seg1, ggplot2::aes(x = B, xend = B + : All aesthetics have length 1, but the data has 2 rows.</span></span>
-<span><span class="co">#&gt; ℹ Did you mean to use `annotate()`?</span></span></code></pre></div>
+<span><span class="co">#&gt; ℹ Please consider using `annotate()` or provide this layer with data containing</span></span>
+<span><span class="co">#&gt;   a single row.</span></span></code></pre></div>
 <p><img src="reference/figures/README-xc-plot-trap-1.png" width="50%"></p>
 <p>For other functions related to pump characteristic curves and operating point determination, and pipe network solutions, refer to the <em>hydraulics</em> vignette.</p>
 </div>
@@ -335,13 +339,18 @@ Re
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Ed Maurer <br><small class="roles"> Author, maintainer </small>  </li>
-<li>Irucka Embry <br><small class="roles"> Author, contributor </small>  </li>
+<li>Ed Maurer <br><small class="roles"> Author, maintainer </small>   </li>
+<li>Irucka Embry <br><small class="roles"> Author, contributor </small>   </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/EdM44/hydraulics/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/EdM44/hydraulics/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
@@ -352,7 +361,7 @@ Re
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
