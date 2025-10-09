@@ -101,6 +101,10 @@ moody <- function(Re = NULL, f = NULL) {
   minor_breaks <- rep(1:9, 21) * (10^rep(-10:10, each = 9))
   yminor_breaks <- c(seq(from = 0.008, to = 0.05, by = 0.001), seq(from = 0.055,
                                                                    to = 0.1, by = 0.005))
+  ks_d_tics <- subset(dfrough2, Re == 1e+08)$f
+  ks_d_labels <- subset(dfrough2, Re == 1e+08)$ks_d
+  ks_d <- NULL
+  
   ybreaks <- ytickloc
   # plot lines for turbulent region
   p1 <- ggplot2::ggplot(dfrough2, ggplot2::aes(x = Re, y = f, group = ks_d)) +  

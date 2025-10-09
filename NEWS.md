@@ -1,5 +1,9 @@
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
+## hydraulics 0.7.2
+
+- Update moody.R to accommodate deprecation of ggplot aes_string
+
 ## hydraulics 0.7.1
 
 - Update vignette to avoid deprecated formatdown functions

@@ -101,81 +101,140 @@ knitr::kable(setNames(as.data.frame(unlist(ans4)),c('value')), format = "html", 
 ```
 
 <table>
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 </th>
+
 <th style="text-align:right;">
+
 value
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 Q
 </td>
+
 <td style="text-align:right;">
+
 3.750000e+01
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 V
 </td>
+
 <td style="text-align:right;">
+
 1.395076e+01
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 L
 </td>
+
 <td style="text-align:right;">
+
 8.000000e+03
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 D
 </td>
+
 <td style="text-align:right;">
+
 1.850000e+00
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 hf
 </td>
+
 <td style="text-align:right;">
+
 2.150000e+02
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 f
 </td>
+
 <td style="text-align:right;">
+
 1.649880e-02
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 ks
 </td>
+
 <td style="text-align:right;">
+
 8.176000e-04
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 Re
 </td>
+
 <td style="text-align:right;">
+
 2.335866e+06
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ## Utility functions for water properties can be used independently as well:
@@ -263,9 +322,11 @@ spec_energy_trap( Q = oc3$Q, b = oc3$b, m = oc3$m, scale = 4, units = "Eng" )
 ``` r
 xc_trap( y = oc3$y, b = oc3$b, m = oc3$m, units = "Eng" )
 #> Warning in ggplot2::geom_segment(data = seg1, ggplot2::aes(x = 0, xend = -0.1 * : All aesthetics have length 1, but the data has 2 rows.
-#> ℹ Did you mean to use `annotate()`?
+#> ℹ Please consider using `annotate()` or provide this layer with data containing
+#>   a single row.
 #> Warning in ggplot2::geom_segment(data = seg1, ggplot2::aes(x = B, xend = B + : All aesthetics have length 1, but the data has 2 rows.
-#> ℹ Did you mean to use `annotate()`?
+#> ℹ Please consider using `annotate()` or provide this layer with data containing
+#>   a single row.
 ```
 
 <img src="man/figures/README-xc-plot-trap-1.png" width="50%" />
