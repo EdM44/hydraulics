@@ -15,6 +15,10 @@ format of functions and pressure pipe solutions are designed to be
 compatible with the *iemisc* package, and the open channel hydraulics
 solutions are modifications of code in that package.
 
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/EdM44/hydraulics/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/EdM44/hydraulics/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
 # Installation
 
 ``` r
