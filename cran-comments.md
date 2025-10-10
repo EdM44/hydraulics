@@ -1,55 +1,38 @@
-##Submission of revised version: v 0.7.1 - November 17, 2024
+##Submission of revised version: v 0.7.2 - October 9, 2025
 
-* New version includes correction to equation in pumpcurve.R and updates
-  to vignette to accommodate deprecated functions in formatdown package
+* New version is a minor update to remove the deprecated ggplot2 aes_string
+  function from moody.R. This corrects plotting errors that had resulted.
 
-* Results from macOS Monterey 12.4 check:
+* Results from macOS Sequoia 15.5 check:
 
-  + ── R CMD check results ───────────────────────── hydraulics 0.7.1 ────
-  + Duration: 42.4s
+  + ── R CMD check results ─────────────────── hydraulics 0.7.2 ────
+  + Duration: 28.9s
   + 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
-  + R CMD check succeeded
 
-  + From Windows check (devtools::check_win_devel()): 
-  + using R Under development (unstable) (2024-11-15 r87338 ucrt)
+
+  + From Windows check (usethis::use_github_action("check-standard"):
+  ── R CMD check ─────────────────────────────────────────────────────────────────
+  + using log directory 'D:/a/hydraulics/hydraulics/check/hydraulics.Rcheck'
+  + using R version 4.5.1 (2025-06-13 ucrt)
   + using platform: x86_64-w64-mingw32
   + R was compiled by
-    gcc.exe (GCC) 13.3.0
-    GNU Fortran (GCC) 13.3.0
-  + running under: Windows Server 2022 x64 (build 20348)
+  +    gcc.exe (GCC) 14.2.0
+  +    GNU Fortran (GCC) 14.2.0
+  + running under: Windows Server 2022 x64 (build 26100)
   + using session charset: UTF-8
+  + using options '--no-manual --as-cran'
   + checking for file 'hydraulics/DESCRIPTION' ... OK
   + checking extension type ... Package
-  + this is package 'hydraulics' version '0.7.1'
+  + this is package 'hydraulics' version '0.7.2'
   + ...
-  + checking package vignettes ... OK
-  + checking re-building of vignette outputs ... OK
-  + checking PDF version of manual ... [16s] OK
-  + checking HTML version of manual ... OK
   + DONE
-  + Status: OK
-
-* From linux check using rhub::rhub_check(platforms = "ubuntu-release")
-  + using log directory ‘/__w/hydraulics/hydraulics/check/hydraulics.Rcheck’
-  + using R version 4.4.2 (2024-10-31)
-  + using platform: x86_64-pc-linux-gnu
-  + R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-  + running under: Ubuntu 22.04.5 LTS
-  + using session charset: UTF-8
-  + using options ‘--no-manual --as-cran’
-  + checking for file ‘hydraulics/DESCRIPTION’ ... OK
-  + checking extension type ... Package
-  + this is package ‘hydraulics’ version ‘0.7.1’
-  + ...
-  + checking package vignettes ... OK
-  + checking re-building of vignette outputs ... [5s/4s] OK
-  + checking for non-standard things in the check directory ... OK
-  + checking for detritus in the temp directory ... OK
-  + DONE
-
-  + Status: OK
+  + Status: 4 NOTEs
+  + All notes are related to the presence of the "revdep" directory, created 
+  + by the revdep_check package. That directory is excluded from the R package
+  + by having ^revdep$ in the .Rbuildignore file.
+  
+  + Badges for R-CMD-check.yaml are all passing for Mac-OS, Windows, and 3 
+  + versions of Ubuntu as displayed at https://github.com/EdM44/hydraulics
 
 * Downstream dependencies: iemisc.
   + Results from revdepcheck::revdep_check(num_workers = 4)
@@ -59,4 +42,3 @@
   + ✔ iemisc 1.0.4                           ── E: 0     | W: 0     | N: 0                                                
   + OK: 1  
   + BROKEN: 0
-

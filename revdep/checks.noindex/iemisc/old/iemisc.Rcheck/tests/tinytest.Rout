@@ -1,56 +1,0 @@
-
-R version 4.2.1 (2022-06-23) -- "Funny-Looking Kid"
-Copyright (C) 2022 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin17.0 (64-bit)
-
-R is free software and comes with ABSOLUTELY NO WARRANTY.
-You are welcome to redistribute it under certain conditions.
-Type 'license()' or 'licence()' for distribution details.
-
-R is a collaborative project with many contributors.
-Type 'contributors()' for more information and
-'citation()' on how to cite R or R packages in publications.
-
-Type 'demo()' for some demos, 'help()' for on-line help, or
-'help.start()' for an HTML browser interface to help.
-Type 'q()' to quit R.
-
-> if (requireNamespace("tinytest", quietly = TRUE)) {
-+ tinytest::test_package("iemisc")
-+ }
-test_Re1.R....................    0 tests    test_Re1.R....................    3 tests [0;32mOK[0m [0;36m44ms[0m
-test_Re2.R....................    0 tests    test_Re2.R....................    3 tests [0;32mOK[0m [0;36m1ms[0m
-test_Re3.R....................    0 tests    test_Re3.R....................    2 tests [0;32mOK[0m [0;36m1ms[0m
-test_acotd.R..................    0 tests    test_acotd.R..................    6 tests [0;32mOK[0m [0;36m2ms[0m
-test_acscd.R..................    0 tests    test_acscd.R..................    4 tests [0;32mOK[0m [0;36m1ms[0m
-test_approxerror.R............    0 tests    test_approxerror.R............    4 tests [0;32mOK[0m [0;36m1ms[0m
-test_asecd.R..................    0 tests    test_asecd.R..................    6 tests [0;32mOK[0m [0;36m1ms[0m
-test_asind.R..................    0 tests    test_asind.R..................    3 tests [0;32mOK[0m [0;36m1ms[0m
-test_atan2d.R.................    0 tests    test_atan2d.R.................    3 tests [0;32mOK[0m [0;36m1ms[0m
-test_atand.R..................    0 tests    test_atand.R..................    6 tests [0;32mOK[0m [0;36m1ms[0m
-test_colebrook.R..............    0 tests    test_colebrook.R..............    5 tests [0;32mOK[0m [0;36m2ms[0m
-test_construction_decimal.R...    0 tests    test_construction_decimal.R...    8 tests [0;32mOK[0m [0;36m7ms[0m
-test_cscd.R...................    0 tests    test_cscd.R...................    4 tests [0;32mOK[0m [0;36m1ms[0m
-test_cv.R.....................    0 tests    test_cv.R.....................    8 tests [0;32mOK[0m [0;36m2ms[0m
-test_f1.R.....................    0 tests    test_f1.R.....................    4 tests [0;32mOK[0m [0;36m1ms[0m
-test_f2.R.....................    0 tests    test_f2.R.....................    4 tests [0;32mOK[0m [0;36m1ms[0m
-test_f3.R.....................    0 tests    test_f3.R.....................    4 tests [0;32mOK[0m [0;36m2ms[0m
-test_f4.R.....................    0 tests    test_f4.R.....................    4 tests [0;32mOK[0m [0;36m10ms[0m
-test_f5.R.....................    0 tests    test_f5.R.....................    4 tests [0;32mOK[0m [0;36m1ms[0m
-test_f6.R.....................    0 tests    test_f6.R.....................    4 tests [0;32mOK[0m [0;36m1ms[0m
-test_f7.R.....................    0 tests    test_f7.R.....................    4 tests [0;32mOK[0m [0;36m1ms[0m
-test_f8.R.....................    0 tests    test_f8.R.....................    3 tests [0;32mOK[0m [0;36m1ms[0m
-test_frac_to_numeric.R........    0 tests    test_frac_to_numeric.R........    5 tests [0;32mOK[0m [0;36m10ms[0m
-test_kin_visc_water.R.........    0 tests    test_kin_visc_water.R.........    2 tests [0;32mOK[0m [0;36m6ms[0m
-test_ranges.R.................    0 tests    test_ranges.R.................    4 tests [0;32mOK[0m [0;36m29ms[0m
-test_relerror.R...............    0 tests    test_relerror.R...............    4 tests [0;32mOK[0m [0;36m1ms[0m
-test_righttri.R...............    0 tests    test_righttri.R...............    5 tests [0;32mOK[0m [0;36m2ms[0m
-test_secd.R...................    0 tests    test_secd.R...................    4 tests [0;32mOK[0m [0;36m1ms[0m
-test_secprop.R................    0 tests    test_secprop.R................    4 tests [0;32mOK[0m [0;36m1ms[0m
-test_sind.R...................    0 tests    test_sind.R...................    5 tests [0;32mOK[0m [0;36m1ms[0m
-test_tand.R...................    0 tests    test_tand.R...................    4 tests [0;32mOK[0m [0;36m1ms[0m
-All ok, 133 results (0.1s)
-> 
-> proc.time()
-   user  system elapsed 
-  1.574   0.164   1.731 
